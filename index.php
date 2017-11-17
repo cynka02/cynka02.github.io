@@ -10,6 +10,6 @@
 	#<button onclick="LetterClickPlus()" id="LetterClickPlusButton">100 letters --> upgrade click</button><br />
 	#<button onclick="Pen()" id="PenButton">20 letters --> +1.00 letters per second</button><br />
 	#<button onclick="UpgradePenfunc()" id="UpgradePen">30 letters --> pens upgrade</button><br />
-	#<button onclick="reset()">Reset</button>
+	#<button onclick="reset()">Reset</button>cos cos cos
 </body>
 </html>
