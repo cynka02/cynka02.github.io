@@ -4,6 +4,15 @@ body
 	padding: 0;
 	background-color: white;
 }
+.title
+{
+	text-align: center;
+	font-size: 45px;
+	vertical-align: middle;
+	width: 100%;
+	height: 60px;
+	margin-top: 2px;
+}
 .tableletters
 {
 	border-style: solid;
@@ -33,6 +42,15 @@ body
 	text-align: center;
 	vertical-align: middle;
 	width: 13%;
+	font-size: 18px;
+}
+.table2td2
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 12%;
 	font-size: 18px;
 }
 .tabletd3
@@ -117,4 +135,37 @@ body
 	font-size: 16px;
 	background-color: #f75353;
 	border-style: none;
+}
+#ButtonClickPage
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 17px;
+	font-weight: 540;
+	background-color: #f75353;
+	border-style: none;
+}
+#ButtonClickPage:active
+{
+	transform: scale(1.07);
+}
+#UpgradePen:active
+{
+	transform: scale(1.07);
+}
+#PenButton:active
+{
+	transform: scale(1.07);
+}
+#LetterClickPlusButton:active
+{
+	transform: scale(1.07);
+}
+.ButtonClick:active
+{
+	transform: scale(1.07);
 }
