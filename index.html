@@ -1,18 +1,19 @@
 <html>
 <head>
-<title>Clicker</title>
+<title>Book Clicker</title>
 <script src="scripts.js"></script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body onload="load()">
+<div class="title"><strong><font color="brown">Book Clicker</font></strong><i><sub>beta</sub></i></div>
 <table class="tableletters">
 	<tr>
 		<td class="tabletd"><span id="ClickDiv">0/1000</span><br />
 		Letters</td>
 		<td class="tabletd2"><span id="PerSecond">0.00</span><br />Letters per second</td>
 		<td class="tabletd3"><button onclick="LettersCountTracker()" id="ClickButton" class="ButtonClick">+ 1</button></td>
-		<td class="tabletd4"><button onclick="LetterClickPlus()" id="LetterClickPlusButton">100 letters<br /><strong>Click x10</strong></button></td>
-		<td class="tabletd5"><button onclick="Pen()" id="PenButton">20 letters<br /><strong>1 Pen (1.00/s)</strong></button></td>
+		<td class="tabletd4"><button onclick="LetterClickPlus()" id="LetterClickPlusButton">50 letters<br /><strong>Upgrade click</strong></button></td>
+		<td class="tabletd5"><button onclick="Pen()" id="PenButton">15 letters<br /><strong>+1 Pen (1.00/s)</strong></button></td>
 		<td class="tabletd6"><button onclick="UpgradePenfunc()" id="UpgradePen">5 pages<br /><strong>Pens upgrade</strong></button></td>
 	</tr>
 </table>
@@ -21,12 +22,12 @@
 		<td class="tabletd"><span id="ClickPage">0/1000</span><br />
 		Pages</td>
 		<td class="tabletd2"><span id="PerSecondPage">0.00</span><br />Pages per second</td>
-		<td><button onclick="PagePlusTracker()">1 Page = 500 Letters</button></td>
-		<td><button onclick="Printer()" id="PrinterButton">15 pages --> +1.00 pages per second</button></td>
-		<td><button onclick="UpgradePrinterfunc()" id="UpgradePrinter">5 chapters --> printers upgrade</button></td>
+		<td class="table2td2"><button onclick="PagePlusTracker()" id="ButtonClickPage">500 letters<br /><strong>1 Page</strong></button></td>
+		<td><button onclick="Printer()" id="PrinterButton">15 pages<br /><strong>+1 Printer (1.00/s)</strong></button></td>
+		<td><button onclick="UpgradePrinterfunc()" id="UpgradePrinter">5 chapters<br /><strong>Printers upgrade</strong></button></td>
 		<td><button onclick="reset()">Reset Game</button></td>
 	</tr>
 </table><br /><br /><br />
-<center><strong>*** PRINTERS (PAGES/S) ARE NOT WORKING YET ***</center></strong>
+<center><strong>*** PRINTERS (PAGES/S) AND PRINTERS UPGRADE ARE NOT WORKING YET ***</center></strong>
 </body>
 </html>
