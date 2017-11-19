@@ -1,0 +1,120 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	background-color: white;
+}
+.tableletters
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: powderblue;
+	width: 95%;
+	margin: auto;
+	height: 80px;
+	border-radius: 10px;
+}
+.tabletd
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	border-right: 1px solid powderblue;
+	background-color: #68ff68;
+	width: 22%;
+	border-radius: 10px;
+	font-size: 23px
+}
+.tabletd2
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 13%;
+	font-size: 18px;
+}
+.tabletd3
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 10%;
+	font-size: 17px;
+}
+.ButtonClick
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 17px;
+	font-weight: 550;
+	background-color: #68ff68;
+	border-style: none;
+}
+.tabletd4
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 18%;
+	font-size: 17px;
+}
+#LetterClickPlusButton
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	background-color: #f75353;
+	border-style: none;
+}
+.tabletd5
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 22%;
+	font-size: 17px;
+}
+#PenButton
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	background-color: #f75353;
+	border-style: none;
+}
+.tabletd6
+{
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 17px;
+}
+#UpgradePen
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	background-color: #f75353;
+	border-style: none;
+}
