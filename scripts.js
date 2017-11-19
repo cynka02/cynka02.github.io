@@ -4,13 +4,15 @@ var LetterCount = 0;
 var LetterPlus = 1;
 var LetterSecondMinus = 0;
 var LetterSecond = 0;
-var ClickUpgradeCost = 100;
-var PenCost = 20;
+var ClickUpgradeCost = 50;
+var PenCost = 15;
 var PenCount = 0;
 var PenUpgradeCost = 5;
 var PenMult = 1;
 var MaxLetterCount = 1000;
 var LetterClickTracker = 0;
+var UpgradeClickOwned = 1;
+var PenUpgradeCount = 1;
 
 //Pages
 
@@ -37,7 +39,7 @@ var PageClickTracker = 0;
 	{
 		LetterCount = LetterCount + LetterPlus;
 		LetterClickTracker = LetterClickTracker + 1;
-		document.getElementById("ClickDiv").innerHTML = LetterCount.toFixed(0) + "/" + MaxLetterCount;
+		document.getElementById("ClickDiv").innerHTML = Math.round(LetterCount) + "/" + MaxLetterCount;
 	}
 	function LetterClickTrackerfunc()
 	{
@@ -53,7 +55,7 @@ var PageClickTracker = 0;
 					PageCount = PageCount + 1;
 					LetterCount = LetterCount - 500;
 					PageClickTracker = PageClickTracker + 1;
-					document.getElementById("ClickPage").innerHTML = PageCount.toFixed(0) + "/" + MaxPageCount;
+					document.getElementById("ClickPage").innerHTML = Math.round(PageCount) + "/" + MaxPageCount;
 					}
 					else
 					{
@@ -75,11 +77,12 @@ function LetterClickPlus()
 	if (LetterCount >= ClickUpgradeCost)
 	{
 		LetterCount = LetterCount - ClickUpgradeCost;
-		ClickUpgradeCost = ClickUpgradeCost * 10;
-		LetterPlus = LetterPlus * 10;
-		document.getElementById("ClickDiv").innerHTML = LetterCount.toFixed(0) + "/" + MaxLetterCount;
-		document.getElementById("ClickButton").innerHTML = "+ " + LetterPlus.toFixed(0);
-		document.getElementById("LetterClickPlusButton").innerHTML = ClickUpgradeCost.toFixed(0)  + " letters <br /><strong>Click x10</strong>";
+		UpgradeClickOwned = UpgradeClickOwned + 1;
+		ClickUpgradeCost = 50 * Math.pow(1.15, UpgradeClickOwned);
+		LetterPlus = Math.pow(1.2, UpgradeClickOwned) ;
+		document.getElementById("ClickDiv").innerHTML = Math.round(LetterCount) + "/" + MaxLetterCount;
+		document.getElementById("ClickButton").innerHTML = "+ " + Math.round(LetterPlus);
+		document.getElementById("LetterClickPlusButton").innerHTML = Math.round(ClickUpgradeCost)  + " letters <br /><strong>Upgrade click</strong>";
 	} 
 	else
 	{
@@ -199,7 +202,42 @@ function ColorsUpgradePen()
 	}
 }
 setInterval(ColorsUpgradePen, 500);
-
+function ColorsBuyPage()
+{
+	if (LetterCount >= 500)
+	{
+		var buypagecolor = document.getElementById("ButtonClickPage");
+		with (buypagecolor.style)
+		{
+			paddingLeft = "5px";
+			paddingRight = "5px";
+			textAlign = "center";
+			verticalAlign = "middle";
+			width = "80%";
+			height = "80%";
+			fontSize = "17px";
+			backgroundColor = "#68ff68";
+			borderStyle = "none";
+		}
+	}
+	else if (LetterCount < 500)
+	{
+		var buypagecolor = document.getElementById("ButtonClickPage");
+		with (buypagecolor.style)
+		{
+			paddingLeft = "5px";
+			paddingRight = "5px";
+			textAlign = "center";
+			verticalAlign = "middle";
+			width = "80%";
+			height = "80%";
+			fontSize = "17px";
+			backgroundColor = "#f75353";
+			borderStyle = "none";
+		}
+	}
+}
+setInterval(ColorsBuyPage, 500);
 
 //PER SECOND --------------------------------------------------------------
 
@@ -209,12 +247,12 @@ setInterval(ColorsUpgradePen, 500);
 		if (LetterCount >= PenCost)
 		{
 			LetterCount = LetterCount - PenCost;
-			PenCost = PenCost * 1.05;
 			PenCount = PenCount + 1;
+			PenCost = 15 * Math.pow(1.125, PenCount);
 			LetterSecond = PenCount * PenMult;
 			document.getElementById("ClickDiv").innerHTML = LetterCount.toFixed(0) + "/" + MaxLetterCount;
 			document.getElementById("PerSecond").innerHTML = LetterSecond.toFixed(2);
-			document.getElementById("PenButton").innerHTML = PenCost.toFixed(0) + " letters<br /><strong>1 Pen (" + PenMult.toFixed(2) + "/s)</strong>";
+			document.getElementById("PenButton").innerHTML = PenCost.toFixed(0) + " letters<br /><strong>+1 Pen (" + PenMult.toFixed(2) + "/s)</strong>";
 		}
 		else
 		{
@@ -223,12 +261,12 @@ setInterval(ColorsUpgradePen, 500);
 	}
 	function PenWork()
 	{
-		LetterCount = LetterCount + LetterSecond / 10;
-		LetterSecond = LetterSecond - LetterSecondMinus /100;
+		LetterCount = LetterCount + LetterSecond / 20;
+		LetterSecond = LetterSecond - LetterSecondMinus /200;
 		document.getElementById("ClickDiv").innerHTML = LetterCount.toFixed(0) + "/" + MaxLetterCount;
 		document.getElementById("PerSecond").innerHTML = LetterSecond.toFixed(2);
 	}
-	setInterval(PenWork, 100);
+	setInterval(PenWork, 50);
 				
 				
 		/*		function Printer()     ----------- DOKONCZYC
@@ -322,12 +360,13 @@ function UpgradePenfunc()
 	if (PageCount >= PenUpgradeCost)
 	{
 		PageCount = PageCount - PenUpgradeCost;
-		PenUpgradeCost = PenUpgradeCost * 1.075;
-		PenMult = PenMult + 0.05 * 1.01;
+		PenUpgradeCount = PenUpgradeCount + 1;
+		PenUpgradeCost = 5 * Math.pow(1.2, PenUpgradeCount);
+		PenMult = PenMult + Math.pow(1.1, PenUpgradeCount) * 0.1;
 		LetterSecond = PenCount * PenMult;
 		document.getElementById("ClickPage").innerHTML = PageCount.toFixed(0) + "/" + MaxPageCount;
 		document.getElementById("PerSecond").innerHTML = LetterSecond.toFixed(2);
-		document.getElementById("PenButton").innerHTML = PenCost.toFixed(0) + " letters<br /><strong>1 Pen (" + PenMult.toFixed(2) + "/s)</strong>";
+		document.getElementById("PenButton").innerHTML = PenCost.toFixed(0) + " letters<br /><strong>+1 Pen (" + PenMult.toFixed(2) + "/s)</strong>";
 		document.getElementById("UpgradePen").innerHTML = PenUpgradeCost.toFixed(0) + " pages<br /><strong>Pens upgrade</strong>";
 	}
 	else
@@ -336,15 +375,18 @@ function UpgradePenfunc()
 	}
 }
 
+
+//SAVE LOAD RESET --------------------------------------------------------------
+
+
 function save()
 {
 	var Save =
 	{
-		LetterCount: LetterCount, LetterPlus: LetterPlus, LetterSecond: LetterSecond, ClickUpgradeCost: ClickUpgradeCost, PenCost: PenCost, PenCount: PenCount, PenUpgradeCost: PenUpgradeCost, PenMult: PenMult, MaxLetterCount: MaxLetterCount, PageCount: PageCount, PageSecond: PageSecond, PrinterCost: PrinterCost, PrinterCount: PrinterCount, PrinterUpgradeCost: PrinterUpgradeCost, PrinterMult: PrinterMult, MaxPageCount: MaxPageCount,
+		LetterCount: LetterCount, LetterPlus: LetterPlus, LetterSecond: LetterSecond, ClickUpgradeCost: ClickUpgradeCost, PenCost: PenCost, PenCount: PenCount, PenUpgradeCost: PenUpgradeCost, PenMult: PenMult, MaxLetterCount: MaxLetterCount, PageCount: PageCount, PageSecond: PageSecond, PrinterCost: PrinterCost, PrinterCount: PrinterCount, PrinterUpgradeCost: PrinterUpgradeCost, PrinterMult: PrinterMult, MaxPageCount: MaxPageCount, UpgradeClickOwned: UpgradeClickOwned, PenUpgradeCount, PenUpgradeCount
 	}
 	localStorage.setItem("Saved", JSON.stringify(Save));
 }
-
 function load()
 {
 	var SavedGame = JSON.parse(localStorage.getItem("Saved"));
@@ -364,19 +406,20 @@ function load()
 	if (typeof SavedGame.PrinterUpgradeCost !== "undefined") PrinterUpgradeCost = SavedGame.PrinterUpgradeCost;
 	if (typeof SavedGame.PrinterMult !== "undefined") PrinterMult = SavedGame.PrinterMult;
 	if (typeof SavedGame.MaxPageCount !== "undefined") MaxPageCount = SavedGame.MaxPageCount;
+	if (typeof SavedGame.UpgradeClickOwned !== "undefined") UpgradeClickOwned = SavedGame.UpgradeClickOwned;
+	if (typeof SavedGame.PenUpgradeCount !== "undefined") PenUpgradeCount = SavedGame.PenUpgradeCount;
 	document.getElementById("ClickDiv").innerHTML = LetterCount.toFixed(0) + "/" + MaxLetterCount;
 	document.getElementById("ClickPage").innerHTML = PageCount.toFixed(0) + "/" + MaxPageCount;
 	document.getElementById("PerSecondPage").innerHTML = PageSecond.toFixed(2);
-	document.getElementById("PrinterButton").innerHTML = PrinterCost.toFixed(0) + " pages<br /><strong>1 Printer (" + PrinterMult.toFixed(2) + "/s)</strong>";
+	document.getElementById("PrinterButton").innerHTML = PrinterCost.toFixed(0) + " pages<br /><strong>+1 Printer (" + PrinterMult.toFixed(2) + "/s)</strong>";
 	document.getElementById("UpgradePrinter").innerHTML = PrinterUpgradeCost.toFixed(0) + " chapters<br /><strong>Printers upgrade</strong>";
 	document.getElementById("ClickButton").innerHTML = "+ " + LetterPlus.toFixed();
-	document.getElementById("LetterClickPlusButton").innerHTML = ClickUpgradeCost.toFixed(0)  + " letters<br /><strong>Click x10</strong>";
-	document.getElementById("PenButton").innerHTML = PenCost.toFixed(0) + " letters<br /><strong>1 Pen (" + PenMult.toFixed(2) + "/s)</strong>";
+	document.getElementById("LetterClickPlusButton").innerHTML = ClickUpgradeCost.toFixed(0)  + " letters<br /><strong>Upgrade click</strong>";
+	document.getElementById("PenButton").innerHTML = PenCost.toFixed(0) + " letters<br /><strong>+1 Pen (" + PenMult.toFixed(2) + "/s)</strong>";
 	document.getElementById("UpgradePen").innerHTML = PenUpgradeCost.toFixed(0) + " pages<br /><strong>Pens upgrade</strong>";
 	document.getElementById("PerSecond").innerHTML = LetterSecond.toFixed(2);
 }
 setInterval(save, 100);
-
 function reset()
 		{
 			localStorage.clear();
