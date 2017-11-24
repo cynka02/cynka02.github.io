@@ -11,7 +11,8 @@ body
 	vertical-align: middle;
 	width: 100%;
 	height: 60px;
-	margin-top: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 .tableletters
 {
@@ -29,38 +30,31 @@ body
 	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
-	border-right: 1px solid powderblue;
-	background-color: #68ff68;
+	border-right: 1px solid #4C94FF;
+	background-color: #4C94FF;
 	width: 22%;
 	border-radius: 10px;
 	font-size: 23px
 }
 .tabletd2
 {
-	padding-left: 5px;
-	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
 	width: 13%;
 	font-size: 18px;
 }
-.table2td2
+.table2td3
 {
-	padding-left: 5px;
-	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
-	width: 12%;
-	font-size: 18px;
+	width: 13%;
 }
 .tabletd3
 {
-	padding-left: 5px;
-	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
 	width: 10%;
-	font-size: 17px;
+	font-size: 16px;
 }
 .ButtonClick
 {
@@ -70,19 +64,18 @@ body
 	vertical-align: middle;
 	width: 80%;
 	height: 80%;
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: 550;
 	background-color: #68ff68;
 	border-style: none;
+	transition-duration: 0.1s;
 }
 .tabletd4
 {
-	padding-left: 5px;
-	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
-	width: 18%;
-	font-size: 17px;
+	width: 13%;
+	font-size: 16px;
 }
 #LetterClickPlusButton
 {
@@ -95,15 +88,14 @@ body
 	font-size: 16px;
 	background-color: #f75353;
 	border-style: none;
+	transition-duration: 0.5s;
 }
 .tabletd5
 {
-	padding-left: 5px;
-	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
-	width: 22%;
-	font-size: 17px;
+	width: 14%;
+	font-size: 16px;
 }
 #PenButton
 {
@@ -116,13 +108,14 @@ body
 	font-size: 16px;
 	background-color: #f75353;
 	border-style: none;
+	transition-duration: 0.5s;
 }
 .tabletd6
 {
-	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
-	font-size: 17px;
+	font-size: 16px;
+	width: 13%;
 }
 #UpgradePen
 {
@@ -135,6 +128,7 @@ body
 	font-size: 16px;
 	background-color: #f75353;
 	border-style: none;
+	transition-duration: 0.5s;
 }
 #ButtonClickPage
 {
@@ -142,12 +136,12 @@ body
 	padding-right: 5px;
 	text-align: center;
 	vertical-align: middle;
-	width: 80%;
+	width: 85%;
 	height: 80%;
-	font-size: 17px;
-	font-weight: 540;
+	font-size: 16px;
 	background-color: #f75353;
 	border-style: none;
+	transition-duration: 0.5s;
 }
 #ButtonClickPage:active
 {
@@ -166,6 +160,125 @@ body
 	transform: scale(1.07);
 }
 .ButtonClick:active
+{
+	transform: scale(1.07);
+}
+.tabletd7
+{
+	padding-left: 5px;
+	padding-right: 10px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	width: 15%;
+}
+#UpgradeMax
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	font-weight: 540;
+	background-color: #f75353;
+	border-style: none;
+	transition-duration: 0.5s;
+}
+#UpgradeMax:active
+{
+	transform: scale(1.07);
+}
+#PrinterButton
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	background-color: #f75353;
+	border-style: none;
+	transition-duration: 0.5s;
+}
+#PrinterButton:active
+{
+	transform: scale(1.07);
+}
+#UpgradePrinter
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	background-color: #f75353;
+	border-style: none;
+	transition-duration: 0.5s;
+}
+#UpgradePrinter:active
+{
+	transform: scale(1.07);
+}
+.table2td6
+{
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	width: 18%;
+}
+.table2td5
+{
+	text-align: center;
+	vertical-align: middle;
+	width: 17%;
+	font-size: 16px;
+}
+.table2td7
+{
+	padding-left: 5px;
+	padding-right: 8px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 16px;
+	width: 21%;
+}
+#UpgradeMaxPage
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 80%;
+	height: 80%;
+	font-size: 16px;
+	font-weight: 540;
+	background-color: #f75353;
+	border-style: none;
+	transition-duration: 0.5s;
+}
+#UpgradeMaxPage:active
+{
+	transform: scale(1.07);
+}
+#ButtonClickChapter
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	vertical-align: middle;
+	width: 85%;
+	height: 80%;
+	font-size: 16px;
+	background-color: #f75353;
+	border-style: none;
+	transition-duration: 0.5s;
+}
+#ButtonClickChapter:active
 {
 	transform: scale(1.07);
 }
