@@ -1,45 +1,44 @@
 <html>
 <head>
-<title>Book Clicker</title>
+<title>RGB Clicker</title>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="load()">
-<div class="title"><strong><font color="brown">Book Clicker</font></strong><i><sub>beta</sub></i><div id="langpl">PL</div><div id="langen">EN</div></div>
-<table class="tableletters">
-	<tr>
-		<td class="tabletd"><span id="ClickDiv">0/1000<br />
-		Letters</span></td>
-		<td class="tabletd2"><span id="PerSecond">0.00<br />Letters per second</span></td>
-		<td class="tabletd3"><button id="ClickButton" class="ButtonClick">+ 1.0</button></td>
-		<td class="tabletd4"><button id="LetterClickPlusButton">50 letters<br /><strong>Upgrade click</strong></button></td>
-		<td class="tabletd5"><button id="PenButton">15 letters<br /><strong>+1 Pen (1.00/s)</strong></button></td>
-		<td class="tabletd6"><button id="UpgradePen">5 pages<br /><strong>Pens upgrade</strong></button></td>
-		<td class="tabletd7"><button id="UpgradeMax">10 pages<br /><strong><font size="2">Max letters upgrade</font></strong></button></td>
-	</tr>
-</table>
-<table class="tableletters">
-	<tr>
-		<td class="tabletd"><span id="ClickPage">0.0/1000<br />
-		Pages</span></td>
-		<td class="tabletd2"><span id="PerSecondPage">0.00<br />Pages per second</span></td>
-		<td class="table2td3"><button id="ButtonClickPage">500 letters<br /><strong>1 Page</strong></button></td>
-		<td class="table2td5"><button id="PrinterButton">15 pages<br /><strong>+1 Printer (0.5/s)</strong></button></td>
-		<td class="table2td6"><button id="UpgradePrinter">5 chapters<br /><strong>Printers upgrade</strong></button></td>
-		<td class="table2td7"><button id="UpgradeMaxPage">10 chapters<br /><strong><font size="2">Max pages upgrade</font></strong></button></td>
-	</tr>
-</table>
-<table class="tableletters">
-	<tr>
-		<td class="tabletd"><span id="ClickChapter">0/1000<br />
-		Chapters</span></td>
-		<td class="tabletd2"><span id="PerSecondChapter">0.00<br />Chapters per second</span></td>
-		<td class="table2td3"><button id="ButtonClickChapter">500 pages<br /><strong>1 Chapter</strong></button></td>
-		<td class="table2td5"><button id="TextEditorButton"><s>???<br /><strong>???</strong></s></button></td>
-		<td class="table2td6"><button id="UpgradeTextEditor"><s>???<br /><strong>???</strong></s></button></td>
-		<td class="table2td7"><button id="UpgradeMaxChapter"><s>???<br /><strong>???</strong></s></button></td>
-	</tr>
-</table><br /><br /><br />
-<center><button id="reset">Reset game</button></center>
+<body>
+
+<div id="title"><center><font color="#ff6464">R</font><font color="#64ff64">G</font><font color="#6464ff">B</font> Clicker<sub>beta</sub></div>
+
+<center><div class="progressr">
+	<div id="pasekr" role="progressbar" style="width: 1%;">1/100(0/s)</div>
+</div>
+<div id="strzalkar">\/</div>
+<div id="RPokaz">
+<!--<div id="RPrzyrost">+x</div>-->
+</div>
+<div id="RSPokaz">
+<!--<div id="RSPrzyrost">x/s</div>-->
+</div>
+
+<div class="progressg">
+	<div id="pasekg" role="progressbar" style="width: 1%;">1/100(0/s)</div>
+</div>
+<div id="strzalkag">\/</div>
+<div id="GPokaz">
+<!--<div id ="GPrzyrost">+x</div>-->
+</div>
+<div id="GSPokaz">
+<!--<div id="GSPrzyrost">x/s</div>-->
+</div>
+
+<div class="progressb">
+	<div id="pasekb" role="progressbar" style="width: 1%;">1/100(0/s)</div>
+</div>
+<div id="strzalkab">\/</div>
+<div id="BPokaz">
+<!--<div id ="BPrzyrost">+x</div>-->
+</div>
+<div id="BSPokaz">
+<!--<div id="BSPrzyrost">x/s</div>-->
+</div>
 </body>
 <script src="scripts.js"></script>
 </html>
