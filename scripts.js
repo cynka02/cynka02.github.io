@@ -31,7 +31,7 @@ document.getElementById("strzalkag").onclick = function()
 	{
 	var gpokazany = document.createElement("div"); 
 	gpokazany.id = "GPrzyrost";
-	gpokazany.innerHTML = przyrostg + '<img src="kulkag.png" id="kulkag" />';
+	gpokazany.innerHTML = przyrostg + '<img src="cynka02.github.io/kulkag.png" id="kulkag" />';
 	var gpokazanyp = document.getElementById("GPokaz"); 
 	gpokazanyp.appendChild(gpokazany);
 	document.getElementById("strzalkag").innerHTML = "/\\";
