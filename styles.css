@@ -1,0 +1,136 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	background-color: #eaeaea;
+}
+#title
+{
+	margin: auto;
+	width: 522px;
+}
+#Speed
+{
+	height: 80px;
+	font-size: 50px;
+	color: #757575;
+	text-align: center;
+	line-height: 80px;
+	width: 400px;
+	float: left;
+}
+#Boost
+{
+	height: 60px;
+	font-size: 35px;
+	line-height: 60px;
+	margin-top: 8.5px;
+	width: 120px;
+	text-align: center;
+	float: left;
+	color: #8e8e8e;
+	border-left: 1px solid #949494;
+	border-right: 1px solid #949494;
+}
+#Points
+{
+	height: 30px;
+	margin: auto;
+	width: 350px;
+}
+.s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9, .s10
+{
+	background-color: #a5a5a5;
+	float: left;
+	margin-left: 5px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+#s2s1, #s2s2, #s2s3, #s2s4, #s2s5, #s2s6, #s2s7, #s2s8, #s2s9, #s2s10
+{
+	height: 30px;
+	appearance: none;
+	-webkit-appearance: none;
+	background-color: #e8ea2d;
+}
+#Upgrade1Progress, #Upgrade2Progress, #Upgrade3Progress, #Upgrade4Progress
+{
+	width: 100%;
+	height: 15px;
+	margin-top: 8px;
+}
+.su1, .su21, .su31, .su41
+{ 
+	background-color: #a5a5a5;
+	float: left;
+	margin-left: 0px;
+	width: 22px;
+	height: 22px;
+	text-align: center;
+	margin-top: 5px;
+}
+.su2, .su3, .su4, .su5, .su6, .su7, .su8, .su9, .su10, .su22, .su23, .su24, .su25, .su26, .su27, .su28, .su29, .su210, .su32, .su33, .su34, .su35, .su36, .su37, .su38, .su39, .su310, .su42, .su43, .su44, .su45, .su46, .su47, .su48, .su49, .su410
+{
+	background-color: #a5a5a5;
+	float: left;
+	margin-left: 4px;
+	width: 22px;
+	height: 22px;
+	text-align: center;
+	margin-top: 5px;
+}
+#s2su1, #s2su2, #s2su3, #s2su4, #s2su5, #s2su6, #s2su7, #s2su8, #s2su9, #s2su10, #s2su21, #s2su22, #s2su23, #s2su24, #s2su25, #s2su26, #s2su27, #s2su28, #s2su29, #s2su210, #s2su31, #s2su32, #s2su33, #s2su34, #s2su35, #s2su36, #s2su37, #s2su38, #s2su39, #s2su310, #s2su41, #s2su42, #s2su43, #s2su44, #s2su45, #s2su46, #s2su47, #s2su48, #s2su49, #s2su410
+{
+	height: 100%;
+	appearance: none;
+	-webkit-appearance: none;
+	background-color: #e8ea2d;
+}
+#u110, #u125, #u150, #u1100, #u210, #u225, #u250, #u2100, #u310, #u325, #u350, #u3100, #u410, #u425, #u450, #u4100
+{
+	background-color: #c1c1c1;
+	height: 20%;
+	width: 102.9%;
+}
+#u110:hover, #u125:hover, #u150:hover, #u1100:hover, #u210:hover, #u225:hover, #u250:hover, #u2100:hover, #u310:hover, #u325:hover, #u350:hover, #u3100:hover, #u410:hover, #u425:hover, #u450:hover, #u4100:hover
+{
+	background-color: #e4e4e4;
+	height: 20%;
+	width: 102.9%;
+}
+#Upgrade1BuyInfo, #Upgrade2BuyInfo, #Upgrade3BuyInfo, #Upgrade4BuyInfo
+{
+	height: 20%;
+	width: 102.9%;
+}
+#Upgrade1, #Upgrade2, #Upgrade3, #Upgrade4
+{
+	height: 140px;
+	width: 50%;
+	margin: auto;
+	background-color: #d6d6d6;
+	border: 2px solid #404040;
+}
+#Upgrade1Buy, #Upgrade2Buy, #Upgrade3Buy, #Upgrade4Buy
+{
+	height: 100%;
+	width: 25%;
+	float: left;
+	line-height: 165%;
+	text-align: center;
+	font-size: 120%;
+	color: #444444;
+}
+#Upgrade1Main, #Upgrade2Main, #Upgrade3Main, #Upgrade4Main
+{
+	height: 100%;
+	width: 70%;
+	border-right: 2px solid #404040;
+	float: left;
+	line-height: 200%;
+	text-align: left;
+	padding-left: 4%;
+	font-size: 120%;
+	color: #444444;
+}
