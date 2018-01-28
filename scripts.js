@@ -1,4 +1,4 @@
-var Speed = 15; //7692307 -- MAX SPEED
+var Speed = 15;
 var SpeedforUpgrade1 = 0;
 var SpeedAfterBoost = 0;
 var Points = 0;
@@ -99,7 +99,6 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints; 
 		var width = LocalPoints * 1000;
 		document.getElementById("s2s1").style = "width: " + width +"%;";
@@ -112,12 +111,35 @@ function ScorePoints()
 		document.getElementById("s2s4").style = "width: 0%;";
 		document.getElementById("s2s3").style = "width: 0%;";
 		document.getElementById("s2s2").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints2 && Points > AlternativePoints)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width2 = (LocalPoints * 1000) - 100;
 		document.getElementById("s2s2").style = "width: " + width2 +"%;";
@@ -130,12 +152,35 @@ function ScorePoints()
 		document.getElementById("s2s5").style = "width: 0%;";
 		document.getElementById("s2s4").style = "width: 0%;";
 		document.getElementById("s2s3").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints3 && Points > AlternativePoints2)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width3 = (LocalPoints * 1000) - 200;
 		document.getElementById("s2s3").style = "width: " + width3 +"%;";
@@ -148,12 +193,35 @@ function ScorePoints()
 		document.getElementById("s2s6").style = "width: 0%;";
 		document.getElementById("s2s5").style = "width: 0%;";
 		document.getElementById("s2s4").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints4 && Points > AlternativePoints3)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width4 = (LocalPoints * 1000) - 300;
 		document.getElementById("s2s4").style = "width: " + width4 +"%;";
@@ -166,12 +234,35 @@ function ScorePoints()
 		document.getElementById("s2s7").style = "width: 0%;";
 		document.getElementById("s2s6").style = "width: 0%;";
 		document.getElementById("s2s5").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints5 && Points > AlternativePoints4)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width5 = (LocalPoints * 1000) - 400;
 		document.getElementById("s2s5").style = "width: " + width5 +"%;";
@@ -184,12 +275,35 @@ function ScorePoints()
 		document.getElementById("s2s8").style = "width: 0%;";
 		document.getElementById("s2s7").style = "width: 0%;";
 		document.getElementById("s2s6").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints6 && Points > AlternativePoints5)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width6 = (LocalPoints * 1000) - 500;
 		document.getElementById("s2s6").style = "width: " + width6 +"%;";
@@ -202,12 +316,35 @@ function ScorePoints()
 		document.getElementById("s2s9").style = "width: 0%;";
 		document.getElementById("s2s8").style = "width: 0%;";
 		document.getElementById("s2s7").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints7 && Points > AlternativePoints6)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width7 = (LocalPoints * 1000) - 600;
 		document.getElementById("s2s7").style = "width: " + width7 +"%;";
@@ -220,12 +357,35 @@ function ScorePoints()
 		document.getElementById("s2s10").style = "width: 0%;";
 		document.getElementById("s2s9").style = "width: 0%;";
 		document.getElementById("s2s8").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints8 && Points > AlternativePoints7)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width8 = (LocalPoints * 1000) - 700;
 		document.getElementById("s2s8").style = "width: " + width8 +"%;";
@@ -238,12 +398,35 @@ function ScorePoints()
 		document.getElementById("s2s1").style = "width: 100%;";
 		document.getElementById("s2s10").style = "width: 0%;";
 		document.getElementById("s2s9").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points <= AlternativePoints9 && Points > AlternativePoints8)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width9 = (LocalPoints * 1000) - 800;
 		document.getElementById("s2s9").style = "width: " + width9 +"%;";
@@ -256,12 +439,35 @@ function ScorePoints()
 		document.getElementById("s2s2").style = "width: 100%;";
 		document.getElementById("s2s1").style = "width: 100%;";
 		document.getElementById("s2s10").style = "width: 0%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points < MaxPoints && Points > AlternativePoints9)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width10 = (LocalPoints * 1000) - 900;
 		document.getElementById("s2s10").style = "width: " + width10 + "%;";
@@ -274,6 +480,30 @@ function ScorePoints()
 		document.getElementById("s2s3").style = "width: 100%;";
 		document.getElementById("s2s2").style = "width: 100%;";
 		document.getElementById("s2s1").style = "width: 100%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 	else if (Points >= MaxPoints)
 	{
@@ -289,6 +519,30 @@ function ScorePoints()
 		document.getElementById("s2s8").style = "width: 100%;";
 		document.getElementById("s2s9").style = "width: 100%;";
 		document.getElementById("s2s10").style = "width: 100%;";
+		if (Points < 1000)
+		{
+			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+		}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints2 = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints2 = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints2 = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
 	}
 }
 setInterval(ScorePoints, 10);
@@ -395,29 +649,14 @@ document.getElementById("Upgrade1").onclick = function()
 		Upgrade1Cost = 5 * Math.pow(1.09, Upgrade1Count);
 		Upgrade1Value = Upgrade1Cost;
 		Upgrade1Buy = 0;
-		document.getElementById("BuyInfo1").innerHTML = "Click to buy ! (" + Upgrade1Cost.toFixed(1) + " points)"
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
 		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
-		if (Speed >= 7692307)
-		{
-			Speed = 7692307;
-			document.getElementById("Upgrade1Buy").innerHTML = "";
-			document.getElementById("s2su10").style = "width: 100%;";
-			document.getElementById("s2su9").style = "width: 100%;";
-			document.getElementById("s2su8").style = "width: 100%;";
-			document.getElementById("s2su7").style = "width: 100%;";
-			document.getElementById("s2su6").style = "width: 100%;";
-			document.getElementById("s2su5").style = "width: 100%;";
-			document.getElementById("s2su4").style = "width: 100%;";
-			document.getElementById("s2su3").style = "width: 100%;";
-			document.getElementById("s2su2").style = "width: 100%;";
-			document.getElementById("s2su1").style = "width: 100%;";
-		}
-		else if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100 || Upgrade1Count == 110 || Upgrade1Count == 120 || Upgrade1Count == 130 || Upgrade1Count == 140 || Upgrade1Count == 150 || Upgrade1Count == 160 || Upgrade1Count == 170 || Upgrade1Count == 180 || Upgrade1Count == 190 || Upgrade1Count == 200)
+		if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100 || Upgrade1Count == 110 || Upgrade1Count == 120 || Upgrade1Count == 130 || Upgrade1Count == 140 || Upgrade1Count == 150 || Upgrade1Count == 160 || Upgrade1Count == 170 || Upgrade1Count == 180 || Upgrade1Count == 190 || Upgrade1Count == 200)
 		{
 			SpeedforUpgrade1 = SpeedforUpgrade1 * 2;
 			Upgrade1SpeedAdd = Upgrade1SpeedAdd * 2;
 			Speed = 15 + SpeedforUpgrade1;
-			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " PPM";
+			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " Points Per Minute";
 		}
 	}
 	else if (PointsForUpgrade1 < Upgrade1Value)
@@ -425,6 +664,7 @@ document.getElementById("Upgrade1").onclick = function()
 		Upgrade1Buy = Upgrade1Buy + Points;
 		Upgrade1Value = Upgrade1Value - Points;
 		Points = 0;
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
 	}
 }
 
@@ -680,7 +920,7 @@ document.getElementById("Upgrade2").onclick = function()
 		BoostTime = BoostTime + 100;
 		var LocalBoostTime = BoostTime / 1000
 		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("BuyInfo2").innerHTML = "Click to buy ! (" + Upgrade2Cost.toFixed(1) + " points)"
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
 		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
 	}
@@ -689,6 +929,7 @@ document.getElementById("Upgrade2").onclick = function()
 		Upgrade2Buy = Upgrade2Buy + Points;
 		Upgrade2Value = Upgrade2Value - Points;
 		Points = Points - Points;
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
 	}
 }
 
@@ -940,7 +1181,7 @@ document.getElementById("Upgrade3").onclick = function()
 		BoostStrenght = BoostStrenght + 0.01;
 		var LocalBoostTime = BoostTime / 1000
 		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("BuyInfo3").innerHTML = "Click to buy ! (" + Upgrade3Cost.toFixed(1) + " points)"
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
 		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
 	}
@@ -949,6 +1190,7 @@ document.getElementById("Upgrade3").onclick = function()
 		Upgrade3Buy = Upgrade3Buy + Points;
 		Upgrade3Value = Upgrade3Value - Points;
 		Points = Points - Points;
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
 	}
 }
 
@@ -1186,7 +1428,7 @@ document.getElementById("Upgrade4").onclick = function()
 		Upgrade4Value = Upgrade4Cost;
 		Upgrade4Buy = 0;
 		MaxPoints = MaxPoints * 10;
-		document.getElementById("BuyInfo4").innerHTML = "Click to buy ! (" + Upgrade4Cost.toFixed(1) + " points)"
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
 		document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
 		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
 	}
@@ -1195,6 +1437,7 @@ document.getElementById("Upgrade4").onclick = function()
 		Upgrade4Buy = Upgrade4Buy + Points;
 		Upgrade4Value = Upgrade4Value - Points;
 		Points = Points - Points;
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
 	}
 }
 
@@ -1450,16 +1693,16 @@ function load()
 	var LocalBoostTime = BoostTime / 1000
 	var LocalBoostStrenght = BoostStrenght + 1;
 	document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-	document.getElementById("BuyInfo1").innerHTML = "Click to buy ! (" + Upgrade1Cost.toFixed(1) + " points)"
-	document.getElementById("BuyInfo2").innerHTML = "Click to buy ! (" + Upgrade2Cost.toFixed(1) + " points)"
-	document.getElementById("BuyInfo3").innerHTML = "Click to buy ! (" + Upgrade3Cost.toFixed(1) + " points)"
-	document.getElementById("BuyInfo4").innerHTML = "Click to buy ! (" + Upgrade4Cost.toFixed(1) + " points)"
+	document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
+	document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
+	document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
+	document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
 	document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
 	document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
 	document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
 	document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
 	document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
-	document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " PPM";
+	document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " Points Per Minute";
 }
 document.getElementById("reset").onclick = function()
 {
