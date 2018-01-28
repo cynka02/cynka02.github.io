@@ -99,6 +99,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints; 
 		var width = LocalPoints * 1000;
 		document.getElementById("s2s1").style = "width: " + width +"%;";
@@ -116,6 +117,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width2 = (LocalPoints * 1000) - 100;
 		document.getElementById("s2s2").style = "width: " + width2 +"%;";
@@ -133,6 +135,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width3 = (LocalPoints * 1000) - 200;
 		document.getElementById("s2s3").style = "width: " + width3 +"%;";
@@ -150,6 +153,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width4 = (LocalPoints * 1000) - 300;
 		document.getElementById("s2s4").style = "width: " + width4 +"%;";
@@ -167,6 +171,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width5 = (LocalPoints * 1000) - 400;
 		document.getElementById("s2s5").style = "width: " + width5 +"%;";
@@ -184,6 +189,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width6 = (LocalPoints * 1000) - 500;
 		document.getElementById("s2s6").style = "width: " + width6 +"%;";
@@ -201,6 +207,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width7 = (LocalPoints * 1000) - 600;
 		document.getElementById("s2s7").style = "width: " + width7 +"%;";
@@ -218,6 +225,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width8 = (LocalPoints * 1000) - 700;
 		document.getElementById("s2s8").style = "width: " + width8 +"%;";
@@ -235,6 +243,7 @@ function ScorePoints()
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width9 = (LocalPoints * 1000) - 800;
 		document.getElementById("s2s9").style = "width: " + width9 +"%;";
@@ -248,13 +257,14 @@ function ScorePoints()
 		document.getElementById("s2s1").style = "width: 100%;";
 		document.getElementById("s2s10").style = "width: 0%;";
 	}
-	else if (Points <= MaxPoints && Points > AlternativePoints9)
+	else if (Points < MaxPoints && Points > AlternativePoints9)
 	{
 		var LocalSpeed = SpeedAfterBoost + Speed;
 		Points = Points + (LocalSpeed/6000);
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		var LocalPoints = Points / MaxPoints;
 		var width10 = (LocalPoints * 1000) - 900;
-		document.getElementById("s2s10").style = "width: " + width10 +"%;";
+		document.getElementById("s2s10").style = "width: " + width10 + "%;";
 		document.getElementById("s2s9").style = "width: 100%;";
 		document.getElementById("s2s8").style = "width: 100%;";
 		document.getElementById("s2s7").style = "width: 100%;";
@@ -268,6 +278,7 @@ function ScorePoints()
 	else if (Points >= MaxPoints)
 	{
 		Points = MaxPoints;
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
 		document.getElementById("s2s1").style = "width: 100%;";
 		document.getElementById("s2s2").style = "width: 100%;";
 		document.getElementById("s2s3").style = "width: 100%;";
@@ -320,15 +331,12 @@ setInterval(ScorePoints, 10);
 
 document.getElementById("Boost").onclick = function()
 {
-	document.getElementById("Boost").style = "color: #eaec42;";
+	document.getElementById("Boost").style = "color: #f8ff00;";
 	SpeedAfterBoost = Speed * BoostStrenght;
-	var LocalSpeed = SpeedAfterBoost + Speed;
-	document.getElementById("Speed").innerHTML = LocalSpeed.toFixed(1) + " PPM";
 	function Timeout()
 	{
-		document.getElementById("Boost").style = "color: #8e8e8e;";
+		document.getElementById("Boost").style = "color: #e76666;";
 		SpeedAfterBoost = 0;
-		document.getElementById("Speed").innerHTML = Speed + " PPM";
 	}
 	setTimeout(Timeout, BoostTime);
 }
@@ -364,207 +372,13 @@ document.getElementById("Boost").onclick = function()
 
 
 
-
-
-
-
-document.getElementById("u110").onclick = function() 
-{
-	PointsForUpgrade1 = Points / 10;
-	if (Upgrade1Value <= PointsForUpgrade1)
-	{
-		SpeedforUpgrade1 = SpeedforUpgrade1 + Upgrade1SpeedAdd;
-		Speed = 15 + SpeedforUpgrade1;
-		document.getElementById("Speed").innerHTML = Speed + " PPM";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: 0%;";
-		document.getElementById("s2su2").style = "width: 0%;";
-		document.getElementById("s2su1").style = "width: 0%;";
-		Points = Points - Upgrade1Value;
-		Upgrade1Count = Upgrade1Count + 1;
-		Upgrade1Count2 = Upgrade1Count2 + 1;
-		Upgrade1Cost = 5 * Math.pow(1.08, Upgrade1Count);
-		Upgrade1Value = Upgrade1Cost;
-		Upgrade1Buy = 0;
-		AlternativeUpgrade1Cost = Upgrade1Cost / 10;
-		document.getElementById("Upgrade1Progress").title = "1 square = " + AlternativeUpgrade1Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
-		if (Speed >= 7692307)
-		{
-			Speed = 7692307;
-			document.getElementById("Upgrade1Buy").innerHTML = "";
-			document.getElementById("s2su10").style = "width: 100%;";
-			document.getElementById("s2su9").style = "width: 100%;";
-			document.getElementById("s2su8").style = "width: 100%;";
-			document.getElementById("s2su7").style = "width: 100%;";
-			document.getElementById("s2su6").style = "width: 100%;";
-			document.getElementById("s2su5").style = "width: 100%;";
-			document.getElementById("s2su4").style = "width: 100%;";
-			document.getElementById("s2su3").style = "width: 100%;";
-			document.getElementById("s2su2").style = "width: 100%;";
-			document.getElementById("s2su1").style = "width: 100%;";
-		}
-		else if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100)
-		{
-			SpeedforUpgrade1 = SpeedforUpgrade1 * 2;
-			Upgrade1SpeedAdd = Upgrade1SpeedAdd * 2;
-			Speed = 15 + SpeedforUpgrade1;
-			document.getElementById("Speed").innerHTML = Speed + " PPM";
-			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " PPM";
-		}
-	}
-	else if (PointsForUpgrade1 < Upgrade1Value)
-	{
-		Upgrade1Buy = Upgrade1Buy + (Points / 10);
-		Upgrade1Value = Upgrade1Value - (Points / 10);
-		Points = Points - (Points / 10);
-	}
-}
-
-
-
-
-
-document.getElementById("u150").onclick = function() 
-{
-	PointsForUpgrade1 = Points / 2;
-	if (Upgrade1Value <= PointsForUpgrade1)
-	{
-		SpeedforUpgrade1 = SpeedforUpgrade1 + Upgrade1SpeedAdd;
-		Speed = 15 + SpeedforUpgrade1;
-		document.getElementById("Speed").innerHTML = Speed + " PPM";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: 0%;";
-		document.getElementById("s2su2").style = "width: 0%;";
-		document.getElementById("s2su1").style = "width: 0%;";
-		Points = Points - Upgrade1Value;
-		Upgrade1Count = Upgrade1Count + 1;
-		Upgrade1Count2 = Upgrade1Count2 + 1;
-		Upgrade1Cost = 5 * Math.pow(1.08, Upgrade1Count);
-		Upgrade1Value = Upgrade1Cost;
-		Upgrade1Buy = 0;
-		AlternativeUpgrade1Cost = Upgrade1Cost / 10;
-		document.getElementById("Upgrade1Progress").title = "1 square = " + AlternativeUpgrade1Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
-		if (Speed >= 7692307)
-		{
-			Speed = 7692307;
-			document.getElementById("Upgrade1Buy").innerHTML = "";
-			document.getElementById("s2su10").style = "width: 100%;";
-			document.getElementById("s2su9").style = "width: 100%;";
-			document.getElementById("s2su8").style = "width: 100%;";
-			document.getElementById("s2su7").style = "width: 100%;";
-			document.getElementById("s2su6").style = "width: 100%;";
-			document.getElementById("s2su5").style = "width: 100%;";
-			document.getElementById("s2su4").style = "width: 100%;";
-			document.getElementById("s2su3").style = "width: 100%;";
-			document.getElementById("s2su2").style = "width: 100%;";
-			document.getElementById("s2su1").style = "width: 100%;";
-		}
-		else if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100)
-		{
-			SpeedforUpgrade1 = SpeedforUpgrade1 * 2;
-			Upgrade1SpeedAdd = Upgrade1SpeedAdd * 2;
-			Speed = 15 + SpeedforUpgrade1;
-			document.getElementById("Speed").innerHTML = Speed + " PPM";
-			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " PPM";
-		}
-	}
-	else if (PointsForUpgrade1 < Upgrade1Value)
-	{
-		Upgrade1Buy = Upgrade1Buy + (Points / 2);
-		Upgrade1Value = Upgrade1Value - (Points / 2);
-		Points = Points - (Points / 2);
-	}
-}
-
-
-
-
-
-document.getElementById("u125").onclick = function() 
-{
-	PointsForUpgrade1 = Points / 4;
-	if (Upgrade1Value <= PointsForUpgrade1)
-	{
-		SpeedforUpgrade1 = SpeedforUpgrade1 + Upgrade1SpeedAdd;
-		Speed = 15 + SpeedforUpgrade1;
-		document.getElementById("Speed").innerHTML = Speed + " PPM";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: 0%;";
-		document.getElementById("s2su2").style = "width: 0%;";
-		document.getElementById("s2su1").style = "width: 0%;";
-		Points = Points - Upgrade1Value;
-		Upgrade1Count = Upgrade1Count + 1;
-		Upgrade1Count2 = Upgrade1Count2 + 1;
-		Upgrade1Cost = 5 * Math.pow(1.08, Upgrade1Count);
-		Upgrade1Value = Upgrade1Cost;
-		Upgrade1Buy = 0;
-		AlternativeUpgrade1Cost = Upgrade1Cost / 10;
-		document.getElementById("Upgrade1Progress").title = "1 square = " + AlternativeUpgrade1Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
-		if (Speed >= 7692307)
-		{
-			Speed = 7692307;
-			document.getElementById("Upgrade1Buy").innerHTML = "";
-			document.getElementById("s2su10").style = "width: 100%;";
-			document.getElementById("s2su9").style = "width: 100%;";
-			document.getElementById("s2su8").style = "width: 100%;";
-			document.getElementById("s2su7").style = "width: 100%;";
-			document.getElementById("s2su6").style = "width: 100%;";
-			document.getElementById("s2su5").style = "width: 100%;";
-			document.getElementById("s2su4").style = "width: 100%;";
-			document.getElementById("s2su3").style = "width: 100%;";
-			document.getElementById("s2su2").style = "width: 100%;";
-			document.getElementById("s2su1").style = "width: 100%;";
-		}
-		else if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100)
-		{
-			SpeedforUpgrade1 = SpeedforUpgrade1 * 2;
-			Upgrade1SpeedAdd = Upgrade1SpeedAdd * 2;
-			Speed = 15 + SpeedforUpgrade1;
-			document.getElementById("Speed").innerHTML = Speed + " PPM";
-			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " PPM";
-		}
-	}
-	else if (PointsForUpgrade1 < Upgrade1Value)
-	{
-		Upgrade1Buy = Upgrade1Buy + (Points / 4);
-		Upgrade1Value = Upgrade1Value - (Points / 4);
-		Points = Points - (Points / 4);
-	}
-}
-
-
-
-
-
-document.getElementById("u1100").onclick = function() 
+document.getElementById("Upgrade1").onclick = function() 
 {
 	PointsForUpgrade1 = Points;
 	if (Upgrade1Value <= PointsForUpgrade1)
 	{
 		SpeedforUpgrade1 = SpeedforUpgrade1 + Upgrade1SpeedAdd;
 		Speed = 15 + SpeedforUpgrade1;
-		document.getElementById("Speed").innerHTML = Speed + " PPM";
 		document.getElementById("s2su10").style = "width: 0%;";
 		document.getElementById("s2su9").style = "width: 0%;";
 		document.getElementById("s2su8").style = "width: 0%;";
@@ -578,11 +392,10 @@ document.getElementById("u1100").onclick = function()
 		Points = Points - Upgrade1Value;
 		Upgrade1Count = Upgrade1Count + 1;
 		Upgrade1Count2 = Upgrade1Count2 + 1;
-		Upgrade1Cost = 5 * Math.pow(1.08, Upgrade1Count);
+		Upgrade1Cost = 5 * Math.pow(1.09, Upgrade1Count);
 		Upgrade1Value = Upgrade1Cost;
 		Upgrade1Buy = 0;
-		AlternativeUpgrade1Cost = Upgrade1Cost / 10;
-		document.getElementById("Upgrade1Progress").title = "1 square = " + AlternativeUpgrade1Cost.toFixed(2) + " points";
+		document.getElementById("BuyInfo1").innerHTML = "Click to buy ! (" + Upgrade1Cost.toFixed(1) + " points)"
 		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
 		if (Speed >= 7692307)
 		{
@@ -599,12 +412,11 @@ document.getElementById("u1100").onclick = function()
 			document.getElementById("s2su2").style = "width: 100%;";
 			document.getElementById("s2su1").style = "width: 100%;";
 		}
-		else if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100)
+		else if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100 || Upgrade1Count == 110 || Upgrade1Count == 120 || Upgrade1Count == 130 || Upgrade1Count == 140 || Upgrade1Count == 150 || Upgrade1Count == 160 || Upgrade1Count == 170 || Upgrade1Count == 180 || Upgrade1Count == 190 || Upgrade1Count == 200)
 		{
 			SpeedforUpgrade1 = SpeedforUpgrade1 * 2;
 			Upgrade1SpeedAdd = Upgrade1SpeedAdd * 2;
 			Speed = 15 + SpeedforUpgrade1;
-			document.getElementById("Speed").innerHTML = Speed + " PPM";
 			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " PPM";
 		}
 	}
@@ -844,136 +656,7 @@ function Upgrade1ProgressF()
 
 
 
-
-
-
-
-
-document.getElementById("u210").onclick = function() 
-{
-	PointsForUpgrade2 = Points / 10;
-	if (Upgrade2Value <= PointsForUpgrade2)
-	{
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: 0%;";
-		document.getElementById("s2su22").style = "width: 0%;";
-		document.getElementById("s2su21").style = "width: 0%;";
-		Points = Points - Upgrade2Value;
-		Upgrade2Count = Upgrade2Count + 1;
-		Upgrade2Count2 = Upgrade2Count2 + 1;
-		Upgrade2Cost = 20 * Math.pow(1.15, Upgrade2Count);
-		Upgrade2Value = Upgrade2Cost;
-		Upgrade2Buy = 0;
-		AlternativeUpgrade2Cost = Upgrade2Cost / 10;
-		BoostTime = BoostTime + 100;
-		var LocalBoostTime = BoostTime / 1000
-		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade2Progress").title = "1 square = " + AlternativeUpgrade2Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
-	}
-	else if (PointsForUpgrade2 < Upgrade2Value)
-	{
-		Upgrade2Buy = Upgrade2Buy + (Points / 10);
-		Upgrade2Value = Upgrade2Value - (Points / 10);
-		Points = Points - (Points / 10);
-	}
-}
-
-
-
-
-
-document.getElementById("u225").onclick = function() 
-{
-	PointsForUpgrade2 = Points / 4;
-	if (Upgrade2Value <= PointsForUpgrade2)
-	{
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: 0%;";
-		document.getElementById("s2su22").style = "width: 0%;";
-		document.getElementById("s2su21").style = "width: 0%;";
-		Points = Points - Upgrade2Value;
-		Upgrade2Count = Upgrade2Count + 1;
-		Upgrade2Count2 = Upgrade2Count2 + 1;
-		Upgrade2Cost = 20 * Math.pow(1.15, Upgrade2Count);
-		Upgrade2Value = Upgrade2Cost;
-		Upgrade2Buy = 0;
-		AlternativeUpgrade2Cost = Upgrade2Cost / 10;
-		BoostTime = BoostTime + 100;
-		var LocalBoostTime = BoostTime / 1000
-		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade2Progress").title = "1 square = " + AlternativeUpgrade2Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
-	}
-	else if (PointsForUpgrade2 < Upgrade2Value)
-	{
-		Upgrade2Buy = Upgrade2Buy + (Points / 4);
-		Upgrade2Value = Upgrade2Value - (Points / 4);
-		Points = Points - (Points / 4);
-	}
-}
-
-
-
-
-
-
-document.getElementById("u250").onclick = function() 
-{
-	PointsForUpgrade2 = Points / 2;
-	if (Upgrade2Value <= PointsForUpgrade2)
-	{
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: 0%;";
-		document.getElementById("s2su22").style = "width: 0%;";
-		document.getElementById("s2su21").style = "width: 0%;";
-		Points = Points - Upgrade2Value;
-		Upgrade2Count = Upgrade2Count + 1;
-		Upgrade2Count2 = Upgrade2Count2 + 1;
-		Upgrade2Cost = 20 * Math.pow(1.15, Upgrade2Count);
-		Upgrade2Value = Upgrade2Cost;
-		Upgrade2Buy = 0;
-		AlternativeUpgrade2Cost = Upgrade2Cost / 10;
-		BoostTime = BoostTime + 100;
-		var LocalBoostTime = BoostTime / 1000
-		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade2Progress").title = "1 square = " + AlternativeUpgrade2Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
-	}
-	else if (PointsForUpgrade2 < Upgrade2Value)
-	{
-		Upgrade2Buy = Upgrade2Buy + (Points / 2);
-		Upgrade2Value = Upgrade2Value - (Points / 2);
-		Points = Points - (Points / 2);
-	}
-}
-
-
-
-
-
-document.getElementById("u2100").onclick = function() 
+document.getElementById("Upgrade2").onclick = function() 
 {
 	PointsForUpgrade2 = Points;
 	if (Upgrade2Value <= PointsForUpgrade2)
@@ -991,15 +674,14 @@ document.getElementById("u2100").onclick = function()
 		Points = Points - Upgrade2Value;
 		Upgrade2Count = Upgrade2Count + 1;
 		Upgrade2Count2 = Upgrade2Count2 + 1;
-		Upgrade2Cost = 20 * Math.pow(1.15, Upgrade2Count);
+		Upgrade2Cost = 20 * Math.pow(1.21, Upgrade2Count);
 		Upgrade2Value = Upgrade2Cost;
 		Upgrade2Buy = 0;
-		AlternativeUpgrade2Cost = Upgrade2Cost / 10;
 		BoostTime = BoostTime + 100;
 		var LocalBoostTime = BoostTime / 1000
 		var LocalBoostStrenght = BoostStrenght + 1;
+		document.getElementById("BuyInfo2").innerHTML = "Click to buy ! (" + Upgrade2Cost.toFixed(1) + " points)"
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade2Progress").title = "1 square = " + AlternativeUpgrade2Cost.toFixed(2) + " points";
 		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
 	}
 	else if (PointsForUpgrade2 < Upgrade2Value)
@@ -1234,133 +916,7 @@ function Upgrade2ProgressF()
 
 
 
-
-
-document.getElementById("u310").onclick = function() 
-{
-	PointsForUpgrade3 = Points / 10;
-	if (Upgrade3Value <= PointsForUpgrade3)
-	{
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: 0%;";
-		document.getElementById("s2su32").style = "width: 0%;";
-		document.getElementById("s2su31").style = "width: 0%;";
-		Points = Points - Upgrade3Value;
-		Upgrade3Count = Upgrade3Count + 1;
-		Upgrade3Count2 = Upgrade3Count2 + 1;
-		Upgrade3Cost = 30 * Math.pow(1.15, Upgrade3Count);
-		Upgrade3Value = Upgrade3Cost;
-		Upgrade3Buy = 0;
-		AlternativeUpgrade3Cost = Upgrade3Cost / 10;
-		BoostStrenght = BoostStrenght + 0.01;
-		var LocalBoostTime = BoostTime / 1000
-		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade3Progress").title = "1 square = " + AlternativeUpgrade3Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
-	}
-	else if (PointsForUpgrade3 < Upgrade3Value)
-	{
-		Upgrade3Buy = Upgrade3Buy + (Points / 10);
-		Upgrade3Value = Upgrade3Value - (Points / 10);
-		Points = Points - (Points / 10);
-	}
-}
-
-
-
-
-
-document.getElementById("u325").onclick = function() 
-{
-	PointsForUpgrade3 = Points / 4;
-	if (Upgrade3Value <= PointsForUpgrade3)
-	{
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: 0%;";
-		document.getElementById("s2su32").style = "width: 0%;";
-		document.getElementById("s2su31").style = "width: 0%;";
-		Points = Points - Upgrade3Value;
-		Upgrade3Count = Upgrade3Count + 1;
-		Upgrade3Count2 = Upgrade3Count2 + 1;
-		Upgrade3Cost = 30 * Math.pow(1.15, Upgrade3Count);
-		Upgrade3Value = Upgrade3Cost;
-		Upgrade3Buy = 0;
-		AlternativeUpgrade3Cost = Upgrade3Cost / 10;
-		BoostStrenght = BoostStrenght + 0.01;
-		var LocalBoostTime = BoostTime / 1000
-		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade3Progress").title = "1 square = " + AlternativeUpgrade3Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
-	}
-	else if (PointsForUpgrade3 < Upgrade3Value)
-	{
-		Upgrade3Buy = Upgrade3Buy + (Points / 4);
-		Upgrade3Value = Upgrade3Value - (Points / 4);
-		Points = Points - (Points / 4);
-	}
-}
-
-
-
-
-
-
-document.getElementById("u350").onclick = function() 
-{
-	PointsForUpgrade3 = Points / 2;
-	if (Upgrade3Value <= PointsForUpgrade3)
-	{
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: 0%;";
-		document.getElementById("s2su32").style = "width: 0%;";
-		document.getElementById("s2su31").style = "width: 0%;";
-		Points = Points - Upgrade3Value;
-		Upgrade3Count = Upgrade3Count + 1;
-		Upgrade3Count2 = Upgrade3Count2 + 1;
-		Upgrade3Cost = 30 * Math.pow(1.15, Upgrade3Count);
-		Upgrade3Value = Upgrade3Cost;
-		Upgrade3Buy = 0;
-		AlternativeUpgrade3Cost = Upgrade3Cost / 10;
-		BoostStrenght = BoostStrenght + 0.01;
-		var LocalBoostTime = BoostTime / 1000
-		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade3Progress").title = "1 square = " + AlternativeUpgrade3Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
-	}
-	else if (PointsForUpgrade3 < Upgrade3Value)
-	{
-		Upgrade3Buy = Upgrade3Buy + (Points / 2);
-		Upgrade3Value = Upgrade3Value - (Points / 2);
-		Points = Points - (Points / 2);
-	}
-}
-
-
-
-
-
-document.getElementById("u3100").onclick = function() 
+document.getElementById("Upgrade3").onclick = function() 
 {
 	PointsForUpgrade3 = Points;
 	if (Upgrade3Value <= PointsForUpgrade3)
@@ -1378,15 +934,14 @@ document.getElementById("u3100").onclick = function()
 		Points = Points - Upgrade3Value;
 		Upgrade3Count = Upgrade3Count + 1;
 		Upgrade3Count2 = Upgrade3Count2 + 1;
-		Upgrade3Cost = 30 * Math.pow(1.15, Upgrade3Count);
+		Upgrade3Cost = 30 * Math.pow(1.22, Upgrade3Count);
 		Upgrade3Value = Upgrade3Cost;
 		Upgrade3Buy = 0;
-		AlternativeUpgrade3Cost = Upgrade3Cost / 10;
 		BoostStrenght = BoostStrenght + 0.01;
 		var LocalBoostTime = BoostTime / 1000
 		var LocalBoostStrenght = BoostStrenght + 1;
+		document.getElementById("BuyInfo3").innerHTML = "Click to buy ! (" + Upgrade3Cost.toFixed(1) + " points)"
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-		document.getElementById("Upgrade3Progress").title = "1 square = " + AlternativeUpgrade3Cost.toFixed(2) + " points";
 		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
 	}
 	else if (PointsForUpgrade3 < Upgrade3Value)
@@ -1609,128 +1164,7 @@ function Upgrade3ProgressF()
 
 
 
-
-
-
-document.getElementById("u410").onclick = function() 
-{
-	PointsForUpgrade4 = Points / 10;
-	if (Upgrade4Value <= PointsForUpgrade4)
-	{
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: 0%;";
-		document.getElementById("s2su42").style = "width: 0%;";
-		document.getElementById("s2su41").style = "width: 0%;";
-		Points = Points - Upgrade4Value;
-		Upgrade4Count = Upgrade4Count + 1;
-		Upgrade4Count2 = Upgrade4Count2 + 1;
-		Upgrade4Cost = Upgrade4Cost * 10;
-		Upgrade4Value = Upgrade4Cost;
-		Upgrade4Buy = 0;
-		AlternativeUpgrade4Cost = Upgrade4Cost / 10;
-		MaxPoints = MaxPoints * 10;
-		document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
-		document.getElementById("Upgrade4Progress").title = "1 square = " + AlternativeUpgrade4Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
-	}
-	else if (PointsForUpgrade4 < Upgrade4Value)
-	{
-		Upgrade4Buy = Upgrade4Buy + (Points / 10);
-		Upgrade4Value = Upgrade4Value - (Points / 10);
-		Points = Points - (Points / 10);
-	}
-}
-
-
-
-
-
-document.getElementById("u425").onclick = function() 
-{
-	PointsForUpgrade4 = Points / 4;
-	if (Upgrade4Value <= PointsForUpgrade4)
-	{
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: 0%;";
-		document.getElementById("s2su42").style = "width: 0%;";
-		document.getElementById("s2su41").style = "width: 0%;";
-		Points = Points - Upgrade4Value;
-		Upgrade4Count = Upgrade4Count + 1;
-		Upgrade4Count2 = Upgrade4Count2 + 1;
-		Upgrade4Cost = Upgrade4Cost * 10;
-		Upgrade4Value = Upgrade4Cost;
-		Upgrade4Buy = 0;
-		AlternativeUpgrade4Cost = Upgrade4Cost / 10;
-		MaxPoints = MaxPoints * 10;
-		document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
-		document.getElementById("Upgrade4Progress").title = "1 square = " + AlternativeUpgrade4Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
-	}
-	else if (PointsForUpgrade4 < Upgrade4Value)
-	{
-		Upgrade4Buy = Upgrade4Buy + (Points / 4);
-		Upgrade4Value = Upgrade4Value - (Points / 4);
-		Points = Points - (Points / 4);
-	}
-}
-
-
-
-
-
-
-document.getElementById("u450").onclick = function() 
-{
-	PointsForUpgrade4 = Points / 2;
-	if (Upgrade4Value <= PointsForUpgrade4)
-	{
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: 0%;";
-		document.getElementById("s2su42").style = "width: 0%;";
-		document.getElementById("s2su41").style = "width: 0%;";
-		Points = Points - Upgrade4Value;
-		Upgrade4Count = Upgrade4Count + 1;
-		Upgrade4Count2 = Upgrade4Count2 + 1;
-		Upgrade4Cost = Upgrade4Cost * 10;
-		Upgrade4Value = Upgrade4Cost;
-		Upgrade4Buy = 0;
-		AlternativeUpgrade4Cost = Upgrade4Cost / 10;
-		MaxPoints = MaxPoints * 10;
-		document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
-		document.getElementById("Upgrade4Progress").title = "1 square = " + AlternativeUpgrade4Cost.toFixed(2) + " points";
-		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
-	}
-	else if (PointsForUpgrade4 < Upgrade4Value)
-	{
-		Upgrade4Buy = Upgrade4Buy + (Points / 2);
-		Upgrade4Value = Upgrade4Value - (Points / 2);
-		Points = Points - (Points / 2);
-	}
-}
-
-
-
-
-
-document.getElementById("u4100").onclick = function() 
+document.getElementById("Upgrade4").onclick = function() 
 {
 	PointsForUpgrade4 = Points;
 	if (Upgrade4Value <= PointsForUpgrade4)
@@ -1751,10 +1185,9 @@ document.getElementById("u4100").onclick = function()
 		Upgrade4Cost = Upgrade4Cost * 10;
 		Upgrade4Value = Upgrade4Cost;
 		Upgrade4Buy = 0;
-		AlternativeUpgrade4Cost = Upgrade4Cost / 10;
 		MaxPoints = MaxPoints * 10;
+		document.getElementById("BuyInfo4").innerHTML = "Click to buy ! (" + Upgrade4Cost.toFixed(1) + " points)"
 		document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
-		document.getElementById("Upgrade4Progress").title = "1 square = " + AlternativeUpgrade4Cost.toFixed(2) + " points";
 		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
 	}
 	else if (PointsForUpgrade4 < Upgrade4Value)
@@ -2013,19 +1446,14 @@ function load()
 	if (typeof SavedGame.Upgrade4Buy !== "undefined") Upgrade4Buy = SavedGame.Upgrade4Buy;
 	if (typeof SavedGame.BoostTime !== "undefined") BoostTime = SavedGame.BoostTime;
 	if (typeof SavedGame.BoostStrenght !== "undefined") BoostStrenght = SavedGame.BoostStrenght;
-	AlternativeUpgrade1Cost = Upgrade1Cost / 10;
-	AlternativeUpgrade2Cost = Upgrade2Cost / 10;
-	AlternativeUpgrade3Cost = Upgrade3Cost / 10;
-	AlternativeUpgrade4Cost = Upgrade4Cost / 10;
 	Speed = 15 + SpeedforUpgrade1;
 	var LocalBoostTime = BoostTime / 1000
 	var LocalBoostStrenght = BoostStrenght + 1;
 	document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-	document.getElementById("Speed").innerHTML = Speed.toFixed(0) + " PPM";
-	document.getElementById("Upgrade1Progress").title = "1 square = " + AlternativeUpgrade1Cost.toFixed(2) + " points";
-	document.getElementById("Upgrade2Progress").title = "1 square = " + AlternativeUpgrade2Cost.toFixed(2) + " points";
-	document.getElementById("Upgrade3Progress").title = "1 square = " + AlternativeUpgrade3Cost.toFixed(2) + " points";
-	document.getElementById("Upgrade4Progress").title = "1 square = " + AlternativeUpgrade4Cost.toFixed(2) + " points";
+	document.getElementById("BuyInfo1").innerHTML = "Click to buy ! (" + Upgrade1Cost.toFixed(1) + " points)"
+	document.getElementById("BuyInfo2").innerHTML = "Click to buy ! (" + Upgrade2Cost.toFixed(1) + " points)"
+	document.getElementById("BuyInfo3").innerHTML = "Click to buy ! (" + Upgrade3Cost.toFixed(1) + " points)"
+	document.getElementById("BuyInfo4").innerHTML = "Click to buy ! (" + Upgrade4Cost.toFixed(1) + " points)"
 	document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
 	document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
 	document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
