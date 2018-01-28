@@ -20,8 +20,8 @@ body
 	height: 90px;
 	text-align: center;
 	line-height: 90px;
-	margin-left: 22.7%;
-	width: 55%;
+	margin-left: 30%;
+	width: 40%;
 	float: left;
 	font-size: 55px;
 	color: #8100fb;
@@ -93,7 +93,7 @@ body
 }
 .su1, .su21, .su31, .su41
 { 
-	background-color: #d1e6c3;
+	background-color: #c9e6c3;
 	float: left;
 	width: 22px;
 	height: 22px;
@@ -103,7 +103,7 @@ body
 }
 .su2, .su3, .su4, .su5, .su6, .su7, .su8, .su9, .su10, .su22, .su23, .su24, .su25, .su26, .su27, .su28, .su29, .su210, .su32, .su33, .su34, .su35, .su36, .su37, .su38, .su39, .su310, .su42, .su43, .su44, .su45, .su46, .su47, .su48, .su49, .su410
 {
-	background-color: #d1e6c3;
+	background-color: #c9e6c3;
 	float: left;
 	margin-left: 4px;
 	width: 22px;
@@ -147,12 +147,12 @@ body
 	border-radius: 15px;
 	color: #e8e8e8;
 }
-#Upgrade1:hover, #Upgrade2:hover, #Upgrade3:hover, #Upgrade4:hover
+#Upgrade1:hover, #Upgrade2:hover, #Upgrade3:hover, #Upgrade4:hover, #Boost:hover
 {
 	transform: scale(1.05,1.05);
 	transition-duration: 0.1s;
 }
-#Upgrade1:active, #Upgrade2:active, #Upgrade3:active, #Upgrade4:active
+#Upgrade1:active, #Upgrade2:active, #Upgrade3:active, #Upgrade4:active, #Boost:active
 {
 	transform: scale(0.975,0.975);
 	transition-duration: 0.12s;
