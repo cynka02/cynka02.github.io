@@ -5,6 +5,9 @@ var Points = 0;
 var PointsForUpgrade1 = Points / 10;
 var PointsForUpgrade2 = Points / 10;
 var MaxPoints = 10;
+var LvlCount = 0;
+var XPToReach = 50;
+var XPOwned = 0;
 
 var BoostTime = 2000;
 var BoostStrenght = 0.3;
@@ -643,6 +646,10 @@ document.getElementById("Upgrade1").onclick = function()
 		document.getElementById("s2su3").style = "width: 0%;";
 		document.getElementById("s2su2").style = "width: 0%;";
 		document.getElementById("s2su1").style = "width: 0%;";
+		XPOwned = XPOwned + Upgrade1Value / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade1Value;
 		Upgrade1Count = Upgrade1Count + 1;
 		Upgrade1Count2 = Upgrade1Count2 + 1;
@@ -661,6 +668,10 @@ document.getElementById("Upgrade1").onclick = function()
 	}
 	else if (PointsForUpgrade1 < Upgrade1Value)
 	{
+		XPOwned = XPOwned + PointsForUpgrade1 / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade1Buy = Upgrade1Buy + Points;
 		Upgrade1Value = Upgrade1Value - Points;
 		Points = 0;
@@ -911,6 +922,10 @@ document.getElementById("Upgrade2").onclick = function()
 		document.getElementById("s2su23").style = "width: 0%;";
 		document.getElementById("s2su22").style = "width: 0%;";
 		document.getElementById("s2su21").style = "width: 0%;";
+		XPOwned = XPOwned + Upgrade2Value / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade2Value;
 		Upgrade2Count = Upgrade2Count + 1;
 		Upgrade2Count2 = Upgrade2Count2 + 1;
@@ -918,7 +933,7 @@ document.getElementById("Upgrade2").onclick = function()
 		Upgrade2Value = Upgrade2Cost;
 		Upgrade2Buy = 0;
 		BoostTime = BoostTime + 100;
-		var LocalBoostTime = BoostTime / 1000
+		var LocalBoostTime = BoostTime / 1000;
 		var LocalBoostStrenght = BoostStrenght + 1;
 		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
@@ -926,6 +941,10 @@ document.getElementById("Upgrade2").onclick = function()
 	}
 	else if (PointsForUpgrade2 < Upgrade2Value)
 	{
+		XPOwned = XPOwned + PointsForUpgrade2 / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade2Buy = Upgrade2Buy + Points;
 		Upgrade2Value = Upgrade2Value - Points;
 		Points = Points - Points;
@@ -1172,6 +1191,10 @@ document.getElementById("Upgrade3").onclick = function()
 		document.getElementById("s2su33").style = "width: 0%;";
 		document.getElementById("s2su32").style = "width: 0%;";
 		document.getElementById("s2su31").style = "width: 0%;";
+		XPOwned = XPOwned + Upgrade3Value / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade3Value;
 		Upgrade3Count = Upgrade3Count + 1;
 		Upgrade3Count2 = Upgrade3Count2 + 1;
@@ -1179,7 +1202,7 @@ document.getElementById("Upgrade3").onclick = function()
 		Upgrade3Value = Upgrade3Cost;
 		Upgrade3Buy = 0;
 		BoostStrenght = BoostStrenght + 0.01;
-		var LocalBoostTime = BoostTime / 1000
+		var LocalBoostTime = BoostTime / 1000;
 		var LocalBoostStrenght = BoostStrenght + 1;
 		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
@@ -1187,6 +1210,10 @@ document.getElementById("Upgrade3").onclick = function()
 	}
 	else if (PointsForUpgrade3 < Upgrade3Value)
 	{
+		XPOwned = XPOwned + PointsForUpgrade3 / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade3Buy = Upgrade3Buy + Points;
 		Upgrade3Value = Upgrade3Value - Points;
 		Points = Points - Points;
@@ -1421,6 +1448,10 @@ document.getElementById("Upgrade4").onclick = function()
 		document.getElementById("s2su43").style = "width: 0%;";
 		document.getElementById("s2su42").style = "width: 0%;";
 		document.getElementById("s2su41").style = "width: 0%;";
+		XPOwned = XPOwned + Upgrade4Value / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade4Value;
 		Upgrade4Count = Upgrade4Count + 1;
 		Upgrade4Count2 = Upgrade4Count2 + 1;
@@ -1434,6 +1465,10 @@ document.getElementById("Upgrade4").onclick = function()
 	}
 	else if (PointsForUpgrade4 < Upgrade4Value)
 	{
+		XPOwned = XPOwned + PointsForUpgrade4 / 2;
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade4Buy = Upgrade4Buy + Points;
 		Upgrade4Value = Upgrade4Value - Points;
 		Points = Points - Points;
@@ -1650,11 +1685,63 @@ function Upgrade4ProgressF()
 
 
 
+function CountLevel()
+{
+	if (XPOwned == XPToReach)
+	{
+		XPOwned = 0;
+		LvlCount = LvlCount + 1;
+		XPToReach = 50 * Math.pow(1.5, LvlCount)
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+	}
+	else if (XPOwned > XPToReach)
+	{
+		XPOwned = XPOwned - XPToReach;
+		LvlCount = LvlCount + 1;
+		XPToReach = 50 * Math.pow(1.5, LvlCount)
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+	}
+	else if (XPOwned < XPToReach)
+	{
+
+	}
+}setInterval(CountLevel, 1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function save()
 {
 	var Save =
 	{
-		Speed: Speed, Points: Points, MaxPoints: MaxPoints, Upgrade1Cost: Upgrade1Cost, Upgrade1Count: Upgrade1Count, Upgrade1Value: Upgrade1Value, Upgrade1Count2: Upgrade1Count2, Upgrade1Buy: Upgrade1Buy, SpeedforUpgrade1: SpeedforUpgrade1, Upgrade1SpeedAdd: Upgrade1SpeedAdd, Upgrade2Cost: Upgrade2Cost, Upgrade2Count: Upgrade2Count, Upgrade2Count2: Upgrade2Count2, Upgrade2Value: Upgrade2Value, Upgrade2Buy: Upgrade2Buy, BoostTime: BoostTime, BoostStrenght: BoostStrenght, Upgrade3Cost: Upgrade3Cost, Upgrade3Count: Upgrade3Count, Upgrade3Count2: Upgrade3Count2, Upgrade3Value: Upgrade3Value, Upgrade3Buy: Upgrade3Buy, Upgrade4Cost: Upgrade4Cost, Upgrade4Count: Upgrade4Count, Upgrade4Count2: Upgrade4Count2, Upgrade4Value: Upgrade4Value, Upgrade4Buy: Upgrade4Buy 
+		Speed: Speed, Points: Points, MaxPoints: MaxPoints, Upgrade1Cost: Upgrade1Cost, Upgrade1Count: Upgrade1Count, Upgrade1Value: Upgrade1Value, Upgrade1Count2: Upgrade1Count2, Upgrade1Buy: Upgrade1Buy, SpeedforUpgrade1: SpeedforUpgrade1, Upgrade1SpeedAdd: Upgrade1SpeedAdd, Upgrade2Cost: Upgrade2Cost, Upgrade2Count: Upgrade2Count, Upgrade2Count2: Upgrade2Count2, Upgrade2Value: Upgrade2Value, Upgrade2Buy: Upgrade2Buy, BoostTime: BoostTime, BoostStrenght: BoostStrenght, Upgrade3Cost: Upgrade3Cost, Upgrade3Count: Upgrade3Count, Upgrade3Count2: Upgrade3Count2, Upgrade3Value: Upgrade3Value, Upgrade3Buy: Upgrade3Buy, Upgrade4Cost: Upgrade4Cost, Upgrade4Count: Upgrade4Count, Upgrade4Count2: Upgrade4Count2, Upgrade4Value: Upgrade4Value, Upgrade4Buy: Upgrade4Buy, LvlCount: LvlCount, XPToReach: XPToReach, XPOwned: XPOwned
 	}
 	localStorage.setItem("Saved", JSON.stringify(Save));
 }
@@ -1665,6 +1752,9 @@ function load()
 	if (typeof SavedGame.Speed !== "undefined") Speed = SavedGame.Speed;
 	if (typeof SavedGame.Points !== "undefined") Points = SavedGame.Points;
 	if (typeof SavedGame.MaxPoints !== "undefined") MaxPoints = SavedGame.MaxPoints;
+	if (typeof SavedGame.LvlCount !== "undefined") LvlCount = SavedGame.LvlCount;
+	if (typeof SavedGame.XPToReach !== "undefined") XPToReach = SavedGame.XPToReach;
+	if (typeof SavedGame.XPOwned !== "undefined") XPOwned = SavedGame.XPOwned;
 	if (typeof SavedGame.Upgrade1Cost !== "undefined") Upgrade1Cost = SavedGame.Upgrade1Cost;
 	if (typeof SavedGame.Upgrade1Count !== "undefined") Upgrade1Count = SavedGame.Upgrade1Count;
 	if (typeof SavedGame.Upgrade1Count2 !== "undefined") Upgrade1Count2 = SavedGame.Upgrade1Count2;
@@ -1690,8 +1780,12 @@ function load()
 	if (typeof SavedGame.BoostTime !== "undefined") BoostTime = SavedGame.BoostTime;
 	if (typeof SavedGame.BoostStrenght !== "undefined") BoostStrenght = SavedGame.BoostStrenght;
 	Speed = 15 + SpeedforUpgrade1;
-	var LocalBoostTime = BoostTime / 1000
+	var LocalBoostTime = BoostTime / 1000;
 	var LocalBoostStrenght = BoostStrenght + 1;
+	var LocalWidth = (XPOwned / XPToReach) * 100;
+	document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+	document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+	document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 	document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
 	document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
 	document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
