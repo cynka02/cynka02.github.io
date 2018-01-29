@@ -7,21 +7,46 @@ body
 #title2
 {
 	width: 100%;
-	height: 90px;
+	height: 100px;
 	background: linear-gradient(to top, #ccd5fd 0%, #eeeddd 100%);
 }
-#title
+#LVL
 {
+	width: 90px;
+	height: 90px;
+	background-color: #54e26a;
+	float: left;
+	margin-top: 10px;
+	margin-left: 15px;
+	border-radius: 100%;
+	line-height: 70px;
+	text-align: center;
+	font-size: 20px;
+	color: #e6ebf5;
+	box-shadow: 0px 3px 17px 0px #9c9c9c;
+}
+#LvlProgress
+{
+	width: 60px;
+	height: 10px;
+	background-color: #e0ffe5;
 	margin: auto;
-	width: 100%;
+	margin-top: -12px;
+}
+#LvlProgressBar
+{
+	height: 10px;
+	background-color: #4aadf1;
+	appearance: none;
+	-webkit-appearance: none;
 }
 #PointsCount
 {
 	height: 90px;
 	text-align: center;
 	line-height: 90px;
-	margin-left: 30%;
 	width: 40%;
+	margin-left: 22%;
 	float: left;
 	font-size: 55px;
 	color: #8100fb;
@@ -37,7 +62,7 @@ body
 	text-align: center;
 	float: left;
 	color: #e76666;
-	box-shadow: 0px 0px 20px 1px #c3c3c3;
+	box-shadow: 0px 0px 20px 1px #d0d0d0;
 	text-shadow: 2px 2px 4px #a5a5a5;
 	border-radius: 15px;
 	transition-duration: 0.3s;
@@ -48,15 +73,9 @@ body
 	margin: auto;
 	width: 350px;
 }
-#Line
-{
-	height: 6px;
-	width: 100%;
-	background-color: #3585e4;
-}
 .s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9, .s10
 {
-	background-color: #958bf1;
+	background-color: #a89ff5;
 	float: left;
 	margin-left: 5px;
 	width: 30px;
