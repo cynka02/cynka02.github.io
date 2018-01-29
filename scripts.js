@@ -8,6 +8,7 @@ var MaxPoints = 10;
 var LvlCount = 0;
 var XPToReach = 50;
 var XPOwned = 0;
+var LocalSpeed = 0;
 
 var BoostTime = 2000;
 var BoostStrenght = 0.3;
@@ -98,459 +99,350 @@ function ScorePoints()
 	AlternativePoints7 = (MaxPoints / 10) * 7;
 	AlternativePoints8 = (MaxPoints / 10) * 8;
 	AlternativePoints9 = (MaxPoints / 10) * 9;
+	LocalSpeed = SpeedAfterBoost + Speed;
+	Points = Points + (LocalSpeed/6000);
 	if (Points <= AlternativePoints)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints; 
-		var width = LocalPoints * 1000;
-		document.getElementById("s2s1").style = "width: " + width +"%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		document.getElementById("s2s7").style = "width: 0%;";
-		document.getElementById("s2s6").style = "width: 0%;";
-		document.getElementById("s2s5").style = "width: 0%;";
-		document.getElementById("s2s4").style = "width: 0%;";
-		document.getElementById("s2s3").style = "width: 0%;";
-		document.getElementById("s2s2").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		var width1 = LocalPoints * 1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints2 && Points > AlternativePoints)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width2 = (LocalPoints * 1000) - 100;
-		document.getElementById("s2s2").style = "width: " + width2 +"%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		document.getElementById("s2s7").style = "width: 0%;";
-		document.getElementById("s2s6").style = "width: 0%;";
-		document.getElementById("s2s5").style = "width: 0%;";
-		document.getElementById("s2s4").style = "width: 0%;";
-		document.getElementById("s2s3").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints3 && Points > AlternativePoints2)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width3 = (LocalPoints * 1000) - 200;
-		document.getElementById("s2s3").style = "width: " + width3 +"%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		document.getElementById("s2s7").style = "width: 0%;";
-		document.getElementById("s2s6").style = "width: 0%;";
-		document.getElementById("s2s5").style = "width: 0%;";
-		document.getElementById("s2s4").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints4 && Points > AlternativePoints3)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width4 = (LocalPoints * 1000) - 300;
-		document.getElementById("s2s4").style = "width: " + width4 +"%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		document.getElementById("s2s7").style = "width: 0%;";
-		document.getElementById("s2s6").style = "width: 0%;";
-		document.getElementById("s2s5").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints5 && Points > AlternativePoints4)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width5 = (LocalPoints * 1000) - 400;
-		document.getElementById("s2s5").style = "width: " + width5 +"%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		document.getElementById("s2s7").style = "width: 0%;";
-		document.getElementById("s2s6").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints6 && Points > AlternativePoints5)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width6 = (LocalPoints * 1000) - 500;
-		document.getElementById("s2s6").style = "width: " + width6 +"%;";
-		document.getElementById("s2s5").style = "width: 100%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		document.getElementById("s2s7").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints7 && Points > AlternativePoints6)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width7 = (LocalPoints * 1000) - 600;
-		document.getElementById("s2s7").style = "width: " + width7 +"%;";
-		document.getElementById("s2s6").style = "width: 100%;";
-		document.getElementById("s2s5").style = "width: 100%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		document.getElementById("s2s8").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints8 && Points > AlternativePoints7)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width8 = (LocalPoints * 1000) - 700;
-		document.getElementById("s2s8").style = "width: " + width8 +"%;";
-		document.getElementById("s2s7").style = "width: 100%;";
-		document.getElementById("s2s6").style = "width: 100%;";
-		document.getElementById("s2s5").style = "width: 100%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		document.getElementById("s2s9").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points <= AlternativePoints9 && Points > AlternativePoints8)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width9 = (LocalPoints * 1000) - 800;
-		document.getElementById("s2s9").style = "width: " + width9 +"%;";
-		document.getElementById("s2s8").style = "width: 100%;";
-		document.getElementById("s2s7").style = "width: 100%;";
-		document.getElementById("s2s6").style = "width: 100%;";
-		document.getElementById("s2s5").style = "width: 100%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 0%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points < MaxPoints && Points > AlternativePoints9)
 	{
-		var LocalSpeed = SpeedAfterBoost + Speed;
-		Points = Points + (LocalSpeed/6000);
 		var LocalPoints = Points / MaxPoints;
 		var width10 = (LocalPoints * 1000) - 900;
-		document.getElementById("s2s10").style = "width: " + width10 + "%;";
-		document.getElementById("s2s9").style = "width: 100%;";
-		document.getElementById("s2s8").style = "width: 100%;";
-		document.getElementById("s2s7").style = "width: 100%;";
-		document.getElementById("s2s6").style = "width: 100%;";
-		document.getElementById("s2s5").style = "width: 100%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s1").style = "width: 100%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2s");
+		NumbersConverter(1);
 	}
 	else if (Points >= MaxPoints)
 	{
 		Points = MaxPoints;
-		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		document.getElementById("s2s1").style = "width: 100%;";
-		document.getElementById("s2s2").style = "width: 100%;";
-		document.getElementById("s2s3").style = "width: 100%;";
-		document.getElementById("s2s4").style = "width: 100%;";
-		document.getElementById("s2s5").style = "width: 100%;";
-		document.getElementById("s2s6").style = "width: 100%;";
-		document.getElementById("s2s7").style = "width: 100%;";
-		document.getElementById("s2s8").style = "width: 100%;";
-		document.getElementById("s2s9").style = "width: 100%;";
-		document.getElementById("s2s10").style = "width: 100%;";
-		if (Points < 1000)
-		{
-			document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
-		}
-		else if (Points >= 1000 && Points < 1000000)
-		{
-			var LocalPoints2 = Points / 1000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "k Points";
-		}
-		else if (Points >= 1000000 && Points < 1000000000)
-		{
-			var LocalPoints2 = Points / 1000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
-		}
-		else if (Points >= 1000000000 && Points < 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
-		}
-		else if (Points >= 1000000000000)
-		{
-			var LocalPoints2 = Points / 1000000000000;
-			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
-		}
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2s");
+		NumbersConverter(1);
 	}
 }
 setInterval(ScorePoints, 10);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function NumbersConverter(a)
+{
+	if (a == 1)
+	{
+		if (Points < 1000)
+			{
+				document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+			}
+		else if (Points >= 1000 && Points < 1000000)
+		{
+			var LocalPoints = Points / 1000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "K Points";
+		}
+		else if (Points >= 1000000 && Points < 1000000000)
+		{
+			var LocalPoints = Points / 1000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "M Points";
+		}
+		else if (Points >= 1000000000 && Points < 1000000000000)
+		{
+			var LocalPoints = Points / 1000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "B Points";
+		}
+		else if (Points >= 1000000000000)
+		{
+			var LocalPoints = Points / 1000000000000;
+			document.getElementById("PointsCount").innerHTML = LocalPoints2.toFixed(1) + "T Points";
+		}
+	}
+	else if (a == 2)
+	{
+		if (Upgrade1Value < 1000)
+		{
+			document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
+		}
+		else if (Upgrade1Value >= 1000 && Upgrade1Value < 1000000)
+		{
+			var LocalUpgrade1Value = Upgrade1Value / 1000;
+			document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "K points left)";
+		}
+		else if (Upgrade1Value >= 1000000 && Upgrade1Value < 1000000000)
+		{
+			var LocalUpgrade1Value = Upgrade1Value / 1000000;
+			document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "M points left)";
+		}
+		else if (Upgrade1Value >= 1000000000 && Upgrade1Value < 1000000000000)
+		{
+			var LocalUpgrade1Value = Upgrade1Value / 1000000000;
+			document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "B points left)";
+		}
+		else if (Upgrade1Value >= 1000000000000)
+		{
+			var LocalUpgrade1Value = Upgrade1Value / 1000000000000;
+			document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "T points left)";
+		}
+	}
+	else if (a == 3)
+	{
+		if (Upgrade2Value < 1000)
+		{
+			document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
+		}
+		else if (Upgrade2Value >= 1000 && Upgrade2Value < 1000000)
+		{
+			var LocalUpgrade2Value = Upgrade2Value / 1000;
+			document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "K points left)";
+		}
+		else if (Upgrade2Value >= 1000000 && Upgrade2Value < 1000000000)
+		{
+			var LocalUpgrade2Value = Upgrade2Value / 1000000;
+			document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "M points left)";
+		}
+		else if (Upgrade2Value >= 1000000000 && Upgrade2Value < 1000000000000)
+		{
+			var LocalUpgrade2Value = Upgrade2Value / 1000000000;
+			document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "B points left)";
+		}
+		else if (Upgrade2Value >= 1000000000000)
+		{
+			var LocalUpgrade2Value = Upgrade2Value / 1000000000000;
+			document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "T points left)";
+		}
+	}
+	else if (a == 4)
+	{
+		if (Upgrade3Value < 1000)
+		{
+			document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
+		}
+		else if (Upgrade3Value >= 1000 && Upgrade3Value < 1000000)
+		{
+			var LocalUpgrade3Value = Upgrade3Value / 1000;
+			document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "K points left)";
+		}
+		else if (Upgrade3Value >= 1000000 && Upgrade3Value < 1000000000)
+		{
+			var LocalUpgrade3Value = Upgrade3Value / 1000000;
+			document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "M points left)";
+		}
+		else if (Upgrade3Value >= 1000000000 && Upgrade3Value < 1000000000000)
+		{
+			var LocalUpgrade3Value = Upgrade3Value / 1000000000;
+			document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "B points left)";
+		}
+		else if (Upgrade3Value >= 1000000000000)
+		{
+			var LocalUpgrade3Value = Upgrade3Value / 1000000000000;
+			document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "T points left)";
+		}
+	}
+	else if (a == 5)
+	{
+		if (Upgrade4Value < 1000)
+		{
+			document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
+		}
+		else if (Upgrade4Value >= 1000 && Upgrade4Value < 1000000)
+		{
+			var LocalUpgrade4Value = Upgrade4Value / 1000;
+			document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "K points left)";
+		}
+		else if (Upgrade4Value >= 1000000 && Upgrade4Value < 1000000000)
+		{
+			var LocalUpgrade4Value = Upgrade4Value / 1000000;
+			document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "M points left)";
+		}
+		else if (Upgrade4Value >= 1000000000 && Upgrade4Value < 1000000000000)
+		{
+			var LocalUpgrade4Value = Upgrade4Value / 1000000000;
+			document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "B points left)";
+		}
+		else if (Upgrade4Value >= 1000000000000)
+		{
+			var LocalUpgrade4Value = Upgrade4Value / 1000000000000;
+			document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "T points left)";
+		}
+	}
+	else if (a == 6)
+	{
+		if (XPToReach < 1000 && XPOwned < 1000)
+		{
+			document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + XPToReach.toFixed(1) + " XP";
+		}
+		else if (XPToReach >= 1000 && XPToReach < 1000000 && XPOwned < 1000)
+		{
+			var LocalXPToReach = XPToReach / 1000;
+			document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "K XP";
+		}
+		else if (XPToReach >= 1000 && XPToReach < 1000000 && XPOwned >= 1000 && XPOwned < 1000000)
+		{
+			var LocalXPToReach = XPToReach / 1000;
+			var LocalXPOwned = XPOwned / 1000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "K XP";
+		}
+		else if (XPToReach >= 1000000 && XPToReach < 1000000000 && XPOwned < 1000)
+		{
+			var LocalXPToReach = XPToReach / 1000000;
+			document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "M XP";
+		}
+		else if (XPToReach >= 1000000 && XPToReach < 1000000000 && XPOwned >= 1000 && XPOwned < 1000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000;
+			var LocalXPOwned = XPOwned / 1000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "M XP";
+		}
+		else if (XPToReach >= 1000000 && XPToReach < 1000000000 && XPOwned >= 1000000 && XPOwned < 1000000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000;
+			var LocalXPOwned = XPOwned / 1000000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "M XP / " + LocalXPToReach.toFixed(1) + "M XP";
+		}
+		else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned < 1000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000;
+			document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "B XP";
+		}
+		else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned >= 1000 && XPOwned < 1000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000;
+			var LocalXPOwned = XPOwned / 1000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "B XP";
+		}
+		else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned >= 1000000 && XPOwned < 1000000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000;
+			var LocalXPOwned = XPOwned / 1000000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "M XP / " + LocalXPToReach.toFixed(1) + "B XP";
+		}
+		else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned >= 1000000000 && XPOwned < 1000000000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000;
+			var LocalXPOwned = XPOwned / 1000000000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "B XP / " + LocalXPToReach.toFixed(1) + "B XP";
+		}
+		else if (XPToReach >= 1000000000000 && XPOwned < 1000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000000;
+			document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "T XP";
+		}
+		else if (XPToReach >= 1000000000000 && XPOwned >= 1000 && XPOwned < 1000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000000;
+			var LocalXPOwned = XPOwned / 1000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "T XP";
+		}
+		else if (XPToReach >= 1000000000000 && XPOwned >= 1000000 && XPOwned < 1000000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000000;
+			var LocalXPOwned = XPOwned / 1000000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "M XP / " + LocalXPToReach.toFixed(1) + "T XP";
+		}
+		else if (XPToReach >= 1000000000000 && XPOwned >= 1000000000 && XPOwned < 1000000000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000000;
+			var LocalXPOwned = XPOwned / 1000000000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "B XP / " + LocalXPToReach.toFixed(1) + "T XP";
+		}
+		else if (XPToReach >= 1000000000000 && XPOwned >= 1000000000000)
+		{
+			var LocalXPToReach = XPToReach / 1000000000000;
+			var LocalXPOwned = XPOwned / 1000000000000;
+			document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "T XP / " + LocalXPToReach.toFixed(1) + "T XP";
+		}
+	}
+}
+function Widths(width1, width2, width3, width4, width5, width6, width7, width8, width9, width10, ss)
+{
+	var ss1 = ss + "1";
+	var ss2 = ss + "2";
+	var ss3 = ss + "3";
+	var ss4 = ss + "4";
+	var ss5 = ss + "5";
+	var ss6 = ss + "6";
+	var ss7 = ss + "7";
+	var ss8 = ss + "8";
+	var ss9 = ss + "9";
+	var ss10 = ss + "10";
+	document.getElementById(ss1).style = "width: " + width1 +"%;";
+	document.getElementById(ss2).style = "width: " + width2 +"%;";
+	document.getElementById(ss3).style = "width: " + width3 +"%;";
+	document.getElementById(ss4).style = "width: " + width4 +"%;";
+	document.getElementById(ss5).style = "width: " + width5 +"%;";
+	document.getElementById(ss6).style = "width: " + width6 +"%;";
+	document.getElementById(ss7).style = "width: " + width7 +"%;";
+	document.getElementById(ss8).style = "width: " + width8 +"%;";
+	document.getElementById(ss9).style = "width: " + width9 +"%;";
+	document.getElementById(ss10).style = "width: " + width10 +"%;";
+}
 
 
 
@@ -636,28 +528,18 @@ document.getElementById("Upgrade1").onclick = function()
 	{
 		SpeedforUpgrade1 = SpeedforUpgrade1 + Upgrade1SpeedAdd;
 		Speed = 15 + SpeedforUpgrade1;
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: 0%;";
-		document.getElementById("s2su2").style = "width: 0%;";
-		document.getElementById("s2su1").style = "width: 0%;";
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su");
 		XPOwned = XPOwned + Upgrade1Value / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade1Value;
 		Upgrade1Count = Upgrade1Count + 1;
 		Upgrade1Count2 = Upgrade1Count2 + 1;
 		Upgrade1Cost = 5 * Math.pow(1.09, Upgrade1Count);
 		Upgrade1Value = Upgrade1Cost;
 		Upgrade1Buy = 0;
-		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
 		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
+		Upgrade1ProgressF();
+		CountLevel();
+		NumbersConverter(2);
 		if (Upgrade1Count == 10 || Upgrade1Count == 20 || Upgrade1Count == 30 || Upgrade1Count == 40 || Upgrade1Count == 50 || Upgrade1Count == 60 || Upgrade1Count == 70 || Upgrade1Count == 80 || Upgrade1Count == 90 || Upgrade1Count == 100 || Upgrade1Count == 110 || Upgrade1Count == 120 || Upgrade1Count == 130 || Upgrade1Count == 140 || Upgrade1Count == 150 || Upgrade1Count == 160 || Upgrade1Count == 170 || Upgrade1Count == 180 || Upgrade1Count == 190 || Upgrade1Count == 200)
 		{
 			SpeedforUpgrade1 = SpeedforUpgrade1 * 2;
@@ -669,13 +551,12 @@ document.getElementById("Upgrade1").onclick = function()
 	else if (PointsForUpgrade1 < Upgrade1Value)
 	{
 		XPOwned = XPOwned + PointsForUpgrade1 / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade1Buy = Upgrade1Buy + Points;
 		Upgrade1Value = Upgrade1Value - Points;
 		Points = 0;
-		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
+		Upgrade1ProgressF();
+		CountLevel();
+		NumbersConverter(2);
 	}
 }
 
@@ -706,167 +587,68 @@ function Upgrade1ProgressF()
 		if (Upgrade1Buy <= AlternativeUpgrade1Cost)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
-		var width = LocalValue * 1000;
-		document.getElementById("s2su1").style = "width: " + width +"%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: 0%;";
-		document.getElementById("s2su2").style = "width: 0%;";
+		var width1 = LocalValue * 1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost2 && Upgrade1Buy > AlternativeUpgrade1Cost)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width2 = (LocalValue * 1000) - 100;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: 0%;";
-		document.getElementById("s2su2").style = "width: " + width2 +"%;";
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost3 && Upgrade1Buy > AlternativeUpgrade1Cost2)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width3 = (LocalValue * 1000) - 200;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: 0%;";
-		document.getElementById("s2su3").style = "width: " + width3 + "%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost4 && Upgrade1Buy > AlternativeUpgrade1Cost3)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width4 = (LocalValue * 1000) - 300;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: 0%;";
-		document.getElementById("s2su4").style = "width: " + width4 + "%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost5 && Upgrade1Buy > AlternativeUpgrade1Cost4)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width5 = (LocalValue * 1000) - 400;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: 0%;";
-		document.getElementById("s2su5").style = "width: " + width5 + "%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost6 && Upgrade1Buy > AlternativeUpgrade1Cost5)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width6 = (LocalValue * 1000) - 500;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: 0%;";
-		document.getElementById("s2su6").style = "width: " + width6 + "%;";
-		document.getElementById("s2su5").style = "width: 100%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost7 && Upgrade1Buy > AlternativeUpgrade1Cost6)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width7 = (LocalValue * 1000) - 600;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: 0%;";
-		document.getElementById("s2su7").style = "width: " + width7 + "%;";
-		document.getElementById("s2su6").style = "width: 100%;";
-		document.getElementById("s2su5").style = "width: 100%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost8 && Upgrade1Buy > AlternativeUpgrade1Cost7)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width8 = (LocalValue * 1000) - 700;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: 0%;";
-		document.getElementById("s2su8").style = "width: " + width8 + "%;";
-		document.getElementById("s2su7").style = "width: 100%;";
-		document.getElementById("s2su6").style = "width: 100%;";
-		document.getElementById("s2su5").style = "width: 100%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= AlternativeUpgrade1Cost9 && Upgrade1Buy > AlternativeUpgrade1Cost8)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width9 = (LocalValue * 1000) - 800;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: 0%;";
-		document.getElementById("s2su9").style = "width: " + width9 + "%;";
-		document.getElementById("s2su8").style = "width: 100%;";
-		document.getElementById("s2su7").style = "width: 100%;";
-		document.getElementById("s2su6").style = "width: 100%;";
-		document.getElementById("s2su5").style = "width: 100%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su");
 		}
 		else if (Upgrade1Buy <= Upgrade1Cost && Upgrade1Buy > AlternativeUpgrade1Cost9)
 		{
 		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
 		var width10 = (LocalValue * 1000) - 900;
-		document.getElementById("s2su1").style = "width: 100%;";
-		document.getElementById("s2su10").style = "width: " + width10 + "%;";
-		document.getElementById("s2su9").style = "width: 100%;";
-		document.getElementById("s2su8").style = "width: 100%;";
-		document.getElementById("s2su7").style = "width: 100%;";
-		document.getElementById("s2su6").style = "width: 100%;";
-		document.getElementById("s2su5").style = "width: 100%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su");
 		}
 		else if (Upgrade1Buy >= Upgrade1Cost)
 		{
-		document.getElementById("s2su10").style = "width: 100%;";
-		document.getElementById("s2su9").style = "width: 100%;";
-		document.getElementById("s2su8").style = "width: 100%;";
-		document.getElementById("s2su7").style = "width: 100%;";
-		document.getElementById("s2su6").style = "width: 100%;";
-		document.getElementById("s2su5").style = "width: 100%;";
-		document.getElementById("s2su4").style = "width: 100%;";
-		document.getElementById("s2su3").style = "width: 100%;";
-		document.getElementById("s2su2").style = "width: 100%;";
-		document.getElementById("s2su1").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su");
 		}
-}setInterval(Upgrade1ProgressF, 10);
+}
 
 
 
@@ -912,20 +694,8 @@ document.getElementById("Upgrade2").onclick = function()
 	PointsForUpgrade2 = Points;
 	if (Upgrade2Value <= PointsForUpgrade2)
 	{
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: 0%;";
-		document.getElementById("s2su22").style = "width: 0%;";
-		document.getElementById("s2su21").style = "width: 0%;";
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su2");
 		XPOwned = XPOwned + Upgrade2Value / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade2Value;
 		Upgrade2Count = Upgrade2Count + 1;
 		Upgrade2Count2 = Upgrade2Count2 + 1;
@@ -935,20 +705,21 @@ document.getElementById("Upgrade2").onclick = function()
 		BoostTime = BoostTime + 100;
 		var LocalBoostTime = BoostTime / 1000;
 		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
 		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
+		Upgrade2ProgressF();
+		CountLevel();
+		NumbersConverter(3);
 	}
 	else if (PointsForUpgrade2 < Upgrade2Value)
 	{
 		XPOwned = XPOwned + PointsForUpgrade2 / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade2Buy = Upgrade2Buy + Points;
 		Upgrade2Value = Upgrade2Value - Points;
 		Points = Points - Points;
-		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
+		Upgrade2ProgressF();
+		CountLevel();
+		NumbersConverter(3);
 	}
 }
 
@@ -975,167 +746,68 @@ function Upgrade2ProgressF()
 		if (Upgrade2Buy <= AlternativeUpgrade2Cost)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
-		var width = LocalValue * 1000;
-		document.getElementById("s2su21").style = "width: " + width +"%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: 0%;";
-		document.getElementById("s2su22").style = "width: 0%;";
+		var width1 = LocalValue * 1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost2 && Upgrade2Buy > AlternativeUpgrade2Cost)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width2 = (LocalValue * 1000) - 100;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: 0%;";
-		document.getElementById("s2su22").style = "width: " + width2 +"%;";
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost3 && Upgrade2Buy > AlternativeUpgrade2Cost2)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width3 = (LocalValue * 1000) - 200;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: 0%;";
-		document.getElementById("s2su23").style = "width: " + width3 + "%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost4 && Upgrade2Buy > AlternativeUpgrade2Cost3)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width4 = (LocalValue * 1000) - 300;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: 0%;";
-		document.getElementById("s2su24").style = "width: " + width4 + "%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost5 && Upgrade2Buy > AlternativeUpgrade2Cost4)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width5 = (LocalValue * 1000) - 400;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: 0%;";
-		document.getElementById("s2su25").style = "width: " + width5 + "%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost6 && Upgrade2Buy > AlternativeUpgrade2Cost5)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width6 = (LocalValue * 1000) - 500;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: 0%;";
-		document.getElementById("s2su26").style = "width: " + width6 + "%;";
-		document.getElementById("s2su25").style = "width: 100%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost7 && Upgrade2Buy > AlternativeUpgrade2Cost6)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width7 = (LocalValue * 1000) - 600;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: 0%;";
-		document.getElementById("s2su27").style = "width: " + width7 + "%;";
-		document.getElementById("s2su26").style = "width: 100%;";
-		document.getElementById("s2su25").style = "width: 100%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost8 && Upgrade2Buy > AlternativeUpgrade2Cost7)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width8 = (LocalValue * 1000) - 700;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: 0%;";
-		document.getElementById("s2su28").style = "width: " + width8 + "%;";
-		document.getElementById("s2su27").style = "width: 100%;";
-		document.getElementById("s2su26").style = "width: 100%;";
-		document.getElementById("s2su25").style = "width: 100%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= AlternativeUpgrade2Cost9 && Upgrade2Buy > AlternativeUpgrade2Cost8)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width9 = (LocalValue * 1000) - 800;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: 0%;";
-		document.getElementById("s2su29").style = "width: " + width9 + "%;";
-		document.getElementById("s2su28").style = "width: 100%;";
-		document.getElementById("s2su27").style = "width: 100%;";
-		document.getElementById("s2su26").style = "width: 100%;";
-		document.getElementById("s2su25").style = "width: 100%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su2");
 		}
 		else if (Upgrade2Buy <= Upgrade2Cost && Upgrade2Buy > AlternativeUpgrade2Cost9)
 		{
 		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
 		var width10 = (LocalValue * 1000) - 900;
-		document.getElementById("s2su21").style = "width: 100%;";
-		document.getElementById("s2su210").style = "width: " + width10 + "%;";
-		document.getElementById("s2su29").style = "width: 100%;";
-		document.getElementById("s2su28").style = "width: 100%;";
-		document.getElementById("s2su27").style = "width: 100%;";
-		document.getElementById("s2su26").style = "width: 100%;";
-		document.getElementById("s2su25").style = "width: 100%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su2");
 		}
 		else if (Upgrade2Buy >= Upgrade2Cost)
 		{
-		document.getElementById("s2su210").style = "width: 100%;";
-		document.getElementById("s2su29").style = "width: 100%;";
-		document.getElementById("s2su28").style = "width: 100%;";
-		document.getElementById("s2su27").style = "width: 100%;";
-		document.getElementById("s2su26").style = "width: 100%;";
-		document.getElementById("s2su25").style = "width: 100%;";
-		document.getElementById("s2su24").style = "width: 100%;";
-		document.getElementById("s2su23").style = "width: 100%;";
-		document.getElementById("s2su22").style = "width: 100%;";
-		document.getElementById("s2su21").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su2");
 		}
-}setInterval(Upgrade2ProgressF, 10);
+}
 
 
 
@@ -1181,20 +853,8 @@ document.getElementById("Upgrade3").onclick = function()
 	PointsForUpgrade3 = Points;
 	if (Upgrade3Value <= PointsForUpgrade3)
 	{
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: 0%;";
-		document.getElementById("s2su32").style = "width: 0%;";
-		document.getElementById("s2su31").style = "width: 0%;";
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su3");
 		XPOwned = XPOwned + Upgrade3Value / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade3Value;
 		Upgrade3Count = Upgrade3Count + 1;
 		Upgrade3Count2 = Upgrade3Count2 + 1;
@@ -1204,20 +864,21 @@ document.getElementById("Upgrade3").onclick = function()
 		BoostStrenght = BoostStrenght + 0.01;
 		var LocalBoostTime = BoostTime / 1000;
 		var LocalBoostStrenght = BoostStrenght + 1;
-		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
 		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
 		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
+		Upgrade3ProgressF();
+		CountLevel();
+		NumbersConverter(4);
 	}
 	else if (PointsForUpgrade3 < Upgrade3Value)
 	{
 		XPOwned = XPOwned + PointsForUpgrade3 / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade3Buy = Upgrade3Buy + Points;
 		Upgrade3Value = Upgrade3Value - Points;
 		Points = Points - Points;
-		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
+		Upgrade3ProgressF();
+		CountLevel();
+		NumbersConverter(4);
 	}
 }
 
@@ -1245,167 +906,68 @@ function Upgrade3ProgressF()
 		if (Upgrade3Buy <= AlternativeUpgrade3Cost)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
-		var width = LocalValue * 1000;
-		document.getElementById("s2su31").style = "width: " + width +"%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: 0%;";
-		document.getElementById("s2su32").style = "width: 0%;";
+		var width1 = LocalValue * 1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost2 && Upgrade3Buy > AlternativeUpgrade3Cost)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width2 = (LocalValue * 1000) - 100;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: 0%;";
-		document.getElementById("s2su32").style = "width: " + width2 +"%;";
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost3 && Upgrade3Buy > AlternativeUpgrade3Cost2)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width3 = (LocalValue * 1000) - 200;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: 0%;";
-		document.getElementById("s2su33").style = "width: " + width3 + "%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost4 && Upgrade3Buy > AlternativeUpgrade3Cost3)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width4 = (LocalValue * 1000) - 300;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: 0%;";
-		document.getElementById("s2su34").style = "width: " + width4 + "%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost5 && Upgrade3Buy > AlternativeUpgrade3Cost4)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width5 = (LocalValue * 1000) - 400;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: 0%;";
-		document.getElementById("s2su35").style = "width: " + width5 + "%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost6 && Upgrade3Buy > AlternativeUpgrade3Cost5)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width6 = (LocalValue * 1000) - 500;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: 0%;";
-		document.getElementById("s2su36").style = "width: " + width6 + "%;";
-		document.getElementById("s2su35").style = "width: 100%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost7 && Upgrade3Buy > AlternativeUpgrade3Cost6)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width7 = (LocalValue * 1000) - 600;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: 0%;";
-		document.getElementById("s2su37").style = "width: " + width7 + "%;";
-		document.getElementById("s2su36").style = "width: 100%;";
-		document.getElementById("s2su35").style = "width: 100%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost8 && Upgrade3Buy > AlternativeUpgrade3Cost7)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width8 = (LocalValue * 1000) - 700;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: 0%;";
-		document.getElementById("s2su38").style = "width: " + width8 + "%;";
-		document.getElementById("s2su37").style = "width: 100%;";
-		document.getElementById("s2su36").style = "width: 100%;";
-		document.getElementById("s2su35").style = "width: 100%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= AlternativeUpgrade3Cost9 && Upgrade3Buy > AlternativeUpgrade3Cost8)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width9 = (LocalValue * 1000) - 800;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: 0%;";
-		document.getElementById("s2su39").style = "width: " + width9 + "%;";
-		document.getElementById("s2su38").style = "width: 100%;";
-		document.getElementById("s2su37").style = "width: 100%;";
-		document.getElementById("s2su36").style = "width: 100%;";
-		document.getElementById("s2su35").style = "width: 100%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su3");
 		}
 		else if (Upgrade3Buy <= Upgrade3Cost && Upgrade3Buy > AlternativeUpgrade3Cost9)
 		{
 		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
 		var width10 = (LocalValue * 1000) - 900;
-		document.getElementById("s2su31").style = "width: 100%;";
-		document.getElementById("s2su310").style = "width: " + width10 + "%;";
-		document.getElementById("s2su39").style = "width: 100%;";
-		document.getElementById("s2su38").style = "width: 100%;";
-		document.getElementById("s2su37").style = "width: 100%;";
-		document.getElementById("s2su36").style = "width: 100%;";
-		document.getElementById("s2su35").style = "width: 100%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su3");
 		}
 		else if (Upgrade3Buy >= Upgrade3Cost)
 		{
-		document.getElementById("s2su310").style = "width: 100%;";
-		document.getElementById("s2su39").style = "width: 100%;";
-		document.getElementById("s2su38").style = "width: 100%;";
-		document.getElementById("s2su37").style = "width: 100%;";
-		document.getElementById("s2su36").style = "width: 100%;";
-		document.getElementById("s2su35").style = "width: 100%;";
-		document.getElementById("s2su34").style = "width: 100%;";
-		document.getElementById("s2su33").style = "width: 100%;";
-		document.getElementById("s2su32").style = "width: 100%;";
-		document.getElementById("s2su31").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su3");
 		}
-}setInterval(Upgrade3ProgressF, 10);
+}
 
 
 
@@ -1438,20 +1000,8 @@ document.getElementById("Upgrade4").onclick = function()
 	PointsForUpgrade4 = Points;
 	if (Upgrade4Value <= PointsForUpgrade4)
 	{
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: 0%;";
-		document.getElementById("s2su42").style = "width: 0%;";
-		document.getElementById("s2su41").style = "width: 0%;";
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su4");
 		XPOwned = XPOwned + Upgrade4Value / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Points = Points - Upgrade4Value;
 		Upgrade4Count = Upgrade4Count + 1;
 		Upgrade4Count2 = Upgrade4Count2 + 1;
@@ -1459,20 +1009,21 @@ document.getElementById("Upgrade4").onclick = function()
 		Upgrade4Value = Upgrade4Cost;
 		Upgrade4Buy = 0;
 		MaxPoints = MaxPoints * 10;
-		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
 		document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
 		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
+		Upgrade4ProgressF();
+		CountLevel();
+		NumbersConverter(5);
 	}
 	else if (PointsForUpgrade4 < Upgrade4Value)
 	{
 		XPOwned = XPOwned + PointsForUpgrade4 / 2;
-		var LocalWidth = (XPOwned / XPToReach) * 100;
-		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		Upgrade4Buy = Upgrade4Buy + Points;
 		Upgrade4Value = Upgrade4Value - Points;
 		Points = Points - Points;
-		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
+		Upgrade4ProgressF();
+		CountLevel();
+		NumbersConverter(5);
 	}
 }
 
@@ -1500,167 +1051,68 @@ function Upgrade4ProgressF()
 		if (Upgrade4Buy <= AlternativeUpgrade4Cost)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
-		var width = LocalValue * 1000;
-		document.getElementById("s2su41").style = "width: " + width +"%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: 0%;";
-		document.getElementById("s2su42").style = "width: 0%;";
+		var width1 = LocalValue * 1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost2 && Upgrade4Buy > AlternativeUpgrade4Cost)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width2 = (LocalValue * 1000) - 100;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: 0%;";
-		document.getElementById("s2su42").style = "width: " + width2 +"%;";
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost3 && Upgrade4Buy > AlternativeUpgrade4Cost2)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width3 = (LocalValue * 1000) - 200;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: 0%;";
-		document.getElementById("s2su43").style = "width: " + width3 + "%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost4 && Upgrade4Buy > AlternativeUpgrade4Cost3)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width4 = (LocalValue * 1000) - 300;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: 0%;";
-		document.getElementById("s2su44").style = "width: " + width4 + "%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost5 && Upgrade4Buy > AlternativeUpgrade4Cost4)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width5 = (LocalValue * 1000) - 400;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: 0%;";
-		document.getElementById("s2su45").style = "width: " + width5 + "%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost6 && Upgrade4Buy > AlternativeUpgrade4Cost5)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width6 = (LocalValue * 1000) - 500;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: 0%;";
-		document.getElementById("s2su46").style = "width: " + width6 + "%;";
-		document.getElementById("s2su45").style = "width: 100%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost7 && Upgrade4Buy > AlternativeUpgrade4Cost6)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width7 = (LocalValue * 1000) - 600;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: 0%;";
-		document.getElementById("s2su47").style = "width: " + width7 + "%;";
-		document.getElementById("s2su46").style = "width: 100%;";
-		document.getElementById("s2su45").style = "width: 100%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost8 && Upgrade4Buy > AlternativeUpgrade4Cost7)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width8 = (LocalValue * 1000) - 700;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: 0%;";
-		document.getElementById("s2su48").style = "width: " + width8 + "%;";
-		document.getElementById("s2su47").style = "width: 100%;";
-		document.getElementById("s2su46").style = "width: 100%;";
-		document.getElementById("s2su45").style = "width: 100%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= AlternativeUpgrade4Cost9 && Upgrade4Buy > AlternativeUpgrade4Cost8)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width9 = (LocalValue * 1000) - 800;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: 0%;";
-		document.getElementById("s2su49").style = "width: " + width9 + "%;";
-		document.getElementById("s2su48").style = "width: 100%;";
-		document.getElementById("s2su47").style = "width: 100%;";
-		document.getElementById("s2su46").style = "width: 100%;";
-		document.getElementById("s2su45").style = "width: 100%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su4");
 		}
 		else if (Upgrade4Buy <= Upgrade4Cost && Upgrade4Buy > AlternativeUpgrade4Cost9)
 		{
 		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
 		var width10 = (LocalValue * 1000) - 900;
-		document.getElementById("s2su41").style = "width: 100%;";
-		document.getElementById("s2su410").style = "width: " + width10 + "%;";
-		document.getElementById("s2su49").style = "width: 100%;";
-		document.getElementById("s2su48").style = "width: 100%;";
-		document.getElementById("s2su47").style = "width: 100%;";
-		document.getElementById("s2su46").style = "width: 100%;";
-		document.getElementById("s2su45").style = "width: 100%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su4");
 		}
 		else if (Upgrade4Buy >= Upgrade4Cost)
 		{
-		document.getElementById("s2su410").style = "width: 100%;";
-		document.getElementById("s2su49").style = "width: 100%;";
-		document.getElementById("s2su48").style = "width: 100%;";
-		document.getElementById("s2su47").style = "width: 100%;";
-		document.getElementById("s2su46").style = "width: 100%;";
-		document.getElementById("s2su45").style = "width: 100%;";
-		document.getElementById("s2su44").style = "width: 100%;";
-		document.getElementById("s2su43").style = "width: 100%;";
-		document.getElementById("s2su42").style = "width: 100%;";
-		document.getElementById("s2su41").style = "width: 100%;";
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su4");
 		}
-}setInterval(Upgrade4ProgressF, 10);
+}
 
 
 
@@ -1694,8 +1146,8 @@ function CountLevel()
 		XPToReach = 50 * Math.pow(1.5, LvlCount)
 		var LocalWidth = (XPOwned / XPToReach) * 100;
 		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		NumbersConverter(6);
 	}
 	else if (XPOwned > XPToReach)
 	{
@@ -1704,14 +1156,17 @@ function CountLevel()
 		XPToReach = 50 * Math.pow(1.5, LvlCount)
 		var LocalWidth = (XPOwned / XPToReach) * 100;
 		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
-		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		NumbersConverter(6);
 	}
 	else if (XPOwned < XPToReach)
 	{
-
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		NumbersConverter(6);
 	}
-}setInterval(CountLevel, 1);
+}
 
 
 
@@ -1782,21 +1237,23 @@ function load()
 	Speed = 15 + SpeedforUpgrade1;
 	var LocalBoostTime = BoostTime / 1000;
 	var LocalBoostStrenght = BoostStrenght + 1;
-	var LocalWidth = (XPOwned / XPToReach) * 100;
 	document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
-	document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
-	document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + "XP / " + XPToReach.toFixed(0) + "XP";
 	document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
-	document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
-	document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
-	document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
-	document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
 	document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + Upgrade1Count2 +":";
 	document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + Upgrade2Count2 +":";
 	document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + Upgrade3Count2 +":";
 	document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + Upgrade4Count2 +":";
 	document.getElementById("Upgrade4Add").innerHTML = "1 Square = " + MaxPoints + " points";
 	document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " Points Per Minute";
+	Upgrade1ProgressF();
+	Upgrade2ProgressF();
+	Upgrade3ProgressF();
+	Upgrade4ProgressF();
+	NumbersConverter(2);
+	NumbersConverter(3);
+	NumbersConverter(4);
+	NumbersConverter(5);
+	CountLevel();
 }
 document.getElementById("reset").onclick = function()
 {
