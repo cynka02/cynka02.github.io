@@ -1,186 +1,261 @@
 <html>
 <head>
-	<title>Points Idle</title>
-	<link rel="stylesheet" href="styles.css">
+<title>Gamy</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body onload="load()">
-	<div id="lvlup">LVL UP!</div>
-	<div id="title2">
-		<div id="LVLContainer">
-			<div id="LVL" title="Buy upgrades to lvl up !">
-				<div id="LvlText">Lvl 0</div>
-				<div id="LvlProgress" title="0.0 XP / 50.0 XP">
-					<div id="LvlProgressBar" role="progressbar" style="width: 0%;"></div>
-				</div>
-			</div>
-		</div>
-		<div id="PerSecondsNo">You need<br /><span id="LEVEL2">LVL 3</span></div>
-		<div id="PerSeconds">
-			<div id="ps" title="every  15.0 seconds gives 10.0 points"><div id="ps2" role="progressbar" style="width: 0%;"></div></div>
-			<div id="BonusText">+ 0.0 Points</div>
-		</div>
-		<div id="PointsSeconds">
-			<div id="PointsCount">0.0 Points</div>
-			<div id="SecondsText">999.9M p/s</div>
-		</div>
-		<div id="Boost" title="x1.30 PPM for 2 seconds">Boost!</div>
-	</div>
-	
-	<br />
-	
-	<div id="Points">
-		<div id="HelpPoints">
-			<div class="s1"><div id="s2s1" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s2"><div id="s2s2" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s3"><div id="s2s3" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s4"><div id="s2s4" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s5"><div id="s2s5" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s6"><div id="s2s6" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s7"><div id="s2s7" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s8"><div id="s2s8" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s9"><div id="s2s9" role="progressbar" style="width: 0%;"></div></div>
-			<div class="s10"><div id="s2s10" role="progressbar" style="width: 0%;"></div></div>
-		</div>
-	</div>
-	
-	<br /><br /><br /><br /><br />
-	
-	<div id="Upgrades">
-		<div id="Upgrade1">
-			<div id="Upgrade1Add">+ 1 Points Per Minute</div>
-			<div id="Upgrade1Level">Lvl 0, progress to lvl 1:</div>
-			<div id="Upgrade1Progress">
-				<div class="su1"><div id="s2su1" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su2"><div id="s2su2" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su3"><div id="s2su3" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su4"><div id="s2su4" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su5"><div id="s2su5" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su6"><div id="s2su6" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su7"><div id="s2su7" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su8"><div id="s2su8" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su9"><div id="s2su9" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su10"><div id="s2su10" role="progressbar" style="width: 0%;"></div></div>
-			</div>
-			<div id="BuyInfo1">Click to spend points (5.0 points left)</div>
-		</div>
-		
-		
-		<div id="Upgrade2">
-			<div id="Upgrade2Add">Boost works 0.1 second longer</div>
-			<div id="Upgrade2Level">Lvl 0, progress to lvl 1:</div>
-			<div id="Upgrade2Progress">
-				<div class="su21"><div id="s2su21" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su22"><div id="s2su22" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su23"><div id="s2su23" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su24"><div id="s2su24" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su25"><div id="s2su25" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su26"><div id="s2su26" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su27"><div id="s2su27" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su28"><div id="s2su28" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su29"><div id="s2su29" role="progressbar" style="width: 0%;"	></div></div>
-				<div class="su210"><div id="s2su210" role="progressbar" style="width: 0%;"></div></div>
-			</div>
-			<div id="BuyInfo2">Click to spend points (20.0 points left)</div>
-		</div>
-		
-		
-		<div id="Upgrade3">
-			<div id="Upgrade3Add">+ 0.01 Boost multiplier</div>
-			<div id="Upgrade3Level">Lvl 0, progress to lvl 1:</div>
-			<div id="Upgrade3Progress">
-				<div class="su31"><div id="s2su31" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su32"><div id="s2su32" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su33"><div id="s2su33" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su34"><div id="s2su34" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su35"><div id="s2su35" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su36"><div id="s2su36" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su37"><div id="s2su37" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su38"><div id="s2su38" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su39"><div id="s2su39" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su310"><div id="s2su310" role="progressbar" style="width: 0%;"></div></div>
-			</div>
-			<div id="BuyInfo3">Click to spend points (30.0 points left)</div>
-		</div>
-		
-		
-		<div id="Upgrade4">
-			<div id="Upgrade4Add">Increase maximum capacity x10 (current: 10)</div>
-			<div id="Upgrade4Level">Lvl 0, progress to lvl 1:</div>
-			<div id="Upgrade4Progress">
-				<div class="su41"><div id="s2su41" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su42"><div id="s2su42" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su43"><div id="s2su43" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su44"><div id="s2su44" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su45"><div id="s2su45" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su46"><div id="s2su46" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su47"><div id="s2su47" role="progressbar" style="width: 0%;"	></div></div>
-				<div class="su48"><div id="s2su48" role="progressbar" style="width: 0%;"	></div></div>
-				<div class="su49"><div id="s2su49" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su410"><div id="s2su410" role="progressbar" style="width: 0%;"></div></div>
-			</div>
-			<div id="BuyInfo4">Click to spend points (50.0 points left)</div>
-		</div>
-	
-	
-		<div id="Upgrade5No">
-			You need<br />
-			<span id="LEVEL">LEVEL 5</span><br />
-			to unlock this upgrade!
-		</div>
-
-		<div id="Upgrade5">
-			<div id="Upgrade5Add">Time bonus give 10% more points</div>
-			<div id="Upgrade5Level">Lvl 0, progress to lvl 1:</div>
-			<div id="Upgrade5Progress">
-				<div class="su51"><div id="s2su51" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su52"><div id="s2su52" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su53"><div id="s2su53" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su54"><div id="s2su54" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su55"><div id="s2su55" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su56"><div id="s2su56" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su57"><div id="s2su57" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su58"><div id="s2su58" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su59"><div id="s2su59" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su510"><div id="s2su510" role="progressbar" style="width: 0%;"></div></div>
-			</div>
-			<div id="BuyInfo5">Click to spend points (200.0 points left)</div>
-		</div>
-
-
-		<div id="Upgrade6No">
-			You need<br />
-			<span id="LEVEL">LEVEL 15</span><br />
-			to unlock this upgrade!
-		</div>
-		
-		<div id="Upgrade6yes">
-			Maximum level !
-		</div>
-
-		<div id="Upgrade6">
-			<div id="Upgrade6Add">Time bonus cooldown - 0.1 second (max. - 10s)</div>
-			<div id="Upgrade6Level">Lvl 0, progress to lvl 1:</div>
-			<div id="Upgrade6Progress">
-				<div class="su61"><div id="s2su61" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su62"><div id="s2su62" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su63"><div id="s2su63" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su64"><div id="s2su64" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su65"><div id="s2su65" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su66"><div id="s2su66" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su67"><div id="s2su67" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su68"><div id="s2su68" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su69"><div id="s2su69" role="progressbar" style="width: 0%;"></div></div>
-				<div class="su610"><div id="s2su610" role="progressbar" style="width: 0%;"></div></div>
-			</div>
-			<div id="BuyInfo6">Click to spend points (5.0K points left)</div>
-		</div>
-
-	</div>
-
-	<br /><br /><br />
-
-	<button id="reset">Reset game</button>
-
+<body onload="load()" onkeypress="Press(event)">
+<table id ="table">
+	<tr id="sticky">
+		<td id="td">Gama</td>
+		<td id="td">Naturalna/Harm.</td>
+		<td id="td">Tercje</td>
+		<td id="td">Melodyczna</td>
+		<td id="td">Chromatyka</td>
+		<td id="td">Całotonowa</td>
+		<td id="td">D7</td>
+		<td id="td">></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">C-dur</td>
+		<td id="td1"><div id="C1" onclick='Mark("C1")'>+</div></td>
+		<td id="td1"><div id="C2" onclick='Mark("C2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="C3" onclick='Mark("C3")'>+</div></td>
+		<td id="td1"><div id="C4" onclick='Mark("C4")'>+</div></td>
+		<td id="td1"><div id="C5" onclick='Mark("C5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">a-moll</td>
+		<td id="td1"><div id="a1" onclick='Mark("a1")'>+</div></td>
+		<td id="td1"><div id="a2" onclick='Mark("a2")'>+</div></td>
+		<td id="td1"><div id="a3" onclick='Mark("a3")'>+</div></td>
+		<td id="td1"><div id="a4" onclick='Mark("a4")'>+</div></td>
+		<td id="td1"><div id="a5" onclick='Mark("a5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="a6" onclick='Mark("a6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">G-dur</td>
+		<td id="td1"><div id="G1" onclick='Mark("G1")'>+</div></td>
+		<td id="td1"><div id="G2" onclick='Mark("G2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="G3" onclick='Mark("G3")'>+</div></td>
+		<td id="td1"><div id="G4" onclick='Mark("G4")'>+</div></td>
+		<td id="td1"><div id="G5" onclick='Mark("G5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">e-moll</td>
+		<td id="td1"><div id="e1" onclick='Mark("e1")'>+</div></td>
+		<td id="td1"><div id="e2" onclick='Mark("e2")'>+</div></td>
+		<td id="td1"><div id="e3" onclick='Mark("e3")'>+</div></td>
+		<td id="td1"><div id="e4" onclick='Mark("e4")'>+</div></td>
+		<td id="td1"><div id="e5" onclick='Mark("e5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="e6" onclick='Mark("e6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">F-dur</td>
+		<td id="td1"><div id="F1" onclick='Mark("F1")'>+</div></td>
+		<td id="td1"><div id="F2" onclick='Mark("F2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="F3" onclick='Mark("F3")'>+</div></td>
+		<td id="td1"><div id="F4" onclick='Mark("F4")'>+</div></td>
+		<td id="td1"><div id="F5" onclick='Mark("F5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">d-moll</td>
+		<td id="td1"><div id="d1" onclick='Mark("d1")'>+</div></td>
+		<td id="td1"><div id="d2" onclick='Mark("d2")'>+</div></td>
+		<td id="td1"><div id="d3" onclick='Mark("d3")'>+</div></td>
+		<td id="td1"><div id="d4" onclick='Mark("d4")'>+</div></td>
+		<td id="td1"><div id="d5" onclick='Mark("d5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="d6" onclick='Mark("d6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">D-dur</td>
+		<td id="td1"><div id="D1" onclick='Mark("D1")'>+</div></td>
+		<td id="td1"><div id="D2" onclick='Mark("D2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="D3" onclick='Mark("D3")'>+</div></td>
+		<td id="td1"><div id="D4" onclick='Mark("D4")'>+</div></td>
+		<td id="td1"><div id="D5" onclick='Mark("D5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">h-moll</td>
+		<td id="td1"><div id="h1" onclick='Mark("h1")'>+</div></td>
+		<td id="td1"><div id="h2" onclick='Mark("h2")'>+</div></td>
+		<td id="td1"><div id="h3" onclick='Mark("h3")'>+</div></td>
+		<td id="td1"><div id="h4" onclick='Mark("h4")'>+</div></td>
+		<td id="td1"><div id="h5" onclick='Mark("h5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="h6" onclick='Mark("h6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">B-dur</td>
+		<td id="td1"><div id="B1" onclick='Mark("B1")'>+</div></td>
+		<td id="td1"><div id="B2" onclick='Mark("B2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="B3" onclick='Mark("B3")'>+</div></td>
+		<td id="td1"><div id="B4" onclick='Mark("B4")'>+</div></td>
+		<td id="td1"><div id="B5" onclick='Mark("B5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">g-moll</td>
+		<td id="td1"><div id="g1" onclick='Mark("g1")'>+</div></td>
+		<td id="td1"><div id="g2" onclick='Mark("g2")'>+</div></td>
+		<td id="td1"><div id="g3" onclick='Mark("g3")'>+</div></td>
+		<td id="td1"><div id="g4" onclick='Mark("g4")'>+</div></td>
+		<td id="td1"><div id="g5" onclick='Mark("g5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="g6" onclick='Mark("g6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">A-dur</td>
+		<td id="td1"><div id="A1" onclick='Mark("A1")'>+</div></td>
+		<td id="td1"><div id="A2" onclick='Mark("A2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="A3" onclick='Mark("A3")'>+</div></td>
+		<td id="td1"><div id="A4" onclick='Mark("A4")'>+</div></td>
+		<td id="td1"><div id="A5" onclick='Mark("A5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">fis-moll</td>
+		<td id="td1"><div id="fis1" onclick='Mark("fis1")'>+</div></td>
+		<td id="td1"><div id="fis2" onclick='Mark("fis2")'>+</div></td>
+		<td id="td1"><div id="fis3" onclick='Mark("fis3")'>+</div></td>
+		<td id="td1"><div id="fis4" onclick='Mark("fis4")'>+</div></td>
+		<td id="td1"><div id="fis5" onclick='Mark("fis5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="fis6" onclick='Mark("fis6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">Es-dur</td>
+		<td id="td1"><div id="Es1" onclick='Mark("Es1")'>+</div></td>
+		<td id="td1"><div id="Es2" onclick='Mark("Es2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="Es3" onclick='Mark("Es3")'>+</div></td>
+		<td id="td1"><div id="Es4" onclick='Mark("Es4")'>+</div></td>
+		<td id="td1"><div id="Es5" onclick='Mark("Es5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">c-moll</td>
+		<td id="td1"><div id="c1" onclick='Mark("c1")'>+</div></td>
+		<td id="td1"><div id="c2" onclick='Mark("c2")'>+</div></td>
+		<td id="td1"><div id="c3" onclick='Mark("c3")'>+</div></td>
+		<td id="td1"><div id="c4" onclick='Mark("c4")'>+</div></td>
+		<td id="td1"><div id="c5" onclick='Mark("c5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="c6" onclick='Mark("c6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">E-dur</td>
+		<td id="td1"><div id="E1" onclick='Mark("E1")'>+</div></td>
+		<td id="td1"><div id="E2" onclick='Mark("E2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="E3" onclick='Mark("E3")'>+</div></td>
+		<td id="td1"><div id="E4" onclick='Mark("E4")'>+</div></td>
+		<td id="td1"><div id="E5" onclick='Mark("E5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">cis-moll</td>
+		<td id="td1"><div id="cis1" onclick='Mark("cis1")'>+</div></td>
+		<td id="td1"><div id="cis2" onclick='Mark("cis2")'>+</div></td>
+		<td id="td1"><div id="cis3" onclick='Mark("cis3")'>+</div></td>
+		<td id="td1"><div id="cis4" onclick='Mark("cis4")'>+</div></td>
+		<td id="td1"><div id="cis5" onclick='Mark("cis5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="cis6" onclick='Mark("cis6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">As-dur</td>
+		<td id="td1"><div id="As1" onclick='Mark("As1")'>+</div></td>
+		<td id="td1"><div id="As2" onclick='Mark("As2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="As3" onclick='Mark("As3")'>+</div></td>
+		<td id="td1"><div id="As4" onclick='Mark("As4")'>+</div></td>
+		<td id="td1"><div id="As5" onclick='Mark("As5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">f-moll</td>
+		<td id="td1"><div id="f1" onclick='Mark("f1")'>+</div></td>
+		<td id="td1"><div id="f2" onclick='Mark("f2")'>+</div></td>
+		<td id="td1"><div id="f3" onclick='Mark("f3")'>+</div></td>
+		<td id="td1"><div id="f4" onclick='Mark("f4")'>+</div></td>
+		<td id="td1"><div id="f5" onclick='Mark("f5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="f6" onclick='Mark("f6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">H-dur</td>
+		<td id="td1"><div id="H1" onclick='Mark("H1")'>+</div></td>
+		<td id="td1"><div id="H2" onclick='Mark("H2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="H3" onclick='Mark("H3")'>+</div></td>
+		<td id="td1"><div id="H4" onclick='Mark("H4")'>+</div></td>
+		<td id="td1"><div id="H5" onclick='Mark("H5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">gis-moll</td>
+		<td id="td1"><div id="gis1" onclick='Mark("gis1")'>+</div></td>
+		<td id="td1"><div id="gis2" onclick='Mark("gis2")'>+</div></td>
+		<td id="td1"><div id="gis3" onclick='Mark("gis3")'>+</div></td>
+		<td id="td1"><div id="gis4" onclick='Mark("gis4")'>+</div></td>
+		<td id="td1"><div id="gis5" onclick='Mark("gis5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="gis6" onclick='Mark("gis6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">b-moll</td>
+		<td id="td1"><div id="b1" onclick='Mark("b1")'>+</div></td>
+		<td id="td1"><div id="b2" onclick='Mark("b2")'>+</div></td>
+		<td id="td1"><div id="b3" onclick='Mark("b3")'>+</div></td>
+		<td id="td1"><div id="b4" onclick='Mark("b4")'>+</div></td>
+		<td id="td1"><div id="b5" onclick='Mark("b5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="b6" onclick='Mark("b6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">Fis-dur</td>
+		<td id="td1"><div id="Fis1" onclick='Mark("Fis1")'>+</div></td>
+		<td id="td1"><div id="Fis2" onclick='Mark("Fis2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="Fis3" onclick='Mark("Fis3")'>+</div></td>
+		<td id="td1"><div id="Fis4" onclick='Mark("Fis4")'>+</div></td>
+		<td id="td1"><div id="Fis5" onclick='Mark("Fis5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">dis-moll</td>
+		<td id="td1"><div id="dis1" onclick='Mark("dis1")'>+</div></td>
+		<td id="td1"><div id="dis2" onclick='Mark("dis2")'>+</div></td>
+		<td id="td1"><div id="dis3" onclick='Mark("dis3")'>+</div></td>
+		<td id="td1"><div id="dis4" onclick='Mark("dis4")'>+</div></td>
+		<td id="td1"><div id="dis5" onclick='Mark("dis5")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="dis6" onclick='Mark("dis6")'>+</div></td>
+	</tr>
+	<tr id="tr">
+		<td id="td1">Cis-dur</td>
+		<td id="td1"><div id="Cis1" onclick='Mark("Cis1")'>+</div></td>
+		<td id="td1"><div id="Cis2" onclick='Mark("Cis2")'>+</div></td>
+		<td id="td1"></td>
+		<td id="td1"><div id="Cis3" onclick='Mark("Cis3")'>+</div></td>
+		<td id="td1"><div id="Cis4" onclick='Mark("Cis4")'>+</div></td>
+		<td id="td1"><div id="Cis5" onclick='Mark("Cis5")'>+</div></td>
+		<td id="td1"></td>
+	</tr>
+</table>
 </body>
 <script src="scripts.js"></script>
 </html>
