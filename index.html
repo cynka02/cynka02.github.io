@@ -3,257 +3,371 @@
 <title>Gamy</title>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body onload="load()" onkeypress="Press(event)">
-<table id ="table">
-	<tr id="sticky">
-		<td id="td">Gama</td>
-		<td id="td">Naturalna/Harm.</td>
-		<td id="td">Tercje</td>
-		<td id="td">Melodyczna</td>
-		<td id="td">Chromatyka</td>
-		<td id="td">Całotonowa</td>
-		<td id="td">D7</td>
-		<td id="td">></td>
+<body onload="load()">
+<div id="Main">
+	<div id="Popraw">Popraw wyniki</div>
+	<div id="Nauka">Ucz się</div>
+	<div id="Wyniki">Tabela wyników</div>
+</div>
+<div id="Container">
+	<div id="Options">
+		<div id="Option1">Poprzednia ocena:<br /><div id="OMarkA" title="null"></div></div>
+		<div id="OptionMain"><b>a-moll</b><br /><img src="D9.png" id ="D79img"/></div>
+		<div id="Option2"><img src="strzałka.png" id="strzałkaimg" /></div>
+	</div>
+</div>
+<div id="Ocena">Twoja ocena:</div>
+<div id="Marks">
+	<div id="Mark1" title="1/18"></div>
+	<div id="Mark2" title="2/18"></div>
+	<div id="Mark3" title="3/18"></div>
+	<div id="Mark4" title="4/18"></div>
+	<div id="Mark5" title="5/18"></div>
+	<div id="Mark6" title="6/18"></div>
+	<div id="Mark7" title="7/18"></div>
+	<div id="Mark8" title="8/18"></div>
+	<div id="Mark9" title="9/18"></div>
+	<div id="Mark10" title="10/18"></div>
+	<div id="Mark11" title="11/18"></div>
+	<div id="Mark12" title="12/18"></div>
+	<div id="Mark13" title="13/18"></div>
+	<div id="Mark14" title="14/18"></div>
+	<div id="Mark15" title="15/18"></div>
+	<div id="Mark16" title="16/18"></div>
+	<div id="Mark17" title="17/18"></div>
+	<div id="Mark18" title="18/18"></div>
+</div>
+<div id="MarksAlt">
+	<div id="MarkA1" title="Polska"></div>
+	<div id="MarkA2" title="Milicja"></div>
+	<div id="MarkA3" title="W"></div>
+	<div id="MarkA4" title="Akcji"></div>
+	<div id="MarkA5" title='"'></div>
+	<div id="MarkA6" title="W"></div>
+	<div id="MarkA7" title="Drugim"></div>
+	<div id="MarkA8" title="Stopniu"></div>
+	<div id="MarkA9" title="Ćwiczy"></div>
+	<div id="MarkA10" title="Się"></div>
+	<div id="MarkA11" title="Po"></div>
+	<div id="MarkA12" title="58"></div>
+	<div id="MarkA13" title="Godzin"></div>
+	<div id="MarkA14" title="Na"></div>
+	<div id="MarkA15" title="Dobę"></div>
+	<div id="MarkA16" title='"'></div>
+	<div id="MarkA17" title="Ką Gratulejszyn"></div>
+	<div id="MarkA18" title="Na co jeszcze waiting?"></div>
+</div>
+
+<table id="TabelaW">
+	<tr id="TabelaPoczatek">
+		<td id="Tr1G">Gama:</td>
+		<td id="Tr1">Naturalna/Harm.</td>
+		<td id="Tr1">Tercje</td>
+		<td id="Tr1">Melodyczna</td>
+		<td id="Tr1">Chromatyka</td>
+		<td id="Tr1">Całotonowa</td>
+		<td id="Tr1"><img src="D7.png" width="40px" height="40px"/></td>
+		<td id="Tr1"><img src="D9.png" width="40px" height="40px"/></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">C-dur</td>
-		<td id="td1"><div id="C1" onclick='Mark("C1")'>+</div></td>
-		<td id="td1"><div id="C2" onclick='Mark("C2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="C3" onclick='Mark("C3")'>+</div></td>
-		<td id="td1"><div id="C4" onclick='Mark("C4")'>+</div></td>
-		<td id="td1"><div id="C5" onclick='Mark("C5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaC">
+		<td id="TC0">C-dur</td>
+		<td id="TC1"></td>
+		<td id="TC2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TC3"></td>
+		<td id="TC4"></td>
+		<td id="TC5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">a-moll</td>
-		<td id="td1"><div id="a1" onclick='Mark("a1")'>+</div></td>
-		<td id="td1"><div id="a2" onclick='Mark("a2")'>+</div></td>
-		<td id="td1"><div id="a3" onclick='Mark("a3")'>+</div></td>
-		<td id="td1"><div id="a4" onclick='Mark("a4")'>+</div></td>
-		<td id="td1"><div id="a5" onclick='Mark("a5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="a6" onclick='Mark("a6")'>+</div></td>
+	<tr id="Tabelaa">
+		<td id="Ta0">a-moll</td>
+		<td id="Ta1"></td>
+		<td id="Ta2"></td>
+		<td id="Ta3"></td>
+		<td id="Ta4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Ta5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">G-dur</td>
-		<td id="td1"><div id="G1" onclick='Mark("G1")'>+</div></td>
-		<td id="td1"><div id="G2" onclick='Mark("G2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="G3" onclick='Mark("G3")'>+</div></td>
-		<td id="td1"><div id="G4" onclick='Mark("G4")'>+</div></td>
-		<td id="td1"><div id="G5" onclick='Mark("G5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaG">
+		<td id="TG0">G-dur</td>
+		<td id="TG1"></td>
+		<td id="TG2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TG3"></td>
+		<td id="TG4"></td>
+		<td id="TG5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">e-moll</td>
-		<td id="td1"><div id="e1" onclick='Mark("e1")'>+</div></td>
-		<td id="td1"><div id="e2" onclick='Mark("e2")'>+</div></td>
-		<td id="td1"><div id="e3" onclick='Mark("e3")'>+</div></td>
-		<td id="td1"><div id="e4" onclick='Mark("e4")'>+</div></td>
-		<td id="td1"><div id="e5" onclick='Mark("e5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="e6" onclick='Mark("e6")'>+</div></td>
+	<tr id="Tabelae">
+		<td id="Te0">e-moll</td>
+		<td id="Te1"></td>
+		<td id="Te2"></td>
+		<td id="Te3"></td>
+		<td id="Te4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Te5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">F-dur</td>
-		<td id="td1"><div id="F1" onclick='Mark("F1")'>+</div></td>
-		<td id="td1"><div id="F2" onclick='Mark("F2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="F3" onclick='Mark("F3")'>+</div></td>
-		<td id="td1"><div id="F4" onclick='Mark("F4")'>+</div></td>
-		<td id="td1"><div id="F5" onclick='Mark("F5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaF">
+		<td id="TF0">F-dur</td>
+		<td id="TF1"></td>
+		<td id="TF2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TF3"></td>
+		<td id="TF4"></td>
+		<td id="TF5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">d-moll</td>
-		<td id="td1"><div id="d1" onclick='Mark("d1")'>+</div></td>
-		<td id="td1"><div id="d2" onclick='Mark("d2")'>+</div></td>
-		<td id="td1"><div id="d3" onclick='Mark("d3")'>+</div></td>
-		<td id="td1"><div id="d4" onclick='Mark("d4")'>+</div></td>
-		<td id="td1"><div id="d5" onclick='Mark("d5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="d6" onclick='Mark("d6")'>+</div></td>
+	<tr id="Tabelad">
+		<td id="Td0">d-moll</td>
+		<td id="Td1"></td>
+		<td id="Td2"></td>
+		<td id="Td3"></td>
+		<td id="Td4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Td5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">D-dur</td>
-		<td id="td1"><div id="D1" onclick='Mark("D1")'>+</div></td>
-		<td id="td1"><div id="D2" onclick='Mark("D2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="D3" onclick='Mark("D3")'>+</div></td>
-		<td id="td1"><div id="D4" onclick='Mark("D4")'>+</div></td>
-		<td id="td1"><div id="D5" onclick='Mark("D5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaD">
+		<td id="TD0">D-dur</td>
+		<td id="TD1"></td>
+		<td id="TD2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TD3"></td>
+		<td id="TD4"></td>
+		<td id="TD5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">h-moll</td>
-		<td id="td1"><div id="h1" onclick='Mark("h1")'>+</div></td>
-		<td id="td1"><div id="h2" onclick='Mark("h2")'>+</div></td>
-		<td id="td1"><div id="h3" onclick='Mark("h3")'>+</div></td>
-		<td id="td1"><div id="h4" onclick='Mark("h4")'>+</div></td>
-		<td id="td1"><div id="h5" onclick='Mark("h5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="h6" onclick='Mark("h6")'>+</div></td>
+	<tr id="Tabelah">
+		<td id="Th0">h-moll</td>
+		<td id="Th1"></td>
+		<td id="Th2"></td>
+		<td id="Th3"></td>
+		<td id="Th4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Th5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">B-dur</td>
-		<td id="td1"><div id="B1" onclick='Mark("B1")'>+</div></td>
-		<td id="td1"><div id="B2" onclick='Mark("B2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="B3" onclick='Mark("B3")'>+</div></td>
-		<td id="td1"><div id="B4" onclick='Mark("B4")'>+</div></td>
-		<td id="td1"><div id="B5" onclick='Mark("B5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaB">
+		<td id="TB0">B-dur</td>
+		<td id="TB1"></td>
+		<td id="TB2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TB3"></td>
+		<td id="TB4"></td>
+		<td id="TB5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">g-moll</td>
-		<td id="td1"><div id="g1" onclick='Mark("g1")'>+</div></td>
-		<td id="td1"><div id="g2" onclick='Mark("g2")'>+</div></td>
-		<td id="td1"><div id="g3" onclick='Mark("g3")'>+</div></td>
-		<td id="td1"><div id="g4" onclick='Mark("g4")'>+</div></td>
-		<td id="td1"><div id="g5" onclick='Mark("g5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="g6" onclick='Mark("g6")'>+</div></td>
+	<tr id="Tabelag">
+		<td id="Tg0">g-moll</td>
+		<td id="Tg1"></td>
+		<td id="Tg2"></td>
+		<td id="Tg3"></td>
+		<td id="Tg4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tg5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">A-dur</td>
-		<td id="td1"><div id="A1" onclick='Mark("A1")'>+</div></td>
-		<td id="td1"><div id="A2" onclick='Mark("A2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="A3" onclick='Mark("A3")'>+</div></td>
-		<td id="td1"><div id="A4" onclick='Mark("A4")'>+</div></td>
-		<td id="td1"><div id="A5" onclick='Mark("A5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaA">
+		<td id="TA0">A-dur</td>
+		<td id="TA1"></td>
+		<td id="TA2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TA3"></td>
+		<td id="TA4"></td>
+		<td id="TA5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">fis-moll</td>
-		<td id="td1"><div id="fis1" onclick='Mark("fis1")'>+</div></td>
-		<td id="td1"><div id="fis2" onclick='Mark("fis2")'>+</div></td>
-		<td id="td1"><div id="fis3" onclick='Mark("fis3")'>+</div></td>
-		<td id="td1"><div id="fis4" onclick='Mark("fis4")'>+</div></td>
-		<td id="td1"><div id="fis5" onclick='Mark("fis5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="fis6" onclick='Mark("fis6")'>+</div></td>
+	<tr id="Tabelafis">
+		<td id="Tfis0">fis-moll</td>
+		<td id="Tfis1"></td>
+		<td id="Tfis2"></td>
+		<td id="Tfis3"></td>
+		<td id="Tfis4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tfis5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">Es-dur</td>
-		<td id="td1"><div id="Es1" onclick='Mark("Es1")'>+</div></td>
-		<td id="td1"><div id="Es2" onclick='Mark("Es2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="Es3" onclick='Mark("Es3")'>+</div></td>
-		<td id="td1"><div id="Es4" onclick='Mark("Es4")'>+</div></td>
-		<td id="td1"><div id="Es5" onclick='Mark("Es5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaEs">
+		<td id="TEs0">Es-dur</td>
+		<td id="TEs1"></td>
+		<td id="TEs2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TEs3"></td>
+		<td id="TEs4"></td>
+		<td id="TEs5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">c-moll</td>
-		<td id="td1"><div id="c1" onclick='Mark("c1")'>+</div></td>
-		<td id="td1"><div id="c2" onclick='Mark("c2")'>+</div></td>
-		<td id="td1"><div id="c3" onclick='Mark("c3")'>+</div></td>
-		<td id="td1"><div id="c4" onclick='Mark("c4")'>+</div></td>
-		<td id="td1"><div id="c5" onclick='Mark("c5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="c6" onclick='Mark("c6")'>+</div></td>
+	<tr id="Tabelac">
+		<td id="Tc0">c-moll</td>
+		<td id="Tc1"></td>
+		<td id="Tc2"></td>
+		<td id="Tc3"></td>
+		<td id="Tc4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tc5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">E-dur</td>
-		<td id="td1"><div id="E1" onclick='Mark("E1")'>+</div></td>
-		<td id="td1"><div id="E2" onclick='Mark("E2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="E3" onclick='Mark("E3")'>+</div></td>
-		<td id="td1"><div id="E4" onclick='Mark("E4")'>+</div></td>
-		<td id="td1"><div id="E5" onclick='Mark("E5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaE">
+		<td id="TE0">E-dur</td>
+		<td id="TE1"></td>
+		<td id="TE2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TE3"></td>
+		<td id="TE4"></td>
+		<td id="TE5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">cis-moll</td>
-		<td id="td1"><div id="cis1" onclick='Mark("cis1")'>+</div></td>
-		<td id="td1"><div id="cis2" onclick='Mark("cis2")'>+</div></td>
-		<td id="td1"><div id="cis3" onclick='Mark("cis3")'>+</div></td>
-		<td id="td1"><div id="cis4" onclick='Mark("cis4")'>+</div></td>
-		<td id="td1"><div id="cis5" onclick='Mark("cis5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="cis6" onclick='Mark("cis6")'>+</div></td>
+	<tr id="Tabelacis">
+		<td id="Tcis0">cis-moll</td>
+		<td id="Tcis1"></td>
+		<td id="Tcis2"></td>
+		<td id="Tcis3"></td>
+		<td id="Tcis4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tcis5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">As-dur</td>
-		<td id="td1"><div id="As1" onclick='Mark("As1")'>+</div></td>
-		<td id="td1"><div id="As2" onclick='Mark("As2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="As3" onclick='Mark("As3")'>+</div></td>
-		<td id="td1"><div id="As4" onclick='Mark("As4")'>+</div></td>
-		<td id="td1"><div id="As5" onclick='Mark("As5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaAs">
+		<td id="TAs0">As-dur</td>
+		<td id="TAs1"></td>
+		<td id="TAs2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TAs3"></td>
+		<td id="TAs4"></td>
+		<td id="TAs5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">f-moll</td>
-		<td id="td1"><div id="f1" onclick='Mark("f1")'>+</div></td>
-		<td id="td1"><div id="f2" onclick='Mark("f2")'>+</div></td>
-		<td id="td1"><div id="f3" onclick='Mark("f3")'>+</div></td>
-		<td id="td1"><div id="f4" onclick='Mark("f4")'>+</div></td>
-		<td id="td1"><div id="f5" onclick='Mark("f5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="f6" onclick='Mark("f6")'>+</div></td>
+	<tr id="Tabelaf">
+		<td id="Tf0">f-moll</td>
+		<td id="Tf1"></td>
+		<td id="Tf2"></td>
+		<td id="Tf3"></td>
+		<td id="Tf4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tf5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">H-dur</td>
-		<td id="td1"><div id="H1" onclick='Mark("H1")'>+</div></td>
-		<td id="td1"><div id="H2" onclick='Mark("H2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="H3" onclick='Mark("H3")'>+</div></td>
-		<td id="td1"><div id="H4" onclick='Mark("H4")'>+</div></td>
-		<td id="td1"><div id="H5" onclick='Mark("H5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="TabelaH">
+		<td id="TH0">H-dur</td>
+		<td id="TH1"></td>
+		<td id="TH2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TH3"></td>
+		<td id="TH4"></td>
+		<td id="TH5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">gis-moll</td>
-		<td id="td1"><div id="gis1" onclick='Mark("gis1")'>+</div></td>
-		<td id="td1"><div id="gis2" onclick='Mark("gis2")'>+</div></td>
-		<td id="td1"><div id="gis3" onclick='Mark("gis3")'>+</div></td>
-		<td id="td1"><div id="gis4" onclick='Mark("gis4")'>+</div></td>
-		<td id="td1"><div id="gis5" onclick='Mark("gis5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="gis6" onclick='Mark("gis6")'>+</div></td>
+	<tr id="Tabelagis">
+		<td id="Tgis0">gis-moll</td>
+		<td id="Tgis1"></td>
+		<td id="Tgis2"></td>
+		<td id="Tgis3"></td>
+		<td id="Tgis4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tgis5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">b-moll</td>
-		<td id="td1"><div id="b1" onclick='Mark("b1")'>+</div></td>
-		<td id="td1"><div id="b2" onclick='Mark("b2")'>+</div></td>
-		<td id="td1"><div id="b3" onclick='Mark("b3")'>+</div></td>
-		<td id="td1"><div id="b4" onclick='Mark("b4")'>+</div></td>
-		<td id="td1"><div id="b5" onclick='Mark("b5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="b6" onclick='Mark("b6")'>+</div></td>
+	<tr id="TabelaDes">
+		<td id="TDes0">Des-dur</td>
+		<td id="TDes1"></td>
+		<td id="TDes2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TDes3"></td>
+		<td id="TDes4"></td>
+		<td id="TDes5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">Fis-dur</td>
-		<td id="td1"><div id="Fis1" onclick='Mark("Fis1")'>+</div></td>
-		<td id="td1"><div id="Fis2" onclick='Mark("Fis2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="Fis3" onclick='Mark("Fis3")'>+</div></td>
-		<td id="td1"><div id="Fis4" onclick='Mark("Fis4")'>+</div></td>
-		<td id="td1"><div id="Fis5" onclick='Mark("Fis5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="Tabelab">
+		<td id="Tb0">b-moll</td>
+		<td id="Tb1"></td>
+		<td id="Tb2"></td>
+		<td id="Tb3"></td>
+		<td id="Tb4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tb5"></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">dis-moll</td>
-		<td id="td1"><div id="dis1" onclick='Mark("dis1")'>+</div></td>
-		<td id="td1"><div id="dis2" onclick='Mark("dis2")'>+</div></td>
-		<td id="td1"><div id="dis3" onclick='Mark("dis3")'>+</div></td>
-		<td id="td1"><div id="dis4" onclick='Mark("dis4")'>+</div></td>
-		<td id="td1"><div id="dis5" onclick='Mark("dis5")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="dis6" onclick='Mark("dis6")'>+</div></td>
+	<tr id="TabelaFis">
+		<td id="TFis0">Fis-dur</td>
+		<td id="TFis1"></td>
+		<td id="TFis2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TFis3"></td>
+		<td id="TFis4"></td>
+		<td id="TFis5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
 	</tr>
-	<tr id="tr">
-		<td id="td1">Cis-dur</td>
-		<td id="td1"><div id="Cis1" onclick='Mark("Cis1")'>+</div></td>
-		<td id="td1"><div id="Cis2" onclick='Mark("Cis2")'>+</div></td>
-		<td id="td1"></td>
-		<td id="td1"><div id="Cis3" onclick='Mark("Cis3")'>+</div></td>
-		<td id="td1"><div id="Cis4" onclick='Mark("Cis4")'>+</div></td>
-		<td id="td1"><div id="Cis5" onclick='Mark("Cis5")'>+</div></td>
-		<td id="td1"></td>
+	<tr id="Tabeladis">
+		<td id="Tdis0">dis-moll</td>
+		<td id="Tdis1"></td>
+		<td id="Tdis2"></td>
+		<td id="Tdis3"></td>
+		<td id="Tdis4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tdis5"></td>
+	</tr>
+	<tr id="TabelaGes">
+		<td id="TGes0">Ges-dur</td>
+		<td id="TGes1"></td>
+		<td id="TGes2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TGes3"></td>
+		<td id="TGes4"></td>
+		<td id="TGes5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+	</tr>
+	<tr id="Tabelaes">
+		<td id="Tes0">es-moll</td>
+		<td id="Tes1"></td>
+		<td id="Tes2"></td>
+		<td id="Tes3"></td>
+		<td id="Tes4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tes5"></td>
+	</tr>
+	<tr id="TabelaCis">
+		<td id="TCis0">Cis-dur</td>
+		<td id="TCis1"></td>
+		<td id="TCis2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TCis3"></td>
+		<td id="TCis4"></td>
+		<td id="TCis5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+	</tr>
+	<tr id="Tabelaais">
+		<td id="Tais0">ais-moll</td>
+		<td id="Tais1"></td>
+		<td id="Tais2"></td>
+		<td id="Tais3"></td>
+		<td id="Tais4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tais5"></td>
+	</tr>
+	<tr id="TabelaCes">
+		<td id="TCes0">Ces-dur</td>
+		<td id="TCes1"></td>
+		<td id="TCes2"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TCes3"></td>
+		<td id="TCes4"></td>
+		<td id="TCes5"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+	</tr>
+	<tr id="Tabelaas">
+		<td id="Tas0">as-moll</td>
+		<td id="Tas1"></td>
+		<td id="Tas2"></td>
+		<td id="Tas3"></td>
+		<td id="Tas4"></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="TNull"><div id="TNull2"></div></td>
+		<td id="Tas5"></td>
 	</tr>
 </table>
 </body>
