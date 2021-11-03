@@ -1,605 +1,1363 @@
-var Gamy = [[["C-dur"], [["C1"],[0],["Naturalna"]], [["C2"],[0],["Tercje"]], [["C3"],[0],["Chromatyka"]], [["C4"],[0],["Całotonowa"]], [["C5"],[0],['<img src="D7.png" id="D79img" />']]],[["a-moll"], [["a1"],[0],["Harmoniczna"]], [["a2"],[0],["Tercje"]], [["a3"],[0],["Melodyczna"]], [["a4"],[0],["Chromatyka"]], [["a5"],[0],['<img src="D9.png" id="D79img" />']]],[["G-dur"], [["G1"],[0],["Naturalna"]], [["G2"],[0],["Tercje"]], [["G3"],[0],["Chromatyka"]], [["G4"],[0],["Całotonowa"]], [["G5"],[0],['<img src="D7.png" id="D79img" />']]],[["e-moll"], [["e1"],[0],["Harmoniczna"]], [["e2"],[0],["Tercje"]], [["e3"],[0],["Melodyczna"]], [["e4"],[0],["Chromatyka"]], [["e5"],[0],['<img src="D9.png" id="D79img" />']]],[["F-dur"], [["F1"],[0],["Naturalna"]], [["F2"],[0],["Tercje"]], [["F3"],[0],["Chromatyka"]], [["F4"],[0],["Całotonowa"]], [["F5"],[0],['<img src="D7.png" id="D79img" />']]],[["d-moll"], [["d1"],[0],["Harmoniczna"]], [["d2"],[0],["Tercje"]], [["d3"],[0],["Melodyczna"]], [["d4"],[0],["Chromatyka"]], [["d5"],[0],['<img src="D9.png" id="D79img" />']]],[["D-dur"], [["D1"],[0],["Naturalna"]], [["D2"],[0],["Tercje"]], [["D3"],[0],["Chromatyka"]], [["D4"],[0],["Całotonowa"]], [["D5"],[0],['<img src="D7.png" id="D79img" />']]],[["h-moll"], [["h1"],[0],["Harmoniczna"]], [["h2"],[0],["Tercje"]], [["h3"],[0],["Melodyczna"]], [["h4"],[0],["Chromatyka"]], [["h5"],[0],['<img src="D9.png" id="D79img" />']]],[["B-dur"], [["B1"],[0],["Naturalna"]], [["B2"],[0],["Tercje"]], [["B3"],[0],["Chromatyka"]], [["B4"],[0],["Całotonowa"]], [["B5"],[0],['<img src="D7.png" id="D79img" />']]],[["g-moll"], [["g1"],[0],["Harmoniczna"]], [["g2"],[0],["Tercje"]], [["g3"],[0],["Melodyczna"]], [["g4"],[0],["Chromatyka"]], [["g5"],[0],['<img src="D9.png" id="D79img" />']]],[["A-dur"], [["A1"],[0],["Naturalna"]], [["A2"],[0],["Tercje"]], [["A3"],[0],["Chromatyka"]], [["A4"],[0],["Całotonowa"]], [["A5"],[0],['<img src="D7.png" id="D79img" />']]],[["fis-moll"], [["fis1"],[0],["Harmoniczna"]], [["fis2"],[0],["Tercje"]], [["fis3"],[0],["Melodyczna"]], [["fis4"],[0],["Chromatyka"]], [["fis5"],[0],['<img src="D9.png" id="D79img" />']]],[["Es-dur"], [["Es1"],[0],["Naturalna"]], [["Es2"],[0],["Tercje"]], [["Es3"],[0],["Chromatyka"]], [["Es4"],[0],["Całotonowa"]], [["Es5"],[0],['<img src="D7.png" id="D79img" />']]],[["c-moll"], [["c1"],[0],["Harmoniczna"]], [["c2"],[0],["Tercje"]], [["c3"],[0],["Melodyczna"]], [["c4"],[0],["Chromatyka"]], [["c5"],[0],['<img src="D9.png" id="D79img" />']]],[["E-dur"], [["E1"],[0],["Naturalna"]], [["E2"],[0],["Tercje"]], [["E3"],[0],["Chromatyka"]], [["E4"],[0],["Całotonowa"]], [["E5"],[0],['<img src="D7.png" id="D79img" />']]],[["cis-moll"], [["cis1"],[0],["Harmoniczna"]], [["cis2"],[0],["Tercje"]], [["cis3"],[0],["Melodyczna"]], [["cis4"],[0],["Chromatyka"]], [["cis5"],[0],['<img src="D9.png" id="D79img" />']]],[["As-dur"], [["As1"],[0],["Naturalna"]], [["As2"],[0],["Tercje"]], [["As3"],[0],["Chromatyka"]], [["As4"],[0],["Całotonowa"]], [["As5"],[0],['<img src="D7.png" id="D79img" />']]],[["f-moll"], [["f1"],[0],["Harmoniczna"]], [["f2"],[0],["Tercje"]], [["f3"],[0],["Melodyczna"]], [["f4"],[0],["Chromatyka"]], [["f5"],[0],['<img src="D9.png" id="D79img" />']]],[["H-dur"], [["H1"],[0],["Naturalna"]], [["H2"],[0],["Tercje"]], [["H3"],[0],["Chromatyka"]], [["H4"],[0],["Całotonowa"]], [["H5"],[0],['<img src="D7.png" id="D79img" />']]],[["gis-moll"], [["gis1"],[0],["Harmoniczna"]], [["gis2"],[0],["Tercje"]], [["gis3"],[0],["Melodyczna"]], [["gis4"],[0],["Chromatyka"]], [["gis5"],[0],['<img src="D9.png" id="D79img" />']]],[["Des-dur"], [["Des1"],[0],["Naturalna"]], [["Des2"],[0],["Tercje"]], [["Des3"],[0],["Chromatyka"]], [["Des4"],[0],["Całotonowa"]], [["Des5"],[0],['<img src="D7.png" id="D79img" />']]],[["b-moll"], [["b1"],[0],["Harmoniczna"]], [["b2"],[0],["Tercje"]], [["b3"],[0],["Melodyczna"]], [["b4"],[0],["Chromatyka"]], [["b5"],[0],['<img src="D9.png" id="D79img" />']]],[["Fis-dur"], [["Fis1"],[0],["Naturalna"]], [["Fis2"],[0],["Tercje"]], [["Fis3"],[0],["Chromatyka"]], [["Fis4"],[0],["Całotonowa"]], [["Fis5"],[0],['<img src="D7.png" id="D79img" />']]],[["dis-moll"], [["dis1"],[0],["Harmoniczna"]], [["dis2"],[0],["Tercje"]], [["dis3"],[0],["Melodyczna"]], [["dis4"],[0],["Chromatyka"]], [["dis5"],[0],['<img src="D9.png" id="D79img" />']]],[["Ges-dur"], [["Ges1"],[0],["Naturalna"]], [["Ges2"],[0],["Tercje"]], [["Ges3"],[0],["Chromatyka"]], [["Ges4"],[0],["Całotonowa"]], [["Ges5"],[0],['<img src="D7.png" id="D79img" />']]],[["es-moll"], [["es1"],[0],["Harmoniczna"]], [["es2"],[0],["Tercje"]], [["es3"],[0],["Melodyczna"]], [["es4"],[0],["Chromatyka"]], [["es5"],[0],['<img src="D9.png" id="D79img" />']]],[["Cis-dur"], [["Cis1"],[0],["Naturalna"]], [["Cis2"],[0],["Tercje"]], [["Cis3"],[0],["Chromatyka"]], [["Cis4"],[0],["Całotonowa"]], [["Cis5"],[0],['<img src="D7.png" id="D79img" />']]],[["ais-moll"], [["ais1"],[0],["Harmoniczna"]], [["ais2"],[0],["Tercje"]], [["ais3"],[0],["Melodyczna"]], [["ais4"],[0],["Chromatyka"]], [["ais5"],[0],['<img src="D9.png" id="D79img" />']]],[["Ces-dur"], [["Ces1"],[0],["Naturalna"]], [["Ces2"],[0],["Tercje"]], [["Ces3"],[0],["Chromatyka"]], [["Ces4"],[0],["Całotonowa"]], [["Ces5"],[0],['<img src="D7.png" id="D79img" />']]],[["as-moll"], [["as1"],[0],["Harmoniczna"]], [["as2"],[0],["Tercje"]], [["as3"],[0],["Melodyczna"]], [["as4"],[0],["Chromatyka"]], [["as5"],[0],['<img src="D9.png" id="D79img" />']]]];
-var LicznikNauka = 0;
-var Gamai = 0;
-var Gamau = 0;
-var GamaOcena = 0;
-var CzyNauka = 0;
-var CzyPopraw = 0;
-var PoprzedniaOcena = 0;
-var Kolor = "";
-var Title = "";
-var OMark = "";
+var Speed = 15;
+var SpeedforUpgrade1 = 0;
+var SpeedAfterBoost = 0;
+var Points = 0;
+var MaxPoints = 10;
+var LvlCount = 0;
+var XPToReach = 50;
+var XPOwned = 0;
+var LocalSpeed = SpeedAfterBoost + Speed;
 
-document.getElementById("Nauka").onclick = function()
-{
-	document.getElementById("TabelaW").style = "display: none;";
-	document.getElementById("Container").style = "display: block;";
-	document.getElementById("Ocena").style = "display: block;";
-	document.getElementById("Marks").style = "display: block;";
-	document.getElementById("MarksAlt").style = "display: none;";
-	document.getElementById("Option1").innerHTML = 'Poprzednia ocena:<br /><div id="OMarkA" title="null"></div>';
-	CzyPopraw = 0;
-	Uczenie();
+var BoostTime = 2000;
+var BoostStrenght = 0.3;
+
+var AlternativePoints = MaxPoints/10;
+var AlternativePoints2 = MaxPoints/5;
+var AlternativePoints3 = (MaxPoints/10) * 3;
+var AlternativePoints4 = (MaxPoints/10) * 4;
+var AlternativePoints5 = MaxPoints/2;
+var AlternativePoints6 = (MaxPoints/10) * 6;
+var AlternativePoints7 = (MaxPoints/10) * 7;
+var AlternativePoints8 = (MaxPoints/10) * 8;
+var AlternativePoints9 = (MaxPoints/10) * 9;
+
+var Upgrade1Cost = 5;
+var Upgrade1Value = 5;
+var Upgrade1Count = 0;
+var Upgrade1SpeedAdd = 1;
+var Upgrade1Buy = 0;
+var AlternativeUpgrade1Cost = Upgrade1Cost/10;
+var AlternativeUpgrade1Cost2 = Upgrade1Cost/5;
+var AlternativeUpgrade1Cost3 = (Upgrade1Cost/10) * 3;
+var AlternativeUpgrade1Cost4 = (Upgrade1Cost/10) * 4;
+var AlternativeUpgrade1Cost5 = Upgrade1Cost/2;
+var AlternativeUpgrade1Cost6 = (Upgrade1Cost/10) * 6;
+var AlternativeUpgrade1Cost7 = (Upgrade1Cost/10) * 7;
+var AlternativeUpgrade1Cost8 = (Upgrade1Cost/10) * 8;
+var AlternativeUpgrade1Cost9 = (Upgrade1Cost/10) * 9;
+
+var Upgrade2Cost = 20;
+var Upgrade2Value = 20;
+var Upgrade2Count = 0;
+var Upgrade2Buy = 0;
+var AlternativeUpgrade2Cost = Upgrade2Cost/10;
+var AlternativeUpgrade2Cost2 = Upgrade2Cost/5;
+var AlternativeUpgrade2Cost3 = (Upgrade2Cost/10) * 3;
+var AlternativeUpgrade2Cost4 = (Upgrade2Cost/10) * 4;
+var AlternativeUpgrade2Cost5 = Upgrade2Cost/2;
+var AlternativeUpgrade2Cost6 = (Upgrade2Cost/10) * 6;
+var AlternativeUpgrade2Cost7 = (Upgrade2Cost/10) * 7;
+var AlternativeUpgrade2Cost8 = (Upgrade2Cost/10) * 8;
+var AlternativeUpgrade2Cost9 = (Upgrade2Cost/10) * 9;
+
+var Upgrade3Cost = 30;
+var Upgrade3Value = 30;
+var Upgrade3Count = 0;
+var Upgrade3Buy = 0;
+var AlternativeUpgrade3Cost = Upgrade3Cost/10;
+var AlternativeUpgrade3Cost2 = Upgrade3Cost/5;
+var AlternativeUpgrade3Cost3 = (Upgrade3Cost/10) * 3;
+var AlternativeUpgrade3Cost4 = (Upgrade3Cost/10) * 4;
+var AlternativeUpgrade3Cost5 = Upgrade3Cost/2;
+var AlternativeUpgrade3Cost6 = (Upgrade3Cost/10) * 6;
+var AlternativeUpgrade3Cost7 = (Upgrade3Cost/10) * 7;
+var AlternativeUpgrade3Cost8 = (Upgrade3Cost/10) * 8;
+var AlternativeUpgrade3Cost9 = (Upgrade3Cost/10) * 9;
+
+var Upgrade4Cost = 50;
+var Upgrade4Value = 50;
+var Upgrade4Count = 0;
+var Upgrade4Buy = 0;
+var AlternativeUpgrade4Cost = Upgrade4Cost/10;
+var AlternativeUpgrade4Cost2 = Upgrade4Cost/5;
+var AlternativeUpgrade4Cost3 = (Upgrade4Cost/10) * 3;
+var AlternativeUpgrade4Cost4 = (Upgrade4Cost/10) * 4;
+var AlternativeUpgrade4Cost5 = Upgrade4Cost/2;
+var AlternativeUpgrade4Cost6 = (Upgrade4Cost/10) * 6;
+var AlternativeUpgrade4Cost7 = (Upgrade4Cost/10) * 7;
+var AlternativeUpgrade4Cost8 = (Upgrade4Cost/10) * 8;
+var AlternativeUpgrade4Cost9 = (Upgrade4Cost/10) * 9;
+
+var Upgrade5Cost = 200;
+var Upgrade5Value = 200;
+var Upgrade5Count = 0;
+var Upgrade5Buy = 0;
+var AlternativeUpgrade5Cost = Upgrade5Cost/10;
+var AlternativeUpgrade5Cost2 = Upgrade5Cost/5;
+var AlternativeUpgrade5Cost3 = (Upgrade5Cost/10) * 3;
+var AlternativeUpgrade5Cost4 = (Upgrade5Cost/10) * 4;
+var AlternativeUpgrade5Cost5 = Upgrade5Cost/2;
+var AlternativeUpgrade5Cost6 = (Upgrade5Cost/10) * 6;
+var AlternativeUpgrade5Cost7 = (Upgrade5Cost/10) * 7;
+var AlternativeUpgrade5Cost8 = (Upgrade5Cost/10) * 8;
+var AlternativeUpgrade5Cost9 = (Upgrade5Cost/10) * 9;
+
+var Upgrade6Cost = 5000;
+var Upgrade6Value = 5000;
+var Upgrade6Count = 0;
+var Upgrade6Buy = 0;
+var AlternativeUpgrade6Cost = Upgrade6Cost/10;
+var AlternativeUpgrade6Cost2 = Upgrade6Cost/5;
+var AlternativeUpgrade6Cost3 = (Upgrade6Cost/10) * 3;
+var AlternativeUpgrade6Cost4 = (Upgrade6Cost/10) * 4;
+var AlternativeUpgrade6Cost5 = Upgrade6Cost/2;
+var AlternativeUpgrade6Cost6 = (Upgrade6Cost/10) * 6;
+var AlternativeUpgrade6Cost7 = (Upgrade6Cost/10) * 7;
+var AlternativeUpgrade6Cost8 = (Upgrade6Cost/10) * 8;
+var AlternativeUpgrade6Cost9 = (Upgrade6Cost/10) * 9;
+
+var FilledPerSecond = 0;
+var FillingTime = 15;
+var FillBonus = 10;
+
+
+
+function ScorePoints(){
+	LocalSpeed = SpeedAfterBoost + Speed;
+	Points += LocalSpeed/6000;
+	if (Points <= AlternativePoints){
+		var LocalPoints = Points / MaxPoints; 
+		var width1 = LocalPoints*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints2 && Points > AlternativePoints){
+		var LocalPoints = Points / MaxPoints;
+		var width2 = (LocalPoints*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints3 && Points > AlternativePoints2){
+		var LocalPoints = Points / MaxPoints;
+		var width3 = (LocalPoints*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints4 && Points > AlternativePoints3){
+		var LocalPoints = Points / MaxPoints;
+		var width4 = (LocalPoints*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints5 && Points > AlternativePoints4){
+		var LocalPoints = Points / MaxPoints;
+		var width5 = (LocalPoints*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints6 && Points > AlternativePoints5){
+		var LocalPoints = Points / MaxPoints;
+		var width6 = (LocalPoints*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints7 && Points > AlternativePoints6){
+		var LocalPoints = Points / MaxPoints;
+		var width7 = (LocalPoints*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints8 && Points > AlternativePoints7){
+		var LocalPoints = Points / MaxPoints;
+		var width8 = (LocalPoints*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points <= AlternativePoints9 && Points > AlternativePoints8){
+		var LocalPoints = Points / MaxPoints;
+		var width9 = (LocalPoints*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2s");
+		NumbersConverter();
+	}
+	else if (Points < MaxPoints && Points > AlternativePoints9){
+		var LocalPoints = Points / MaxPoints;
+		var width10 = (LocalPoints*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2s");
+		NumbersConverter();
+	}
+	else if (Points >= MaxPoints){
+		Points = MaxPoints;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2s");
+		NumbersConverter();
+	}
+}setInterval(ScorePoints, 10);
+
+
+
+function NumbersConverter(){
+	LocalSpeed = SpeedAfterBoost + Speed;
+	var LocalLocalSpeed = LocalSpeed/60;
+	if (Points < 1000){
+		document.getElementById("PointsCount").innerHTML = Points.toFixed(1) + " Points";
+	}
+	else if (Points >= 1000 && Points < 1000000){
+		var LocalPoints = Points/1000;
+		document.getElementById("PointsCount").innerHTML = LocalPoints.toFixed(1) + "K Points";
+	}
+	else if (Points >= 1000000 && Points < 1000000000){
+		var LocalPoints = Points/1000000;
+		document.getElementById("PointsCount").innerHTML = LocalPoints.toFixed(1) + "M Points";
+	}
+	else if (Points >= 1000000000 && Points < 1000000000000){
+		var LocalPoints = Points/1000000000;
+		document.getElementById("PointsCount").innerHTML = LocalPoints.toFixed(1) + "B Points";
+	}
+	else if (Points >= 1000000000000){
+		var LocalPoints = Points/1000000000000;
+		document.getElementById("PointsCount").innerHTML = LocalPoints.toFixed(1) + "T Points";
+	}
+	if (LocalLocalSpeed < 1000){
+		document.getElementById("SecondsText").innerHTML = LocalLocalSpeed.toFixed(1) + " p/s";
+	}
+	else if (LocalLocalSpeed >= 1000 && LocalLocalSpeed < 1000000){
+		var LocalLocalSpeedText = LocalLocalSpeed/1000;
+		document.getElementById("SecondsText").innerHTML = LocalLocalSpeedText.toFixed(1) + "K p/s";
+	}
+	else if (LocalLocalSpeed >= 1000000 && LocalLocalSpeed < 1000000000){
+		var LocalLocalSpeedText = LocalLocalSpeed/1000000;
+		document.getElementById("SecondsText").innerHTML = LocalLocalSpeedText.toFixed(1) + "M p/s";
+	}
+	else if (LocalLocalSpeed >= 1000000000 && LocalLocalSpeed < 1000000000000){
+		var LocalLocalSpeedText = LocalLocalSpeed/1000000000;
+		document.getElementById("SecondsText").innerHTML = LocalLocalSpeedText.toFixed(1) + "B p/s";
+	}
+	else if (LocalLocalSpeed >= 1000000000000){
+		var LocalLocalSpeedText = LocalLocalSpeed/1000000000000;
+		document.getElementById("SecondsText").innerHTML = LocalLocalSpeedText.toFixed(1) + "T p/s";
+	}
+	if (Upgrade1Value < 1000){
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + Upgrade1Value.toFixed(1) + " points left)";
+	}
+	else if (Upgrade1Value >= 1000 && Upgrade1Value < 1000000){
+		var LocalUpgrade1Value = Upgrade1Value/1000;
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "K points left)";
+	}
+	else if (Upgrade1Value >= 1000000 && Upgrade1Value < 1000000000){
+		var LocalUpgrade1Value = Upgrade1Value/1000000;
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "M points left)";
+	}
+	else if (Upgrade1Value >= 1000000000 && Upgrade1Value < 1000000000000){
+		var LocalUpgrade1Value = Upgrade1Value/1000000000;
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "B points left)";
+	}
+	else if (Upgrade1Value >= 1000000000000){
+		var LocalUpgrade1Value = Upgrade1Value/1000000000000;
+		document.getElementById("BuyInfo1").innerHTML = "Click to spend points (" + LocalUpgrade1Value.toFixed(1) + "T points left)";
+	}
+	if (Upgrade2Value < 1000){
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + Upgrade2Value.toFixed(1) + " points left)";
+	}
+	else if (Upgrade2Value >= 1000 && Upgrade2Value < 1000000){
+		var LocalUpgrade2Value = Upgrade2Value/1000;
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "K points left)";
+	}
+	else if (Upgrade2Value >= 1000000 && Upgrade2Value < 1000000000){
+		var LocalUpgrade2Value = Upgrade2Value/1000000;
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "M points left)";
+	}
+	else if (Upgrade2Value >= 1000000000 && Upgrade2Value < 1000000000000){
+		var LocalUpgrade2Value = Upgrade2Value/1000000000;
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "B points left)";
+	}
+	else if (Upgrade2Value >= 1000000000000){
+		var LocalUpgrade2Value = Upgrade2Value/1000000000000;
+		document.getElementById("BuyInfo2").innerHTML = "Click to spend points (" + LocalUpgrade2Value.toFixed(1) + "T points left)";
+	}
+	if (Upgrade3Value < 1000){
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + Upgrade3Value.toFixed(1) + " points left)";
+	}
+	else if (Upgrade3Value >= 1000 && Upgrade3Value < 1000000){
+		var LocalUpgrade3Value = Upgrade3Value/1000;
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "K points left)";
+	}
+	else if (Upgrade3Value >= 1000000 && Upgrade3Value < 1000000000){
+		var LocalUpgrade3Value = Upgrade3Value/1000000;
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "M points left)";
+	}
+	else if (Upgrade3Value >= 1000000000 && Upgrade3Value < 1000000000000){
+		var LocalUpgrade3Value = Upgrade3Value/1000000000;
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "B points left)";
+	}
+	else if (Upgrade3Value >= 1000000000000){
+		var LocalUpgrade3Value = Upgrade3Value/1000000000000;
+		document.getElementById("BuyInfo3").innerHTML = "Click to spend points (" + LocalUpgrade3Value.toFixed(1) + "T points left)";
+	}
+	if (Upgrade4Value < 1000){
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + Upgrade4Value.toFixed(1) + " points left)";
+	}
+	else if (Upgrade4Value >= 1000 && Upgrade4Value < 1000000){
+		var LocalUpgrade4Value = Upgrade4Value/1000;
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "K points left)";
+	}
+	else if (Upgrade4Value >= 1000000 && Upgrade4Value < 1000000000){
+		var LocalUpgrade4Value = Upgrade4Value/1000000;
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "M points left)";
+	}
+	else if (Upgrade4Value >= 1000000000 && Upgrade4Value < 1000000000000){
+		var LocalUpgrade4Value = Upgrade4Value/1000000000;
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "B points left)";
+	}
+	else if (Upgrade4Value >= 1000000000000){
+		var LocalUpgrade4Value = Upgrade4Value/1000000000000;
+		document.getElementById("BuyInfo4").innerHTML = "Click to spend points (" + LocalUpgrade4Value.toFixed(1) + "T points left)";
+	}
+	if (XPToReach < 1000 && XPOwned < 1000){
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + XPToReach.toFixed(1) + " XP";
+	}
+	else if (XPToReach >= 1000 && XPToReach < 1000000 && XPOwned < 1000){
+		var LocalXPToReach = XPToReach/1000;
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "K XP";
+	}
+	else if (XPToReach >= 1000 && XPToReach < 1000000 && XPOwned >= 1000 && XPOwned < 1000000){
+		var LocalXPToReach = XPToReach/1000;
+		var LocalXPOwned = XPOwned/1000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "K XP";
+	}
+	else if (XPToReach >= 1000000 && XPToReach < 1000000000 && XPOwned < 1000){
+		var LocalXPToReach = XPToReach/1000000;
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "M XP";
+	}
+	else if (XPToReach >= 1000000 && XPToReach < 1000000000 && XPOwned >= 1000 && XPOwned < 1000000){
+		var LocalXPToReach = XPToReach/1000000;
+		var LocalXPOwned = XPOwned/1000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "M XP";
+	}
+	else if (XPToReach >= 1000000 && XPToReach < 1000000000 && XPOwned >= 1000000 && XPOwned < 1000000000){
+		var LocalXPToReach = XPToReach/1000000;
+		var LocalXPOwned = XPOwned/1000000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "M XP / " + LocalXPToReach.toFixed(1) + "M XP";
+	}
+	else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned < 1000){
+		var LocalXPToReach = XPToReach/1000000000;
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "B XP";
+	}
+	else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned >= 1000 && XPOwned < 1000000){
+		var LocalXPToReach = XPToReach/1000000000;
+		var LocalXPOwned = XPOwned/1000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "B XP";
+	}
+	else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned >= 1000000 && XPOwned < 1000000000){
+		var LocalXPToReach = XPToReach/1000000000;
+		var LocalXPOwned = XPOwned/1000000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "M XP / " + LocalXPToReach.toFixed(1) + "B XP";
+	}
+	else if (XPToReach >= 1000000000 && XPToReach < 1000000000000 && XPOwned >= 1000000000 && XPOwned < 1000000000000){
+		var LocalXPToReach = XPToReach/1000000000;
+		var LocalXPOwned = XPOwned/1000000000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "B XP / " + LocalXPToReach.toFixed(1) + "B XP";
+	}
+	else if (XPToReach >= 1000000000000 && XPOwned < 1000){
+		var LocalXPToReach = XPToReach/1000000000000;
+		document.getElementById("LvlProgress").title = XPOwned.toFixed(1) + " XP / " + LocalXPToReach.toFixed(1) + "T XP";
+	}
+	else if (XPToReach >= 1000000000000 && XPOwned >= 1000 && XPOwned < 1000000){
+		var LocalXPToReach = XPToReach/1000000000000;
+		var LocalXPOwned = XPOwned/1000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "K XP / " + LocalXPToReach.toFixed(1) + "T XP";
+	}
+	else if (XPToReach >= 1000000000000 && XPOwned >= 1000000 && XPOwned < 1000000000){
+		var LocalXPToReach = XPToReach/1000000000000;
+		var LocalXPOwned = XPOwned/1000000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "M XP / " + LocalXPToReach.toFixed(1) + "T XP";
+	}
+	else if (XPToReach >= 1000000000000 && XPOwned >= 1000000000 && XPOwned < 1000000000000){
+		var LocalXPToReach = XPToReach/1000000000000;
+		var LocalXPOwned = XPOwned/1000000000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "B XP / " + LocalXPToReach.toFixed(1) + "T XP";
+	}
+	else if (XPToReach >= 1000000000000 && XPOwned >= 1000000000000){
+		var LocalXPToReach = XPToReach/1000000000000;
+		var LocalXPOwned = XPOwned/1000000000000;
+		document.getElementById("LvlProgress").title = LocalXPOwned.toFixed(1) + "T XP / " + LocalXPToReach.toFixed(1) + "T XP";
+	}
+	if (Upgrade5Value < 1000){
+		document.getElementById("BuyInfo5").innerHTML = "Click to spend points (" + Upgrade5Value.toFixed(1) + " points left)";
+	}
+	else if (Upgrade5Value >= 1000 && Upgrade5Value < 1000000){
+		var LocalUpgrade5Value = Upgrade5Value/1000;
+		document.getElementById("BuyInfo5").innerHTML = "Click to spend points (" + LocalUpgrade5Value.toFixed(1) + "K points left)";
+	}
+	else if (Upgrade5Value >= 1000000 && Upgrade5Value < 1000000000){
+		var LocalUpgrade5Value = Upgrade5Value/1000000;
+		document.getElementById("BuyInfo5").innerHTML = "Click to spend points (" + LocalUpgrade5Value.toFixed(1) + "M points left)";
+	}
+	else if (Upgrade5Value >= 1000000000 && Upgrade5Value < 1000000000000){
+		var LocalUpgrade5Value = Upgrade5Value/1000000000;
+		document.getElementById("BuyInfo5").innerHTML = "Click to spend points (" + LocalUpgrade5Value.toFixed(1) + "B points left)";
+	}
+	else if (Upgrade5Value >= 1000000000000){
+		var LocalUpgrade5Value = Upgrade5Value/1000000000000;
+		document.getElementById("BuyInfo5").innerHTML = "Click to spend points (" + LocalUpgrade5Value.toFixed(1) + "T points left)";
+	}
+	if (Upgrade6Value < 1000){
+		document.getElementById("BuyInfo6").innerHTML = "Click to spend points (" + Upgrade6Value.toFixed(1) + " points left)";
+	}
+	else if (Upgrade6Value >= 1000 && Upgrade6Value < 1000000){
+		var LocalUpgrade6Value = Upgrade6Value/1000;
+		document.getElementById("BuyInfo6").innerHTML = "Click to spend points (" + LocalUpgrade6Value.toFixed(1) + "K points left)";
+	}
+	else if (Upgrade6Value >= 1000000 && Upgrade6Value < 1000000000){
+		var LocalUpgrade6Value = Upgrade6Value/1000000;
+		document.getElementById("BuyInfo6").innerHTML = "Click to spend points (" + LocalUpgrade6Value.toFixed(1) + "M points left)";
+	}
+	else if (Upgrade6Value >= 1000000000 && Upgrade6Value < 1000000000000){
+		var LocalUpgrade6Value = Upgrade6Value/1000000000;
+		document.getElementById("BuyInfo6").innerHTML = "Click to spend points (" + LocalUpgrade6Value.toFixed(1) + "B points left)";
+	}
+	else if (Upgrade6Value >= 1000000000000){
+		var LocalUpgrade6Value = Upgrade6Value/1000000000000;
+		document.getElementById("BuyInfo6").innerHTML = "Click to spend points (" + LocalUpgrade6Value.toFixed(1) + "T points left)";
+	}
+	if (FillBonus < 1000){
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + FillBonus.toFixed(1) + " points";
+	}
+	else if (FillBonus >= 1000 && FillBonus < 1000000){
+		var LocalFillBonus = FillBonus/1000;
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + LocalFillBonus.toFixed(1) + "K points";
+	}
+	else if (FillBonus >= 1000000 && FillBonus < 1000000000){
+		var LocalFillBonus = FillBonus/1000000;
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + LocalFillBonus.toFixed(1) + "M points";
+	}
+	else if (FillBonus >= 1000000000 && FillBonus < 1000000000000){
+		var LocalFillBonus = FillBonus/1000000000;
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + LocalFillBonus.toFixed(1) + "B points";
+	}
+	else if (FillBonus >= 1000000000000){
+		var LocalFillBonus = FillBonus/1000000000000;
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + LocalFillBonus.toFixed(1) + "T points";
+	}
+	if (MaxPoints < 1000){
+		document.getElementById("Upgrade4Add").innerHTML = "Increase maximum capacity x10 (current: " + MaxPoints +")";
+	}
+	else if (MaxPoints >= 1000 && MaxPoints < 1000000){
+		var LocalMaxPoints = MaxPoints/1000;
+		document.getElementById("Upgrade4Add").innerHTML = "Increase maximum capacity x10 (current: " + LocalMaxPoints.toFixed(1) +"K)";
+	}
+	else if (MaxPoints >= 1000000 && MaxPoints < 1000000000){
+		var LocalMaxPoints = MaxPoints/1000000;
+		document.getElementById("Upgrade4Add").innerHTML = "Increase maximum capacity x10 (current: " + LocalMaxPoints.toFixed(1) +"M)";
+	}
+	else if (MaxPoints >= 1000000000 && MaxPoints < 1000000000000){
+		var LocalMaxPoints = MaxPoints/1000000000;
+		document.getElementById("Upgrade4Add").innerHTML = "Increase maximum capacity x10 (current: " + LocalMaxPoints.toFixed(1) +"B)";
+	}
+	else if (MaxPoints >= 1000000000000){
+		var LocalMaxPoints = MaxPoints/1000000000000;
+		document.getElementById("Upgrade4Add").innerHTML = "Increase maximum capacity x10 (current: " + LocalMaxPoints.toFixed(1) +"T)";
+	}
 }
-document.getElementById("Popraw").onclick = function()
-{
-	document.getElementById("TabelaW").style = "display: none;";
-	document.getElementById("Container").style = "display: block;";
-	document.getElementById("Ocena").style = "display: block;";
-	document.getElementById("Marks").style = "display: block;";
-	document.getElementById("MarksAlt").style = "display: none;";
-	CzyNauka = 0;
-	Poprawianie();
+
+
+
+function Widths(width1, width2, width3, width4, width5, width6, width7, width8, width9, width10, ss){
+	var ss1 = ss + "1";
+	var ss2 = ss + "2";
+	var ss3 = ss + "3";
+	var ss4 = ss + "4";
+	var ss5 = ss + "5";
+	var ss6 = ss + "6";
+	var ss7 = ss + "7";
+	var ss8 = ss + "8";
+	var ss9 = ss + "9";
+	var ss10 = ss + "10";
+	document.getElementById(ss1).style = "width: " + width1 +"%;";
+	document.getElementById(ss2).style = "width: " + width2 +"%;";
+	document.getElementById(ss3).style = "width: " + width3 +"%;";
+	document.getElementById(ss4).style = "width: " + width4 +"%;";
+	document.getElementById(ss5).style = "width: " + width5 +"%;";
+	document.getElementById(ss6).style = "width: " + width6 +"%;";
+	document.getElementById(ss7).style = "width: " + width7 +"%;";
+	document.getElementById(ss8).style = "width: " + width8 +"%;";
+	document.getElementById(ss9).style = "width: " + width9 +"%;";
+	document.getElementById(ss10).style = "width: " + width10 +"%;";
 }
-document.getElementById("Wyniki").onclick = function()
-{
-	document.getElementById("TabelaW").style = "display: block;";
-	document.getElementById("Container").style = "display: none;";
-	document.getElementById("Ocena").style = "display: none;";
-	document.getElementById("MarksAlt").style = "display: none;";
-	document.getElementById("Marks").style = "display: none;";
-	document.getElementById("Option1").innerHTML = 'Poprzednia ocena:<br /><div id="OMarkA" title="null"></div>';
-	MarkOff();
-	CzyNauka = 0;
-	CzyPopraw = 0;
-	GamaOcena = 0;
-	Gamai = 0;
-	Gamau = 0;
+
+
+
+document.getElementById("Boost").onclick = function(){
+	document.getElementById("Boost").style = "color: #f8ff00;";
+	SpeedAfterBoost = Speed * BoostStrenght;
+	NumbersConverter();
+	function Timeout(){
+		document.getElementById("Boost").style = "color: #e76666;";
+		SpeedAfterBoost = 0;
+		NumbersConverter();
+	} setTimeout(Timeout, BoostTime);
 }
-function MarkOff()
-{
-	document.getElementById("Mark1").style = "border: 2px solid #323232;";
-	document.getElementById("Mark2").style = "border: 2px solid #323232;";
-	document.getElementById("Mark3").style = "border: 2px solid #323232;";
-	document.getElementById("Mark4").style = "border: 2px solid #323232;";
-	document.getElementById("Mark5").style = "border: 2px solid #323232;";
-	document.getElementById("Mark6").style = "border: 2px solid #323232;";
-	document.getElementById("Mark7").style = "border: 2px solid #323232;";
-	document.getElementById("Mark8").style = "border: 2px solid #323232;";
-	document.getElementById("Mark9").style = "border: 2px solid #323232;";
-	document.getElementById("Mark10").style = "border: 2px solid #323232;";
-	document.getElementById("Mark11").style = "border: 2px solid #323232;";
-	document.getElementById("Mark12").style = "border: 2px solid #323232;";
-	document.getElementById("Mark13").style = "border: 2px solid #323232;";
-	document.getElementById("Mark14").style = "border: 2px solid #323232;";
-	document.getElementById("Mark15").style = "border: 2px solid #323232;";
-	document.getElementById("Mark16").style = "border: 2px solid #323232;";
-	document.getElementById("Mark17").style = "border: 2px solid #323232;";
-	document.getElementById("Mark18").style = "border: 2px solid #323232;";
-}
-function Uczenie()
-{
-	Gamai = 0;
-	Gamau = 0;
-	GamaOcena = 0;
-	MarkOff();
-	for (let i=0; i<Gamy.length; i++)
-	{
-		for (let u=1; u<Gamy[i].length; u++)
-		{
-			if (Gamy[i][u][1] == 0)
-			{
-				LicznikNauka = LicznikNauka + 1;
-			} else{}
+
+
+
+document.getElementById("Upgrade1").onclick = function() {
+	if (Upgrade1Value <= Points){
+		SpeedforUpgrade1 += Upgrade1SpeedAdd;
+		Speed += SpeedforUpgrade1;
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su");
+		XPOwned += Upgrade1Value/2;
+		Points -= Upgrade1Value;
+		Upgrade1Count += 1;
+		Upgrade1Cost = 5*Math.pow(1.09, Upgrade1Count);
+		Upgrade1Value = Upgrade1Cost;
+		Upgrade1Buy = 0;
+		document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + (Upgrade1Count+1) +":";
+		if (Upgrade1Count % 10 == 0){
+			SpeedforUpgrade1 = SpeedforUpgrade1*2;
+			Upgrade1SpeedAdd = Upgrade1SpeedAdd*2;
+			Speed += SpeedforUpgrade1;
+			document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " Points Per Minute";
 		}
 	}
-	if (LicznikNauka >= 1)
-	{
-		var Losowanie = Math.floor(Math.random()*LicznikNauka+1);
-		LicznikNauka = 0;
-		for (let i=0; i<Gamy.length; i++)
-		{
-			for (let u=1; u<Gamy[i].length; u++)
-			{
-				if (Gamy[i][u][1] == 0)
-				{
-					LicznikNauka = LicznikNauka + 1;
-					if (Losowanie == LicznikNauka)
-					{
-						document.getElementById("OptionMain").innerHTML = "<b>" + Gamy[i][0] + "</b><br />" + Gamy[i][u][2];
-						Gamai = i;
-						Gamau = u;
-					} else{}
-				} else{}
+	else if (Points < Upgrade1Value){
+		XPOwned += Points/2;
+		Upgrade1Buy += Points;
+		Upgrade1Value -= Points;
+		Points = 0;
+	}
+	Upgrade1ProgressF();
+	CountLevel();
+	NumbersConverter();
+}
+
+
+
+function Upgrade1ProgressF(){
+	AlternativeUpgrade1Cost = Upgrade1Cost/10;
+	AlternativeUpgrade1Cost2 = Upgrade1Cost/5;
+	AlternativeUpgrade1Cost3 = (Upgrade1Cost/10) * 3;
+	AlternativeUpgrade1Cost4 = (Upgrade1Cost/10) * 4;
+	AlternativeUpgrade1Cost5 = Upgrade1Cost/2;
+	AlternativeUpgrade1Cost6 = (Upgrade1Cost/10) * 6;
+	AlternativeUpgrade1Cost7 = (Upgrade1Cost/10) * 7;
+	AlternativeUpgrade1Cost8 = (Upgrade1Cost/10) * 8;
+	AlternativeUpgrade1Cost9 = (Upgrade1Cost/10) * 9;
+	if (Upgrade1Buy <= AlternativeUpgrade1Cost){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width1 = LocalValue*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost2 && Upgrade1Buy > AlternativeUpgrade1Cost){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width2 = (LocalValue*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost3 && Upgrade1Buy > AlternativeUpgrade1Cost2){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width3 = (LocalValue*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost4 && Upgrade1Buy > AlternativeUpgrade1Cost3){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width4 = (LocalValue*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost5 && Upgrade1Buy > AlternativeUpgrade1Cost4){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width5 = (LocalValue*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost6 && Upgrade1Buy > AlternativeUpgrade1Cost5){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width6 = (LocalValue*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost7 && Upgrade1Buy > AlternativeUpgrade1Cost6){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width7 = (LocalValue*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost8 && Upgrade1Buy > AlternativeUpgrade1Cost7){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width8 = (LocalValue*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= AlternativeUpgrade1Cost9 && Upgrade1Buy > AlternativeUpgrade1Cost8){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width9 = (LocalValue*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su");
+	}
+	else if (Upgrade1Buy <= Upgrade1Cost && Upgrade1Buy > AlternativeUpgrade1Cost9){
+		var LocalValue = Upgrade1Buy / Upgrade1Cost; 
+		var width10 = (LocalValue*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su");
+	}
+	else if (Upgrade1Buy >= Upgrade1Cost){
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su");
+	}
+}
+
+
+
+document.getElementById("Upgrade2").onclick = function(){
+	if (Upgrade2Value <= Points){
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su2");
+		XPOwned += Upgrade2Value/2;
+		Points -= Upgrade2Value;
+		Upgrade2Count += 1;
+		Upgrade2Cost = 20*Math.pow(1.21, Upgrade2Count);
+		Upgrade2Value = Upgrade2Cost;
+		Upgrade2Buy = 0;
+		BoostTime += 100;
+		var LocalBoostTime = BoostTime/1000;
+		var LocalBoostStrenght = BoostStrenght + 1;
+		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
+		document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + (Upgrade2Count+1) +":";
+	}
+	else if (Upgrade2Value > Points){
+		XPOwned += Points/2;
+		Upgrade2Buy += Points;
+		Upgrade2Value -= Points;
+		Points = 0;
+	}
+	Upgrade2ProgressF();
+	CountLevel();
+	NumbersConverter();
+}
+
+
+
+function Upgrade2ProgressF(){
+	AlternativeUpgrade2Cost = Upgrade2Cost/10;
+	AlternativeUpgrade2Cost2 = Upgrade2Cost/5;
+	AlternativeUpgrade2Cost3 = (Upgrade2Cost/10) * 3;
+	AlternativeUpgrade2Cost4 = (Upgrade2Cost/10) * 4;
+	AlternativeUpgrade2Cost5 = Upgrade2Cost/2;
+	AlternativeUpgrade2Cost6 = (Upgrade2Cost/10) * 6;
+	AlternativeUpgrade2Cost7 = (Upgrade2Cost/10) * 7;
+	AlternativeUpgrade2Cost8 = (Upgrade2Cost/10) * 8;
+	AlternativeUpgrade2Cost9 = (Upgrade2Cost/10) * 9;
+	if (Upgrade2Buy <= AlternativeUpgrade2Cost){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width1 = LocalValue*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost2 && Upgrade2Buy > AlternativeUpgrade2Cost){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width2 = (LocalValue*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost3 && Upgrade2Buy > AlternativeUpgrade2Cost2){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width3 = (LocalValue*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost4 && Upgrade2Buy > AlternativeUpgrade2Cost3){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width4 = (LocalValue*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost5 && Upgrade2Buy > AlternativeUpgrade2Cost4){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width5 = (LocalValue*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost6 && Upgrade2Buy > AlternativeUpgrade2Cost5){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width6 = (LocalValue*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost7 && Upgrade2Buy > AlternativeUpgrade2Cost6){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width7 = (LocalValue*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost8 && Upgrade2Buy > AlternativeUpgrade2Cost7){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width8 = (LocalValue*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= AlternativeUpgrade2Cost9 && Upgrade2Buy > AlternativeUpgrade2Cost8){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width9 = (LocalValue*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su2");
+	}
+	else if (Upgrade2Buy <= Upgrade2Cost && Upgrade2Buy > AlternativeUpgrade2Cost9){
+		var LocalValue = Upgrade2Buy / Upgrade2Cost; 
+		var width10 = (LocalValue*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su2");
+	}
+	else if (Upgrade2Buy >= Upgrade2Cost){
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su2");
+	}
+}
+
+
+
+document.getElementById("Upgrade3").onclick = function(){
+	if (Upgrade3Value <= Points){
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su3");
+		XPOwned += Upgrade3Value/2;
+		Points -= Upgrade3Value;
+		Upgrade3Count += 1;
+		Upgrade3Cost = 30*Math.pow(1.22, Upgrade3Count);
+		Upgrade3Value = Upgrade3Cost;
+		Upgrade3Buy = 0;
+		BoostStrenght += 0.01;
+		var LocalBoostTime = BoostTime/1000;
+		var LocalBoostStrenght = BoostStrenght + 1;
+		document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
+		document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + (Upgrade3Count+1) +":";
+	}
+	else if (Upgrade3Value > Points){
+		XPOwned += Points/2;
+		Upgrade3Buy += Points;
+		Upgrade3Value -= Points;
+		Points = 0;
+	}
+	Upgrade3ProgressF();
+	CountLevel();
+	NumbersConverter();
+}
+
+
+
+function Upgrade3ProgressF(){
+	AlternativeUpgrade3Cost = Upgrade3Cost/10;
+	AlternativeUpgrade3Cost2 = Upgrade3Cost/5;
+	AlternativeUpgrade3Cost3 = (Upgrade3Cost/10) * 3;
+	AlternativeUpgrade3Cost4 = (Upgrade3Cost/10) * 4;
+	AlternativeUpgrade3Cost5 = Upgrade3Cost/2;
+	AlternativeUpgrade3Cost6 = (Upgrade3Cost/10) * 6;
+	AlternativeUpgrade3Cost7 = (Upgrade3Cost/10) * 7;
+	AlternativeUpgrade3Cost8 = (Upgrade3Cost/10) * 8;
+	AlternativeUpgrade3Cost9 = (Upgrade3Cost/10) * 9;
+	if (Upgrade3Buy <= AlternativeUpgrade3Cost){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width1 = LocalValue*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost2 && Upgrade3Buy > AlternativeUpgrade3Cost){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width2 = (LocalValue*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost3 && Upgrade3Buy > AlternativeUpgrade3Cost2){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width3 = (LocalValue*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost4 && Upgrade3Buy > AlternativeUpgrade3Cost3){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width4 = (LocalValue*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost5 && Upgrade3Buy > AlternativeUpgrade3Cost4){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width5 = (LocalValue*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost6 && Upgrade3Buy > AlternativeUpgrade3Cost5){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width6 = (LocalValue*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost7 && Upgrade3Buy > AlternativeUpgrade3Cost6){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width7 = (LocalValue*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost8 && Upgrade3Buy > AlternativeUpgrade3Cost7){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width8 = (LocalValue*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= AlternativeUpgrade3Cost9 && Upgrade3Buy > AlternativeUpgrade3Cost8){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width9 = (LocalValue*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su3");
+	}
+	else if (Upgrade3Buy <= Upgrade3Cost && Upgrade3Buy > AlternativeUpgrade3Cost9){
+		var LocalValue = Upgrade3Buy / Upgrade3Cost; 
+		var width10 = (LocalValue*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su3");
+	}
+	else if (Upgrade3Buy >= Upgrade3Cost){
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su3");
+	}
+}
+
+
+
+document.getElementById("Upgrade4").onclick = function() {
+	if (Upgrade4Value <= Points){
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su4");
+		XPOwned += Upgrade4Value/2;
+		Points -= Upgrade4Value;
+		Upgrade4Count += 1;
+		Upgrade4Cost = 50*Math.pow(10, Upgrade4Count);
+		Upgrade4Value = Upgrade4Cost;
+		Upgrade4Buy = 0;
+		MaxPoints = MaxPoints*10;
+		document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + (Upgrade4Count+1) +":";
+		AlternativePoints = MaxPoints/10;
+		AlternativePoints2 = MaxPoints/5;
+		AlternativePoints3 = (MaxPoints/10) * 3;
+		AlternativePoints4 = (MaxPoints/10) * 4;
+		AlternativePoints5 = MaxPoints/2;
+		AlternativePoints6 = (MaxPoints/10) * 6;
+		AlternativePoints7 = (MaxPoints/10) * 7;
+		AlternativePoints8 = (MaxPoints/10) * 8;
+		AlternativePoints9 = (MaxPoints/10) * 9;
+	}
+	else if (Upgrade4Value > Points){
+		XPOwned += Points/2;
+		Upgrade4Buy += Points;
+		Upgrade4Value -= Points;
+		Points = 0;
+	}
+	Upgrade4ProgressF();
+	CountLevel();
+	NumbersConverter();
+}
+
+
+
+function Upgrade4ProgressF(){
+	AlternativeUpgrade4Cost = Upgrade4Cost/10;
+	AlternativeUpgrade4Cost2 = Upgrade4Cost/5;
+	AlternativeUpgrade4Cost3 = (Upgrade4Cost/10) * 3;
+	AlternativeUpgrade4Cost4 = (Upgrade4Cost/10) * 4;
+	AlternativeUpgrade4Cost5 = Upgrade4Cost/2;
+	AlternativeUpgrade4Cost6 = (Upgrade4Cost/10) * 6;
+	AlternativeUpgrade4Cost7 = (Upgrade4Cost/10) * 7;
+	AlternativeUpgrade4Cost8 = (Upgrade4Cost/10) * 8;
+	AlternativeUpgrade4Cost9 = (Upgrade4Cost/10) * 9;
+	if (Upgrade4Buy <= AlternativeUpgrade4Cost){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width1 = LocalValue*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost2 && Upgrade4Buy > AlternativeUpgrade4Cost){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width2 = (LocalValue*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost3 && Upgrade4Buy > AlternativeUpgrade4Cost2){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width3 = (LocalValue*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost4 && Upgrade4Buy > AlternativeUpgrade4Cost3){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width4 = (LocalValue*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost5 && Upgrade4Buy > AlternativeUpgrade4Cost4){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width5 = (LocalValue*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost6 && Upgrade4Buy > AlternativeUpgrade4Cost5){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width6 = (LocalValue*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost7 && Upgrade4Buy > AlternativeUpgrade4Cost6){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width7 = (LocalValue*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost8 && Upgrade4Buy > AlternativeUpgrade4Cost7){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width8 = (LocalValue*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= AlternativeUpgrade4Cost9 && Upgrade4Buy > AlternativeUpgrade4Cost8){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width9 = (LocalValue*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su4");
+	}
+	else if (Upgrade4Buy <= Upgrade4Cost && Upgrade4Buy > AlternativeUpgrade4Cost9){
+		var LocalValue = Upgrade4Buy / Upgrade4Cost; 
+		var width10 = (LocalValue*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su4");
+	}
+	else if (Upgrade4Buy >= Upgrade4Cost){
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su4");
+	}
+}
+
+
+
+document.getElementById("Upgrade5").onclick = function() {
+	if (Upgrade5Value <= Points){
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su5");
+		XPOwned += Upgrade5Value/2;
+		Points -= Upgrade5Value;
+		Upgrade5Count += 1;
+		Upgrade5Cost = 200*Math.pow(1.12, Upgrade5Count);
+		Upgrade5Value = Upgrade5Cost;
+		Upgrade5Buy = 0;
+		FillBonus += 1/10*FillBonus;
+		document.getElementById("Upgrade5Level").innerHTML = "Lvl " + Upgrade5Count + ", progress to lvl " + (Upgrade5Count+1) +":";
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + FillBonus.toFixed(1) + " points";
+	}
+	else if (Upgrade5Value > Points){
+		XPOwned += Points/2;
+		Upgrade5Buy += Points;
+		Upgrade5Value -= Points;
+		Points = 0;
+	}
+	Upgrade5ProgressF();
+	CountLevel();
+	NumbersConverter();
+}
+
+
+
+function Upgrade5ProgressF(){
+	AlternativeUpgrade5Cost = Upgrade5Cost/10;
+	AlternativeUpgrade5Cost2 = Upgrade5Cost/5;
+	AlternativeUpgrade5Cost3 = (Upgrade5Cost/10) * 3;
+	AlternativeUpgrade5Cost4 = (Upgrade5Cost/10) * 4;
+	AlternativeUpgrade5Cost5 = Upgrade5Cost/2;
+	AlternativeUpgrade5Cost6 = (Upgrade5Cost/10) * 6;
+	AlternativeUpgrade5Cost7 = (Upgrade5Cost/10) * 7;
+	AlternativeUpgrade5Cost8 = (Upgrade5Cost/10) * 8;
+	AlternativeUpgrade5Cost9 = (Upgrade5Cost/10) * 9;
+	if (Upgrade5Buy <= AlternativeUpgrade5Cost){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width1 = LocalValue*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost2 && Upgrade5Buy > AlternativeUpgrade5Cost){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width2 = (LocalValue*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost3 && Upgrade5Buy > AlternativeUpgrade5Cost2){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width3 = (LocalValue*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost4 && Upgrade5Buy > AlternativeUpgrade5Cost3){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width4 = (LocalValue*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost5 && Upgrade5Buy > AlternativeUpgrade5Cost4){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width5 = (LocalValue*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost6 && Upgrade5Buy > AlternativeUpgrade5Cost5){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width6 = (LocalValue*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost7 && Upgrade5Buy > AlternativeUpgrade5Cost6){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width7 = (LocalValue*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost8 && Upgrade5Buy > AlternativeUpgrade5Cost7){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width8 = (LocalValue*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= AlternativeUpgrade5Cost9 && Upgrade5Buy > AlternativeUpgrade5Cost8){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width9 = (LocalValue*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su5");
+	}
+	else if (Upgrade5Buy <= Upgrade5Cost && Upgrade5Buy > AlternativeUpgrade5Cost9){
+		var LocalValue = Upgrade5Buy / Upgrade5Cost; 
+		var width10 = (LocalValue*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su5");
+	}
+	else if (Upgrade5Buy >= Upgrade5Cost){
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su5");
+	}
+}
+
+
+
+document.getElementById("Upgrade6").onclick = function(){
+	if (Upgrade6Value <= Points){
+		Widths(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su6");
+		XPOwned += Upgrade6Value/2;
+		Points -= Upgrade6Value;
+		Upgrade6Count += 1;
+		Upgrade6Cost = 5000*Math.pow(1.15, Upgrade6Count);
+		Upgrade6Value = Upgrade6Cost;
+		Upgrade6Buy = 0;
+		FillingTime -= 0.1;
+		document.getElementById("Upgrade6Level").innerHTML = "Lvl " + Upgrade6Count + ", progress to lvl " + (Upgrade6Count+1) +":";
+		document.getElementById("ps").title = "every " + FillingTime.toFixed(1) + " seconds gives " + FillBonus.toFixed(1) + " points";
+		UpgradesUnlock();
+		CountLevel();
+	}
+	else if (Upgrade6Value > Points){
+		XPOwned += Points/2;
+		Upgrade6Buy += Points;
+		Upgrade6Value -= Points;
+		Points = 0;
+	}
+	Upgrade6ProgressF();
+	CountLevel();
+	NumbersConverter();
+}
+
+
+
+function Upgrade6ProgressF(){
+	AlternativeUpgrade6Cost = Upgrade6Cost/10;
+	AlternativeUpgrade6Cost2 = Upgrade6Cost/5;
+	AlternativeUpgrade6Cost3 = (Upgrade6Cost/10) * 3;
+	AlternativeUpgrade6Cost4 = (Upgrade6Cost/10) * 4;
+	AlternativeUpgrade6Cost5 = Upgrade6Cost/2;
+	AlternativeUpgrade6Cost6 = (Upgrade6Cost/10) * 6;
+	AlternativeUpgrade6Cost7 = (Upgrade6Cost/10) * 7;
+	AlternativeUpgrade6Cost8 = (Upgrade6Cost/10) * 8;
+	AlternativeUpgrade6Cost9 = (Upgrade6Cost/10) * 9;
+	if (Upgrade6Buy <= AlternativeUpgrade6Cost){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width1 = LocalValue*1000;
+		Widths(width1, 0, 0, 0, 0, 0, 0, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost2 && Upgrade6Buy > AlternativeUpgrade6Cost){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width2 = (LocalValue*1000) - 100;
+		Widths(100, width2, 0, 0, 0, 0, 0, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost3 && Upgrade6Buy > AlternativeUpgrade6Cost2){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width3 = (LocalValue*1000) - 200;
+		Widths(100, 100, width3, 0, 0, 0, 0, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost4 && Upgrade6Buy > AlternativeUpgrade6Cost3){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width4 = (LocalValue*1000) - 300;
+		Widths(100, 100, 100, width4, 0, 0, 0, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost5 && Upgrade6Buy > AlternativeUpgrade6Cost4){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width5 = (LocalValue*1000) - 400;
+		Widths(100, 100, 100, 100, width5, 0, 0, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost6 && Upgrade6Buy > AlternativeUpgrade6Cost5){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width6 = (LocalValue*1000) - 500;
+		Widths(100, 100, 100, 100, 100, width6, 0, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost7 && Upgrade6Buy > AlternativeUpgrade6Cost6){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width7 = (LocalValue*1000) - 600;
+		Widths(100, 100, 100, 100, 100, 100, width7, 0, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost8 && Upgrade6Buy > AlternativeUpgrade6Cost7){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width8 = (LocalValue*1000) - 700;
+		Widths(100, 100, 100, 100, 100, 100, 100, width8, 0, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= AlternativeUpgrade6Cost9 && Upgrade6Buy > AlternativeUpgrade6Cost8){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width9 = (LocalValue*1000) - 800;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, width9, 0, "s2su6");
+	}
+	else if (Upgrade6Buy <= Upgrade6Cost && Upgrade6Buy > AlternativeUpgrade6Cost9){
+		var LocalValue = Upgrade6Buy / Upgrade6Cost; 
+		var width10 = (LocalValue*1000) - 900;
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, width10, "s2su6");
+	}
+	else if (Upgrade6Buy >= Upgrade6Cost){
+		Widths(100, 100, 100, 100, 100, 100, 100, 100, 100, 100, "s2su6");
+	}
+}
+
+
+
+function PerSecond(){
+	if (LvlCount >= 3){
+		var LocalPoints = MaxPoints - FillBonus;
+		if (Points < MaxPoints && LocalPoints > Points){
+			if (FilledPerSecond < 1){
+				var LocalFilling = 1/FillingTime;
+				FilledPerSecond += LocalFilling/100;
+				var LocalWidth = FilledPerSecond*100;
+				document.getElementById("ps2").style = "width: " + LocalWidth + "%;";
+			}
+			else if (FilledPerSecond >= 1){
+				Points += FillBonus;
+				FilledPerSecond = 0;
+				document.getElementById("ps2").style = "width: 0%;";
+				document.getElementById("BonusText").style = "display: block;"
+				if (FillBonus < 1000){
+					document.getElementById("BonusText").innerHTML = "+ " + FillBonus.toFixed(1) + " Points";
+				}
+				else if (FillBonus >= 1000 && FillBonus < 1000000){
+					var LocalFillBonus = FillBonus/1000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalFillBonus.toFixed(1) + "K 	Points";
+				}
+				else if (FillBonus >= 1000000 && FillBonus < 1000000000){
+					var LocalFillBonus = FillBonus/1000000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalFillBonus.toFixed(1) + "M Points";
+				}
+				else if (FillBonus >= 1000000000 && FillBonus < 1000000000000){
+					var LocalFillBonus = FillBonus/1000000000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalFillBonus.toFixed(1) + "B Points";
+				}
+				else if (FillBonus >= 1000000000000){
+					var LocalFillBonus = FillBonus/1000000000000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalFillBonus.toFixed(1) + "T Points";
+				}
+				function AnimationBonusOut(){
+					document.getElementById("BonusText").innerHTML = "";
+					document.getElementById("BonusText").style = "display: none;"
+				}setTimeout(AnimationBonusOut, 700);
 			}
 		}
-		LicznikNauka = 0;
-		Losowanie = 0;
-		
-		CzyNauka = 1;
-	} 
-	else
-	{
-		document.getElementById("OptionMain").innerHTML = '<font size="5">Wszystko zaliczone<br />czas na poprawki</font>';
-		document.getElementById("MarksAlt").style = "display: block;";
-		document.getElementById("Marks").style = "display: none;";
-	}
-}
-
-
-function Poprawianie()
-{
-	Gamai = 0;
-	Gamau = 0;
-	GamaOcena = 0;
-	MarkOff();
-	for (let i=0; i<Gamy.length; i++)
-	{
-		for (let u=1; u<Gamy[i].length; u++)
-		{
-			if (Gamy[i][u][1] >= 1 && Gamy[i][u][1] < 18)
-			{
-				LicznikNauka = LicznikNauka + 1;
-			} else{}
-		}
-	}
-	if (LicznikNauka >= 1)
-	{
-		var Losowanie = Math.floor(Math.random()*LicznikNauka+1);
-		LicznikNauka = 0;
-		for (let i=0; i<Gamy.length; i++)
-		{
-			for (let u=1; u<Gamy[i].length; u++)
-			{
-				if (Gamy[i][u][1] >= 1 && Gamy[i][u][1] < 18)
-				{
-					LicznikNauka = LicznikNauka + 1;
-					if (Losowanie == LicznikNauka)
-					{
-						document.getElementById("OptionMain").innerHTML = "<b>" + Gamy[i][0] + "</b><br />" + Gamy[i][u][2];
-						Gamai = i;
-						Gamau = u;
-						PoprzedniaOcena = Gamy[i][u][1];
-						Kolory();
-						document.getElementById("Option1").innerHTML = 'Poprzednia ocena:<br /><div id="' + OMark + '" title="' + Title + '"></div>';
-					} else{}
-				} else{}
+		else if (Points < MaxPoints && LocalPoints <= Points){
+			if (FilledPerSecond < 1){
+				var LocalFilling = 1/FillingTime;
+				FilledPerSecond += LocalFilling/100;
+				var LocalWidth = FilledPerSecond*100;
+				document.getElementById("ps2").style = "width: " + LocalWidth + "%;";
+			}
+			else if (FilledPerSecond >= 1){
+				var LocalPoints = MaxPoints - FillBonus;
+				var LocalBonus = (MaxPoints - LocalPoints) - (Points - LocalPoints);
+				Points += FillBonus;
+				FilledPerSecond = 0;
+				document.getElementById("ps2").style = "width: 0%;";
+				document.getElementById("BonusText").style = "display: block;"
+				if (LocalBonus < 1000){
+					document.getElementById("BonusText").innerHTML = "+ " + LocalBonus.toFixed(1) + " Points";
+				}
+				else if (LocalBonus >= 1000 && LocalBonus < 1000000){
+					var LocalLocalBonus = LocalBonus/1000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalLocalBonus.toFixed(1) + "K Points";
+				}
+				else if (LocalBonus >= 1000000 && LocalBonus < 1000000000){
+					var LocalLocalBonus = LocalBonus/1000000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalLocalBonus.toFixed(1) + "M Points";
+				}
+				else if (LocalBonus >= 1000000000 && LocalBonus < 1000000000000){
+					var LocalLocalBonus = LocalBonus/1000000000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalLocalBonus.toFixed(1) + "B Points";
+				}
+				else if (LocalBonus >= 1000000000000){
+					var LocalLocalBonus = LocalBonus/1000000000000;
+					document.getElementById("BonusText").innerHTML = "+ " + LocalLocalBonus.toFixed(1) + "T Points";
+				}
+				function AnimationBonusOut(){
+					document.getElementById("BonusText").innerHTML = "";
+					document.getElementById("BonusText").style = "display: none;"
+				}setTimeout(AnimationBonusOut, 700);
 			}
 		}
-		PoprzedniaOcena = 0;
-		LicznikNauka = 0;
-		Losowanie = 0;
-		
-		CzyPopraw = 1;
-	} 
-	else
-	{
-		document.getElementById("OptionMain").innerHTML = '<font size="6">Wszędzie 18pkt<br />Gratulacje!!!</font>';
-		document.getElementById("Option1").innerHTML = 'Poprzednia ocena:<br /><div id="OMarkA" title="null"></div>';
-		document.getElementById("MarksAlt").style = "display: block;";
-		document.getElementById("Marks").style = "display: none;";
-		PoprzedniaOcena = 0;
-		LicznikNauka = 0;
+		else if (Points >= MaxPoints){
+			if (FilledPerSecond < 1){
+				var LocalFilling = 1/FillingTime;
+				FilledPerSecond += LocalFilling/100;
+				var LocalWidth = FilledPerSecond*100;
+				document.getElementById("ps2").style = "width: " + LocalWidth + "%;";
+			}
+			else if (FilledPerSecond >= 1){
+				Points += FillBonus;
+				FilledPerSecond = 0;
+				document.getElementById("ps2").style = "width: 0%;";
+				document.getElementById("BonusText").style = "display: block;"
+				document.getElementById("BonusText").innerHTML = "+ 0.0 Points";
+				function AnimationBonusOut(){
+					document.getElementById("BonusText").innerHTML = "";
+					document.getElementById("BonusText").style = "display: none;"
+				}setTimeout(AnimationBonusOut, 700);
+			}
+		}
 	}
+	else{}
+}setInterval(PerSecond, 10);
+
+
+
+function CountLevel(){
+	if (XPOwned == XPToReach){
+		XPOwned = 0;
+		LvlCount += 1;
+		XPToReach = 50*Math.pow(1.5, LvlCount)
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("lvlup").style = "display: block;";
+		function lvlupTimeout(){
+			document.getElementById("lvlup").style = "display: none;";
+		}setTimeout(lvlupTimeout, 1500);
+	}
+	else if (XPOwned > XPToReach){
+		XPOwned -= XPToReach;
+		LvlCount += 1;
+		XPToReach = 50*Math.pow(1.5, LvlCount)
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+		document.getElementById("lvlup").style = "display: block;";
+		function lvlupTimeout(){
+			document.getElementById("lvlup").style = "display: none;";
+		}setTimeout(lvlupTimeout, 1500);
+	}
+	else if (XPOwned < XPToReach){
+		var LocalWidth = (XPOwned / XPToReach) * 100;
+		document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+		document.getElementById("LvlProgressBar").style = "width: " + LocalWidth + "%;";
+	}
+	NumbersConverter();
+	UpgradesUnlock();
 }
 
 
 
-document.getElementById("Mark1").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 1)
-	{
-		MarkOff();
-		document.getElementById("Mark1").style = "border: 2px solid #5376ff;";
-		GamaOcena = 1;
+function UpgradesUnlock(){
+	if (LvlCount >= 3 && LvlCount < 5){
+		document.getElementById("PerSecondsNo").style = "display: none;";
+		document.getElementById("PerSeconds").style = "display: block;";
+		document.getElementById("Upgrade5No").style = "display: block;";
+		document.getElementById("Upgrade5").style = "display: none;";
+		document.getElementById("Upgrade6No").style = "display: block;";
+		document.getElementById("Upgrade6").style = "display: none;";
 	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 1)
-	{
-		document.getElementById("Mark1").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
+	else if (LvlCount >= 5 && LvlCount < 15){
+		document.getElementById("Upgrade5No").style = "display: none;";
+		document.getElementById("Upgrade5").style = "display: block;";
+		document.getElementById("PerSecondsNo").style = "display: none;";
+		document.getElementById("PerSeconds").style = "display: block;";
+		document.getElementById("Upgrade6No").style = "display: block;";
+		document.getElementById("Upgrade6").style = "display: none;";
+	}
+	else if (LvlCount >= 15){
+		document.getElementById("Upgrade5No").style = "display: none;";
+		document.getElementById("Upgrade5").style = "display: block;";
+		document.getElementById("Upgrade6No").style = "display: none;";
+		document.getElementById("Upgrade6").style = "display: block;";
+		document.getElementById("PerSecondsNo").style = "display: none;";
+		document.getElementById("PerSeconds").style = "display: block;";
+	}
+	if (FillingTime == 5){
+		document.getElementById("Upgrade6").style = "display: none;";
+		document.getElementById("Upgrade6yes").style = "display: block;";
 	}
 }
-document.getElementById("Mark2").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 2)
-	{
-		MarkOff();
-		document.getElementById("Mark2").style = "border: 2px solid #5376ff;";
-		GamaOcena = 2;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 2)
-	{
-		document.getElementById("Mark2").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark3").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 3)
-	{
-		MarkOff();
-		document.getElementById("Mark3").style = "border: 2px solid #5376ff;";
-		GamaOcena = 3;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 3)
-	{
-		document.getElementById("Mark3").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark4").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 4)
-	{
-		MarkOff();
-		document.getElementById("Mark4").style = "border: 2px solid #5376ff;";
-		GamaOcena = 4;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 4)
-	{
-		document.getElementById("Mark4").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark5").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 5)
-	{
-		MarkOff();
-		document.getElementById("Mark5").style = "border: 2px solid #5376ff;";
-		GamaOcena = 5;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 5)
-	{
-		document.getElementById("Mark5").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark6").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 6)
-	{
-		MarkOff();
-		document.getElementById("Mark6").style = "border: 2px solid #5376ff;";
-		GamaOcena = 6;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 6)
-	{
-		document.getElementById("Mark6").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark7").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 7)
-	{
-		MarkOff();
-		document.getElementById("Mark7").style = "border: 2px solid #5376ff;";
-		GamaOcena = 7;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 7)
-	{
-		document.getElementById("Mark7").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark8").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 8)
-	{
-		MarkOff();
-		document.getElementById("Mark8").style = "border: 2px solid #5376ff;";
-		GamaOcena = 8;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 8)
-	{
-		document.getElementById("Mark8").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark9").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 9)
-	{
-		MarkOff();
-		document.getElementById("Mark9").style = "border: 2px solid #5376ff;";
-		GamaOcena = 9;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 9)
-	{
-		document.getElementById("Mark9").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark10").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 10)
-	{
-		MarkOff();
-		document.getElementById("Mark10").style = "border: 2px solid #5376ff;";
-		GamaOcena = 10;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 10)
-	{
-		document.getElementById("Mark10").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark11").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 11)
-	{
-		MarkOff();
-		document.getElementById("Mark11").style = "border: 2px solid #5376ff;";
-		GamaOcena = 11;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 11)
-	{
-		document.getElementById("Mark11").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark12").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 12)
-	{
-		MarkOff();
-		document.getElementById("Mark12").style = "border: 2px solid #5376ff;";
-		GamaOcena = 12;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 12)
-	{
-		document.getElementById("Mark12").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark13").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 13)
-	{
-		MarkOff();
-		document.getElementById("Mark13").style = "border: 2px solid #5376ff;";
-		GamaOcena = 13;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 13)
-	{
-		document.getElementById("Mark13").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark14").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 14)
-	{
-		MarkOff();
-		document.getElementById("Mark14").style = "border: 2px solid #5376ff;";
-		GamaOcena = 14;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 14)
-	{
-		document.getElementById("Mark14").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark15").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 15)
-	{
-		MarkOff();
-		document.getElementById("Mark15").style = "border: 2px solid #5376ff;";
-		GamaOcena = 15;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 15)
-	{
-		document.getElementById("Mark15").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark16").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 16)
-	{
-		MarkOff();
-		document.getElementById("Mark16").style = "border: 2px solid #5376ff;";
-		GamaOcena = 16;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 16)
-	{
-		document.getElementById("Mark16").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark17").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 17)
-	{
-		MarkOff();
-		document.getElementById("Mark17").style = "border: 2px solid #5376ff;";
-		GamaOcena = 17;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 17)
-	{
-		document.getElementById("Mark17").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-document.getElementById("Mark18").onclick = function()
-{
-	if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena != 18)
-	{
-		MarkOff();
-		document.getElementById("Mark18").style = "border: 2px solid #5376ff;";
-		GamaOcena = 18;
-	}
-	else if (CzyNauka == 1 || CzyPopraw == 1 && GamaOcena == 18)
-	{
-		document.getElementById("Mark18").style = "border: 2px solid #323232;";
-		GamaOcena = 0;
-	} else{}
-}
-
-
-
-
-document.getElementById("Option2").onclick = function()
-{
-	if (CzyNauka == 1 && GamaOcena >= 1)
-	{
-		Gamy[Gamai][Gamau][1] = GamaOcena;
-		var id = "T" + Gamy[Gamai][Gamau][0];
-		Kolory();
-		document.getElementById(id).style = "background-color: " + Kolor + ";";
-		document.getElementById(id).title = Title;
-		GamaOcena = 0;
-		save();
-		Uczenie();
-	} 
-	else if (CzyPopraw == 1 && GamaOcena >= 1)
-	{
-		Gamy[Gamai][Gamau][1] = GamaOcena;
-		var id = "T" + Gamy[Gamai][Gamau][0];
-		Kolory();
-		document.getElementById(id).style = "background-color: " + Kolor + ";";
-		document.getElementById(id).title = Title;
-		GamaOcena = 0;
-		save();
-		Poprawianie();
-	} else{}
-}
-function Kolory()
-{
-	if (GamaOcena == 1 || PoprzedniaOcena == 1)
-	{
-		Kolor = "#fd0200";
-		Title = "1/18";
-		OMark = "OMark1";
-	} 
-	else if (GamaOcena == 2 || PoprzedniaOcena == 2)
-	{
-		Kolor = "#e71f00";
-		Title = "2/18";
-		OMark = "OMark2";
-	}
-	else if (GamaOcena == 3 || PoprzedniaOcena == 3)
-	{
-		Kolor = "#dd2c00";
-		Title = "3/18";
-		OMark = "OMark3";
-	}
-	else if (GamaOcena == 4 || PoprzedniaOcena == 4)
-	{
-		Kolor = "#d23900";
-		Title = "4/18";
-		OMark = "OMark4";
-	}
-	else if (GamaOcena == 5 || PoprzedniaOcena == 5)
-	{
-		Kolor = "#c74500";
-		Title = "5/18";
-		OMark = "OMark5";
-	}
-	else if (GamaOcena == 6 || PoprzedniaOcena == 6)
-	{
-		Kolor = "#be5100";
-		Title = "6/18";
-		OMark = "OMark6";
-	}
-	else if (GamaOcena == 7 || PoprzedniaOcena == 7)
-	{
-		Kolor = "#b35e00";
-		Title = "7/18";
-		OMark = "OMark7";
-	}
-	else if (GamaOcena == 8 || PoprzedniaOcena == 8)
-	{
-		Kolor = "#aa6c00";
-		Title = "8/18";
-		OMark = "OMark8";
-	}
-	else if (GamaOcena == 9 || PoprzedniaOcena == 9)
-	{
-		Kolor = "#9f7700";
-		Title = "9/18";
-		OMark = "OMark9";
-	}
-	else if (GamaOcena == 10 || PoprzedniaOcena == 10)
-	{
-		Kolor = "#958400";
-		Title = "10/18";
-		OMark = "OMark10";
-	}
-	else if (GamaOcena == 11 || PoprzedniaOcena == 11)
-	{
-		Kolor = "#8b9100";
-		Title = "11/18";
-		OMark = "OMark11";
-	}
-	else if (GamaOcena == 12 || PoprzedniaOcena == 12)
-	{
-		Kolor = "#819e00";
-		Title = "12/18";
-		OMark = "OMark12";
-	}
-	else if (GamaOcena == 13 || PoprzedniaOcena == 13)
-	{
-		Kolor = "#77ab00";
-		Title = "13/18";
-		OMark = "OMark13";
-	}
-	else if (GamaOcena == 14 || PoprzedniaOcena == 14)
-	{
-		Kolor = "#6db800";
-		Title = "14/18";
-		OMark = "OMark14";
-	}
-	else if (GamaOcena == 15 || PoprzedniaOcena == 15)
-	{
-		Kolor = "#62c400";
-		Title = "15/18";
-		OMark = "OMark15";
-	}
-	else if (GamaOcena == 16 || PoprzedniaOcena == 16)
-	{
-		Kolor = "#59d100";
-		Title = "16/18";
-		OMark = "OMark16";
-	}
-	else if (GamaOcena == 17 || PoprzedniaOcena == 17)
-	{
-		Kolor = "#4edf00";
-		Title = "17/18";
-		OMark = "OMark17";
-	}
-	else if (GamaOcena == 18 || PoprzedniaOcena == 18)
-	{
-		Kolor = "#37fa00";
-		Title = "18/18";
-		OMark = "OMark18";
-	} else{}
-}
-
-
-//SAVE LOAD RESET --------------------------------------------------------------
 
 
 
 function save()
 {
-	var SavedGamy =
+	var Save =
 	{
-		Gamy: Gamy
+		Speed: Speed,
+		Points: Points,
+		MaxPoints: MaxPoints,
+		Upgrade1Cost: Upgrade1Cost,
+		Upgrade1Count: Upgrade1Count,
+		Upgrade1Value: Upgrade1Value,
+		Upgrade1Buy: Upgrade1Buy,
+		SpeedforUpgrade1: SpeedforUpgrade1,
+		Upgrade1SpeedAdd: Upgrade1SpeedAdd,
+		Upgrade2Cost: Upgrade2Cost,
+		Upgrade2Count: Upgrade2Count,
+		Upgrade2Value: Upgrade2Value,
+		Upgrade2Buy: Upgrade2Buy,
+		BoostTime: BoostTime,
+		BoostStrenght: BoostStrenght,
+		Upgrade3Cost: Upgrade3Cost,
+		Upgrade3Count: Upgrade3Count,
+		Upgrade3Value: Upgrade3Value,
+		Upgrade3Buy: Upgrade3Buy,
+		Upgrade4Cost: Upgrade4Cost,
+		Upgrade4Count: Upgrade4Count,
+		Upgrade4Value: Upgrade4Value,
+		Upgrade4Buy: Upgrade4Buy,
+		LvlCount: LvlCount,
+		XPToReach: XPToReach,
+		XPOwned: XPOwned,
+		Upgrade5Cost: Upgrade5Cost,
+		Upgrade5Count: Upgrade5Count,
+		Upgrade5Value: Upgrade5Value,
+		Upgrade5Buy: Upgrade5Buy,
+		FilledPerSecond: FilledPerSecond,
+		FillingTime: FillingTime,
+		FillBonus: FillBonus,
+		Upgrade6Cost: Upgrade6Cost,
+		Upgrade6Count: Upgrade6Count,
+		Upgrade6Value: Upgrade6Value,
+		Upgrade6Buy: Upgrade6Buy
 	}
-	localStorage.setItem("SavedGamy", JSON.stringify(SavedGamy));
+	localStorage.setItem("Saved", JSON.stringify(Save));
+}setInterval(save, 100);
+
+
+
+function load(){
+	var SavedGame = JSON.parse(localStorage.getItem("Saved"));
+	if (typeof SavedGame.Speed !== "undefined") Speed = SavedGame.Speed;
+	if (typeof SavedGame.Points !== "undefined") Points = SavedGame.Points;
+	if (typeof SavedGame.MaxPoints !== "undefined") MaxPoints = SavedGame.MaxPoints;
+	if (typeof SavedGame.LvlCount !== "undefined") LvlCount = SavedGame.LvlCount;
+	if (typeof SavedGame.XPToReach !== "undefined") XPToReach = SavedGame.XPToReach;
+	if (typeof SavedGame.XPOwned !== "undefined") XPOwned = SavedGame.XPOwned;
+	if (typeof SavedGame.Upgrade1Cost !== "undefined") Upgrade1Cost = SavedGame.Upgrade1Cost;
+	if (typeof SavedGame.Upgrade1Count !== "undefined") Upgrade1Count = SavedGame.Upgrade1Count;
+	if (typeof SavedGame.Upgrade1Value !== "undefined") Upgrade1Value = SavedGame.Upgrade1Value;
+	if (typeof SavedGame.Upgrade1Buy !== "undefined") Upgrade1Buy = SavedGame.Upgrade1Buy;
+	if (typeof SavedGame.Upgrade1SpeedAdd !== "undefined") Upgrade1SpeedAdd = SavedGame.Upgrade1SpeedAdd;
+	if (typeof SavedGame.SpeedforUpgrade1 !== "undefined") SpeedforUpgrade1 = SavedGame.SpeedforUpgrade1;
+	if (typeof SavedGame.Upgrade2Cost !== "undefined") Upgrade2Cost = SavedGame.Upgrade2Cost;
+	if (typeof SavedGame.Upgrade2Count !== "undefined") Upgrade2Count = SavedGame.Upgrade2Count;
+	if (typeof SavedGame.Upgrade2Value !== "undefined") Upgrade2Value = SavedGame.Upgrade2Value;
+	if (typeof SavedGame.Upgrade2Buy !== "undefined") Upgrade2Buy = SavedGame.Upgrade2Buy;
+	if (typeof SavedGame.Upgrade3Cost !== "undefined") Upgrade3Cost = SavedGame.Upgrade3Cost;
+	if (typeof SavedGame.Upgrade3Count !== "undefined") Upgrade3Count = SavedGame.Upgrade3Count;
+	if (typeof SavedGame.Upgrade3Value !== "undefined") Upgrade3Value = SavedGame.Upgrade3Value;
+	if (typeof SavedGame.Upgrade3Buy !== "undefined") Upgrade3Buy = SavedGame.Upgrade3Buy;
+	if (typeof SavedGame.Upgrade4Cost !== "undefined") Upgrade4Cost = SavedGame.Upgrade4Cost;
+	if (typeof SavedGame.Upgrade4Count !== "undefined") Upgrade4Count = SavedGame.Upgrade4Count;
+	if (typeof SavedGame.Upgrade4Value !== "undefined") Upgrade4Value = SavedGame.Upgrade4Value;
+	if (typeof SavedGame.Upgrade4Buy !== "undefined") Upgrade4Buy = SavedGame.Upgrade4Buy;
+	if (typeof SavedGame.Upgrade5Cost !== "undefined") Upgrade5Cost = SavedGame.Upgrade5Cost;
+	if (typeof SavedGame.Upgrade5Count !== "undefined") Upgrade5Count = SavedGame.Upgrade5Count;
+	if (typeof SavedGame.Upgrade5Value !== "undefined") Upgrade5Value = SavedGame.Upgrade5Value;
+	if (typeof SavedGame.Upgrade5Buy !== "undefined") Upgrade5Buy = SavedGame.Upgrade5Buy;
+	if (typeof SavedGame.Upgrade6Cost !== "undefined") Upgrade6Cost = SavedGame.Upgrade6Cost;
+	if (typeof SavedGame.Upgrade6Count !== "undefined") Upgrade6Count = SavedGame.Upgrade6Count;
+	if (typeof SavedGame.Upgrade6Value !== "undefined") Upgrade6Value = SavedGame.Upgrade6Value;
+	if (typeof SavedGame.Upgrade6Buy !== "undefined") Upgrade6Buy = SavedGame.Upgrade6Buy;
+	if (typeof SavedGame.BoostTime !== "undefined") BoostTime = SavedGame.BoostTime;
+	if (typeof SavedGame.BoostStrenght !== "undefined") BoostStrenght = SavedGame.BoostStrenght;
+	if (typeof SavedGame.FilledPerSecond !== "undefined") FilledPerSecond = SavedGame.FilledPerSecond;
+	if (typeof SavedGame.FillingTime !== "undefined") FillingTime = SavedGame.FillingTime;
+	if (typeof SavedGame.FillBonus !== "undefined") FillBonus = SavedGame.FillBonus;
+	Speed = 15 + SpeedforUpgrade1;
+	var LocalBoostTime = BoostTime/1000;
+	var LocalBoostStrenght = BoostStrenght + 1;
+	document.getElementById("LvlText").innerHTML = "Lvl " + LvlCount;
+	document.getElementById("Boost").title = "x" + LocalBoostStrenght.toFixed(2) + " PPM for " + LocalBoostTime + " seconds";
+	document.getElementById("Upgrade1Level").innerHTML = "Lvl " + Upgrade1Count + ", progress to lvl " + (Upgrade1Count+1) +":";
+	document.getElementById("Upgrade2Level").innerHTML = "Lvl " + Upgrade2Count + ", progress to lvl " + (Upgrade2Count+1) +":";
+	document.getElementById("Upgrade3Level").innerHTML = "Lvl " + Upgrade3Count + ", progress to lvl " + (Upgrade3Count+1) +":";
+	document.getElementById("Upgrade4Level").innerHTML = "Lvl " + Upgrade4Count + ", progress to lvl " + (Upgrade4Count+1) +":";
+	document.getElementById("Upgrade5Level").innerHTML = "Lvl " + Upgrade5Count + ", progress to lvl " + (Upgrade5Count+1) +":";
+	document.getElementById("Upgrade6Level").innerHTML = "Lvl " + Upgrade6Count + ", progress to lvl " + (Upgrade6Count+1) +":";
+	document.getElementById("Upgrade4Add").innerHTML = "Increase maximum capacity x10 (current: " + MaxPoints +")";
+	document.getElementById("Upgrade1Add").innerHTML = "+ " + Upgrade1SpeedAdd + " Points Per Minute";
+	AlternativePoints = MaxPoints/10;
+	AlternativePoints2 = MaxPoints/5;
+	AlternativePoints3 = (MaxPoints/10) * 3;
+	AlternativePoints4 = (MaxPoints/10) * 4;
+	AlternativePoints5 = MaxPoints/2;
+	AlternativePoints6 = (MaxPoints/10) * 6;
+	AlternativePoints7 = (MaxPoints/10) * 7;
+	AlternativePoints8 = (MaxPoints/10) * 8;
+	AlternativePoints9 = (MaxPoints/10) * 9;
+	Upgrade1ProgressF();
+	Upgrade2ProgressF();
+	Upgrade3ProgressF();
+	Upgrade4ProgressF();
+	Upgrade5ProgressF();
+	Upgrade6ProgressF();
+	NumbersConverter();
+	CountLevel();
+	UpgradesUnlock();
 }
-function load()
-{
-	var SavedGame = JSON.parse(localStorage.getItem("SavedGamy"));
-	Gamy = SavedGame.Gamy;
-	for (let i=0; i<Gamy.length; i++)
-	{
-		for (let u=1; u<Gamy[i].length; u++)
-		{
-			if (Gamy[i][u][1] != 0)
-			{
-				GamaOcena = Gamy[i][u][1];
-				var id = "T" + Gamy[i][u][0];
-				Kolory();
-				document.getElementById(id).style = "background-color: " + Kolor + ";";
-				document.getElementById(id).title = Title;
-				GamaOcena = 0;
-			} else{}
-		}
-	}
-	/*Gamy[13][4][1] = 0;
-	save();*/
+document.getElementById("reset").onclick = function(){
+	localStorage.clear();
+	location.reload();
 }
