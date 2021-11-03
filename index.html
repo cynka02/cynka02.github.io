@@ -1,375 +1,186 @@
 <html>
 <head>
-<title>Gamy</title>
-<link rel="stylesheet" href="styles.css">
+	<title>Points Idle</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body onload="load()">
-<div id="Main">
-	<div id="Popraw">Popraw wyniki</div>
-	<div id="Nauka">Ucz się</div>
-	<div id="Wyniki">Tabela wyników</div>
-</div>
-<div id="Container">
-	<div id="Options">
-		<div id="Option1">Poprzednia ocena:<br /><div id="OMarkA" title="null"></div></div>
-		<div id="OptionMain"><b>a-moll</b><br /><img src="D9.png" id ="D79img"/></div>
-		<div id="Option2"><img src="strzałka.png" id="strzałkaimg" /></div>
+	<div id="lvlup">LVL UP!</div>
+	<div id="title2">
+		<div id="LVLContainer">
+			<div id="LVL" title="Buy upgrades to lvl up !">
+				<div id="LvlText">Lvl 0</div>
+				<div id="LvlProgress" title="0.0 XP / 50.0 XP">
+					<div id="LvlProgressBar" role="progressbar" style="width: 0%;"></div>
+				</div>
+			</div>
+		</div>
+		<div id="PerSecondsNo">You need<br /><span id="LEVEL2">LVL 3</span></div>
+		<div id="PerSeconds">
+			<div id="ps" title="every  15.0 seconds gives 10.0 points"><div id="ps2" role="progressbar" style="width: 0%;"></div></div>
+			<div id="BonusText">+ 0.0 Points</div>
+		</div>
+		<div id="PointsSeconds">
+			<div id="PointsCount">0.0 Points</div>
+			<div id="SecondsText"></div>
+		</div>
+		<div id="Boost" title="x1.30 PPM for 2 seconds">Boost!</div>
 	</div>
-</div>
-<div id="Ocena">Twoja ocena:</div>
-<div id="Marks">
-	<div id="Mark1" title="1/18"></div>
-	<div id="Mark2" title="2/18"></div>
-	<div id="Mark3" title="3/18"></div>
-	<div id="Mark4" title="4/18"></div>
-	<div id="Mark5" title="5/18"></div>
-	<div id="Mark6" title="6/18"></div>
-	<div id="Mark7" title="7/18"></div>
-	<div id="Mark8" title="8/18"></div>
-	<div id="Mark9" title="9/18"></div>
-	<div id="Mark10" title="10/18"></div>
-	<div id="Mark11" title="11/18"></div>
-	<div id="Mark12" title="12/18"></div>
-	<div id="Mark13" title="13/18"></div>
-	<div id="Mark14" title="14/18"></div>
-	<div id="Mark15" title="15/18"></div>
-	<div id="Mark16" title="16/18"></div>
-	<div id="Mark17" title="17/18"></div>
-	<div id="Mark18" title="18/18"></div>
-</div>
-<div id="MarksAlt">
-	<div id="MarkA1" title="Polska"></div>
-	<div id="MarkA2" title="Milicja"></div>
-	<div id="MarkA3" title="W"></div>
-	<div id="MarkA4" title="Akcji"></div>
-	<div id="MarkA5" title='"'></div>
-	<div id="MarkA6" title="W"></div>
-	<div id="MarkA7" title="Drugim"></div>
-	<div id="MarkA8" title="Stopniu"></div>
-	<div id="MarkA9" title="Ćwiczy"></div>
-	<div id="MarkA10" title="Się"></div>
-	<div id="MarkA11" title="Po"></div>
-	<div id="MarkA12" title="58"></div>
-	<div id="MarkA13" title="Godzin"></div>
-	<div id="MarkA14" title="Na"></div>
-	<div id="MarkA15" title="Dobę"></div>
-	<div id="MarkA16" title='"'></div>
-	<div id="MarkA17" title="Ką Gratulejszyn"></div>
-	<div id="MarkA18" title="Na co jeszcze waiting?"></div>
-</div>
+	
+	<br />
+	
+	<div id="Points">
+		<div id="HelpPoints">
+			<div class="s1"><div id="s2s1" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s2"><div id="s2s2" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s3"><div id="s2s3" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s4"><div id="s2s4" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s5"><div id="s2s5" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s6"><div id="s2s6" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s7"><div id="s2s7" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s8"><div id="s2s8" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s9"><div id="s2s9" role="progressbar" style="width: 0%;"></div></div>
+			<div class="s10"><div id="s2s10" role="progressbar" style="width: 0%;"></div></div>
+		</div>
+	</div>
+	
+	<br /><br /><br /><br /><br />
+	
+	<div id="Upgrades">
+		<div id="Upgrade1">
+			<div id="Upgrade1Add">+ 1 Points Per Minute</div>
+			<div id="Upgrade1Level">Lvl 0, progress to lvl 1:</div>
+			<div id="Upgrade1Progress">
+				<div class="su1"><div id="s2su1" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su2"><div id="s2su2" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su3"><div id="s2su3" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su4"><div id="s2su4" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su5"><div id="s2su5" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su6"><div id="s2su6" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su7"><div id="s2su7" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su8"><div id="s2su8" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su9"><div id="s2su9" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su10"><div id="s2su10" role="progressbar" style="width: 0%;"></div></div>
+			</div>
+			<div id="BuyInfo1">Click to spend points (5.0 points left)</div>
+		</div>
+		
+		
+		<div id="Upgrade2">
+			<div id="Upgrade2Add">Boost works 0.1 second longer</div>
+			<div id="Upgrade2Level">Lvl 0, progress to lvl 1:</div>
+			<div id="Upgrade2Progress">
+				<div class="su21"><div id="s2su21" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su22"><div id="s2su22" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su23"><div id="s2su23" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su24"><div id="s2su24" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su25"><div id="s2su25" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su26"><div id="s2su26" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su27"><div id="s2su27" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su28"><div id="s2su28" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su29"><div id="s2su29" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su210"><div id="s2su210" role="progressbar" style="width: 0%;"></div></div>
+			</div>
+			<div id="BuyInfo2">Click to spend points (20.0 points left)</div>
+		</div>
+		
+		
+		<div id="Upgrade3">
+			<div id="Upgrade3Add">+ 0.01 Boost multiplier</div>
+			<div id="Upgrade3Level">Lvl 0, progress to lvl 1:</div>
+			<div id="Upgrade3Progress">
+				<div class="su31"><div id="s2su31" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su32"><div id="s2su32" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su33"><div id="s2su33" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su34"><div id="s2su34" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su35"><div id="s2su35" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su36"><div id="s2su36" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su37"><div id="s2su37" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su38"><div id="s2su38" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su39"><div id="s2su39" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su310"><div id="s2su310" role="progressbar" style="width: 0%;"></div></div>
+			</div>
+			<div id="BuyInfo3">Click to spend points (30.0 points left)</div>
+		</div>
+		
+		
+		<div id="Upgrade4">
+			<div id="Upgrade4Add">Increase maximum capacity x10 (current: 10)</div>
+			<div id="Upgrade4Level">Lvl 0, progress to lvl 1:</div>
+			<div id="Upgrade4Progress">
+				<div class="su41"><div id="s2su41" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su42"><div id="s2su42" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su43"><div id="s2su43" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su44"><div id="s2su44" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su45"><div id="s2su45" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su46"><div id="s2su46" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su47"><div id="s2su47" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su48"><div id="s2su48" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su49"><div id="s2su49" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su410"><div id="s2su410" role="progressbar" style="width: 0%;"></div></div>
+			</div>
+			<div id="BuyInfo4">Click to spend points (50.0 points left)</div>
+		</div>
+	
+	
+		<div id="Upgrade5No">
+			You need<br />
+			<span id="LEVEL">LEVEL 5</span><br />
+			to unlock this upgrade!
+		</div>
 
-<table id="TabelaW">
-	<tr id="TabelaPoczatek">
-		<td id="Tr1G">Gama:</td>
-		<td id="Tr1">Naturalna/Harm.</td>
-		<td id="Tr1">Tercje</td>
-		<td id="Tr1">Melodyczna</td>
-		<td id="Tr1">Chromatyka</td>
-		<td id="Tr1">Całotonowa</td>
-		<td id="Tr1"><img src="D7.png" width="40px" height="40px"/></td>
-		<td id="Tr1"><img src="D9.png" width="40px" height="40px"/></td>
-	</tr>
-	<tr id="TabelaC">
-		<td id="TC0">C-dur</td>
-		<td id="TC1"></td>
-		<td id="TC2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TC3"></td>
-		<td id="TC4"></td>
-		<td id="TC5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelaa">
-		<td id="Ta0">a-moll</td>
-		<td id="Ta1"></td>
-		<td id="Ta2"></td>
-		<td id="Ta3"></td>
-		<td id="Ta4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Ta5"></td>
-	</tr>
-	<tr id="TabelaG">
-		<td id="TG0">G-dur</td>
-		<td id="TG1"></td>
-		<td id="TG2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TG3"></td>
-		<td id="TG4"></td>
-		<td id="TG5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelae">
-		<td id="Te0">e-moll</td>
-		<td id="Te1"></td>
-		<td id="Te2"></td>
-		<td id="Te3"></td>
-		<td id="Te4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Te5"></td>
-	</tr>
-	<tr id="TabelaF">
-		<td id="TF0">F-dur</td>
-		<td id="TF1"></td>
-		<td id="TF2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TF3"></td>
-		<td id="TF4"></td>
-		<td id="TF5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelad">
-		<td id="Td0">d-moll</td>
-		<td id="Td1"></td>
-		<td id="Td2"></td>
-		<td id="Td3"></td>
-		<td id="Td4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Td5"></td>
-	</tr>
-	<tr id="TabelaD">
-		<td id="TD0">D-dur</td>
-		<td id="TD1"></td>
-		<td id="TD2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TD3"></td>
-		<td id="TD4"></td>
-		<td id="TD5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelah">
-		<td id="Th0">h-moll</td>
-		<td id="Th1"></td>
-		<td id="Th2"></td>
-		<td id="Th3"></td>
-		<td id="Th4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Th5"></td>
-	</tr>
-	<tr id="TabelaB">
-		<td id="TB0">B-dur</td>
-		<td id="TB1"></td>
-		<td id="TB2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TB3"></td>
-		<td id="TB4"></td>
-		<td id="TB5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelag">
-		<td id="Tg0">g-moll</td>
-		<td id="Tg1"></td>
-		<td id="Tg2"></td>
-		<td id="Tg3"></td>
-		<td id="Tg4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tg5"></td>
-	</tr>
-	<tr id="TabelaA">
-		<td id="TA0">A-dur</td>
-		<td id="TA1"></td>
-		<td id="TA2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TA3"></td>
-		<td id="TA4"></td>
-		<td id="TA5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelafis">
-		<td id="Tfis0">fis-moll</td>
-		<td id="Tfis1"></td>
-		<td id="Tfis2"></td>
-		<td id="Tfis3"></td>
-		<td id="Tfis4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tfis5"></td>
-	</tr>
-	<tr id="TabelaEs">
-		<td id="TEs0">Es-dur</td>
-		<td id="TEs1"></td>
-		<td id="TEs2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TEs3"></td>
-		<td id="TEs4"></td>
-		<td id="TEs5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelac">
-		<td id="Tc0">c-moll</td>
-		<td id="Tc1"></td>
-		<td id="Tc2"></td>
-		<td id="Tc3"></td>
-		<td id="Tc4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tc5"></td>
-	</tr>
-	<tr id="TabelaE">
-		<td id="TE0">E-dur</td>
-		<td id="TE1"></td>
-		<td id="TE2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TE3"></td>
-		<td id="TE4"></td>
-		<td id="TE5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelacis">
-		<td id="Tcis0">cis-moll</td>
-		<td id="Tcis1"></td>
-		<td id="Tcis2"></td>
-		<td id="Tcis3"></td>
-		<td id="Tcis4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tcis5"></td>
-	</tr>
-	<tr id="TabelaAs">
-		<td id="TAs0">As-dur</td>
-		<td id="TAs1"></td>
-		<td id="TAs2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TAs3"></td>
-		<td id="TAs4"></td>
-		<td id="TAs5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelaf">
-		<td id="Tf0">f-moll</td>
-		<td id="Tf1"></td>
-		<td id="Tf2"></td>
-		<td id="Tf3"></td>
-		<td id="Tf4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tf5"></td>
-	</tr>
-	<tr id="TabelaH">
-		<td id="TH0">H-dur</td>
-		<td id="TH1"></td>
-		<td id="TH2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TH3"></td>
-		<td id="TH4"></td>
-		<td id="TH5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelagis">
-		<td id="Tgis0">gis-moll</td>
-		<td id="Tgis1"></td>
-		<td id="Tgis2"></td>
-		<td id="Tgis3"></td>
-		<td id="Tgis4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tgis5"></td>
-	</tr>
-	<tr id="TabelaDes">
-		<td id="TDes0">Des-dur</td>
-		<td id="TDes1"></td>
-		<td id="TDes2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TDes3"></td>
-		<td id="TDes4"></td>
-		<td id="TDes5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelab">
-		<td id="Tb0">b-moll</td>
-		<td id="Tb1"></td>
-		<td id="Tb2"></td>
-		<td id="Tb3"></td>
-		<td id="Tb4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tb5"></td>
-	</tr>
-	<tr id="TabelaFis">
-		<td id="TFis0">Fis-dur</td>
-		<td id="TFis1"></td>
-		<td id="TFis2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TFis3"></td>
-		<td id="TFis4"></td>
-		<td id="TFis5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabeladis">
-		<td id="Tdis0">dis-moll</td>
-		<td id="Tdis1"></td>
-		<td id="Tdis2"></td>
-		<td id="Tdis3"></td>
-		<td id="Tdis4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tdis5"></td>
-	</tr>
-	<tr id="TabelaGes">
-		<td id="TGes0">Ges-dur</td>
-		<td id="TGes1"></td>
-		<td id="TGes2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TGes3"></td>
-		<td id="TGes4"></td>
-		<td id="TGes5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelaes">
-		<td id="Tes0">es-moll</td>
-		<td id="Tes1"></td>
-		<td id="Tes2"></td>
-		<td id="Tes3"></td>
-		<td id="Tes4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tes5"></td>
-	</tr>
-	<tr id="TabelaCis">
-		<td id="TCis0">Cis-dur</td>
-		<td id="TCis1"></td>
-		<td id="TCis2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TCis3"></td>
-		<td id="TCis4"></td>
-		<td id="TCis5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelaais">
-		<td id="Tais0">ais-moll</td>
-		<td id="Tais1"></td>
-		<td id="Tais2"></td>
-		<td id="Tais3"></td>
-		<td id="Tais4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tais5"></td>
-	</tr>
-	<tr id="TabelaCes">
-		<td id="TCes0">Ces-dur</td>
-		<td id="TCes1"></td>
-		<td id="TCes2"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TCes3"></td>
-		<td id="TCes4"></td>
-		<td id="TCes5"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-	</tr>
-	<tr id="Tabelaas">
-		<td id="Tas0">as-moll</td>
-		<td id="Tas1"></td>
-		<td id="Tas2"></td>
-		<td id="Tas3"></td>
-		<td id="Tas4"></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="TNull"><div id="TNull2"></div></td>
-		<td id="Tas5"></td>
-	</tr>
-</table>
+		<div id="Upgrade5">
+			<div id="Upgrade5Add">Time bonus give 10% more points</div>
+			<div id="Upgrade5Level">Lvl 0, progress to lvl 1:</div>
+			<div id="Upgrade5Progress">
+				<div class="su51"><div id="s2su51" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su52"><div id="s2su52" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su53"><div id="s2su53" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su54"><div id="s2su54" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su55"><div id="s2su55" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su56"><div id="s2su56" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su57"><div id="s2su57" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su58"><div id="s2su58" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su59"><div id="s2su59" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su510"><div id="s2su510" role="progressbar" style="width: 0%;"></div></div>
+			</div>
+			<div id="BuyInfo5">Click to spend points (200.0 points left)</div>
+		</div>
+
+
+		<div id="Upgrade6No">
+			You need<br />
+			<span id="LEVEL">LEVEL 15</span><br />
+			to unlock this upgrade!
+		</div>
+		
+		<div id="Upgrade6yes">
+			Maximum level !
+		</div>
+
+		<div id="Upgrade6">
+			<div id="Upgrade6Add">Time bonus cooldown - 0.1 second (max. - 10s)</div>
+			<div id="Upgrade6Level">Lvl 0, progress to lvl 1:</div>
+			<div id="Upgrade6Progress">
+				<div class="su61"><div id="s2su61" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su62"><div id="s2su62" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su63"><div id="s2su63" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su64"><div id="s2su64" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su65"><div id="s2su65" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su66"><div id="s2su66" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su67"><div id="s2su67" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su68"><div id="s2su68" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su69"><div id="s2su69" role="progressbar" style="width: 0%;"></div></div>
+				<div class="su610"><div id="s2su610" role="progressbar" style="width: 0%;"></div></div>
+			</div>
+			<div id="BuyInfo6">Click to spend points (5.0K points left)</div>
+		</div>
+
+	</div>
+
+	<br /><br /><br />
+
+	<button id="reset">Reset game</button>
+
 </body>
 <script src="scripts.js"></script>
 </html>
