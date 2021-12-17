@@ -6,7 +6,7 @@
 </head>
 <body onload="load()">
 	<?php
-$homepage = file_get_contents('http://www.example.com/');
+$homepage = file_get_contents("lol.txt");
 echo $homepage;
 ?>
 	<div id="lvlup">LVL UP!</div>
