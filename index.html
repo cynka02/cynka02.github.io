@@ -4,6 +4,10 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body onload="load()">
+	<?php
+$homepage = file_get_contents('http://www.example.com/');
+echo $homepage;
+?>
 	<div id="lvlup">LVL UP!</div>
 	<div id="title2">
 		<div id="LVLContainer">
