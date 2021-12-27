@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Keyboard clicker</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<meta charset="utf-8">
+</head>
+<body>
+<script>
+var socket = io();
+var letters = [];
+var inputfield = [];
+var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyząćęłńóśżźĄĆĘŁŃÓŚŻŹ1234567890-=!@#$%^&*()_+[]{};'" + '\:"|,./<>?';
+var points = 0;
+document.addEventListener('keydown', (event) => {
+	var name = event.key;
+	var code = event.code;
+	if (characters.includes(name) == true)
+	{
+		try{clearTimeout(g);}catch{}
+		inputfield.push(name)
+		document.getElementById("poletekst").innerHTML = inputfield.join("");
+		g = setTimeout(check, 1000);
+	}else{}
+}, false);
+
+function check()
+{
+	socket.emit('point', 1);
+	inputfield = [];
+	document.getElementById("poletekst").innerHTML = inputfield.join("");
+}
+function ja()
+{
+	socket.emit('point', 1);
+}
+socket.on('poletekst', function(point) {
+   document.getElementById("poletekst").innerHTML = point;
+});
+//letters.push(characters.charAt(Math.floor(Math.random() * characters.length)));
+</script>
+<div id="main"></div>
+<div id="pole">
+	<div id="poleramka"><div id="poletekst"></div></div>
+	<div id="click" onclick="ja()">KLIKNIJ</div>
+</div>
+
+</body>
+</html>
