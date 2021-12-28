@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
 var Points = 0;
+const xyz = process.env.cos;
 app.use(express.static(publicPath));
 server.listen(port);
 
@@ -23,6 +24,6 @@ io.on('connection', (socket) => {
 io.on('connection', (socket) => {
 	socket.on('point', (ile) => {
 		Points += ile;
-		io.emit('poletekst', Points);
+		io.emit('poletekst', xyz);
 	});
 });
