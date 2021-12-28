@@ -7,22 +7,22 @@ const publicPath = path.join(__dirname, '../client');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
-
+var Points = 0;
 app.use(express.static(publicPath));
-server.listen(port, function() {
-    console.log(`Server is up on port ${port}`);
-});
+server.listen(port);
+
 
 io.on('connection', (socket) => {
 	console.log('a user connected');
-	io.emit('liczba', 123);
+	io.emit('poletekst', Points);
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
 });
 
 io.on('connection', (socket) => {
-	socket.on('chat message', (msg) => {
-		console.log('message: ' + msg);
+	socket.on('point', (ile) => {
+		Points += ile;
+		io.emit('poletekst', Points);
 	});
 });
