@@ -3,7 +3,6 @@ var letters = [];
 var inputfield = [];
 var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyząćęłńóśżźĄĆĘŁŃÓŚŻŹ1234567890-=!@#$%^&*()_+[]{};'" + '\:"|,./<>?';
 var characterscolors = ["Backspace", "Tab", "Enter", "CapsLock", "Shift", "Control", "Alt", "AltGraph", " "]
-var points;
 function load(){
 	var classkeys = document.getElementsByClassName("keys");
 	for (let i=0; i < classkeys.length; i++){
@@ -50,9 +49,14 @@ function clearcolors(idname){
 	document.getElementById(idname).style.backgroundColor = "white";
 }
 function check(){
+	socket.emit('point', 1);
 	inputfield = [];
-	document.getElementById("poletekst").innerHTML = inputfield.join("");
 }
-socket.on('liczba', function(number) {
-  document.getElementById("poletekst").innerHTML = number;
+function ja()
+{
+	socket.emit('point', 1);
+}
+socket.on('poletekst', function(point) {
+   document.getElementById("poletekst").innerHTML = point;
 });
+//letters.push(characters.charAt(Math.floor(Math.random() * characters.length)));
