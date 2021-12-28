@@ -7,18 +7,15 @@ const publicPath = path.join(__dirname, '../client');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
-const aws = require('aws-sdk');
-
 
 app.use(express.static(publicPath));
 server.listen(port, function() {
     console.log(`Server is up on port ${port}`);
 });
 
-
 io.on('connection', (socket) => {
 	console.log('a user connected');
-	io.emit("poletekst", 123);
+	io.emit('liczba', 123);
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
