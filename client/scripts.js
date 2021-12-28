@@ -50,15 +50,6 @@ function clearcolors(idname){
 	document.getElementById(idname).style.backgroundColor = "white";
 }
 function check(){
-	socket.emit('point', 1);
 	inputfield = [];
 	document.getElementById("poletekst").innerHTML = inputfield.join("");
 }
-function ja()
-{
-	socket.emit('point', 1);
-}
-socket.on('poletekst', function(point) {
-   document.getElementById("poletekst").innerHTML = point;
-});
-//letters.push(characters.charAt(Math.floor(Math.random() * characters.length)));
