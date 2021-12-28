@@ -53,3 +53,6 @@ function check(){
 	inputfield = [];
 	document.getElementById("poletekst").innerHTML = inputfield.join("");
 }
+socket.on('liczba', function(number) {
+  document.getElementById("poletekst").innerHTML = number;
+});
