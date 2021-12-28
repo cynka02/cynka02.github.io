@@ -7,7 +7,7 @@ const publicPath = path.join(__dirname, '../client');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
-var Points = 0;
+var Points = 100;
 app.use(express.static(publicPath));
 server.listen(port);
 
