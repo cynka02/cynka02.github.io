@@ -3,7 +3,17 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+const path = require('path');
+const Victor = require('victor');
+const publicPath = path.join(__dirname, 'moje');
+const port = process.env.PORT || 3000;
+const socketIO = require('socket.io');
+const io = socketIO(server);
+app.use(express.static(publicPath));
+server.listen(port, function() {
+    console.log(`Server is up on port ${port}`);
+});
+
 
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/index.html');
@@ -21,9 +31,6 @@ io.on('connection', (socket) => {
 	});
 });
 
-server.listen(3000, () => {
-	console.log('listening on *:3000');
-});
 io.on('connection', (socket) => {
 	socket.on('chat message', (msg) => {
 		console.log('message: ' + msg);
