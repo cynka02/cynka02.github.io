@@ -9,9 +9,6 @@ const server = http.createServer(app);
 const io = socketIO(server);
 const aws = require('aws-sdk');
 
-let s3 = new aws.S3({
-  accessKeyId: process.env.cos
-});
 
 app.use(express.static(publicPath));
 server.listen(port, function() {
@@ -21,7 +18,7 @@ server.listen(port, function() {
 
 io.on('connection', (socket) => {
 	console.log('a user connected');
-	io.emit("poletekst", s3);
+	io.emit("poletekst", 123);
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
