@@ -2,47 +2,91 @@
 <head>
 	<title>Keyboard clicker</title>
 	<script src="/socket.io/socket.io.js"></script>
+	<link rel="stylesheet" href="styles.css">
 	<meta charset="utf-8">
 </head>
-<body>
-<script>
-var socket = io(`http://cynka02.github.io:3000`);
-var letters = [];
-var inputfield = [];
-var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyząćęłńóśżźĄĆĘŁŃÓŚŻŹ1234567890-=!@#$%^&*()_+[]{};'" + '\:"|,./<>?';
-var points = 0;
-document.addEventListener('keydown', (event) => {
-	var name = event.key;
-	var code = event.code;
-	if (characters.includes(name) == true)
-	{
-		try{clearTimeout(g);}catch{}
-		inputfield.push(name)
-		document.getElementById("poletekst").innerHTML = inputfield.join("");
-		g = setTimeout(check, 1000);
-	}else{}
-}, false);
+<body onload="load()">
 
-function check()
-{
-	socket.emit('point', 1);
-	inputfield = [];
-	document.getElementById("poletekst").innerHTML = inputfield.join("");
-}
-function ja()
-{
-	socket.emit('point', 1);
-}
-socket.on('poletekst', function(point) {
-   document.getElementById("poletekst").innerHTML = point;
-});
-//letters.push(characters.charAt(Math.floor(Math.random() * characters.length)));
-</script>
-<div id="main"></div>
+<div id="main">
+	<div id="menu"></div>
+	<div id="keyboard">
+		<div class="rows">
+			<div class="keys"></div>
+			<div class="keys" id="1">1</div>
+			<div class="keys" id="2">2</div>
+			<div class="keys" id="3">3</div>
+			<div class="keys" id="4">4</div>
+			<div class="keys" id="5">5</div>
+			<div class="keys" id="6">6</div>
+			<div class="keys" id="7">7</div>
+			<div class="keys" id="8">8</div>
+			<div class="keys" id="9">9</div>
+			<div class="keys" id="0">0</div>
+			<div class="keys" id="-">-</div>
+			<div class="keys" id="=">=</div>
+			<div id="Backspace">Backspace</div>
+		</div>
+		<div class="rows">
+			<div id="Tab">Tab</div>
+			<div class="keys" id="q">q</div>
+			<div class="keys" id="w">w</div>
+			<div class="keys" id="e">e</div>
+			<div class="keys" id="r">r</div>
+			<div class="keys" id="t">t</div>
+			<div class="keys" id="y">y</div>
+			<div class="keys" id="u">u</div>
+			<div class="keys" id="i">i</div>
+			<div class="keys" id="o">o</div>
+			<div class="keys" id="p">p</div>
+			<div class="keys" id="[">[</div>
+			<div class="keys" id="]">]</div>
+		</div>
+		<div class="rows">
+			<div id="CapsLock">Caps</div>
+			<div class="keys" id="a">a</div>
+			<div class="keys" id="s">s</div>
+			<div class="keys" id="d">d</div>
+			<div class="keys" id="f">f</div>
+			<div class="keys" id="g">g</div>
+			<div class="keys" id="h">h</div>
+			<div class="keys" id="j">j</div>
+			<div class="keys" id="k">k</div>
+			<div class="keys" id="l">l</div>
+			<div class="keys" id=";">;</div>
+			<div class="keys" id="'">'</div>
+			<div class="keys" id="Backslash">\</div>
+		</div>
+		<div class="rows">
+			<div id="Shift" class="LShift">Shift</div>
+			<div class="keys" id="z">z</div>
+			<div class="keys" id="x">x</div>
+			<div class="keys" id="c">c</div>
+			<div class="keys" id="v">v</div>
+			<div class="keys" id="b">b</div>
+			<div class="keys" id="n">n</div>
+			<div class="keys" id="m">m</div>
+			<div class="keys" id=",">,</div>
+			<div class="keys" id=".">.</div>
+			<div class="keys" id="/">/</div>
+			<div class="PShift"></div>
+		</div>
+		<div class="rows">
+			<div id="Control">Ctrl</div>
+			<div id="Wind"></div>
+			<div id="Alt">Alt</div>
+			<div id="Space">Space</div>
+			<div id="AltGraph">Alt</div>
+			<div id="Wind"></div>
+			<div id="Wind"></div>
+			<div id="Control"></div>
+		</div>
+	</div>
+</div>
 <div id="pole">
 	<div id="poleramka"><div id="poletekst"></div></div>
 	<div id="click" onclick="ja()">KLIKNIJ</div>
 </div>
 
+<script src="scripts.js"></script>
 </body>
 </html>
