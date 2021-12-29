@@ -23,8 +23,6 @@ io.on('connection', (socket) => {
 io.on('connection', (socket) => {
 	socket.on('point', (ile) => {
 		Points += ile;
-		process.env.Points = Points.toString();
-		Points = parseInt(process.env.Points);
 		io.emit('poletekst', Points);
 	});
 });
