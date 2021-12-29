@@ -26,6 +26,3 @@ io.on('connection', (socket) => {
 		io.emit('poletekst', Points);
 	});
 });
-function Test(){
-	io.emit('poletekst', 1);
-} setInterval(Test, 1000);
