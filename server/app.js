@@ -7,7 +7,7 @@ const publicPath = path.join(__dirname, '../client');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
-var Points = 0;
+var Text = [];
 app.use(express.static(publicPath));
 server.listen(port);
 
@@ -15,14 +15,21 @@ server.listen(port);
 io.on('connection', (socket) => {
 	console.log('a user connected');
 	io.emit('poletekst', "...");
+	io.emit('chat', Text.join(""));
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
 	});
 });
 
 io.on('connection', (socket) => {
-	socket.on('point', (ile) => {
-		Points += ile;
+	socket.on('message', (co) => {
+		Text.push(co);
+		Text.push("<br />")
+		if (Text.length > 14){
+			Text.shift();
+			Text.shift();
+		}
 		io.emit('poletekst', "...");
+		io.emit('chat', Text.join(""));
 	});
 });
