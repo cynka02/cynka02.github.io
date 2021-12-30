@@ -7,79 +7,73 @@
 	<meta charset="utf-8">
 </head>
 <body onload="load()">
+<audio id="audio" controls style="display:none">
+  <source src="keysound.wav" type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
 
 <div id="main">
 	<div id="menu"></div>
 	<div id="keyboard">
 		<div class="rows">
-			<div class="keys"></div>
-			<div class="keys"><div class="shadowkeys" id="1">1</div></div>
-			<div class="keys"><div class="shadowkeys" id="2">2</div></div>
-			<div class="keys"><div class="shadowkeys" id="3">3</div></div>
-			<div class="keys"><div class="shadowkeys" id="4">4</div></div>
-			<div class="keys"><div class="shadowkeys" id="5">5</div></div>
-			<div class="keys"><div class="shadowkeys" id="6">6</div></div>
-			<div class="keys"><div class="shadowkeys" id="7">7</div></div>
-			<div class="keys"><div class="shadowkeys" id="8">8</div></div>
-			<div class="keys"><div class="shadowkeys" id="9">9</div></div>
-			<div class="keys"><div class="shadowkeys" id="0">0</div></div>
-			<div class="keys"><div class="shadowkeys" id="-">-</div></div>
-			<div class="keys"><div class="shadowkeys" id="=">=</div></div>
+			<div class="keys" id="1"><span id="1Text">1</span><span id="1AltText" class="alttext">!</span><div class="bars" id="1Bar"></div></div>
+			<div class="keys" id="2"><span id="2Text">2</span><span id="2AltText" class="alttext">@</span><div class="bars" id="2Bar"></div></div>
+			<div class="keys" id="3"><span id="3Text">3</span><span id="3AltText" class="alttext">#</span><div class="bars" id="3Bar"></div></div>
+			<div class="keys" id="4"><span id="4Text">4</span><span id="4AltText" class="alttext">$</span><div class="bars" id="4Bar"></div></div>
+			<div class="keys" id="5"><span id="5Text">5</span><span id="5AltText" class="alttext">%</span><div class="bars" id="5Bar"></div></div>
+			<div class="keys" id="6"><span id="6Text">6</span><span id="6AltText" class="alttext">^</span><div class="bars" id="6Bar"></div></div>
+			<div class="keys" id="7"><span id="7Text">7</span><span id="7AltText" class="alttext">&amp;</span><div class="bars" id="7Bar"></div></div>
+			<div class="keys" id="8"><span id="8Text">8</span><span id="8AltText" class="alttext">*</span><div class="bars" id="8Bar"></div></div>
+			<div class="keys" id="9"><span id="9Text">9</span><span id="9AltText" class="alttext">(</span><div class="bars" id="9Bar"></div></div>
+			<div class="keys" id="0"><span id="0Text">0</span><span id="0AltText" class="alttext">)</span><div class="bars" id="0Bar"></div></div>
+			<div class="keys" id="-"><span id="-Text">-</span><span id="-AltText" class="alttext">_</span><div class="bars" id="-Bar"></div></div>
+			<div class="keys" id="="><span id="=Text">=</span><span id="=AltText" class="alttext">+</span><div class="bars" id="=Bar"></div></div>
 			<div id="Backspace">Backspace</div>
 		</div>
 		<div class="rows">
-			<div id="Tab">Tab</div>
-			<div class="keys"><div class="shadowkeys" id="q">q</div></div>
-			<div class="keys"><div class="shadowkeys" id="w">w</div></div>
-			<div class="keys"><div class="shadowkeys" id="e">e</div></div>
-			<div class="keys"><div class="shadowkeys" id="r">r</div></div>
-			<div class="keys"><div class="shadowkeys" id="t">t</div></div>
-			<div class="keys"><div class="shadowkeys" id="y">y</div></div>
-			<div class="keys"><div class="shadowkeys" id="u">u</div></div>
-			<div class="keys"><div class="shadowkeys" id="i">i</div></div>
-			<div class="keys"><div class="shadowkeys" id="o">o</div></div>
-			<div class="keys"><div class="shadowkeys" id="p">p</div></div>
-			<div class="keys"><div class="shadowkeys" id="[">[</div></div>
-			<div class="keys"><div class="shadowkeys" id="]">]</div></div>
+			<div class="keys" id="q"><span id="qText">q</span><div class="bars" id="qBar"></div></div>
+			<div class="keys" id="w"><span id="wText">w</span><div class="bars" id="wBar"></div></div>
+			<div class="keys" id="e"><span id="eText">e</span><div class="bars" id="eBar"></div></div>
+			<div class="keys" id="r"><span id="rText">r</span><div class="bars" id="rBar"></div></div>
+			<div class="keys" id="t"><span id="tText">t</span><div class="bars" id="tBar"></div></div>
+			<div class="keys" id="y"><span id="yText">y</span><div class="bars" id="yBar"></div></div>
+			<div class="keys" id="u"><span id="uText">u</span><div class="bars" id="uBar"></div></div>
+			<div class="keys" id="i"><span id="iText">i</span><div class="bars" id="iBar"></div></div>
+			<div class="keys" id="o"><span id="oText">o</span><div class="bars" id="oBar"></div></div>
+			<div class="keys" id="p"><span id="pText">p</span><div class="bars" id="pBar"></div></div>
+			<div class="keys" id="["><span id="[Text">[</span><span id="[AltText" class="alttext">{</span><div class="bars" id="[Bar"></div></div>
+			<div class="keys" id="]"><span id="]Text">]</span><span id="]AltText" class="alttext">}</span><div class="bars" id="]Bar"></div></div>
 		</div>
 		<div class="rows">
 			<div id="CapsLock">Caps</div>
-			<div class="keys"><div class="shadowkeys" id="a">a</div></div>
-			<div class="keys"><div class="shadowkeys" id="s">s</div></div>
-			<div class="keys"><div class="shadowkeys" id="d">d</div></div>
-			<div class="keys"><div class="shadowkeys" id="f">f</div></div>
-			<div class="keys"><div class="shadowkeys" id="g">g</div></div>
-			<div class="keys"><div class="shadowkeys" id="h">h</div></div>
-			<div class="keys"><div class="shadowkeys" id="j">j</div></div>
-			<div class="keys"><div class="shadowkeys" id="k">k</div></div>
-			<div class="keys"><div class="shadowkeys" id="l">l</div></div>
-			<div class="keys"><div class="shadowkeys" id=";">;</div></div>
-			<div class="keys"><div class="shadowkeys" id="'">'</div></div>
-			<div class="keys"><div class="shadowkeys" id="Backslash">\</div></div>
+			<div class="keys" id="a"><span id="aText">a</span><div class="bars" id="aBar"></div></div>
+			<div class="keys" id="s"><span id="sText">s</span><div class="bars" id="sBar"></div></div>
+			<div class="keys" id="d"><span id="dText">d</span><div class="bars" id="dBar"></div></div>
+			<div class="keys" id="f"><span id="fText">f</span><div class="bars" id="fBar"></div></div>
+			<div class="keys" id="g"><span id="gText">g</span><div class="bars" id="gBar"></div></div>
+			<div class="keys" id="h"><span id="hText">h</span><div class="bars" id="hBar"></div></div>
+			<div class="keys" id="j"><span id="jText">j</span><div class="bars" id="jBar"></div></div>
+			<div class="keys" id="k"><span id="kText">k</span><div class="bars" id="kBar"></div></div>
+			<div class="keys" id="l"><span id="lText">l</span><div class="bars" id="lBar"></div></div>
+			<div class="keys" id=";"><span id=";Text">;</span><span id=";AltText" class="alttext">:</span><div class="bars" id=";Bar"></div></div>
+			<div class="keys" id="'"><span id="'Text">'</span><span id="'AltText" class="alttext">"</span><div class="bars" id="'Bar"></div></div>
+			<div class="keys" id="Backslash"><span id="BackslashText">\</span><span id="BackslashAltText" class="alttext">|</span><div class="bars" id="BackslashBar"></div></div>
 		</div>
 		<div class="rows">
-			<div id="ShiftLeft" class="LShift">Shift</div>
-			<div class="keys"><div class="shadowkeys" id="z">z</div></div>
-			<div class="keys"><div class="shadowkeys" id="x">x</div></div>
-			<div class="keys"><div class="shadowkeys" id="c">c</div></div>
-			<div class="keys"><div class="shadowkeys" id="v">v</div></div>
-			<div class="keys"><div class="shadowkeys" id="b">b</div></div>
-			<div class="keys"><div class="shadowkeys" id="n">n</div></div>
-			<div class="keys"><div class="shadowkeys" id="m">m</div></div>
-			<div class="keys"><div class="shadowkeys" id=",">,</div></div>
-			<div class="keys"><div class="shadowkeys" id=".">.</div></div>
-			<div class="keys"><div class="shadowkeys" id="/">/</div></div>
-			<div id="ShiftRight" class="PShift">Shift</div>
+			<div id="ShiftLeft" class="Shift">Shift</div>
+			<div class="keys" id="z"><span id="zText">z</span><div class="bars" id="zBar"></div></div>
+			<div class="keys" id="x"><span id="xText">x</span><div class="bars" id="xBar"></div></div>
+			<div class="keys" id="c"><span id="cText">c</span><div class="bars" id="cBar"></div></div>
+			<div class="keys" id="v"><span id="vText">v</span><div class="bars" id="vBar"></div></div>
+			<div class="keys" id="b"><span id="bText">b</span><div class="bars" id="bBar"></div></div>
+			<div class="keys" id="n"><span id="nText">n</span><div class="bars" id="nBar"></div></div>
+			<div class="keys" id="m"><span id="mText">m</span><div class="bars" id="mBar"></div></div>
+			<div class="keys" id=","><span id=",Text">,</span><span id=",AltText" class="alttext">&lt;</span><div class="bars" id=",Bar"></div></div>
+			<div class="keys" id="."><span id=".Text">.</span><span id=".AltText" class="alttext">&gt;</span><div class="bars" id=".Bar"></div></div>
+			<div class="keys" id="/"><span id="/Text">/</span><span id="/AltText" class="alttext">?</span><div class="bars" id="/Bar"></div></div>
+			<div id="ShiftRight" class="Shift">Shift</div>
 		</div>
 		<div class="rows">
-			<div id="ControlLeft">Ctrl</div>
-			<div id="Wind"></div>
-			<div id="AltLeft">Alt</div>
 			<div id="Space">Space</div>
-			<div id="AltRight">Alt</div>
-			<div id="Wind"></div>
-			<div id="Wind"></div>
-			<div id="ControlRight">Ctrl</div>
 		</div>
 	</div>
 </div>
