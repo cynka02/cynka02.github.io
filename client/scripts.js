@@ -238,6 +238,7 @@ document.addEventListener('keydown', (event) => {
 			case "&":
 				document.getElementById("7").style.backgroundColor = "#6dff5f";
 				setTimeout(clearcolors, 400, "7");
+				name ="&amp;"
 				break;
 			case "*":
 				document.getElementById("8").style.backgroundColor = "#6dff5f";
@@ -282,10 +283,12 @@ document.addEventListener('keydown', (event) => {
 			case "<":
 				document.getElementById(",").style.backgroundColor = "#6dff5f";
 				setTimeout(clearcolors, 400, ",");
+				name = "&lt;";
 				break;
 			case ">":
 				document.getElementById(".").style.backgroundColor = "#6dff5f";
 				setTimeout(clearcolors, 400, ".");
+				name = "&gt;";
 				break;
 			case "?":
 				document.getElementById("/").style.backgroundColor = "#6dff5f";
