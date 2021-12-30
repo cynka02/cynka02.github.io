@@ -19,34 +19,46 @@ body
 	height: 75%;
 	width: 100%;
 }
-.shadowkeys
-{
-	height: 100%;
-	width: 100%;
-	border-radius: 10px;
-	border-bottom: 1px solid #c8c8c8;
-	background: linear-gradient(90deg, #6dff5f 0%, transparent 0%);
-	transition: background-color 0.6s ease;
-}
 .rows
 {
-	height: 20%;
+	height: 19%;
 	width: 100%;
+	text-align: center;
+	margin-top: 0.5%;
 }
 .keys
 {
 	height: 95%;
 	width: 6%;
-	background: linear-gradient(to top, #6dff5f 0%, #eeeeee 0%);
+	display: inline-block;
 }
-.keys, #Backspace, #Tab, #CapsLock, .LShift, .PShift, #ControlRight, #ControlLeft, #AltLeft, #AltRight, #Space, #Wind
+.bars
+{
+	width: 70%;
+	height: 10%;
+	position: relative;
+	margin: 0 auto;
+	margin-top: -17%;
+	border: 1px solid black;
+	background: linear-gradient(to right, red 20%, #eeeeee 0%);
+	border-radius: 5px;
+	display: none;
+}
+#qBar, #wBar, #eBar, #rBar, #tBar, #yBar, #uBar, #iBar, #oBar, #pBar, #aBar, #sBar, #dBar, #fBar, #gBar, #hBar, #jBar, #kBar, #lBar, #zBar, #xBar, #cBar, #vBar, #bBar, #nBar, #mBar
+{
+	margin-top: -9.5%;
+}
+.alttext
+{
+	font-size: 17px;
+	margin-left: 4%;
+}
+.keys, #Backspace, #CapsLock, .Shift, #Space
 {
 	font-size: 35px;
 	background-color: #eeeeee;
 	box-shadow: 1px 2px 2px 0px #787878;
 	border-bottom: 1px solid #c8c8c8;
-	display: block;
-	float: left;
 	font-family: Bradley Hand, cursive;
 	margin-right: 0.25%;
 	margin-left: 0.25%;
@@ -60,51 +72,25 @@ body
 {
 	height: 95%;
 	width: 14%;
-}
-#Tab
-{
-	height: 95%;
-	width: 10%;
+	display: inline-block;
 }
 #CapsLock
 {
 	height: 95%;
 	width: 11.1111111%;
+	display: inline-block;
 }
-.LShift
+.Shift
 {
 	height: 95%;
-	width: 15.555555556%;
-}
-.PShift
-{
-	height: 95%;
-	width: 17.7777778%;
-}
-#ControlLeft
-{
-	height: 95%;
-	width: 9.8888888%;
-}
-#ControlRight
-{
-	height: 95%;
-	width: 9.3%;
-}
-#AltLeft, #AltRight
-{
-	height: 95%;
-	width: 8.2%;
-}
-#Wind
-{
-	height: 95%;
-	width: 7.9%;
+	width: 15%;
+	display: inline-block;
 }
 #Space
 {
 	height: 95%;
 	width: 36%;
+	display: inline-block;
 }
 #pole
 {
