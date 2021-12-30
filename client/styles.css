@@ -2,7 +2,6 @@ body
 {
 	margin: 0;
 	padding: 0;
-	background-color: #fcffed;
 }
 #main
 {
@@ -18,6 +17,7 @@ body
 {
 	height: 75%;
 	width: 100%;
+	background-color: #fcffed;
 }
 .rows
 {
@@ -92,25 +92,36 @@ body
 	width: 36%;
 	display: inline-block;
 }
+#Help
+{
+	position: relative;
+	margin: 0 auto;
+	width: 100%;
+	height: 20%;
+	margin-top: -6%;
+	font-size: 13;
+	text-align: center;
+	font-family: none;
+}
 #pole
 {
 	display: block;
 	width: 100%;
 	height: 19%;
+	background-color: #fcffed;
 }
 #poleramka
 {
-	height: 100%;
-	width: 50%;
+	height: 50%;
+	width: 90%;
 	margin: auto;
-	line-height: auto;
-	font-size: 15;
+	padding-top: 2.2%;
+	font-size: 15px;
 	text-align: center;
 }
 #poletekst
 {
-	font-size: 70;
+	font-size: 60px;
 	text-align: center;
-	padding-top: 3%;
 	font-family: Bradley Hand, cursive;
 }
