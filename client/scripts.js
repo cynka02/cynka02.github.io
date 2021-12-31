@@ -166,7 +166,7 @@ function keydown(event)
 		Caps = 0;
     }
 	
-	// Highlight and input key
+	// Highlight, play sound and input key
 	if (characters.includes(name) == true){
 		document.getElementById('audio').currentTime = 0;
 		document.getElementById('audio').play();
@@ -315,6 +315,7 @@ function clearcolors(idname){
 		document.getElementById(idname).style.backgroundColor = "#eeeeee";
 	} else {}
 }
+
 function check(){
 	if (inputfield.join("") == "sound mute"){document.getElementById("audio").volume = 0;}
 	if (inputfield.join("") == "sound unmute" && audiovol != 0){
@@ -352,8 +353,20 @@ function check(){
 	} else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume > 0.4){
 		document.getElementById("audio").volume = 1; audiovol = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "save"){alert("So far there is no save function :(");}
-	if (inputfield.join("") == "help"){alert("Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!\r\n\r\nCommands:\r\nsave   -> manual save (auto for purchase)\r\nsound mute/unmute\r\nsound-/--/---   -> decrease sound volume by 0.2/0.4/0.6\r\nsound+/++/+++   -> increase sound volume by 0.2/0.4/0.6");}
+	if (inputfield.join("") == "save"){
+		document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
+		document.getElementById("AlertText").innerHTML = "So far there is no save function :(";
+		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/20 + "px;";
+		document.getElementById("AlertConfirm").style = "display: block;";
+		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+	}
+	if (inputfield.join("") == "help"){
+		document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
+		document.getElementById("AlertText").innerHTML = "Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!<br /><br />Commands:<br />save&nbsp;&nbsp;&nbsp;-> manual save (auto for purchase)<br />sound mute/unmute<br />sound-/--/---&nbsp;&nbsp;&nbsp;-> decrease sound volume by 0.2/0.4/0.6<br />sound+/++/+++&nbsp;&nbsp;&nbsp;-> increase sound volume by 0.2/0.4/0.6";
+		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/25 + "px;";
+		document.getElementById("AlertConfirm").style = "display: block;";
+		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+	}
 	if (commands.includes(inputfield.join("")) == false){
 		socket.emit('message', inputfield.join(""));
 		inputfield = [];
@@ -363,6 +376,18 @@ function check(){
 		inputfield = [];
 	}
 }
+// Alert handling for mobile and PC
+document.getElementById("AlertConfirm").addEventListener("touchend", function(){
+	document.getElementById("Alert").style = "display: none;";
+	document.getElementById("AlertConfirm").style = "display: none;";
+})
+document.getElementById("AlertConfirm").onclick = function(){
+	document.getElementById("Alert").style = "display: none;";
+	document.getElementById("AlertConfirm").style = "display: none;";
+}
+
+
+// Mobile implementation
 var isMobile = {
     Android: function() {
         return navigator.userAgent.match(/Android/i);
@@ -582,16 +607,19 @@ document.getElementById("Space").addEventListener("touchend", function(){
 	}
 })
 document.getElementById("Backspace").addEventListener("touchend", function(){
+	document.getElementById("Backspace").style.backgroundColor = "#6dff5f";
+	setTimeout(clearcolors, 400, "Backspace");
 	if (inputfield.length != 0){
-		Mobile(this.id, "");
 		inputfield.pop();
-		inputfield.pop();
-		document.getElementById("poletekst").innerHTML = inputfield.join("");
-	}
-	else{
-		document.getElementById("Backspace").style.backgroundColor = "#6dff5f";
-		setTimeout(clearcolors, 400, "Backspace");
-	}
+		try{clearTimeout(g);}catch{}
+		if (inputfield.length == 0){
+			document.getElementById("poletekst").innerHTML = "...";
+		}
+		else{
+			document.getElementById("poletekst").innerHTML = inputfield.join("");
+			g = setTimeout(check, TimeToCheck);
+		}
+	} else {}
 })
 document.getElementById("1").addEventListener("touchend", function(){
 	var id = this.id + "Text";
@@ -688,6 +716,9 @@ document.getElementById("/").addEventListener("touchend", function(){
 	var id = this.id + "Text";
 	Mobile(this.id, document.getElementById(id).innerHTML);
 })
+
+
+// Socket.io
 socket.on('poletekst', function(text) {
    document.getElementById("poletekst").innerHTML = text;
 });
