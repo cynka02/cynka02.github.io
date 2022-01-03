@@ -6,33 +6,79 @@ var characterscodes = ["Backspace", "CapsLock", "Space", "ShiftLeft", "Backslash
 var commands = ["sound mute", "sound unmute", "save", "help", "sound-", "sound--", "sound---", "sound+", "sound++", "sound+++"]
 var Caps = 0;
 var Shift = 0;
-var audiovol = 1;
 var TimeToCheck = 1000;
+var AlertType = "";
+var ActiveLetter = "";
+var g;
+var c;
+var ActiveLetterCount = 0;
+var ActiveLetterMax = 0;
+var ActiveLetterSpeed = 0;
+var ActiveLetterCap = 0;
+var Player = {
+	volume: 1,
+	Letters: {
+		// Czy małe, Czy duże, ilość małych, ilość dużych, max małych, max dużych, prędkość małych, prędkość dużych
+		a: [true, false, 0, 0, 5, 5, 0.2, 0.1],
+		b: [true, false, 0, 0, 5, 5, 0.19, 0.09],
+		c: [true, false, 0, 0, 5, 5, 0.18, 0.08],
+		d: [false, false, 0, 0, 5, 5, 0.18, 0.08],
+		e: [false, false, 0, 0, 5, 5, 0.17, 0.07],
+		f: [false, false, 0, 0, 5, 5, 0.16, 0.06],
+		g: [false, false, 0, 0, 5, 5, 0.16, 0.06],
+		h: [false, false, 0, 0, 5, 5, 0.15, 0.05],
+		i: [false, false, 0, 0, 5, 5, 0.14, 0.04],
+		j: [false, false, 0, 0, 5, 5, 0.14, 0.04],
+		k: [false, false, 0, 0, 5, 5, 0.13, 0.03],
+		l: [false, false, 0, 0, 5, 5, 0.13, 0.03],
+		m: [false, false, 0, 0, 5, 5, 0.12, 0.02],
+		n: [false, false, 0, 0, 5, 5, 0.12, 0.02],
+		o: [false, false, 0, 0, 5, 5, 0.11, 0.01],
+		p: [false, false, 0, 0, 5, 5, 0.1, 0.009],
+		q: [false, false, 0, 0, 5, 5, 0.1, 0.009],
+		r: [false, false, 0, 0, 5, 5, 0.09, 0.008],
+		s: [false, false, 0, 0, 5, 5, 0.08, 0.007],
+		t: [false, false, 0, 0, 5, 5, 0.07, 0.006],
+		u: [false, false, 0, 0, 5, 5, 0.06, 0.005],
+		v: [false, false, 0, 0, 5, 5, 0.05, 0.004],
+		w: [false, false, 0, 0, 5, 5, 0.04, 0.003],
+		x: [false, false, 0, 0, 5, 5, 0.03, 0.002],
+		y: [false, false, 0, 0, 5, 5, 0.02, 0.002],
+		z: [false, false, 0, 0, 5, 5, 0.01, 0.001]
+	}
+};
 
-function load(){
-	var classkeys = document.getElementsByClassName("keys");
-	for (let i=0; i < classkeys.length; i++){
-		classkeys[i].style = "line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
-	}
-	for (let i=0; i < characterscodes.length; i++){
-		document.getElementById(characterscodes[i]).style = "line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
-	}
-	document.getElementById("Help").style = "margin-top: " + (-(classkeys[0].clientHeight-12)/2) +"px;";
-}
+
+
 function changecaps(value){
 	var tempchar = characters.substring(26,52);
 	var tempchar2 = characters.substring(0,26);
 	if (value == 1){
 		for (let i=0; i < tempchar.length; i++){
-			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar2[i];
+			if (ActiveLetter.toLowerCase() != tempchar[i]){
+				document.getElementById(tempchar[i]+"Text").innerHTML = tempchar2[i];
+				if (Player.Letters[tempchar[i]][1] == true){
+					barcolors(tempchar[i], (Player.Letters[tempchar[i]][3]/Player.Letters[tempchar[i]][5]*100));
+				} else {
+					document.getElementById(tempchar[i]+"Bar").style = "display: none;";
+				}
+			}
 		}
 	}
 	else if (value == 0){
 		for (let i=0; i < tempchar.length; i++){
-			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i];
+			if (ActiveLetter.toLowerCase() != tempchar[i]){
+				document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i];
+				if (Player.Letters[tempchar[i]][0] == true){
+					barcolors(tempchar[i], (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100));
+				} else {
+					document.getElementById(tempchar[i]+"Bar").style = "display: none;";
+				}
+			}
 		}
 	}
 }
+
 function changeshift(value){
 	if (value == 1){
 		document.getElementById("1Text").innerHTML = "!";
@@ -120,11 +166,7 @@ function changeshift(value){
 	}
 }
 
-window.addEventListener('resize', load);
-document.addEventListener("keyup", keyup);
-document.addEventListener("keydown", keydown);
-function keyup(event)
-{ 
+function keyup(event){
 	if ((event.code == "ShiftRight" || event.code == "ShiftLeft") && Caps == 0){
 		changecaps(0);
 		changeshift(0);
@@ -140,8 +182,8 @@ function keyup(event)
 		setTimeout(clearcolors, 200, "ShiftLeft");
 	} else {}
 }
-function keydown(event)
-{
+
+function keydown(event){
 	// Get key codes
 	var name = event.key;
 	var code = event.code;
@@ -170,8 +212,11 @@ function keydown(event)
 	if (characters.includes(name) == true){
 		document.getElementById('audio').currentTime = 0;
 		document.getElementById('audio').play();
+		document.getElementById(name.toLowerCase()).style.transition = "background-color 0.6s ease";
 		document.getElementById(name.toLowerCase()).style.backgroundColor = "#6dff5f";
-		setTimeout(clearcolors, 400, name.toLowerCase());
+		if (ActiveLetter != name){
+			c = setTimeout(clearcolors, 400, name.toLowerCase());
+		} else {}
 		try{clearTimeout(g);}catch{}
 		inputfield.push(name)
 		document.getElementById("poletekst").innerHTML = inputfield.join("");
@@ -211,7 +256,25 @@ function keydown(event)
 		} else{}
 		document.getElementById(code).style.backgroundColor = "#6dff5f";
 		setTimeout(clearcolors, 400, code);
-	} 
+	}
+	else if (code == "Enter"){
+		if (AlertType != ""){
+			if (AlertType == "Info"){
+				document.getElementById("Alert").style = "display: none;";
+				document.getElementById("AlertConfirm").style = "display: none;";
+			}
+			else if (AlertType == "Reset"){
+				reset();
+				document.getElementById("Alert").style = "display: none;";
+				document.getElementById("AlertConfirm").style = "display: none;";
+			}
+			AlertType = "";
+		}
+		else if(inputfield.join("") != ""){
+			try{clearTimeout(g);}catch{}
+			check();
+		}
+	}
 	else if (charactersspecial.includes(name) == true){
 		document.getElementById('audio').currentTime = 0;
 		document.getElementById('audio').play();
@@ -309,85 +372,238 @@ function keydown(event)
 
 function clearcolors(idname){
 	if ((idname != "CapsLock" || Caps == 0) && (idname != "ShiftRight" && idname != "ShiftLeft")){
-		document.getElementById(idname).style.backgroundColor = "#eeeeee";
+		document.getElementById(idname).style.transition = "background-color 0.6s ease";
+		document.getElementById(idname).style.background = "#eeeeee";
 	} else {} 
 	if ((idname == "ShiftRight" || idname == "ShiftLeft") && Shift == 0){
-		document.getElementById(idname).style.backgroundColor = "#eeeeee";
+		document.getElementById(idname).style.transition = "background-color 0.6s ease";
+		document.getElementById(idname).style.background = "#eeeeee";
 	} else {}
 }
 
+function barcolors(id, percentage){
+	document.getElementById(id+"Bar").style = "display: block; background: linear-gradient(to right, hsl(" + percentage + ", 100%, 55%) " + percentage + "%, #eeeeee 0%);";
+}
+
+function resetlettersbackground(){
+	var tempchar = characters.substring(26,52);
+	for (let i=0; i < tempchar.length; i++){
+		try{clearTimeout(c);}catch{};
+		document.getElementById(tempchar[i]).style.transition = "background-color 0s ease";
+		document.getElementById(tempchar[i]).style.background = "#eeeeee";
+		if ((Caps == 1 && Shift == 0) || (Shift == 1 && Caps == 0)){
+			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i].toUpperCase();
+			if (Player.Letters[tempchar[i]][1] == true){
+				barcolors(tempchar[i], (Player.Letters[tempchar[i]][3]/Player.Letters[tempchar[i]][5]*100));
+			} else {
+				document.getElementById(tempchar[i]+"Bar").style = "display: none;";
+			}
+		}
+		else{
+			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i];
+			if (Player.Letters[tempchar[i]][0] == true){
+				barcolors(tempchar[i], (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100));
+			} else {
+				document.getElementById(tempchar[i]+"Bar").style = "display: none;";
+			}
+		}
+	}
+}
+
 function check(){
-	if (inputfield.join("") == "sound mute"){document.getElementById("audio").volume = 0;}
-	if (inputfield.join("") == "sound unmute" && audiovol != 0){
-		document.getElementById("audio").volume = audiovol;
-	} else if (inputfield.join("") == "sound unmute" && audiovol == 0){
+	if (inputfield.join("") == "sound mute"){
+		document.getElementById("audio").volume = 0;
+	}
+	else if (inputfield.join("") == "sound unmute" && Player.volume != 0){
+		document.getElementById("audio").volume = Player.volume;
+	} 
+	else if (inputfield.join("") == "sound unmute" && Player.volume == 0){
 		document.getElementById("audio").volume = 1;
 	}
-	if (inputfield.join("") == "sound-" && document.getElementById("audio").volume >= 0.2){
-		document.getElementById("audio").volume -= 0.2; audiovol = document.getElementById("audio").volume;
-	} else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume < 0.2){
-		document.getElementById("audio").volume = 0; audiovol = document.getElementById("audio").volume;
+	else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume >= 0.2){
+		document.getElementById("audio").volume -= 0.2; Player.volume = document.getElementById("audio").volume;
+	} 
+	else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume < 0.2){
+		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "sound--" && document.getElementById("audio").volume >= 0.4){
-		document.getElementById("audio").volume -= 0.4; audiovol = document.getElementById("audio").volume;
-	} else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume < 0.4){
-		document.getElementById("audio").volume = 0; audiovol = document.getElementById("audio").volume;
+	else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume >= 0.4){
+		document.getElementById("audio").volume -= 0.4; Player.volume = document.getElementById("audio").volume;
+	} 
+	else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume < 0.4){
+		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "sound---" && document.getElementById("audio").volume >= 0.6){
-		document.getElementById("audio").volume -= 0.6; audiovol = document.getElementById("audio").volume;
-	} else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume < 0.6){
-		document.getElementById("audio").volume = 0; audiovol = document.getElementById("audio").volume;
+	else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume >= 0.6){
+		document.getElementById("audio").volume -= 0.6; Player.volume = document.getElementById("audio").volume;
+	} 
+	else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume < 0.6){
+		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "sound+" && document.getElementById("audio").volume <= 0.8){
-		document.getElementById("audio").volume += 0.2; audiovol = document.getElementById("audio").volume;
-	} else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume > 0.8){
-		document.getElementById("audio").volume = 1; audiovol = document.getElementById("audio").volume;
+	else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume <= 0.8){
+		document.getElementById("audio").volume += 0.2; Player.volume = document.getElementById("audio").volume;
+	} 
+	else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume > 0.8){
+		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "sound++" && document.getElementById("audio").volume <= 0.6){
-		document.getElementById("audio").volume += 0.4; audiovol = document.getElementById("audio").volume;
-	} else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume > 0.6){
-		document.getElementById("audio").volume = 1; audiovol = document.getElementById("audio").volume;
+	else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume <= 0.6){
+		document.getElementById("audio").volume += 0.4; Player.volume = document.getElementById("audio").volume;
+	} 
+	else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume > 0.6){
+		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume <= 0.4){
-		document.getElementById("audio").volume += 0.6; audiovol = document.getElementById("audio").volume;
-	} else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume > 0.4){
-		document.getElementById("audio").volume = 1; audiovol = document.getElementById("audio").volume;
+	else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume <= 0.4){
+		document.getElementById("audio").volume += 0.6; Player.volume = document.getElementById("audio").volume;
+	} 
+	else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume > 0.4){
+		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume;
 	}
-	if (inputfield.join("") == "save"){
+	else if (inputfield.join("") == "save"){
+		save();
 		document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
-		document.getElementById("AlertText").innerHTML = "So far there is no save function :(";
-		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/20 + "px;";
+		document.getElementById("AlertText").innerHTML = "Saved!";
+		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/10 + "px;";
 		document.getElementById("AlertConfirm").style = "display: block;";
-		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; font-size:" + document.getElementById("Alert").clientWidth/15 +"px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+		document.getElementById("AlertConfirm").innerHTML = "Ok";
+		AlertType = "Info";
 	}
-	if (inputfield.join("") == "help"){
+	else if (inputfield.join("") == "help"){
 		document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
 		document.getElementById("AlertText").innerHTML = "Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!<br /><br />Commands:<br />save&nbsp;&nbsp;&nbsp;-> manual save (auto for purchase)<br />sound mute/unmute<br />sound-/--/---&nbsp;&nbsp;&nbsp;-> decrease sound volume by 0.2/0.4/0.6<br />sound+/++/+++&nbsp;&nbsp;&nbsp;-> increase sound volume by 0.2/0.4/0.6";
 		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/25 + "px;";
 		document.getElementById("AlertConfirm").style = "display: block;";
 		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+		document.getElementById("AlertConfirm").innerHTML = "Ok";
+		AlertType = "Info";
 	}
-	if (commands.includes(inputfield.join("")) == false){
-		socket.emit('message', inputfield.join(""));
-		inputfield = [];
-	}
-	else {
-		document.getElementById("poletekst").innerHTML = "...";
-		inputfield = [];
-	}
+	if (commands.includes(inputfield.join("")) == false && characters.includes(inputfield.join("")) == true && Player.Letters[inputfield.join("").toLowerCase()] != undefined){
+		if (inputfield.join("") === inputfield.join("").toLowerCase() && Player.Letters[inputfield.join("")][0] == true && Player.Letters[inputfield.join("")][2] < Player.Letters[inputfield.join("")][4]){
+			if (ActiveLetter != inputfield.join("")){
+				resetlettersbackground();
+				ActiveLetter = inputfield.join("");
+				ActiveLetterCount = Player.Letters[inputfield.join("")][2];
+				ActiveLetterMax = Player.Letters[inputfield.join("")][4];
+				ActiveLetterSpeed = Player.Letters[inputfield.join("")][6];
+				ActiveLetterCap = 0;
+			}	
+			else{
+				ActiveLetter = "";
+				ActiveLetterCount = 0;
+				ActiveLetterMax = 0;
+				ActiveLetterSpeed = 0;
+				ActiveLetterCap = 0;
+				resetlettersbackground();
+			}
+		}
+		else if (inputfield.join("") !== inputfield.join("").toLowerCase() && Player.Letters[inputfield.join("").toLowerCase()][1] == true && Player.Letters[inputfield.join("").toLowerCase()][3] < Player.Letters[inputfield.join("").toLowerCase()][5]){
+			if (ActiveLetter != inputfield.join("")){
+				resetlettersbackground();
+				ActiveLetter = inputfield.join("");
+				ActiveLetterCount = Player.Letters[inputfield.join("").toLowerCase()][3];
+				ActiveLetterMax = Player.Letters[inputfield.join("").toLowerCase()][5];
+				ActiveLetterSpeed = Player.Letters[inputfield.join("").toLowerCase()][7];
+				ActiveLetterCap = 0;
+			}
+			else{
+				ActiveLetter = "";
+				ActiveLetterCount = 0;
+				ActiveLetterMax = 0;
+				ActiveLetterSpeed = 0;
+				ActiveLetterCap = 0;
+				resetlettersbackground();
+			}
+		}
+	} else {}
+	document.getElementById("poletekst").innerHTML = "...";
+	inputfield = [];
 }
+
+function getletters(){
+	if (ActiveLetter != ""){
+		if (ActiveLetterCap < ((1/ActiveLetterSpeed)*100)){
+			if (ActiveLetter === ActiveLetter.toLowerCase()){
+				ActiveLetterCap += 1;
+				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100));
+				document.getElementById(ActiveLetter+"Text").innerHTML = ActiveLetter;
+				document.getElementById(ActiveLetter).style.background = "linear-gradient(to right, hsl(" + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + ", 100%, 55%) " + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + "%, #eeeeee 0%)";
+			}
+			else{
+				ActiveLetterCap += 1;
+				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
+				document.getElementById(ActiveLetter.toLowerCase()+"Text").innerHTML = ActiveLetter;
+				document.getElementById(ActiveLetter.toLowerCase()).style.background = "linear-gradient(to right, hsl(" + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + ", 100%, 55%) " + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + "%, #eeeeee 0%)";
+			}
+		}
+		else if (ActiveLetterCap >= ((1/ActiveLetterSpeed)*100)){
+			if (ActiveLetter === ActiveLetter.toLowerCase()){
+				ActiveLetterCount += 1;
+				Player.Letters[ActiveLetter][2] += 1;
+				document.getElementById(ActiveLetter).style.background = "linear-gradient(to right, hsl(0, 100%, 55%) 0%, #eeeeee 0%)";
+				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100));
+				if (ActiveLetterCount == ActiveLetterMax){
+					ActiveLetter = "";
+					ActiveLetterCount = 0;
+					ActiveLetterMax = 0;
+					ActiveLetterSpeed = 0;
+					ActiveLetterCap = 0;
+				}
+				else{
+					ActiveLetterCap = 0;
+				}
+			}
+			else if (ActiveLetter !== ActiveLetter.toLowerCase()){
+				ActiveLetterCount += 1;
+				Player.Letters[ActiveLetter.toLowerCase()][3] += 1;
+				document.getElementById(ActiveLetter.toLowerCase()).style.background = "linear-gradient(to right, hsl(0, 100%, 55%) 0%, #eeeeee 0%)";
+				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
+				if (ActiveLetterCount == ActiveLetterMax){
+					ActiveLetter = "";
+					ActiveLetterCount = 0;
+					ActiveLetterMax = 0;
+					ActiveLetterSpeed = 0;
+					ActiveLetterCap = 0;
+				}
+				else{
+					ActiveLetterCap = 0;
+				}
+			}
+		}
+	} else {}
+} setInterval(getletters, 10);
+
 // Alert handling for mobile and PC
 document.getElementById("AlertConfirm").addEventListener("touchend", function(){
-	document.getElementById("Alert").style = "display: none;";
-	document.getElementById("AlertConfirm").style = "display: none;";
+	if (AlertType == "Info"){
+		document.getElementById("Alert").style = "display: none;";
+		document.getElementById("AlertConfirm").style = "display: none;";
+	}
+	else if (AlertType == "Reset"){
+		reset();
+		document.getElementById("Alert").style = "display: none;";
+		document.getElementById("AlertConfirm").style = "display: none;";
+	}
+	AlertType = "";
 })
 document.getElementById("AlertConfirm").onclick = function(){
-	document.getElementById("Alert").style = "display: none;";
-	document.getElementById("AlertConfirm").style = "display: none;";
+	if (AlertType == "Info"){
+		document.getElementById("Alert").style = "display: none;";
+		document.getElementById("AlertConfirm").style = "display: none;";
+	}
+	else if (AlertType == "Reset"){
+		reset();
+		document.getElementById("Alert").style = "display: none;";
+		document.getElementById("AlertConfirm").style = "display: none;";
+	}
+	AlertType = "";
 }
+
+// Events
+window.addEventListener('resize', load);
+document.addEventListener("keyup", keyup);
+document.addEventListener("keydown", keydown);
 
 
 // Mobile implementation
+//{
 var isMobile = {
     Android: function() {
         return navigator.userAgent.match(/Android/i);
@@ -716,7 +932,80 @@ document.getElementById("/").addEventListener("touchend", function(){
 	var id = this.id + "Text";
 	Mobile(this.id, document.getElementById(id).innerHTML);
 })
+//}
 
+// save load reset
+function save(){
+	var Save =
+	{
+		Player: Player
+	}
+	localStorage.setItem("Saved", JSON.stringify(Save));
+}
+setTimeout(save, 30000);
+
+function load(){
+	var SavedGame = JSON.parse(localStorage.getItem("Saved"));
+	
+	// Wczytywanie localstorage
+	if (SavedGame){
+		if (typeof SavedGame.Player !== "undefined") PlayerLoaded = SavedGame.Player;
+		
+		// Sprawdzanie rożnic między zapisanym playerem a dostarczonym przez plik
+		if (Object.keys(PlayerLoaded) === Object.keys(Player)){
+			Player = PlayerLoaded;
+		}
+		else{
+			Object.entries(Player).forEach(([key, value]) => {
+				if (Object.keys(PlayerLoaded).includes(key) == false){
+					PlayerLoaded[key] = value;
+				} else{}
+			});
+			Player = PlayerLoaded;
+		}
+		document.getElementById("audio").volume = Player.volume;
+	}
+	
+	// Wczytywanie, sprawdzanie i wyświetlanie odblokowanych liter
+	var letterkeys = Object.keys(Player.Letters);
+	for (let i=0; i < letterkeys.length; i++){
+		if (Player.Letters[letterkeys[i]][0] == true){
+			barcolors(Object.keys(Player.Letters)[i], ((Player.Letters[letterkeys[i]][2]/Player.Letters[letterkeys[i]][4])*100));
+		}
+		else{
+			document.getElementById(Object.keys(Player.Letters)[i]+"Bar").style = "display: none;";
+		}
+		/*else if (Player.Letters[letterkeys[i]][0] == false && Player.Letters[letterkeys[i]][1] != 0){
+			document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
+			document.getElementById("AlertText").innerHTML = "Detected awkward data change!!!<br /><br />You must delete saved profile to continue.";
+			document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/15 + "px;";
+			document.getElementById("AlertConfirm").style = "display: block;";
+			document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; font-size:" + document.getElementById("Alert").clientWidth/20 +"px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+			document.getElementById("AlertConfirm").innerHTML = "Hard reset";
+			AlertType = "Reset";
+		} */
+	}
+	loadsize();
+	save();
+	// info do konsoli
+	socket.emit('LogPlayer', Player);
+}
+
+function loadsize(){
+	var classkeys = document.getElementsByClassName("keys");
+	for (let i=0; i < classkeys.length; i++){
+		classkeys[i].style = "line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
+	}
+	for (let i=0; i < characterscodes.length; i++){
+		document.getElementById(characterscodes[i]).style = "line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
+	}
+	document.getElementById("Help").style = "margin-top: " + (-(classkeys[0].clientHeight-12)/2) +"px;";
+}
+
+function reset(){
+	localStorage.clear();
+	location.reload();
+}
 
 // Socket.io
 socket.on('poletekst', function(text) {
