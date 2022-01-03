@@ -464,7 +464,7 @@ function check(){
 	}
 	else if (inputfield.join("") == "help"){
 		document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
-		document.getElementById("AlertText").innerHTML = "Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!<br /><br />Commands:<br />save&nbsp;&nbsp;&nbsp;-> manual save (auto for purchase)<br />sound mute/unmute<br />sound-/--/---&nbsp;&nbsp;&nbsp;-> decrease sound volume by 0.2/0.4/0.6<br />sound+/++/+++&nbsp;&nbsp;&nbsp;-> increase sound volume by 0.2/0.4/0.6";
+		document.getElementById("AlertText").innerHTML = "Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!<br />You can also press enter<br /><br />Commands:<br />save&nbsp;&nbsp;&nbsp;-> manual save (auto every 30 seconds)<br />sound mute/unmute<br />sound-/--/---&nbsp;&nbsp;&nbsp;-> decrease sound volume by 0.2/0.4/0.6<br />sound+/++/+++&nbsp;&nbsp;&nbsp;-> increase sound volume by 0.2/0.4/0.6";
 		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/25 + "px;";
 		document.getElementById("AlertConfirm").style = "display: block;";
 		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
