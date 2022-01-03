@@ -18,7 +18,6 @@ var ActiveLetterCap = 0;
 var Player = {
 	volume: 1,
 	Letters: {
-		// Czy małe, Czy duże, ilość małych, ilość dużych, max małych, max dużych, prędkość małych, prędkość dużych
 		a: [true, false, 0, 0, 5, 5, 0.2, 0.1],
 		b: [true, false, 0, 0, 5, 5, 0.19, 0.09],
 		c: [true, false, 0, 0, 5, 5, 0.18, 0.08],
@@ -184,11 +183,9 @@ function keyup(event){
 }
 
 function keydown(event){
-	// Get key codes
 	var name = event.key;
 	var code = event.code;
 	
-	// Check for CapsLock
 	if (event.getModifierState('CapsLock')) {
         changecaps(1);
 		Caps = 1;
@@ -208,7 +205,6 @@ function keydown(event){
 		Caps = 0;
     }
 	
-	// Highlight, play sound and input key
 	if (characters.includes(name) == true){
 		document.getElementById('audio').currentTime = 0;
 		document.getElementById('audio').play();
@@ -570,7 +566,6 @@ function getletters(){
 	} else {}
 } setInterval(getletters, 10);
 
-// Alert handling for mobile and PC
 document.getElementById("AlertConfirm").addEventListener("touchend", function(){
 	if (AlertType == "Info"){
 		document.getElementById("Alert").style = "display: none;";
@@ -596,14 +591,11 @@ document.getElementById("AlertConfirm").onclick = function(){
 	AlertType = "";
 }
 
-// Events
 window.addEventListener('resize', load);
 document.addEventListener("keyup", keyup);
 document.addEventListener("keydown", keydown);
 
 
-// Mobile implementation
-//{
 var isMobile = {
     Android: function() {
         return navigator.userAgent.match(/Android/i);
@@ -932,9 +924,8 @@ document.getElementById("/").addEventListener("touchend", function(){
 	var id = this.id + "Text";
 	Mobile(this.id, document.getElementById(id).innerHTML);
 })
-//}
 
-// save load reset
+
 function save(){
 	var Save =
 	{
@@ -947,11 +938,9 @@ setTimeout(save, 30000);
 function load(){
 	var SavedGame = JSON.parse(localStorage.getItem("Saved"));
 	
-	// Wczytywanie localstorage
 	if (SavedGame){
 		if (typeof SavedGame.Player !== "undefined") PlayerLoaded = SavedGame.Player;
 		
-		// Sprawdzanie rożnic między zapisanym playerem a dostarczonym przez plik
 		if (Object.keys(PlayerLoaded) === Object.keys(Player)){
 			Player = PlayerLoaded;
 		}
@@ -966,7 +955,6 @@ function load(){
 		document.getElementById("audio").volume = Player.volume;
 	}
 	
-	// Wczytywanie, sprawdzanie i wyświetlanie odblokowanych liter
 	var letterkeys = Object.keys(Player.Letters);
 	for (let i=0; i < letterkeys.length; i++){
 		if (Player.Letters[letterkeys[i]][0] == true){
@@ -975,19 +963,9 @@ function load(){
 		else{
 			document.getElementById(Object.keys(Player.Letters)[i]+"Bar").style = "display: none;";
 		}
-		/*else if (Player.Letters[letterkeys[i]][0] == false && Player.Letters[letterkeys[i]][1] != 0){
-			document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
-			document.getElementById("AlertText").innerHTML = "Detected awkward data change!!!<br /><br />You must delete saved profile to continue.";
-			document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/15 + "px;";
-			document.getElementById("AlertConfirm").style = "display: block;";
-			document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; font-size:" + document.getElementById("Alert").clientWidth/20 +"px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
-			document.getElementById("AlertConfirm").innerHTML = "Hard reset";
-			AlertType = "Reset";
-		} */
 	}
 	loadsize();
 	save();
-	// info do konsoli
 	socket.emit('LogPlayer', Player);
 }
 
@@ -1007,7 +985,6 @@ function reset(){
 	location.reload();
 }
 
-// Socket.io
 socket.on('poletekst', function(text) {
    document.getElementById("poletekst").innerHTML = text;
 });
