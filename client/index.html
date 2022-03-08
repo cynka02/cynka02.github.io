@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Keyboard clicker</title>
+	<title>Keyboard game</title>
 	<script src="/socket.io/socket.io.js"></script>
 	<link rel="stylesheet" href="styles.css">
 	<meta charset="utf-8">
@@ -14,64 +14,70 @@
 </div>
 <div id="AlertConfirm">Ok</div>
 <div id="main">
-	<div id="menu"></div>
+	<div id="title">Keyboard game</div>
+	<div id="menu">
+		<div id="menu1"><span>jakies</span></div>
+		<div id="menu2"><span>fajne</span></div>
+		<div id="menu3"><span>ladne</span></div>
+		<div id="menu4"><span>ikonki</span></div>
+	</div>
 	<div id="keyboard">
 		<div class="rows">
-			<div class="keys" id="1"><span id="1Text">1</span><span id="1AltText" class="alttext">!</span><div class="bars" id="1Bar"></div></div>
-			<div class="keys" id="2"><span id="2Text">2</span><span id="2AltText" class="alttext">@</span><div class="bars" id="2Bar"></div></div>
-			<div class="keys" id="3"><span id="3Text">3</span><span id="3AltText" class="alttext">#</span><div class="bars" id="3Bar"></div></div>
-			<div class="keys" id="4"><span id="4Text">4</span><span id="4AltText" class="alttext">$</span><div class="bars" id="4Bar"></div></div>
-			<div class="keys" id="5"><span id="5Text">5</span><span id="5AltText" class="alttext">%</span><div class="bars" id="5Bar"></div></div>
-			<div class="keys" id="6"><span id="6Text">6</span><span id="6AltText" class="alttext">^</span><div class="bars" id="6Bar"></div></div>
-			<div class="keys" id="7"><span id="7Text">7</span><span id="7AltText" class="alttext">&amp;</span><div class="bars" id="7Bar"></div></div>
-			<div class="keys" id="8"><span id="8Text">8</span><span id="8AltText" class="alttext">*</span><div class="bars" id="8Bar"></div></div>
-			<div class="keys" id="9"><span id="9Text">9</span><span id="9AltText" class="alttext">(</span><div class="bars" id="9Bar"></div></div>
-			<div class="keys" id="0"><span id="0Text">0</span><span id="0AltText" class="alttext">)</span><div class="bars" id="0Bar"></div></div>
-			<div class="keys" id="-"><span id="-Text">-</span><span id="-AltText" class="alttext">_</span><div class="bars" id="-Bar"></div></div>
-			<div class="keys" id="="><span id="=Text">=</span><span id="=AltText" class="alttext">+</span><div class="bars" id="=Bar"></div></div>
+			<div class="keys" id="1"><span id="1Text">1</span><span id="1AltText" class="alttext">!</span><div class="bars" id="1Bar"></div><div class="Count" id="Count1">+1</div></div>
+			<div class="keys" id="2"><span id="2Text">2</span><span id="2AltText" class="alttext">@</span><div class="bars" id="2Bar"></div><div class="Count" id="Count2">+1</div></div>
+			<div class="keys" id="3"><span id="3Text">3</span><span id="3AltText" class="alttext">#</span><div class="bars" id="3Bar"></div><div class="Count" id="Count3">+1</div></div>
+			<div class="keys" id="4"><span id="4Text">4</span><span id="4AltText" class="alttext">$</span><div class="bars" id="4Bar"></div><div class="Count" id="Count4">+1</div></div>
+			<div class="keys" id="5"><span id="5Text">5</span><span id="5AltText" class="alttext">%</span><div class="bars" id="5Bar"></div><div class="Count" id="Count5">+1</div></div>
+			<div class="keys" id="6"><span id="6Text">6</span><span id="6AltText" class="alttext">^</span><div class="bars" id="6Bar"></div><div class="Count" id="Count6">+1</div></div>
+			<div class="keys" id="7"><span id="7Text">7</span><span id="7AltText" class="alttext">&amp;</span><div class="bars" id="7Bar"></div><div class="Count" id="Count7">+1</div></div>
+			<div class="keys" id="8"><span id="8Text">8</span><span id="8AltText" class="alttext">*</span><div class="bars" id="8Bar"></div><div class="Count" id="Count8">+1</div></div>
+			<div class="keys" id="9"><span id="9Text">9</span><span id="9AltText" class="alttext">(</span><div class="bars" id="9Bar"></div><div class="Count" id="Count9">+1</div></div>
+			<div class="keys" id="0"><span id="0Text">0</span><span id="0AltText" class="alttext">)</span><div class="bars" id="0Bar"></div><div class="Count" id="Count0">+1</div></div>
+			<div class="keys" id="-"><span id="-Text">-</span><span id="-AltText" class="alttext">_</span><div class="bars" id="-Bar"></div><div class="Count" id="Count-">+1</div></div>
+			<div class="keys" id="="><span id="=Text">=</span><span id="=AltText" class="alttext">+</span><div class="bars" id="=Bar"></div><div class="Count" id="Count=">+1</div></div>
 			<div id="Backspace">Backspace</div>
 		</div>
 		<div class="rows">
-			<div class="keys" id="q"><span id="qText">q</span><div class="bars" id="qBar"></div></div>
-			<div class="keys" id="w"><span id="wText">w</span><div class="bars" id="wBar"></div></div>
-			<div class="keys" id="e"><span id="eText">e</span><div class="bars" id="eBar"></div></div>
-			<div class="keys" id="r"><span id="rText">r</span><div class="bars" id="rBar"></div></div>
-			<div class="keys" id="t"><span id="tText">t</span><div class="bars" id="tBar"></div></div>
-			<div class="keys" id="y"><span id="yText">y</span><div class="bars" id="yBar"></div></div>
-			<div class="keys" id="u"><span id="uText">u</span><div class="bars" id="uBar"></div></div>
-			<div class="keys" id="i"><span id="iText">i</span><div class="bars" id="iBar"></div></div>
-			<div class="keys" id="o"><span id="oText">o</span><div class="bars" id="oBar"></div></div>
-			<div class="keys" id="p"><span id="pText">p</span><div class="bars" id="pBar"></div></div>
-			<div class="keys" id="["><span id="[Text">[</span><span id="[AltText" class="alttext">{</span><div class="bars" id="[Bar"></div></div>
-			<div class="keys" id="]"><span id="]Text">]</span><span id="]AltText" class="alttext">}</span><div class="bars" id="]Bar"></div></div>
+			<div class="keys" id="q"><span id="qText">q</span><div class="bars" id="qBar"></div><div class="Count" id="Countq">+1</div></div>
+			<div class="keys" id="w"><span id="wText">w</span><div class="bars" id="wBar"></div><div class="Count" id="Countw">+1</div></div>
+			<div class="keys" id="e"><span id="eText">e</span><div class="bars" id="eBar"></div><div class="Count" id="Counte">+1</div></div>
+			<div class="keys" id="r"><span id="rText">r</span><div class="bars" id="rBar"></div><div class="Count" id="Countr">+1</div></div>
+			<div class="keys" id="t"><span id="tText">t</span><div class="bars" id="tBar"></div><div class="Count" id="Countt">+1</div></div>
+			<div class="keys" id="y"><span id="yText">y</span><div class="bars" id="yBar"></div><div class="Count" id="County">+1</div></div>
+			<div class="keys" id="u"><span id="uText">u</span><div class="bars" id="uBar"></div><div class="Count" id="Countu">+1</div></div>
+			<div class="keys" id="i"><span id="iText">i</span><div class="bars" id="iBar"></div><div class="Count" id="Counti">+1</div></div>
+			<div class="keys" id="o"><span id="oText">o</span><div class="bars" id="oBar"></div><div class="Count" id="Counto">+1</div></div>
+			<div class="keys" id="p"><span id="pText">p</span><div class="bars" id="pBar"></div><div class="Count" id="Countp">+1</div></div>
+			<div class="keys" id="["><span id="[Text">[</span><span id="[AltText" class="alttext">{</span><div class="bars" id="[Bar"></div><div class="Count" id="Count[">+1</div></div>
+			<div class="keys" id="]"><span id="]Text">]</span><span id="]AltText" class="alttext">}</span><div class="bars" id="]Bar"></div><div class="Count" id="Count]">+1</div></div>
 		</div>
 		<div class="rows">
 			<div id="CapsLock">Caps</div>
-			<div class="keys" id="a"><span id="aText">a</span><div class="bars" id="aBar"></div></div>
-			<div class="keys" id="s"><span id="sText">s</span><div class="bars" id="sBar"></div></div>
-			<div class="keys" id="d"><span id="dText">d</span><div class="bars" id="dBar"></div></div>
-			<div class="keys" id="f"><span id="fText">f</span><div class="bars" id="fBar"></div></div>
-			<div class="keys" id="g"><span id="gText">g</span><div class="bars" id="gBar"></div></div>
-			<div class="keys" id="h"><span id="hText">h</span><div class="bars" id="hBar"></div></div>
-			<div class="keys" id="j"><span id="jText">j</span><div class="bars" id="jBar"></div></div>
-			<div class="keys" id="k"><span id="kText">k</span><div class="bars" id="kBar"></div></div>
-			<div class="keys" id="l"><span id="lText">l</span><div class="bars" id="lBar"></div></div>
-			<div class="keys" id=";"><span id=";Text">;</span><span id=";AltText" class="alttext">:</span><div class="bars" id=";Bar"></div></div>
-			<div class="keys" id="'"><span id="'Text">'</span><span id="'AltText" class="alttext">"</span><div class="bars" id="'Bar"></div></div>
-			<div class="keys" id="Backslash"><span id="BackslashText">\</span><span id="BackslashAltText" class="alttext">|</span><div class="bars" id="BackslashBar"></div></div>
+			<div class="keys" id="a"><span id="aText">a</span><div class="bars" id="aBar"></div><div class="Count" id="Counta">+1</div></div>
+			<div class="keys" id="s"><span id="sText">s</span><div class="bars" id="sBar"></div><div class="Count" id="Counts">+1</div></div>
+			<div class="keys" id="d"><span id="dText">d</span><div class="bars" id="dBar"></div><div class="Count" id="Countd">+1</div></div>
+			<div class="keys" id="f"><span id="fText">f</span><div class="bars" id="fBar"></div><div class="Count" id="Countf">+1</div></div>
+			<div class="keys" id="g"><span id="gText">g</span><div class="bars" id="gBar"></div><div class="Count" id="Countg">+1</div></div>
+			<div class="keys" id="h"><span id="hText">h</span><div class="bars" id="hBar"></div><div class="Count" id="Counth">+1</div></div>
+			<div class="keys" id="j"><span id="jText">j</span><div class="bars" id="jBar"></div><div class="Count" id="Countj">+1</div></div>
+			<div class="keys" id="k"><span id="kText">k</span><div class="bars" id="kBar"></div><div class="Count" id="Countk">+1</div></div>
+			<div class="keys" id="l"><span id="lText">l</span><div class="bars" id="lBar"></div><div class="Count" id="Countl">+1</div></div>
+			<div class="keys" id=";"><span id=";Text">;</span><span id=";AltText" class="alttext">:</span><div class="bars" id=";Bar"></div><div class="Count" id="Count;">+1</div></div>
+			<div class="keys" id="'"><span id="'Text">'</span><span id="'AltText" class="alttext">"</span><div class="bars" id="'Bar"></div><div class="Count" id="Count'">+1</div></div>
+			<div class="keys" id="Backslash"><span id="BackslashText">\</span><span id="BackslashAltText" class="alttext">|</span><div class="bars" id="BackslashBar"></div><div class="Count" id="CountBackslash">+1</div></div>
 		</div>
 		<div class="rows">
 			<div id="ShiftLeft" class="Shift">Shift</div>
-			<div class="keys" id="z"><span id="zText">z</span><div class="bars" id="zBar"></div></div>
-			<div class="keys" id="x"><span id="xText">x</span><div class="bars" id="xBar"></div></div>
-			<div class="keys" id="c"><span id="cText">c</span><div class="bars" id="cBar"></div></div>
-			<div class="keys" id="v"><span id="vText">v</span><div class="bars" id="vBar"></div></div>
-			<div class="keys" id="b"><span id="bText">b</span><div class="bars" id="bBar"></div></div>
-			<div class="keys" id="n"><span id="nText">n</span><div class="bars" id="nBar"></div></div>
-			<div class="keys" id="m"><span id="mText">m</span><div class="bars" id="mBar"></div></div>
-			<div class="keys" id=","><span id=",Text">,</span><span id=",AltText" class="alttext">&lt;</span><div class="bars" id=",Bar"></div></div>
-			<div class="keys" id="."><span id=".Text">.</span><span id=".AltText" class="alttext">&gt;</span><div class="bars" id=".Bar"></div></div>
-			<div class="keys" id="/"><span id="/Text">/</span><span id="/AltText" class="alttext">?</span><div class="bars" id="/Bar"></div></div>
+			<div class="keys" id="z"><span id="zText">z</span><div class="bars" id="zBar"></div><div class="Count" id="Countz">+1</div></div>
+			<div class="keys" id="x"><span id="xText">x</span><div class="bars" id="xBar"></div><div class="Count" id="Countx">+1</div></div>
+			<div class="keys" id="c"><span id="cText">c</span><div class="bars" id="cBar"></div><div class="Count" id="Countc">+1</div></div>
+			<div class="keys" id="v"><span id="vText">v</span><div class="bars" id="vBar"></div><div class="Count" id="Countv">+1</div></div>
+			<div class="keys" id="b"><span id="bText">b</span><div class="bars" id="bBar"></div><div class="Count" id="Countb">+1</div></div>
+			<div class="keys" id="n"><span id="nText">n</span><div class="bars" id="nBar"></div><div class="Count" id="Countn">+1</div></div>
+			<div class="keys" id="m"><span id="mText">m</span><div class="bars" id="mBar"></div><div class="Count" id="Countm">+1</div></div>
+			<div class="keys" id=","><span id=",Text">,</span><span id=",AltText" class="alttext">&lt;</span><div class="bars" id=",Bar"></div><div class="Count" id="Count,">+1</div></div>
+			<div class="keys" id="."><span id=".Text">.</span><span id=".AltText" class="alttext">&gt;</span><div class="bars" id=".Bar"></div><div class="Count" id="Count.">+1</div></div>
+			<div class="keys" id="/"><span id="/Text">/</span><span id="/AltText" class="alttext">?</span><div class="bars" id="/Bar"></div><div class="Count" id="Count/">+1</div></div>
 			<div id="ShiftRight" class="Shift">Shift</div>
 		</div>
 		<div class="rows">
