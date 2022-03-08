@@ -2,6 +2,7 @@ body
 {
 	margin: 0;
 	padding: 0;
+	background-color: #fcffed;
 }
 #Alert
 {
@@ -49,16 +50,81 @@ body
 	height: 80%;
 	width: 100%;
 }
+#title
+{
+	height: 5%;
+	width: 100%;
+	background: linear-gradient(90deg, rgba(187,255,152,1) 0%, rgba(254,255,250,1) 16%);
+	border-bottom: 1px solid #bfbfbf;
+	box-shadow: 0px 1px 3px 1px #c3c3c3;
+	position:relative;
+	z-index: 10;
+}
 #menu
 {
-	height: 25%;
+	height: 20%;
 	width: 100%;
+	background-color: #fefffa;
+	text-align: center;
+}
+#menu1, #menu2, #menu3, #menu4
+{
+	width: 13%;
+	max-width: 13%;
+	height: 100%;
+	display: inline-block;
+	background: linear-gradient(180deg, rgba(254,255,250,1) 0%, rgba(252,255,237,1) 80%);
+	margin-left: 40px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	position: relative;
+	border-top: 1px solid #bababa;
+	border-right: 1px solid #bababa;
+	border-left: 1px solid #bababa;
+	line-height: 100px;
+	font-size: 20px;
+}
+#menu1 span, #menu2 span, #menu3 span, #menu4 span
+{
+	transition: all 0.4s ease;
+	display: inline-block;
+}
+#menu1:hover span, #menu2:hover span, #menu3:hover span, #menu4:hover span
+{
+	transform: scale(1.5,1.5);
+}
+#menu1:hover::before, #menu2:hover::before, #menu3:hover::before, #menu4:hover::before
+{
+	font-size: 35px;
+	line-height: 70px;
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 30px;
+	background-color: transparent;
+	bottom: 0;
+	left: -31.3px;
+	border-right: 1px solid #bababa;
+	border-bottom-right-radius: 25px;
+	box-shadow: 15px 0px 0px 0px rgba(252,255,237,1);
+}
+#menu1:hover::after, #menu2:hover::after, #menu3:hover::after, #menu4:hover::after
+{
+	content: "";
+	position: absolute;
+	height: 15px;
+	width: 30px;
+	background-color: transparent;
+	bottom: 0;
+	right: -31.3px;
+	border-left: 1px solid #bababa;
+	border-bottom-left-radius: 25px;
+	box-shadow: -15px 0px 0px 0px rgba(252,255,237,1);
 }
 #keyboard
 {
 	height: 75%;
 	width: 100%;
-	background-color: #fcffed;
 }
 .rows
 {
@@ -76,11 +142,12 @@ body
 .bars
 {
 	width: 70%;
-	height: 10%;
+	height: 9%;
 	position: relative;
 	margin: 0 auto;
-	margin-top: -17%;
+	margin-top: -15%;
 	border: 1px solid black;
+	box-shadow: 1px 1px 3px 0px #787878;
 	border-radius: 5px;
 	display: none;
 }
@@ -107,6 +174,7 @@ body
 	transition: background-color 0.6s ease;
 	border-radius: 10px;
 	text-align: center;
+	text-shadow: 0px 0px 17px #919191;
 }
 #Backspace
 {
@@ -143,6 +211,27 @@ body
 	text-align: center;
 	font-family: none;
 }
+.Count{
+	display: none;
+	animation-name: count;
+	animation-duration: 1s;
+	animation: count 1s ease;
+	width: 20px;
+	height: 20px;
+	float: left;
+	font-size: 17;
+	margin-left: 65%;
+}
+@keyframes count {
+	0%{
+		margin-top: -60%;
+		opacity: 1;
+	}
+    100%{
+		margin-top: -80%;
+		opacity: 0;
+	}
+}
 #pole
 {
 	display: block;
@@ -161,6 +250,7 @@ body
 }
 #poletekst
 {
+	display: inline-block;
 	font-size: 60px;
 	text-align: center;
 	font-family: Bradley Hand, cursive;
