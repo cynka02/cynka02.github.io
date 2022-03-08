@@ -5,12 +5,16 @@ var charactersspecial = "!@#$%^&*()_+{}:" + '"|<>?';
 var characterscodes = ["Backspace", "CapsLock", "Space", "ShiftLeft", "Backslash", "ShiftRight"];
 var commands = ["sound mute", "sound unmute", "save", "help", "sound-", "sound--", "sound---", "sound+", "sound++", "sound+++"]
 var Caps = 0;
+var Caps2 = 0;
 var Shift = 0;
 var TimeToCheck = 1000;
 var AlertType = "";
 var ActiveLetter = "";
 var g;
 var c;
+var BarP1 = 0;
+var BarP2 = 0;
+var BarID = "";
 var ActiveLetterCount = 0;
 var ActiveLetterMax = 0;
 var ActiveLetterSpeed = 0;
@@ -18,6 +22,7 @@ var ActiveLetterCap = 0;
 var Player = {
 	volume: 1,
 	Letters: {
+		// Czy małe, Czy duże, ilość małych, ilość dużych, max małych, max dużych, prędkość małych, prędkość dużych
 		a: [true, false, 0, 0, 5, 5, 0.2, 0.1],
 		b: [true, false, 0, 0, 5, 5, 0.19, 0.09],
 		c: [true, false, 0, 0, 5, 5, 0.18, 0.08],
@@ -167,25 +172,30 @@ function changeshift(value){
 
 function keyup(event){
 	if ((event.code == "ShiftRight" || event.code == "ShiftLeft") && Caps == 0){
+		Shift = 0;
 		changecaps(0);
 		changeshift(0);
-		Shift = 0;
 		setTimeout(clearcolors, 200, "ShiftRight");
 		setTimeout(clearcolors, 200, "ShiftLeft");
 	} 
 	else if ((event.code == "ShiftRight" || event.code == "ShiftLeft") && Caps == 1) {
+		Shift = 0;
 		changecaps(1);
 		changeshift(0);
-		Shift = 0;
 		setTimeout(clearcolors, 200, "ShiftRight");
 		setTimeout(clearcolors, 200, "ShiftLeft");
+	} else {}
+	if (event.code == "CapsLock"){
+		Caps2 = 0;
 	} else {}
 }
 
 function keydown(event){
+	// Get key codes
 	var name = event.key;
 	var code = event.code;
 	
+	// Check for CapsLock
 	if (event.getModifierState('CapsLock')) {
         changecaps(1);
 		Caps = 1;
@@ -205,6 +215,7 @@ function keydown(event){
 		Caps = 0;
     }
 	
+	// Highlight, play sound and input key
 	if (characters.includes(name) == true){
 		document.getElementById('audio').currentTime = 0;
 		document.getElementById('audio').play();
@@ -215,24 +226,39 @@ function keydown(event){
 		} else {}
 		try{clearTimeout(g);}catch{}
 		inputfield.push(name)
-		document.getElementById("poletekst").innerHTML = inputfield.join("");
+		console.log(document.getElementById("poletekst").innerHTML.substr(document.getElementById("poletekst").innerHTML.length - 3));
+		if (document.getElementById("poletekst").clientWidth <= 0.35*document.body.clientWidth){
+			document.getElementById("poletekst").innerHTML = inputfield.join("");
+		}
+		else {
+			if (document.getElementById("poletekst").innerHTML.substr(document.getElementById("poletekst").innerHTML.length - 3) != "..."){
+				document.getElementById("poletekst").innerHTML = document.getElementById("poletekst").innerHTML + "...";
+			}
+		}
 		g = setTimeout(check, TimeToCheck);
 	}
 	else if (characterscodes.includes(code) == true){
-		if (code == "ShiftLeft" || code == "ShiftRight"){
-			Shift += 1;
-		}
-		if (Shift <= 1){
+		if ((code == "ShiftLeft" || code == "ShiftRight") && Shift == 0){
+			Shift = 1;
 			document.getElementById('audio').currentTime = 0;
 			document.getElementById('audio').play();
-		}
+		} else {}
+		if (code == "CapsLock" && Caps2 == 0){
+			Caps2 = 1;
+			document.getElementById('audio').currentTime = 0;
+			document.getElementById('audio').play();
+		} else {}
 		if (code == "Backslash"){
+			document.getElementById('audio').currentTime = 0;
+			document.getElementById('audio').play();
 			try{clearTimeout(g);}catch{}
 			inputfield.push(name)
 			document.getElementById("poletekst").innerHTML = inputfield.join("");
 			g = setTimeout(check, TimeToCheck);
 		}
 		else if (code == "Backspace" && inputfield.length != 0){
+			document.getElementById('audio').currentTime = 0;
+			document.getElementById('audio').play();
 			inputfield.pop();
 			if (inputfield.length == 0){
 				try{clearTimeout(g);}catch{}
@@ -245,8 +271,12 @@ function keydown(event){
 			}
 		} 
 		else if (code == "Space" && inputfield.length != 0){
+			if (inputfield[inputfield.length-1] != " "){
+				document.getElementById('audio').currentTime = 0;
+				document.getElementById('audio').play();
+				inputfield.push(name)
+			}
 			try{clearTimeout(g);}catch{}
-			inputfield.push(name)
 			document.getElementById("poletekst").innerHTML = inputfield.join("");
 			g = setTimeout(check, TimeToCheck);
 		} else{}
@@ -377,9 +407,23 @@ function clearcolors(idname){
 	} else {}
 }
 
-function barcolors(id, percentage){
-	document.getElementById(id+"Bar").style = "display: block; background: linear-gradient(to right, hsl(" + percentage + ", 100%, 55%) " + percentage + "%, #eeeeee 0%);";
-}
+function barcolors(id, percentage1, percentage2){
+	if (id){
+		BarP1 = percentage1;
+		BarP2 = percentage2;
+		BarID = id;
+		document.getElementById(id+"Bar").style = "display: block; box-shadow: 1px 1px 2px 0px hsl(" + BarP1 + ", 60%, 30%); border: 1px solid hsl(" + BarP1 + ", 100%, 38%); background: linear-gradient(to right, hsl(" + BarP1 + ", 100%, 55%) " + BarP1 + "%, #eeeeee 0%);";
+	} else{}
+	if (BarP2 < BarP1){
+		document.getElementById(BarID+"Bar").style = "display: block; box-shadow: 1px 1px 2px 0px hsl(" + BarP2 + ", 60%, 30%); border: 1px solid hsl(" + BarP2 + ", 100%, 38%); background: linear-gradient(to right, hsl(" + BarP2 + ", 100%, 55%) " + BarP2 + "%, #eeeeee 0%);";
+		BarP2 += 0.7;
+	}
+	else{
+		BarP2 = 0;
+		BarP1 = 0;
+		BarID = "";
+	}
+} setInterval(barcolors, 10)
 
 function resetlettersbackground(){
 	var tempchar = characters.substring(26,52);
@@ -398,7 +442,7 @@ function resetlettersbackground(){
 		else{
 			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i];
 			if (Player.Letters[tempchar[i]][0] == true){
-				barcolors(tempchar[i], (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100));
+				barcolors(tempchar[i], (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100), (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100));
 			} else {
 				document.getElementById(tempchar[i]+"Bar").style = "display: none;";
 			}
@@ -464,8 +508,8 @@ function check(){
 	}
 	else if (inputfield.join("") == "help"){
 		document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
-		document.getElementById("AlertText").innerHTML = "Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!<br />You can also press enter<br /><br />Commands:<br />save&nbsp;&nbsp;&nbsp;-> manual save (auto every 30 seconds)<br />sound mute/unmute<br />sound-/--/---&nbsp;&nbsp;&nbsp;-> decrease sound volume by 0.2/0.4/0.6<br />sound+/++/+++&nbsp;&nbsp;&nbsp;-> increase sound volume by 0.2/0.4/0.6";
-		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/25 + "px;";
+		document.getElementById("AlertText").innerHTML = "Everything You type is checked and cleared after " + TimeToCheck/1000 + " second(s) of inactivity!<br />You can also press enter.<br /><br />Commands:<br />save&nbsp;&nbsp;&nbsp;-> manual save (auto every 30 seconds)<br />sound mute/unmute<br />sound-/--/---&nbsp;&nbsp;&nbsp;-> decrease sound volume by 0.2/0.4/0.6<br />sound+/++/+++&nbsp;&nbsp;&nbsp;-> increase sound volume by 0.2/0.4/0.6";
+		document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/27 + "px;";
 		document.getElementById("AlertConfirm").style = "display: block;";
 		document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
 		document.getElementById("AlertConfirm").innerHTML = "Ok";
@@ -518,13 +562,11 @@ function getletters(){
 		if (ActiveLetterCap < ((1/ActiveLetterSpeed)*100)){
 			if (ActiveLetter === ActiveLetter.toLowerCase()){
 				ActiveLetterCap += 1;
-				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100));
 				document.getElementById(ActiveLetter+"Text").innerHTML = ActiveLetter;
 				document.getElementById(ActiveLetter).style.background = "linear-gradient(to right, hsl(" + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + ", 100%, 55%) " + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + "%, #eeeeee 0%)";
 			}
 			else{
 				ActiveLetterCap += 1;
-				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
 				document.getElementById(ActiveLetter.toLowerCase()+"Text").innerHTML = ActiveLetter;
 				document.getElementById(ActiveLetter.toLowerCase()).style.background = "linear-gradient(to right, hsl(" + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + ", 100%, 55%) " + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + "%, #eeeeee 0%)";
 			}
@@ -534,7 +576,11 @@ function getletters(){
 				ActiveLetterCount += 1;
 				Player.Letters[ActiveLetter][2] += 1;
 				document.getElementById(ActiveLetter).style.background = "linear-gradient(to right, hsl(0, 100%, 55%) 0%, #eeeeee 0%)";
-				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100));
+				document.getElementById("Count" + ActiveLetter).style = "display: block;";
+				function countnone(){
+					document.getElementById("Count" + ActiveLetter).style = "display: none;";
+				} setTimeout(countnone, 1000);
+				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100), ((Player.Letters[ActiveLetter][2]-1)/Player.Letters[ActiveLetter][4]*100));
 				if (ActiveLetterCount == ActiveLetterMax){
 					ActiveLetter = "";
 					ActiveLetterCount = 0;
@@ -550,7 +596,11 @@ function getletters(){
 				ActiveLetterCount += 1;
 				Player.Letters[ActiveLetter.toLowerCase()][3] += 1;
 				document.getElementById(ActiveLetter.toLowerCase()).style.background = "linear-gradient(to right, hsl(0, 100%, 55%) 0%, #eeeeee 0%)";
-				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
+				document.getElementById("Count" + ActiveLetter.toLowerCase()).style = "display: block;";
+				function countnone(){
+					document.getElementById("Count" + ActiveLetter.toLowerCase()).style = "display: none;";
+				} setTimeout(countnone, 1000);
+				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100), ((Player.Letters[ActiveLetter.toLowerCase()][3]-1)/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
 				if (ActiveLetterCount == ActiveLetterMax){
 					ActiveLetter = "";
 					ActiveLetterCount = 0;
@@ -566,6 +616,7 @@ function getletters(){
 	} else {}
 } setInterval(getletters, 10);
 
+// Alert handling for mobile and PC
 document.getElementById("AlertConfirm").addEventListener("touchend", function(){
 	if (AlertType == "Info"){
 		document.getElementById("Alert").style = "display: none;";
@@ -591,11 +642,14 @@ document.getElementById("AlertConfirm").onclick = function(){
 	AlertType = "";
 }
 
-window.addEventListener('resize', load);
+// Events
+window.addEventListener('resize', loadsize);
 document.addEventListener("keyup", keyup);
 document.addEventListener("keydown", keydown);
 
 
+// Mobile implementation
+//{
 var isMobile = {
     Android: function() {
         return navigator.userAgent.match(/Android/i);
@@ -924,8 +978,9 @@ document.getElementById("/").addEventListener("touchend", function(){
 	var id = this.id + "Text";
 	Mobile(this.id, document.getElementById(id).innerHTML);
 })
+//}
 
-
+// save load reset
 function save(){
 	var Save =
 	{
@@ -938,9 +993,11 @@ setTimeout(save, 30000);
 function load(){
 	var SavedGame = JSON.parse(localStorage.getItem("Saved"));
 	
+	// Wczytywanie localstorage
 	if (SavedGame){
 		if (typeof SavedGame.Player !== "undefined") PlayerLoaded = SavedGame.Player;
 		
+		// Sprawdzanie rożnic między zapisanym playerem a dostarczonym przez plik
 		if (Object.keys(PlayerLoaded) === Object.keys(Player)){
 			Player = PlayerLoaded;
 		}
@@ -955,6 +1012,7 @@ function load(){
 		document.getElementById("audio").volume = Player.volume;
 	}
 	
+	// Wczytywanie, sprawdzanie i wyświetlanie odblokowanych liter
 	var letterkeys = Object.keys(Player.Letters);
 	for (let i=0; i < letterkeys.length; i++){
 		if (Player.Letters[letterkeys[i]][0] == true){
@@ -963,21 +1021,32 @@ function load(){
 		else{
 			document.getElementById(Object.keys(Player.Letters)[i]+"Bar").style = "display: none;";
 		}
+		/*else if (Player.Letters[letterkeys[i]][0] == false && Player.Letters[letterkeys[i]][1] != 0){
+			document.getElementById("Alert").style = "display: block; margin-top: " + (window.innerHeight*0.17) + "px;";
+			document.getElementById("AlertText").innerHTML = "Detected awkward data change!!!<br /><br />You must delete saved profile to continue.";
+			document.getElementById("AlertText").style = "font-size: " + document.getElementById("Alert").clientWidth/15 + "px;";
+			document.getElementById("AlertConfirm").style = "display: block;";
+			document.getElementById("AlertConfirm").style = "display: block; line-height: " + document.getElementById("AlertConfirm").clientHeight + "px; font-size:" + document.getElementById("Alert").clientWidth/20 +"px; margin-top: " + (window.innerHeight*0.42) + "px; margin-left: " + (window.innerWidth*0.535) + "px;";
+			document.getElementById("AlertConfirm").innerHTML = "Hard reset";
+			AlertType = "Reset";
+		} */
 	}
 	loadsize();
 	save();
+	// info do konsoli
 	socket.emit('LogPlayer', Player);
 }
 
 function loadsize(){
 	var classkeys = document.getElementsByClassName("keys");
 	for (let i=0; i < classkeys.length; i++){
-		classkeys[i].style = "line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
+		classkeys[i].style = "font-size: " + (classkeys[0].clientWidth/3.5 + 8) + "px; line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
 	}
 	for (let i=0; i < characterscodes.length; i++){
-		document.getElementById(characterscodes[i]).style = "line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
+		document.getElementById(characterscodes[i]).style = "font-size: " + (classkeys[0].clientWidth/3.5 + 8) + "px;line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
 	}
 	document.getElementById("Help").style = "margin-top: " + (-(classkeys[0].clientHeight-12)/2) +"px;";
+	document.getElementById("title").style = "font-size: " + (document.getElementById("title").clientHeight/2.5 + 8) + "px; line-height: " + document.getElementById("title").clientHeight + "px;";
 }
 
 function reset(){
@@ -985,6 +1054,7 @@ function reset(){
 	location.reload();
 }
 
+// Socket.io
 socket.on('poletekst', function(text) {
    document.getElementById("poletekst").innerHTML = text;
 });
