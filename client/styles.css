@@ -3,6 +3,7 @@ body
 	margin: 0;
 	padding: 0;
 	background-color: #fcffed;
+	cursor: default;
 }
 #Alert
 {
@@ -15,6 +16,7 @@ body
 	border-radius: 20px;
 	box-shadow: 2px 3px 7px 4px #cb9e9e;
 	display: none;
+	z-index: 10;
 }
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -22,12 +24,14 @@ body
 }
 #AlertText
 {
+	position: relative;
 	font-size: 14px;
 	font-family: Bradley Hand, cursive;
 	margin-left: 3%;
 	margin-top: 2%;
 	text-align: left;
 	width: 95%;
+	z-index: 10;
 }
 #AlertConfirm
 {
@@ -44,6 +48,7 @@ body
 	border-radius: 10px;
 	background-color: #fcffed;
 	box-shadow: 1px 1px 7px 0px #dd9999;
+	z-index: 10;
 }
 #main
 {
@@ -54,10 +59,10 @@ body
 {
 	height: 5%;
 	width: 100%;
-	background: linear-gradient(90deg, rgba(187,255,152,1) 0%, rgba(254,255,250,1) 16%);
+	background: linear-gradient(90deg, rgba(109,255,95,1) 0%, rgba(254,255,250,1) 16%);
 	border-bottom: 1px solid #bfbfbf;
 	box-shadow: 0px 1px 3px 1px #c3c3c3;
-	position:relative;
+	position: relative;
 	z-index: 10;
 }
 #menu
@@ -66,6 +71,7 @@ body
 	width: 100%;
 	background-color: #fefffa;
 	text-align: center;
+	overflow:hidden;
 }
 #menu1, #menu2, #menu3, #menu4
 {
@@ -73,6 +79,7 @@ body
 	max-width: 13%;
 	height: 100%;
 	display: inline-block;
+	direction: rtl;
 	background: linear-gradient(180deg, rgba(254,255,250,1) 0%, rgba(252,255,237,1) 80%);
 	margin-left: 40px;
 	border-top-left-radius: 10px;
@@ -82,16 +89,26 @@ body
 	border-right: 1px solid #bababa;
 	border-left: 1px solid #bababa;
 	line-height: 100px;
-	font-size: 20px;
+	font-size: 25px;
+	transition: all 0.4s ease;
 }
-#menu1 span, #menu2 span, #menu3 span, #menu4 span
+#menu1 img, #menu2 img, #menu3 img, #menu4 img
 {
 	transition: all 0.4s ease;
 	display: inline-block;
+	opacity: 0.8;
 }
-#menu1:hover span, #menu2:hover span, #menu3:hover span, #menu4:hover span
+#menu2 img, #menu4 img
 {
-	transform: scale(1.5,1.5);
+	opacity: 0.7;
+}
+#menu1:hover img, #menu2:hover img, #menu3:hover img, #menu4:hover img
+{
+	transform: scale(1.15,1.15);
+}
+#menu > *
+{
+	transform: translateY(15%);
 }
 #menu1:hover::before, #menu2:hover::before, #menu3:hover::before, #menu4:hover::before
 {
@@ -143,12 +160,11 @@ body
 {
 	width: 70%;
 	height: 9%;
-	position: relative;
 	margin: 0 auto;
 	margin-top: -15%;
 	border: 1px solid black;
 	box-shadow: 1px 1px 3px 0px #787878;
-	border-radius: 5px;
+	border-radius: 500px;
 	display: none;
 }
 #qBar, #wBar, #eBar, #rBar, #tBar, #yBar, #uBar, #iBar, #oBar, #pBar, #aBar, #sBar, #dBar, #fBar, #gBar, #hBar, #jBar, #kBar, #lBar, #zBar, #xBar, #cBar, #vBar, #bBar, #nBar, #mBar
@@ -200,6 +216,36 @@ body
 	width: 36%;
 	display: inline-block;
 }
+#store
+{
+	height: 99.6%;
+	width: 100%;
+	display: none;
+	background-color: #fcffed;
+	line-height: 300px;
+	font-size: 40px;
+	text-align: center;
+}
+#features
+{
+	height: 99.6%;
+	width: 100%;
+	display: none;
+	background-color: #fcffed;
+	line-height: 300px;
+	font-size: 40px;
+	text-align: center;
+}
+#online
+{
+	height: 99.6%;
+	width: 100%;
+	display: none;
+	background-color: #fcffed;
+	line-height: 300px;
+	font-size: 40px;
+	text-align: center;
+}
 #Help
 {
 	position: relative;
@@ -219,7 +265,7 @@ body
 	width: 20px;
 	height: 20px;
 	float: left;
-	font-size: 17;
+	font-size: medium;
 	margin-left: 65%;
 }
 @keyframes count {
@@ -244,8 +290,7 @@ body
 	height: 50%;
 	width: 90%;
 	margin: auto;
-	padding-top: 2.2%;
-	font-size: 15px;
+	padding-top: 1.5%;
 	text-align: center;
 }
 #poletekst
