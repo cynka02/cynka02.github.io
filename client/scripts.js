@@ -15,12 +15,17 @@ var c;
 var BarP1 = 0;
 var BarP2 = 0;
 var BarID = "";
+var menu1clicked = 0;
+var menu2clicked = 0;
+var menu3clicked = 0;
+var menu4clicked = 0;
 var ActiveLetterCount = 0;
 var ActiveLetterMax = 0;
 var ActiveLetterSpeed = 0;
 var ActiveLetterCap = 0;
 var Player = {
 	volume: 1,
+	volume2: 1,
 	Letters: {
 		// Czy małe, Czy duże, ilość małych, ilość dużych, max małych, max dużych, prędkość małych, prędkość dużych
 		a: [true, false, 0, 0, 5, 5, 0.2, 0.1],
@@ -52,6 +57,154 @@ var Player = {
 	}
 };
 
+// Menu animation
+//{
+document.getElementById("menu1").onmouseover = function(){
+	if (menu1clicked == 0){
+		document.getElementById("menu1").style.transform = "translateY(8%)";
+	}
+}
+document.getElementById("menu1").onmouseout = function(){
+	if (menu1clicked == 0){
+		document.getElementById("menu1").style.transform = "translateY(15%)";
+	}
+}
+document.getElementById("menu2").onmouseover = function(){
+	if (menu2clicked == 0){
+		document.getElementById("menu2").style.transform = "translateY(8%)";
+	}
+}
+document.getElementById("menu2").onmouseout = function(){
+	if (menu2clicked == 0){
+		document.getElementById("menu2").style.transform = "translateY(15%)";
+	}
+}
+document.getElementById("menu3").onmouseover = function(){
+	if (menu3clicked == 0){
+		document.getElementById("menu3").style.transform = "translateY(8%)";
+	}
+}
+document.getElementById("menu3").onmouseout = function(){
+	if (menu3clicked == 0){
+		document.getElementById("menu3").style.transform = "translateY(15%)";
+	}
+}
+document.getElementById("menu4").onmouseover = function(){
+	if (menu4clicked == 0){
+		document.getElementById("menu4").style.transform = "translateY(8%)";
+	}
+}
+document.getElementById("menu4").onmouseout = function(){
+	if (menu4clicked == 0){
+		document.getElementById("menu4").style.transform = "translateY(15%)";
+	}
+}
+document.getElementById("menu1").onclick = function(){
+	if (menu1clicked == 0){
+		document.getElementById("menu1").style.transform = "translateY(1%)";
+		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
+		document.getElementById("menu2").style.transform = "translateY(15%)";
+		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu3").style.transform = "translateY(15%)";
+		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu4").style.transform = "translateY(15%)";
+		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
+		menu1clicked = 1;
+		menu2clicked = 0;
+		menu3clicked = 0;
+		menu4clicked = 0;
+		document.getElementById("keyboard").style.display = "block";
+		document.getElementById("pole").style.display = "block";
+		document.getElementById("store").style.display = "none";
+		document.getElementById("features").style.display = "none";
+		document.getElementById("online").style.display = "none";
+	}
+	else{
+		menu1clicked = 0;
+		document.getElementById("menu1").style.transform = "translateY(15%)";
+		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
+	}
+}
+document.getElementById("menu2").onclick = function(){
+	if (menu2clicked == 0){
+		document.getElementById("menu1").style.transform = "translateY(15%)";
+		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu2").style.transform = "translateY(1%)";
+		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
+		document.getElementById("menu3").style.transform = "translateY(15%)";
+		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu4").style.transform = "translateY(15%)";
+		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
+		menu1clicked = 0;
+		menu2clicked = 1;
+		menu3clicked = 0;
+		menu4clicked = 0;
+		document.getElementById("keyboard").style.display = "none";
+		document.getElementById("pole").style.display = "none";
+		document.getElementById("store").style.display = "block";
+		document.getElementById("features").style.display = "none";
+		document.getElementById("online").style.display = "none";
+	}
+	else{
+		menu2clicked = 0;
+		document.getElementById("menu2").style.transform = "translateY(15%)";
+		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
+	}
+}
+document.getElementById("menu3").onclick = function(){
+	if (menu3clicked == 0){
+		document.getElementById("menu1").style.transform = "translateY(15%)";
+		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu2").style.transform = "translateY(15%)";
+		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu3").style.transform = "translateY(1%)";
+		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
+		document.getElementById("menu4").style.transform = "translateY(15%)";
+		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
+		menu1clicked = 0;
+		menu2clicked = 0;
+		menu3clicked = 1;
+		menu4clicked = 0;
+		document.getElementById("keyboard").style.display = "none";
+		document.getElementById("pole").style.display = "none";
+		document.getElementById("store").style.display = "none";
+		document.getElementById("features").style.display = "block";
+		document.getElementById("online").style.display = "none";
+	}
+	else{
+		menu3clicked = 0;
+		document.getElementById("menu3").style.transform = "translateY(15%)";
+		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
+	}
+}
+document.getElementById("menu4").onclick = function(){
+	if (menu4clicked == 0){
+		document.getElementById("menu1").style.transform = "translateY(15%)";
+		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu2").style.transform = "translateY(15%)";
+		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu3").style.transform = "translateY(15%)";
+		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
+		document.getElementById("menu4").style.transform = "translateY(1%)";
+		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
+		menu1clicked = 0;
+		menu2clicked = 0;
+		menu3clicked = 0;
+		menu4clicked = 1;
+		document.getElementById("keyboard").style.display = "none";
+		document.getElementById("pole").style.display = "none";
+		document.getElementById("store").style.display = "none";
+		document.getElementById("features").style.display = "none";
+		document.getElementById("online").style.display = "block";
+	}
+	else{
+		menu4clicked = 0;
+		document.getElementById("menu4").style.transform = "translateY(15%)";
+		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
+	}
+}
+
+//}
 
 
 function changecaps(value){
@@ -199,7 +352,9 @@ function keydown(event){
 	if (event.getModifierState('CapsLock')) {
         changecaps(1);
 		Caps = 1;
+		document.getElementById("CapsLock").style.transition = "all 0.5s ease";
 		document.getElementById("CapsLock").style.backgroundColor = "#6dff5f";
+		document.getElementById("CapsLock").style.transform = "scale(0.95,0.95)";
 		if (event.getModifierState('Shift')){
 			changecaps(0);
 			changeshift(1);
@@ -219,20 +374,22 @@ function keydown(event){
 	if (characters.includes(name) == true){
 		document.getElementById('audio').currentTime = 0;
 		document.getElementById('audio').play();
-		document.getElementById(name.toLowerCase()).style.transition = "background-color 0.6s ease";
+		document.getElementById(name.toLowerCase()).style.transition = "all 0.5s ease";
+		document.getElementById(name.toLowerCase()).style.transform = "scale(0.95,0.95)";
 		document.getElementById(name.toLowerCase()).style.backgroundColor = "#6dff5f";
 		if (ActiveLetter != name){
 			c = setTimeout(clearcolors, 400, name.toLowerCase());
 		} else {}
 		try{clearTimeout(g);}catch{}
 		inputfield.push(name)
-		console.log(document.getElementById("poletekst").innerHTML.substr(document.getElementById("poletekst").innerHTML.length - 3));
-		if (document.getElementById("poletekst").clientWidth <= 0.35*document.body.clientWidth){
-			document.getElementById("poletekst").innerHTML = inputfield.join("");
-		}
-		else {
-			if (document.getElementById("poletekst").innerHTML.substr(document.getElementById("poletekst").innerHTML.length - 3) != "..."){
-				document.getElementById("poletekst").innerHTML = document.getElementById("poletekst").innerHTML + "...";
+		var a = document.getElementById("poletekst").innerHTML;
+		document.getElementById("poletekst").innerHTML = inputfield.join("");
+		if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
+			if (a.substr(a.length - 3) != "..."){
+				document.getElementById("poletekst").innerHTML = a + "...";
+			}
+			else {
+				document.getElementById("poletekst").innerHTML = a;
 			}
 		}
 		g = setTimeout(check, TimeToCheck);
@@ -260,13 +417,17 @@ function keydown(event){
 			document.getElementById('audio').currentTime = 0;
 			document.getElementById('audio').play();
 			inputfield.pop();
+			var a = document.getElementById("poletekst").innerHTML;
+			document.getElementById("poletekst").innerHTML = inputfield.join("");
+			if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
+				document.getElementById("poletekst").innerHTML = a;
+			}
 			if (inputfield.length == 0){
 				try{clearTimeout(g);}catch{}
 				document.getElementById("poletekst").innerHTML = "...";
 			}
-			else{
+			else {
 				try{clearTimeout(g);}catch{}
-				document.getElementById("poletekst").innerHTML = inputfield.join("");
 				g = setTimeout(check, TimeToCheck);
 			}
 		} 
@@ -277,11 +438,27 @@ function keydown(event){
 				inputfield.push(name)
 			}
 			try{clearTimeout(g);}catch{}
+			var a = document.getElementById("poletekst").innerHTML;
 			document.getElementById("poletekst").innerHTML = inputfield.join("");
+			if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
+				if (a.substr(a.length - 3) != "..."){
+					document.getElementById("poletekst").innerHTML = a + "...";
+				}
+				else {
+					document.getElementById("poletekst").innerHTML = a;
+				}
+			}
 			g = setTimeout(check, TimeToCheck);
 		} else{}
+		document.getElementById(code).style.transition = "all 0.5s ease";
 		document.getElementById(code).style.backgroundColor = "#6dff5f";
-		setTimeout(clearcolors, 400, code);
+		document.getElementById(code).style.transform = "scale(0.95,0.95)";
+		if (code == "CapsLock"){
+			setTimeout(clearcolors, 1, code);
+		}
+		else{
+			setTimeout(clearcolors, 400, code);
+		}
 	}
 	else if (code == "Enter"){
 		if (AlertType != ""){
@@ -307,85 +484,105 @@ function keydown(event){
 		switch (name){
 			case "!":
 				document.getElementById("1").style.backgroundColor = "#6dff5f";
+				document.getElementById("1").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "1");
 				break;
 			case "@":
 				document.getElementById("2").style.backgroundColor = "#6dff5f";
+				document.getElementById("2").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "2");
 				break;
 			case "#":
 				document.getElementById("3").style.backgroundColor = "#6dff5f";
+				document.getElementById("3").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "3");
 				break;
 			case "$":
 				document.getElementById("4").style.backgroundColor = "#6dff5f";
+				document.getElementById("4").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "4");
 				break;
 			case "%":
 				document.getElementById("5").style.backgroundColor = "#6dff5f";
+				document.getElementById("5").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "5");
 				break;
 			case "^":
 				document.getElementById("6").style.backgroundColor = "#6dff5f";
+				document.getElementById("6").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "6");
 				break;
 			case "&":
 				document.getElementById("7").style.backgroundColor = "#6dff5f";
+				document.getElementById("7").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "7");
 				name ="&amp;"
 				break;
 			case "*":
 				document.getElementById("8").style.backgroundColor = "#6dff5f";
+				document.getElementById("8").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "8");
 				break;
 			case "(":
 				document.getElementById("9").style.backgroundColor = "#6dff5f";
+				document.getElementById("9").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "9");
 				break;
 			case ")":
 				document.getElementById("0").style.backgroundColor = "#6dff5f";
+				document.getElementById("0").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "0");
 				break;
 			case "_":
 				document.getElementById("-").style.backgroundColor = "#6dff5f";
+				document.getElementById("-").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "-");
 				break;
 			case "+":
 				document.getElementById("=").style.backgroundColor = "#6dff5f";
+				document.getElementById("=").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "=");
 				break;
 			case "{":
 				document.getElementById("[").style.backgroundColor = "#6dff5f";
+				document.getElementById("[").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "[");
 				break;
 			case "}":
 				document.getElementById("]").style.backgroundColor = "#6dff5f";
+				document.getElementById("]").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "]");
 				break;
 			case ":":
 				document.getElementById(";").style.backgroundColor = "#6dff5f";
+				document.getElementById(";").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, ";");
 				break;
 			case '"':
 				document.getElementById("'").style.backgroundColor = "#6dff5f";
+				document.getElementById("'").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "'");
 				break;
 			case "|":
 				document.getElementById("Backslash").style.backgroundColor = "#6dff5f";
+				document.getElementById("Backslash").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "Backslash");
 				break;
 			case "<":
 				document.getElementById(",").style.backgroundColor = "#6dff5f";
+				document.getElementById(",").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, ",");
 				name = "&lt;";
 				break;
 			case ">":
 				document.getElementById(".").style.backgroundColor = "#6dff5f";
+				document.getElementById(".").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, ".");
 				name = "&gt;";
 				break;
 			case "?":
 				document.getElementById("/").style.backgroundColor = "#6dff5f";
+				document.getElementById("/").style.transform = "scale(0.95,0.95)";
 				setTimeout(clearcolors, 400, "/");
 				break;
 		}
@@ -398,11 +595,13 @@ function keydown(event){
 
 function clearcolors(idname){
 	if ((idname != "CapsLock" || Caps == 0) && (idname != "ShiftRight" && idname != "ShiftLeft")){
-		document.getElementById(idname).style.transition = "background-color 0.6s ease";
+		document.getElementById(idname).style.transition = "all 0.5s ease";
+		document.getElementById(idname).style.transform = "scale(1,1)";
 		document.getElementById(idname).style.background = "#eeeeee";
 	} else {} 
 	if ((idname == "ShiftRight" || idname == "ShiftLeft") && Shift == 0){
-		document.getElementById(idname).style.transition = "background-color 0.6s ease";
+		document.getElementById(idname).style.transition = "all 0.5s ease";
+		document.getElementById(idname).style.transform = "scale(1,1)";
 		document.getElementById(idname).style.background = "#eeeeee";
 	} else {}
 }
@@ -429,7 +628,8 @@ function resetlettersbackground(){
 	var tempchar = characters.substring(26,52);
 	for (let i=0; i < tempchar.length; i++){
 		try{clearTimeout(c);}catch{};
-		document.getElementById(tempchar[i]).style.transition = "background-color 0s ease";
+		document.getElementById(tempchar[i]).style.transition = "all 0s ease";
+		document.getElementById(tempchar[i]).style.transform = "scale(1,1)";
 		document.getElementById(tempchar[i]).style.background = "#eeeeee";
 		if ((Caps == 1 && Shift == 0) || (Shift == 1 && Caps == 0)){
 			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i].toUpperCase();
@@ -452,49 +652,49 @@ function resetlettersbackground(){
 
 function check(){
 	if (inputfield.join("") == "sound mute"){
-		document.getElementById("audio").volume = 0;
+		document.getElementById("audio").volume = 0; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound unmute" && Player.volume != 0){
-		document.getElementById("audio").volume = Player.volume;
+		document.getElementById("audio").volume = Player.volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound unmute" && Player.volume == 0){
-		document.getElementById("audio").volume = 1;
+		document.getElementById("audio").volume = 1; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume >= 0.2){
-		document.getElementById("audio").volume -= 0.2; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume -= 0.2; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume < 0.2){
-		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume >= 0.4){
-		document.getElementById("audio").volume -= 0.4; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume -= 0.4; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume < 0.4){
-		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume >= 0.6){
-		document.getElementById("audio").volume -= 0.6; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume -= 0.6; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume < 0.6){
-		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume <= 0.8){
-		document.getElementById("audio").volume += 0.2; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume += 0.2; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume > 0.8){
-		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume <= 0.6){
-		document.getElementById("audio").volume += 0.4; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume += 0.4; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume > 0.6){
-		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume <= 0.4){
-		document.getElementById("audio").volume += 0.6; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume += 0.6; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	} 
 	else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume > 0.4){
-		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume;
+		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
 	}
 	else if (inputfield.join("") == "save"){
 		save();
@@ -582,7 +782,10 @@ function getletters(){
 				} setTimeout(countnone, 1000);
 				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100), ((Player.Letters[ActiveLetter][2]-1)/Player.Letters[ActiveLetter][4]*100));
 				if (ActiveLetterCount == ActiveLetterMax){
-					ActiveLetter = "";
+					ActiveLetter = "~";
+					function xyz(){
+						ActiveLetter = "";
+					} setTimeout(xyz, 1000);
 					ActiveLetterCount = 0;
 					ActiveLetterMax = 0;
 					ActiveLetterSpeed = 0;
@@ -602,7 +805,10 @@ function getletters(){
 				} setTimeout(countnone, 1000);
 				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100), ((Player.Letters[ActiveLetter.toLowerCase()][3]-1)/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
 				if (ActiveLetterCount == ActiveLetterMax){
-					ActiveLetter = "";
+					ActiveLetter = "~";
+					function xyz(){
+						ActiveLetter = "";
+					} setTimeout(xyz, 1000);
 					ActiveLetterCount = 0;
 					ActiveLetterMax = 0;
 					ActiveLetterSpeed = 0;
@@ -613,7 +819,13 @@ function getletters(){
 				}
 			}
 		}
-	} else {}
+	} 
+	else{
+		var tempchar = characters.substring(26,52);
+		for (let i=0; i < tempchar.length; i++){
+			document.getElementById("Count" + tempchar[i]).style = "display: none;";
+		}
+	}
 } setInterval(getletters, 10);
 
 // Alert handling for mobile and PC
@@ -1009,7 +1221,7 @@ function load(){
 			});
 			Player = PlayerLoaded;
 		}
-		document.getElementById("audio").volume = Player.volume;
+		document.getElementById("audio").volume = Player.volume2;
 	}
 	
 	// Wczytywanie, sprawdzanie i wyświetlanie odblokowanych liter
@@ -1039,14 +1251,19 @@ function load(){
 
 function loadsize(){
 	var classkeys = document.getElementsByClassName("keys");
+	var classalttext = document.getElementsByClassName("alttext");
 	for (let i=0; i < classkeys.length; i++){
-		classkeys[i].style = "font-size: " + (classkeys[0].clientWidth/3.5 + 8) + "px; line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
+		classkeys[i].style = "font-size: " + (classkeys[0].clientWidth/3.5 + 8) + "px; line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/8 + "px;";
+	}
+	for (let i=0; i < classalttext.length; i++){
+		classalttext[i].style.fontSize = (classkeys[0].clientWidth/3.5 + 8)/2;
 	}
 	for (let i=0; i < characterscodes.length; i++){
 		document.getElementById(characterscodes[i]).style = "font-size: " + (classkeys[0].clientWidth/3.5 + 8) + "px;line-height: " + (classkeys[0].clientHeight-10) + "px; border-radius: " + classkeys[0].clientHeight/9 + "px;";
 	}
-	document.getElementById("Help").style = "margin-top: " + (-(classkeys[0].clientHeight-12)/2) +"px;";
-	document.getElementById("title").style = "font-size: " + (document.getElementById("title").clientHeight/2.5 + 8) + "px; line-height: " + document.getElementById("title").clientHeight + "px;";
+	document.getElementById("title").style = "background: linear-gradient(90deg, rgba(109,255,95,1) 0%, rgba(254,255,250,1) " + (1300*16/document.body.clientWidth) + "%); font-size: " + (document.getElementById("title").clientHeight/2.5 + 8) + "px; line-height: " + document.getElementById("title").clientHeight + "px;";
+	document.getElementById("Help").style = "margin-top: " + (-(classkeys[0].clientHeight-11)/2) +"px; font-size: " + (classkeys[0].clientWidth/7) + "px;";
+	document.getElementById("poletekst").style.fontSize = classkeys[0].clientHeight*0.75;
 }
 
 function reset(){
