@@ -9,16 +9,50 @@ const server = http.createServer(app);
 const io = socketIO(server);
 app.use(express.static(publicPath));
 server.listen(port);
-
+var lista = {};
 
 io.on('connection', (socket) => {
-	console.log('a user connected');
 	io.emit('poletekst', "...");
 	socket.on('disconnect', () => {
-		console.log('user disconnected');
+		delete lista[socket.id];
+		io.emit('playerscore', lista);
 	});
 	
-	socket.on('LogPlayer', (PlayerData) => {
-			console.log("a");
+	socket.on('newplayer', (Player) => {
+		var test = 1;
+		if (Object.keys(lista).length > 0){
+			for (key in lista){
+				if (lista[key][0] == Player.nick){
+					io.emit('enternick', 0);
+					test = 0;
+				}
+			}
+		}
+		if (test == 1){
+			io.emit('enternick', 1);
+		}
+	});
+	socket.on('LogPlayer', (Player) => {
+		var letters = "eatorhnsidlcyufgwbmpvkjzqxEADTORHNSILCYUFGWBMPVKJZQX"
+		var unlocked = []
+		for (key in Player.Letters){
+			if (Player.Letters[key][0] == true){
+				unlocked.push(key);
+			}
+			else if (Player.Letters[key][1] == true){
+				unlocked.push(key.toUpperCase());
+			}
+		}
+		var d = {};
+		for (let i=0; i< unlocked.length; i++){
+			d[unlocked[i]] = letters.indexOf(unlocked[i]);
+		}
+		var max = Math.max.apply(null, Object.values(d)),
+			val = Object.keys(d).find(function(a) {
+				return d[a] === max;
+		});
+		var letter = Object.keys(d).find(key => d[key] === max);
+		lista[socket.id] = [Player.nick, Player.Score, letter];
+		io.emit('playerscore', lista);
 	});
 });
