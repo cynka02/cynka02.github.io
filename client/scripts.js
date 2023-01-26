@@ -1,1986 +1,1563 @@
 var socket = io();
-var inputfield = [];
-var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-=[];',./";
-var charactersspecial = "!@#$%^&*()_+{}:" + '"|<>?';
-var characterscodes = ["Backspace", "CapsLock", "Space", "ShiftLeft", "ShiftRight", "Backslash"];
-var commands = ["sound mute", "sound unmute", "save", "help", "sound-", "sound--", "sound---", "sound+", "sound++", "sound+++"]
-var Caps = 0;
-var Caps2 = 0;
-var Shift = 0;
+var version = 2;
 var AlertType = "";
-var g;
-var c;
 var ssave;
 var hsave;
-var menuclicked = 0;
-var ActiveLetter = "";
-var ActiveLetterCount = 0;
-var ActiveLetterMax = 0;
-var ActiveLetterSpeed = 0;
-var ActiveLetterCap = 0;
-var Collections = [20, 40, 90, 175, 300, 500, 0]
-var ColBonus = ["Speed x1.3", "Score x2", "-2 storage cost", "Speed x1.2", "-3 storage cost", "+1 mined letter", ""]
+var barP11;
+var barP12;
+var barkey1;
+var barP21;
+var barP22;
+var barkey2;
+var barP31;
+var barP32;
+var barkey3;
+var barP41;
+var barP42;
+var barkey4;
+var ifdl = false;
+var ifbc = false;
+var ifjk = false;
+var ifAH = false;
+var ifDL = false;
+var ifBC = false;
+var ifJK = false;
+var menu = 1;
+var logged = 0;
+var strg = "";
+var clickedletters = "e";
 var Player = {
 	nick: "",
-	tut: 0,
-	Secrets: [false, false, false],
-	volume: 0.6,
-	volume2: 0.6,
+	version: 2,
 	Score: 0,
+	Unlocked: ["e"],
 	Letters: {
-		a: [false, false, 0, 0, 5, 3, 0.234, 0.1404, "ee", 0, 1, "xE", 0, 4, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		b: [false, false, 0, 0, 5, 3, 0.043, 0.0258, "wge", 0, 6, "WGE", 0, 6, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		c: [false, false, 0, 0, 5, 3, 0.08, 0.048, "iln", 0, 6, "ILN", 0, 6, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		d: [false, false, 0, 0, 5, 3, 0.123, 0.0738, "net", 0, 4, "AE", 0, 5, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 3, 13],
-		e: [true, false, 0, 0, 5, 3, 0.363, 0.2178, "", 0, 0, "zqx", 0, 3, "ae", 0, "", 0, 0, 0, 20, 20, "Overall speed x1.02", "Speed x1.3", 0, 0, 0, 0, 1, 10],
-		f: [false, false, 0, 0, 5, 3, 0.063, 0.0378, "uon", 0, 7, "UON", 0, 7, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		g: [false, false, 0, 0, 5, 3, 0.057, 0.0342, "lsy", 0, 7, "LSY", 0, 7, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		h: [false, false, 0, 0, 5, 3, 0.174, 0.1044, "re", 0, 4, "RE", 0, 4, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		i: [false, false, 0, 0, 5, 3, 0.2, 0.12, "sn", 0, 5, "SN", 0, 5, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		j: [false, false, 0, 0, 5, 3, 0.006, 0.0036, "kgd", 0, 8, "KGD", 0, 8, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 8, 18],
-		k: [false, false, 0, 0, 5, 3, 0.023, 0.0138, "eve", 0, 8, "EVE", 0, 8, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 8, 18],
-		l: [false, false, 0, 0, 5, 3, 0.114, 0.0684, "rhe", 0, 5, "RHE", 0, 5, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 3, 13],
-		m: [false, false, 0, 0, 5, 3, 0.069, 0.0414, "frg", 0, 6, "FRG", 0, 6, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		n: [false, false, 0, 0, 5, 3, 0.191, 0.1146, "at", 0, 5, "AT", 0, 5, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		o: [false, false, 0, 0, 5, 3, 0.214, 0.1284, "dt", 0, 4, "DT", 0, 4, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		p: [false, false, 0, 0, 5, 3, 0.054, 0.0324, "wno", 0, 7, "WNO", 0, 7, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		q: [false, false, 0, 0, 5, 3, 0.003, 0.0018, "blz", 0, 8, "BLZ", 0, 8, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 10, 10],
-		r: [false, false, 0, 0, 5, 3, 0.171, 0.1026, "oe", 0, 4, "OE", 0, 4, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		s: [false, false, 0, 0, 5, 3, 0.18, 0.108, "no", 0, 5, "NO", 0, 5, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		t: [false, false, 0, 0, 5, 3, 0.26, 0.156, "ea", 0, 4, "EA", 0, 4, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 2, 12],
-		u: [false, false, 0, 0, 5, 3, 0.08, 0.048, "cad", 0, 6, "CAD", 0, 6, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		v: [false, false, 0, 0, 5, 3, 0.029, 0.0174, "hcp", 0, 8, "HCP", 0, 8, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 8, 18],
-		w: [false, false, 0, 0, 5, 3, 0.066, 0.0396, "sul", 0, 7, "SUL", 0, 7, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		x: [false, false, 0, 0, 5, 3, 0.003, 0.0018, "jkmq", 0, 8, "JKMQ", 0, 8, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 10, 20],
-		y: [false, false, 0, 0, 5, 3, 0.057, 0.0342, "ecr", 0, 7, "ECR", 0, 7, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 5, 15],
-		z: [false, false, 0, 0, 5, 3, 0.003, 0.0018, "yvj", 0, 8, "YVJ", 0, 8, "", 0, "", 0, 0, 0, 20, 20, "Speed x1.3", "Speed x1.3", 0, 0, 0, 0, 10, 20]
+		// (0)Czy małe, (1)Czy duże, (2)ilość małych, (3)ilość dużych, (4)max małych, (5)max dużych, (6)prędkość małych, (7)prędkość dużych,
+		// (8)odbl. małych, (9)odbl. dużych, (10)wydobyte małe ten soft, (11)wydobyte duże ten soft,
+		// (12)wydobyte małe ogólnie, (13)wydobyte duże ogólnie, (14)poziom mastery małe, (15)poziom mastery duże,
+		// (16)score małe, (17)score duże, (18)mnożnik speed małe, (19)mnożnik speed duże,
+		// (20)nr prestige małe, (21)nr prestige duże,
+		// (22)up strg score małe, (23)up strg ilość liter małe, (24)up strg litera małe, (25)up strg score postęp małe, (26)up strg litery postęp małe,
+		//
+		a: [false, false, 0, 0, 5, 3, 0.234, 0.1404, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 0.43, 12, 1, 1, 0, 0, 5, 8, "a", 0, 0],
+		b: [false, false, 0, 0, 5, 3, 0.043, 0.0258, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 3.26, 12, 1, 1, 0, 0, 3, 6, "b", 0, 0],
+		c: [false, false, 0, 0, 5, 3, 0.08, 0.048, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 1.75, 12, 1, 1, 0, 0, 3, 6, "c", 0, 0],
+		d: [false, false, 0, 0, 5, 3, 0.123, 0.0738, "ssssssssssrrrrrrrr", "xE", 0, 0, 0, 0, 0, 0, 0.97, 12, 1, 1, 0, 0, 3, 7, "d", 0, 0],
+		e: [true, false, 0, 0, 5, 3, 0.363, 0.2178, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 0.2, 12, 1, 1, 0, 0, 3, 8, "e", 0, 0],
+		f: [false, false, 0, 0, 5, 3, 0.063, 0.0378, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 2.23, 12, 1, 1, 0, 0, 3, 6, "f", 0, 0],
+		g: [false, false, 0, 0, 5, 3, 0.057, 0.0342, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 2.45, 12, 1, 1, 0, 0, 3, 6, "g", 0, 0],
+		h: [false, false, 0, 0, 5, 3, 0.174, 0.1044, "nnnnnnssss", "xE", 0, 0, 0, 0, 0, 0, 0.57, 12, 1, 1, 0, 0, 7, 7, "h", 0, 0],
+		i: [false, false, 0, 0, 5, 3, 0.2, 0.12, "tttttaaa", "xE", 0, 0, 0, 0, 0, 0, 0.5, 12, 1, 1, 0, 0, 6, 8, "i", 0, 0],
+		j: [false, false, 0, 0, 5, 3, 0.015, 0.0090, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 10.67, 12, 1, 1, 0, 0, 3, 6, "j", 0, 0],
+		k: [false, false, 0, 0, 5, 3, 0.023, 0.0138, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 6.96, 12, 1, 1, 0, 0, 3, 6, "k", 0, 0],
+		l: [false, false, 0, 0, 5, 3, 0.114, 0.0684, "hhhhhhhhhhhhdddddddd", "xE", 0, 0, 0, 0, 0, 0, 1.06, 12, 1, 1, 0, 0, 3, 7, "l", 0, 0],
+		m: [false, false, 0, 0, 5, 3, 0.069, 0.0414, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 2.03, 12, 1, 1, 0, 0, 3, 6, "m", 0, 0],
+		n: [false, false, 0, 0, 5, 3, 0.191, 0.1146, "ttttoooo", "xE", 0, 0, 0, 0, 0, 0, 0.52, 12, 1, 1, 0, 0, 6, 7, "n", 0, 0],
+		o: [false, false, 0, 0, 5, 3, 0.214, 0.1284, "eeeeeaa", "xE", 0, 0, 0, 0, 0, 0, 0.47, 12, 1, 1, 0, 0, 6, 8, "o", 0, 0],
+		p: [false, false, 0, 0, 5, 3, 0.054, 0.0324, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 2.59, 12, 1, 1, 0, 0, 3, 6, "p", 0, 0],
+		q: [false, false, 0, 0, 5, 3, 0.010, 0.0060, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 16, 12, 1, 1, 0, 0, 3, 6, "q", 0, 0],
+		r: [false, false, 0, 0, 5, 3, 0.171, 0.1026, "ooooooohhhh", "xE", 0, 0, 0, 0, 0, 0, 0.58, 12, 1, 1, 0, 0, 7, 7, "r", 0, 0],
+		s: [false, false, 0, 0, 5, 3, 0.18, 0.108, "eeeeiiiii", "xE", 0, 0, 0, 0, 0, 0, 0.56, 12, 1, 1, 0, 0, 7, 7, "s", 0, 0],
+		t: [false, false, 0, 0, 5, 3, 0.26, 0.156, "eee", "xE", 0, 0, 0, 0, 0, 0, 0.38, 12, 1, 1, 0, 0, 5, 8, "t", 0, 0],
+		u: [false, false, 0, 0, 5, 3, 0.08, 0.048, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 1.75, 12, 1, 1, 0, 0, 3, 6, "u", 0, 0],
+		v: [false, false, 0, 0, 5, 3, 0.030, 0.0180, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 5.33, 12, 1, 1, 0, 0, 3, 6, "v", 0, 0],
+		w: [false, false, 0, 0, 5, 3, 0.066, 0.0396, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 2.13, 12, 1, 1, 0, 0, 3, 6, "w", 0, 0],
+		x: [false, false, 0, 0, 5, 3, 0.010, 0.0060, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 16, 12, 1, 1, 0, 0, 3, 6, "x", 0, 0],
+		y: [false, false, 0, 0, 5, 3, 0.057, 0.0342, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 2.45, 12, 1, 1, 0, 0, 3, 6, "y", 0, 0],
+		z: [false, false, 0, 0, 5, 3, 0.010, 0.0060, "eeeettt", "xE", 0, 0, 0, 0, 0, 0, 16, 12, 1, 1, 0, 0, 3, 6, "z", 0, 0]
 	},
-	Groups: {
-		ahinorst: [80, 2500, 1200, 500, 200, 80,  0],
-		dl: [20, 400, 200, 100, 45, 20, 0],
-		bcfgmpuwy: [60, 1200, 650, 300, 125, 60, 0],
-		jkqvxz: [30, 700, 300, 175, 80, 30, 0]
-	},
-	Grand: {
-		main: [420, "not", "leap", "orteil", "Nickname of the Cookie Clicker creator<br>&nbsp;", 0, 0, 0, 0],
-		easyused: [],
-		easy: ["the", "north", "hand", "let", "ease", "head", "old", "this", "three", "add", "she", "one", "that"],
-		hardused: [],
-		hard: ["name", "very", "through", "just", "sentence", "great", "think", "house", "keep", "animal", "could", "number", "water"],
-		mysteryused: [],
-		mystery: ["progress quest", "hello there", "orteil", "dripstat", "merge", "idle"],
-		mysterydsc: ["Name of the first idle game<br>&nbsp;", "Hidden words in store .<br>&nbsp;", "Nickname of the Cookie Clicker creator<br>&nbsp;", "Idle game about dripping something...<br>&nbsp;", "<u>Action</u> when two things are connecting into one better", "General type of Cookie Clicker (RPG, RTS, etc.)"],
-		bonusese: ["<b>Score x1.3</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Score x1.4</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Score x1.5</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Score x1.6</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Score x1.3</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>", "<b>Score x1.4</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>", "<b>Score x1.5</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>", "<b>Score x1.3</b> for all letters from group <b><i>bcfgmpuwy</i></b>", "<b>Score x1.4</b> for all letters from group <b><i>bcfgmpuwy</i></b>", "<b>Score x1.5</b> for all letters from group <b><i>bcfgmpuwy</i></b>"],
-		bonusesh: ["<b>Speed x1.2</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Speed x1.3</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Speed x1.4</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Speed x1.2</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>", "<b>Speed x1.3</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>", "<b>Speed x1.2</b> for all letters from group <b><i>bcfgmpuwy</i></b>", "<b>Speed x1.3</b> for all letters from group <b><i>bcfgmpuwy</i></b>"],
-		bonusesm: ["<b>Overall speed x1.05</b> and instant <b>+500 score</b>", "<b>Overall speed x1.1</b> and instant <b>+400 score</b>", "<b>Overall speed x1.15</b> and instant <b>+400 score</b>", "<b>Overall speed x1.2</b> and instant <b>+300 score</b>"],
-		activebonus: [],
-		nextbonus: ["<b>Score x1.4</b> for all letters from group <b><i>ahinorst</i></b>", "<b>Speed x1.2</b> for all letters from group <b><i>bcfgmpuwy</i></b>", "<b>Overall speed x1.1</b> and instant <b>+400 score</b>"]
+	Collectors: {
+		// (0)czy odblokowany, (1)czy działa, (2)literka, (3)postęp
+		0: [true, false, "", 0],
+		1: [false, false, "", 0],
+		2: [false, false, "", 0],
+		3: [false, false, "", 0]
 	}
 };
 
-function info(){
-	document.getElementById("menu1").style.transform = "translateY(15%)";
-	document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-	document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-	document.getElementById("menu2").style.transform = "translateY(15%)";
-	document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
-	document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "";
-	document.getElementById("menu3").style.transform = "translateY(15%)";
-	document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-	if (Player.Letters["l"][0] == false){
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
+
+document.getElementById("menu1").onclick = function(){changemenu(1)};
+document.getElementById("menu2").onclick = function(){changemenu(2)};
+document.getElementById("menu3").onclick = function(){changemenu(3)};
+document.getElementById("menu4").onclick = function(){changemenu(4)};
+document.getElementById("menu5").onclick = function(){changemenu(5)};
+document.getElementById("menu1").onmouseover = function(){highlightmenu(1, 1)};
+document.getElementById("menu1").onmouseout = function(){highlightmenu(1, 0)};
+document.getElementById("menu2").onmouseover = function(){highlightmenu(2, 1)};
+document.getElementById("menu2").onmouseout = function(){highlightmenu(2, 0)};
+document.getElementById("menu3").onmouseover = function(){highlightmenu(3, 1)};
+document.getElementById("menu3").onmouseout = function(){highlightmenu(3, 0)};
+document.getElementById("menu4").onmouseover = function(){highlightmenu(4, 1)};
+document.getElementById("menu4").onmouseout = function(){highlightmenu(4, 0)};
+document.getElementById("menu5").onmouseover = function(){highlightmenu(5, 1)};
+document.getElementById("menu5").onmouseout = function(){highlightmenu(5, 0)};
+
+function changemenu(n){
+	menu = n;
+	for (let i=0; i < 5; i++){
+		if (n != (i+1)){
+			document.getElementById("menu"+(i+1)).style.lineHeight = "5vh";
+			document.getElementById("menu"+(i+1)).style.fontSize = "2.8vh";
+			document.getElementById("menu"+(i+1)).style.textDecoration = "auto";
+			document.getElementById("menu"+(i+1)).style.backgroundColor = "#efeff7";
+			document.getElementById("menu"+(i+1)).style.color = "#4e74d5";
+		}
 	}
-	else{
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-	}
-	document.getElementById("menu4").style.transform = "translateY(15%)";
-	if (Player.Letters["v"][0] == false){
-		document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-	}
-	else{
-		document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-	}
-	document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-	document.getElementById("menu5").style.transform = "translateY(15%)";
-	document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-	if (Player.Letters["g"][0] == false){
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-	}
-	else{
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-	}
-	menuclicked = 0;
-	document.getElementById("info").style.display = "block";
-	document.getElementById("keyboard").style.display = "none";
-	document.getElementById("pole").style.display = "none";
-	document.getElementById("store").style.display = "none";
-	document.getElementById("features").style.display = "none";
-	document.getElementById("grandmamain").style.display = "none";
-	document.getElementById("grandinfo").style.display = "none";
-	document.getElementById("upgrade").style.display = "none";
+	document.getElementById("main").style.display = "none";
+	document.getElementById("mastery").style.display = "none";
+	document.getElementById("storage").style.display = "none";
+	document.getElementById("prestige").style.display = "none";
 	document.getElementById("online").style.display = "none";
-}
-document.getElementById("menu1").onmouseover = function(){
-	if (menuclicked != 1){
-		document.getElementById("menu1").style.transform = "translateY(8%)";
-	}
-}
-document.getElementById("menu1").onmouseout = function(){
-	if (menuclicked != 1){
-		document.getElementById("menu1").style.transform = "translateY(15%)";
-	}
-}
-document.getElementById("menu2").onmouseover = function(){
-	if (menuclicked != 2){
-		document.getElementById("menu2").style.transform = "translateY(8%)";
-	}
-}
-document.getElementById("menu2").onmouseout = function(){
-	if (menuclicked != 2){
-		document.getElementById("menu2").style.transform = "translateY(15%)";
-	}
-}
-document.getElementById("menu3").onmouseover = function(){
-	if (menuclicked != 3 && Player.Letters["l"][0] == false){
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu3").style.transform = "translateY(8%)";
-	}
-	else if (menuclicked != 3){
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu3").style.transform = "translateY(8%)";
-	}
-}
-document.getElementById("menu3").onmouseout = function(){
-	if (menuclicked != 3 && Player.Letters["l"][0] == false){
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		document.getElementById("menu3").style.transform = "translateY(15%)";
-	}
-	else if (menuclicked != 3){
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		document.getElementById("menu3").style.transform = "translateY(15%)";
-	}
-}
-document.getElementById("menu4").onmouseover = function(){
-	if (menuclicked != 4 && Player.Letters["v"][0] == false){
-		document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu4").style.transform = "translateY(8%)";
-	}
-	else if (menuclicked != 4){
-		document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		document.getElementById("menu4").style.transform = "translateY(8%)";
-	}
-}
-document.getElementById("menu4").onmouseout = function(){
-	if (menuclicked != 4 && Player.Letters["v"][0] == false){
-		document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		document.getElementById("menu4").style.transform = "translateY(15%)";
-	}
-	else if (menuclicked != 4){
-		document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		document.getElementById("menu4").style.transform = "translateY(15%)";
-	}
-}
-document.getElementById("menu5").onmouseover = function(){
-	if (menuclicked != 5 && Player.Letters["g"][0] == false){
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu5").style.transform = "translateY(8%)";
-	}
-	else if (menuclicked != 5){
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		document.getElementById("menu5").style.transform = "translateY(8%)";
-	}
-}
-document.getElementById("menu5").onmouseout = function(){
-	if (menuclicked != 5 && Player.Letters["g"][0] == false){
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		document.getElementById("menu5").style.transform = "translateY(15%)";
-	}
-	else if (menuclicked != 5){
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		document.getElementById("menu5").style.transform = "translateY(15%)";
-	}
-}
-document.getElementById("menu1").onclick = function(event){
-	menu1click(event);
-}
-document.getElementById("menu2").onclick = function(){
-	menu2click();
-}
-document.getElementById("menu3").onclick = function(){
-	menu3click();
-}
-document.getElementById("menu4").onclick = function(){
-	menu4click();
-}
-document.getElementById("menu5").onclick = function(){
-	menu5click();
+	document.getElementById("menu"+n).style.lineHeight = "4.5vh";
+	document.getElementById("menu"+n).style.fontSize = "3.2vh";
+	document.getElementById("menu"+n).style.textDecoration = "underline";
+	document.getElementById("menu"+n).style.backgroundColor = "#4e74d5";
+	document.getElementById("menu"+n).style.color = "#efeff7";
+	if (n == 1){document.getElementById("main").style.display="block"};
+	if (n == 2){document.getElementById("mastery").style.display="block"};
+	if (n == 3){document.getElementById("storage").style.display="block"};
+	if (n == 4){document.getElementById("prestige").style.display="block"};
+	if (n == 5){document.getElementById("online").style.display="block"};
 }
 
-function menu1click(event){
-	if (menuclicked != 1 && Player.tut != 0){
-		changeshift(0);
-		changecaps(0);
-		document.getElementById("menu1").style.transform = "translateY(1%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu2").style.transform = "translateY(15%)";
-		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "";
-		document.getElementById("menu3").style.transform = "translateY(15%)";
-		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-		if (Player.Letters["l"][0] == false){
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		document.getElementById("menu4").style.transform = "translateY(15%)";
-		if (Player.Letters["v"][0] == false){
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu5").style.transform = "translateY(15%)";
-		document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-		if (Player.Letters["g"][0] == false){
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		menuclicked = 1;
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "block";
-		document.getElementById("pole").style.display = "block";
-		document.getElementById("store").style.display = "none";
-		document.getElementById("features").style.display = "none";
-		document.getElementById("grandmamain").style.display = "none";
-		document.getElementById("upgrade").style.display = "none";
-		document.getElementById("online").style.display = "none";
-		grandsmallinfo();
-		loadsize();
-		if (event && event.getModifierState('CapsLock')) {
-			changecaps(1);
-			Caps = 1;
-			document.getElementById("CapsLock").style.transition = "all 0.5s ease";
-			document.getElementById("CapsLock").style.background = "#6eff61f7";
-			document.getElementById("CapsLock").style.transform = "scale(0.95,0.95)";
-			if (event.getModifierState('Shift')){
-				changecaps(0);
-				changeshift(1);
-			}
-		} 
-		else if (event && event.getModifierState('Shift')){
-			changecaps(1);
-			changeshift(1);
-			Caps = 0;
-		}
-		else {
-			changecaps(0);
-			Caps = 0;
-		}
+function highlightmenu(n, k){
+	if (k == 1){
+		document.getElementById("menu"+n).style.lineHeight = "4.5vh";
+		document.getElementById("menu"+n).style.fontSize = "3.2vh";
+		document.getElementById("menu"+n).style.textDecoration = "underline";
+		document.getElementById("menu"+n).style.backgroundColor = "#4e74d5";
+		document.getElementById("menu"+n).style.color = "#efeff7";
 	}
-	else if (Player.tut == 10){
-		info();
-		document.getElementById("menu1").style.transform = "translateY(8%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-	}
-}
-function menu2click(){
-	if (menuclicked != 2 && Player.tut == 10){
-		changeshift(0);
-		document.getElementById("menu1").style.transform = "translateY(15%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-		document.getElementById("menu2").style.transform = "translateY(1%)";
-		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu3").style.transform = "translateY(15%)";
-		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-		if (Player.Letters["l"][0] == false){
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		document.getElementById("menu4").style.transform = "translateY(15%)";
-		if (Player.Letters["v"][0] == false){
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu5").style.transform = "translateY(15%)";
-		document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-		if (Player.Letters["g"][0] == false){
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		menuclicked = 2;
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "none";
-		document.getElementById("pole").style.display = "none";
-		document.getElementById("store").style.display = "block";
-		document.getElementById("features").style.display = "none";
-		document.getElementById("grandmamain").style.display = "none";
-		document.getElementById("upgrade").style.display = "none";
-		document.getElementById("online").style.display = "none";
-		grandsmallinfo();
-		loadsize();
-		checkstore();
-	}
-	else if (Player.tut == 10){
-		info();
-		document.getElementById("menu2").style.transform = "translateY(8%)";
-		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "";
-	}
-	else if (menuclicked != 2 && (Player.tut == 1 || Player.tut == 2)){
-		document.getElementById("tut2").style.display = "none";
-		document.getElementById("tut3").style.display = "block";
-		document.getElementById("menu2").style.filter = "blur(0)";
-		document.getElementById("menu3").style.filter = "blur(3px)";
-		document.getElementById("menu4").style.filter = "blur(3px)";
-		document.getElementById("menu5").style.filter = "blur(3px)";
-		document.getElementById("menu2").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu2").style.cursor = "pointer";
-		changeshift(0);
-		Player.tut = 2;
-		document.getElementById("menu1").style.transform = "translateY(15%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-		document.getElementById("menu2").style.transform = "translateY(1%)";
-		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("menu3").style.transform = "translateY(15%)";
-		document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-		if (Player.Letters["l"][0] == false){
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		document.getElementById("menu4").style.transform = "translateY(15%)";
-		if (Player.Letters["v"][0] == false){
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-		document.getElementById("menu5").style.transform = "translateY(15%)";
-		document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-		if (Player.Letters["g"][0] == false){
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-		}
-		else{
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-		}
-		menuclicked = 2;
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "none";
-		document.getElementById("pole").style.display = "none";
-		document.getElementById("store").style.display = "block";
-		document.getElementById("features").style.display = "none";
-		document.getElementById("grandmamain").style.display = "none";
-		document.getElementById("upgrade").style.display = "none";
-		document.getElementById("online").style.display = "none";
-		grandsmallinfo();
-		loadsize();
-		checkstore();
-	}
-}
-function menu3click(){
-	if (Player.Letters["l"][0] == true && Player.tut == 10){
-		if (menuclicked != 3){
-			document.getElementById("menu1").style.transform = "translateY(15%)";
-			document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu2").style.transform = "translateY(15%)";
-			document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu3").style.transform = "translateY(1%)";
-			document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-			document.getElementById("menu4").style.transform = "translateY(15%)";
-			if (Player.Letters["v"][0] == false){
-				document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-			}
-			else{
-				document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-			}
-			document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu5").style.transform = "translateY(15%)";
-			document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-			if (Player.Letters["g"][0] == false){
-				document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-			}
-			else{
-				document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-			}
-			menuclicked = 3;
-			document.getElementById("info").style.display = "none";
-			document.getElementById("keyboard").style.display = "none";
-			document.getElementById("pole").style.display = "none";
-			document.getElementById("store").style.display = "none";
-			document.getElementById("features").style.display = "block";
-			document.getElementById("upgrade").style.display = "none";
-			document.getElementById("online").style.display = "none";
-			if (document.getElementById("ftgrand").style.textDecoration == "underline"){
-				document.getElementById("grandmamain").style.display = "block";
-			}
-			grandsmallinfo();
-			if (document.getElementById("grandmamain").style.display == "block"){
-				document.getElementById("grandinfo").style.display = "none";
-			}
-			checkcollection();
-			granddisplay();
-		}
-		else{
-			info();
-			document.getElementById("menu3").style.transform = "translateY(8%)";
-			document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "";
-		}
-	}
-	else if (Player.tut == 10){
-		document.getElementById("menu3").classList.add("blocked");
-		function stopblock(){
-			document.getElementById("menu3").classList.remove("blocked");
-		} setTimeout(stopblock, 200);
-	}
-}
-function menu4click(){
-	if (Player.Letters["v"][0] == "abc" && Player.tut == 10){
-		if (menuclicked != 4){
-			document.getElementById("menu1").style.transform = "translateY(15%)";
-			document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu2").style.transform = "translateY(15%)";
-			document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu3").style.transform = "translateY(15%)";
-			document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu4").style.transform = "translateY(1%)";
-			document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-			document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu5").style.transform = "translateY(15%)";
-			document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-			if (Player.Letters["g"][0] == false){
-				document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-			}
-			else{
-				document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-			}
-			menuclicked = 4;
-			document.getElementById("info").style.display = "none";
-			document.getElementById("keyboard").style.display = "none";
-			document.getElementById("pole").style.display = "none";
-			document.getElementById("store").style.display = "none";
-			document.getElementById("features").style.display = "none";
-			document.getElementById("grandmamain").style.display = "none";
-			document.getElementById("upgrade").style.display = "block";
-			document.getElementById("online").style.display = "none";
-			grandsmallinfo();
-		}
-		else{
-			info();
-			document.getElementById("menu4").style.transform = "translateY(8%)";
-			document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "";
-		}
-	}
-	else if (Player.tut == 10){
-		document.getElementById("menu4").classList.add("blocked");
-		function stopblock(){
-			document.getElementById("menu4").classList.remove("blocked");
-		} setTimeout(stopblock, 200);
-	}
-}
-function menu5click(){
-	if (Player.Letters["g"][0] == true && Player.tut == 10){
-		if (menuclicked != 5){
-			document.getElementById("menu1").style.transform = "translateY(15%)";
-			document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu2").style.transform = "translateY(15%)";
-			document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu3").style.transform = "translateY(15%)";
-			document.getElementById("menu3").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu4").style.transform = "translateY(15%)";
-			document.getElementById("menu4").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "";
-			document.getElementById("menu5").style.transform = "translateY(1%)";
-			document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-			menuclicked = 5;
-			document.getElementById("info").style.display = "none";
-			document.getElementById("keyboard").style.display = "none";
-			document.getElementById("pole").style.display = "none";
-			document.getElementById("store").style.display = "none";
-			document.getElementById("features").style.display = "none";
-			document.getElementById("grandmamain").style.display = "none";
-			document.getElementById("upgrade").style.display = "none";
-			document.getElementById("online").style.display = "block";
-			grandsmallinfo();
-		}
-		else{
-			info();
-			document.getElementById("menu5").style.transform = "translateY(8%)";
-			document.getElementById("menu5").getElementsByTagName("img")[0].style.transform = "";
-			document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "";
-		}
-	}
-	else if (Player.tut == 10){
-		document.getElementById("menu5").classList.add("blocked");
-		function stopblock(){
-			document.getElementById("menu5").classList.remove("blocked");
-		} setTimeout(stopblock, 200);
+	else if (n != menu){
+		document.getElementById("menu"+n).style.lineHeight = "5vh";
+		document.getElementById("menu"+n).style.fontSize = "2.8vh";
+		document.getElementById("menu"+n).style.textDecoration = "auto";
+		document.getElementById("menu"+n).style.backgroundColor = "#efeff7";
+		document.getElementById("menu"+n).style.color = "#4e74d5";
 	}
 }
 
-function sellhover(letter){
-	var text = document.getElementById(letter + "Text").innerHTML;
-	if (text == letter && Player.Letters[letter][0] == true){
-		document.getElementById(letter + "score").style.opacity = 1;
-		document.getElementById(letter + "score").style.cursor = "pointer";
+function resetlettersbg(){
+	document.getElementById("lettersnormalaehinorst").style.color = "#ffa31b";
+	document.getElementById("lettersnormalaehinorst").style.backgroundColor = "white";
+	document.getElementById("lettersmainnormalaehinorst").style.display = "none";
+	if (ifdl){
+		document.getElementById("lettersnormaldl").style.color = "#34ff1b";
+		document.getElementById("lettersnormaldl").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormaldl").style.display = "none";
 	}
-	if (text == letter.toUpperCase() && Player.Letters[letter][1] == true){
-		document.getElementById(letter + "score").style.opacity = 1;
-		document.getElementById(letter + "score").style.cursor = "pointer";
+	if (ifbc){
+		document.getElementById("lettersnormalbcfgmpuwy").style.color = "#1bacff";
+		document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormalbcfgmpuwy").style.display = "none";
+	}
+	if (ifjk){
+		document.getElementById("lettersnormaljkqvxz").style.color = "#e21bff";
+		document.getElementById("lettersnormaljkqvxz").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormaljkqvxz").style.display = "none";
+	}
+	if (ifAH){
+		document.getElementById("lettersuppercaseaehinorst").style.color = "#ffa31b";
+		document.getElementById("lettersuppercaseaehinorst").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercaseaehinorst").style.display = "none";
+	}
+	if (ifDL){
+		document.getElementById("lettersuppercasedl").style.color = "#34ff1b";
+		document.getElementById("lettersuppercasedl").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercasedl").style.display = "none";
+	}
+	if (ifBC){
+		document.getElementById("lettersuppercasebcfgmpuwy").style.color = "#1bacff";
+		document.getElementById("lettersuppercasebcfgmpuwy").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercasebcfgmpuwy").style.display = "none";
+	}
+	if (ifJK){
+		document.getElementById("lettersuppercasejkqvxz").style.color = "#e21bff";
+		document.getElementById("lettersuppercasejkqvxz").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercasejkqvxz").style.display = "none";
 	}
 }
-function sellhovertooltip(letter){
-	var text = document.getElementById(letter + "Text").innerHTML;
-	if (text == letter && Player.Letters[letter][0] == true){
-		if (Player.Letters[letter][28].toFixed(1).slice(-1) == 0){
-			document.getElementById(letter + "tooltipscore").innerHTML = "+"+Player.Letters[letter][28].toFixed(0);
-		}
-		else{
-			document.getElementById(letter + "tooltipscore").innerHTML = "+"+Player.Letters[letter][28].toFixed(1);
-		}
-	}
-	if (text == letter.toUpperCase() && Player.Letters[letter][1] == true){
-		if (Player.Letters[letter][29].toFixed(1).slice(-1) == 0){
-			document.getElementById(letter + "tooltipscore").innerHTML = "+"+Player.Letters[letter][29].toFixed(0);
-		}
-		else{
-			document.getElementById(letter + "tooltipscore").innerHTML = "+"+Player.Letters[letter][29].toFixed(1);
-		}
+document.getElementById("lettersnormalaehinorst").onmouseover = function(){
+	if (clickedletters != "e"){
+		document.getElementById("lettersnormalaehinorst").style.color = "white";
+		document.getElementById("lettersnormalaehinorst").style.backgroundColor = "#ffc166";
 	}
 }
-document.getElementById("q").onmouseover = function(){
-	sellhover("q");
-}
-document.getElementById("q").onmouseout = function(){
-	document.getElementById("qscore").style.opacity = 0;
-	document.getElementById("qscore").style.cursor = "default";
-}
-document.getElementById("w").onmouseover = function(){
-	sellhover("w");
-}
-document.getElementById("w").onmouseout = function(){
-	document.getElementById("wscore").style.opacity = 0;
-	document.getElementById("wscore").style.cursor = "default";
-}
-document.getElementById("e").onmouseover = function(){
-	sellhover("e");
-}
-document.getElementById("e").onmouseout = function(){
-	document.getElementById("escore").style.opacity = 0;
-	document.getElementById("escore").style.cursor = "default";
-}
-document.getElementById("r").onmouseover = function(){
-	sellhover("r");
-}
-document.getElementById("r").onmouseout = function(){
-	document.getElementById("rscore").style.opacity = 0;
-	document.getElementById("rscore").style.cursor = "default";
-}
-document.getElementById("t").onmouseover = function(){
-	sellhover("t");
-}
-document.getElementById("t").onmouseout = function(){
-	document.getElementById("tscore").style.opacity = 0;
-	document.getElementById("tscore").style.cursor = "default";
-}
-document.getElementById("y").onmouseover = function(){
-	sellhover("y");
-}
-document.getElementById("y").onmouseout = function(){
-	document.getElementById("yscore").style.opacity = 0;
-	document.getElementById("yscore").style.cursor = "default";
-}
-document.getElementById("u").onmouseover = function(){
-	sellhover("u");
-}
-document.getElementById("u").onmouseout = function(){
-	document.getElementById("uscore").style.opacity = 0;
-	document.getElementById("uscore").style.cursor = "default";
-}
-document.getElementById("i").onmouseover = function(){
-	sellhover("i");
-}
-document.getElementById("i").onmouseout = function(){
-	document.getElementById("iscore").style.opacity = 0;
-	document.getElementById("iscore").style.cursor = "default";
-}
-document.getElementById("o").onmouseover = function(){
-	sellhover("o");
-}
-document.getElementById("o").onmouseout = function(){
-	document.getElementById("oscore").style.opacity = 0;
-	document.getElementById("oscore").style.cursor = "default";
-}
-document.getElementById("p").onmouseover = function(){
-	sellhover("p");
-}
-document.getElementById("p").onmouseout = function(){
-	document.getElementById("pscore").style.opacity = 0;
-	document.getElementById("pscore").style.cursor = "default";
-}
-document.getElementById("a").onmouseover = function(){
-	sellhover("a");
-}
-document.getElementById("a").onmouseout = function(){
-	document.getElementById("ascore").style.opacity = 0;
-	document.getElementById("ascore").style.cursor = "default";
-}
-document.getElementById("s").onmouseover = function(){
-	sellhover("s");
-}
-document.getElementById("s").onmouseout = function(){
-	document.getElementById("sscore").style.opacity = 0;
-	document.getElementById("sscore").style.cursor = "default";
-}
-document.getElementById("d").onmouseover = function(){
-	sellhover("d");
-}
-document.getElementById("d").onmouseout = function(){
-	document.getElementById("dscore").style.opacity = 0;
-	document.getElementById("dscore").style.cursor = "default";
-}
-document.getElementById("f").onmouseover = function(){
-	sellhover("f");
-}
-document.getElementById("f").onmouseout = function(){
-	document.getElementById("fscore").style.opacity = 0;
-	document.getElementById("fscore").style.cursor = "default";
-}
-document.getElementById("g").onmouseover = function(){
-	sellhover("g");
-}
-document.getElementById("g").onmouseout = function(){
-	document.getElementById("gscore").style.opacity = 0;
-	document.getElementById("gscore").style.cursor = "default";
-}
-document.getElementById("h").onmouseover = function(){
-	sellhover("h");
-}
-document.getElementById("h").onmouseout = function(){
-	document.getElementById("hscore").style.opacity = 0;
-	document.getElementById("hscore").style.cursor = "default";
-}
-document.getElementById("j").onmouseover = function(){
-	sellhover("j");
-}
-document.getElementById("j").onmouseout = function(){
-	document.getElementById("jscore").style.opacity = 0;
-	document.getElementById("jscore").style.cursor = "default";
-}
-document.getElementById("k").onmouseover = function(){
-	sellhover("k");
-}
-document.getElementById("k").onmouseout = function(){
-	document.getElementById("kscore").style.opacity = 0;
-	document.getElementById("kscore").style.cursor = "default";
-}
-document.getElementById("l").onmouseover = function(){
-	sellhover("l");
-}
-document.getElementById("l").onmouseout = function(){
-	document.getElementById("lscore").style.opacity = 0;
-	document.getElementById("lscore").style.cursor = "default";
-}
-document.getElementById("z").onmouseover = function(){
-	sellhover("z");
-}
-document.getElementById("z").onmouseout = function(){
-	document.getElementById("zscore").style.opacity = 0;
-	document.getElementById("zscore").style.cursor = "default";
-}
-document.getElementById("x").onmouseover = function(){
-	sellhover("x");
-}
-document.getElementById("x").onmouseout = function(){
-	document.getElementById("xscore").style.opacity = 0;
-	document.getElementById("xscore").style.cursor = "default";
-}
-document.getElementById("c").onmouseover = function(){
-	sellhover("c");
-}
-document.getElementById("c").onmouseout = function(){
-	document.getElementById("cscore").style.opacity = 0;
-	document.getElementById("cscore").style.cursor = "default";
-}
-document.getElementById("v").onmouseover = function(){
-	sellhover("v");
-}
-document.getElementById("v").onmouseout = function(){
-	document.getElementById("vscore").style.opacity = 0;
-	document.getElementById("vscore").style.cursor = "default";
-}
-document.getElementById("b").onmouseover = function(){
-	sellhover("b");
-}
-document.getElementById("b").onmouseout = function(){
-	document.getElementById("bscore").style.opacity = 0;
-	document.getElementById("bscore").style.cursor = "default";
-}
-document.getElementById("n").onmouseover = function(){
-	sellhover("n");
-}
-document.getElementById("n").onmouseout = function(){
-	document.getElementById("nscore").style.opacity = 0;
-	document.getElementById("nscore").style.cursor = "default";
-}
-document.getElementById("m").onmouseover = function(){
-	sellhover("m");
-}
-document.getElementById("m").onmouseout = function(){
-	document.getElementById("mscore").style.opacity = 0;
-	document.getElementById("mscore").style.cursor = "default";
-}
-document.getElementById("qscore").onmouseover = function(){sellhovertooltip("q")};
-document.getElementById("wscore").onmouseover = function(){sellhovertooltip("w")};
-document.getElementById("escore").onmouseover = function(){sellhovertooltip("e")};
-document.getElementById("rscore").onmouseover = function(){sellhovertooltip("r")};
-document.getElementById("tscore").onmouseover = function(){sellhovertooltip("t")};
-document.getElementById("yscore").onmouseover = function(){sellhovertooltip("y")};
-document.getElementById("uscore").onmouseover = function(){sellhovertooltip("u")};
-document.getElementById("iscore").onmouseover = function(){sellhovertooltip("i")};
-document.getElementById("oscore").onmouseover = function(){sellhovertooltip("o")};
-document.getElementById("pscore").onmouseover = function(){sellhovertooltip("p")};
-document.getElementById("ascore").onmouseover = function(){sellhovertooltip("a")};
-document.getElementById("sscore").onmouseover = function(){sellhovertooltip("s")};
-document.getElementById("dscore").onmouseover = function(){sellhovertooltip("d")};
-document.getElementById("fscore").onmouseover = function(){sellhovertooltip("f")};
-document.getElementById("gscore").onmouseover = function(){sellhovertooltip("g")};
-document.getElementById("hscore").onmouseover = function(){sellhovertooltip("h")};
-document.getElementById("jscore").onmouseover = function(){sellhovertooltip("j")};
-document.getElementById("kscore").onmouseover = function(){sellhovertooltip("k")};
-document.getElementById("lscore").onmouseover = function(){sellhovertooltip("l")};
-document.getElementById("zscore").onmouseover = function(){sellhovertooltip("z")};
-document.getElementById("xscore").onmouseover = function(){sellhovertooltip("x")};
-document.getElementById("cscore").onmouseover = function(){sellhovertooltip("c")};
-document.getElementById("vscore").onmouseover = function(){sellhovertooltip("v")};
-document.getElementById("bscore").onmouseover = function(){sellhovertooltip("b")};
-document.getElementById("nscore").onmouseover = function(){sellhovertooltip("n")};
-document.getElementById("mscore").onmouseover = function(){sellhovertooltip("m")};
-
-function sellclick(letter){
-	var text = document.getElementById(letter + "Text").innerHTML;
-	if (text == letter && Player.Letters[letter][0] == true && Player.Letters[letter][2] > 0){
-		Player.Score += Player.Letters[letter][28];
-		Player.Letters[letter][2] -= 1;
-		barcolors(letter, Player.Letters[letter][2]/Player.Letters[letter][4]*100);
-		if (letter == ActiveLetter){
-			ActiveLetterCount -= 1;
-		}
+document.getElementById("lettersnormalaehinorst").onmouseout = function(){
+	if (clickedletters != "e"){
+		document.getElementById("lettersnormalaehinorst").style.color = "#ffa31b";
+		document.getElementById("lettersnormalaehinorst").style.backgroundColor = "white";
 	}
-	if (text == letter.toUpperCase() && Player.Letters[letter][1] == true && Player.Letters[letter][3] > 0){
-		Player.Score += Player.Letters[letter][29];
-		Player.Letters[letter][3] -= 1;
-		barcolors(letter, Player.Letters[letter][3]/Player.Letters[letter][5]*100);
-		if (letter.toUpperCase() == ActiveLetter){
-			ActiveLetterCount -= 1;
-		}
-	}
-	if (Player.Score.toFixed(1).slice(-1) == 0){
-		document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(0) + "</b>";
+}
+document.getElementById("lettersnormalaehinorst").onclick = function(){
+	if (clickedletters != "e"){
+		clickedletters = "e";
+		resetlettersbg();
+		document.getElementById("lettersnormalaehinorst").style.color = "white";
+		document.getElementById("lettersnormalaehinorst").style.backgroundColor = "#ffc166";
+		document.getElementById("lettersmainnormalaehinorst").style.display = "block";
 	}
 	else{
-		document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(1) + "</b>";
+		clickedletters = "";
+		document.getElementById("lettersnormalaehinorst").style.color = "#ffa31b";
+		document.getElementById("lettersnormalaehinorst").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormalaehinorst").style.display = "none";
 	}
 }
-document.getElementById("qscore").onclick = function(){sellclick("q");}
-document.getElementById("wscore").onclick = function(){sellclick("w");}
-document.getElementById("escore").onclick = function(){sellclick("e");}
-document.getElementById("rscore").onclick = function(){sellclick("r");}
-document.getElementById("tscore").onclick = function(){sellclick("t");}
-document.getElementById("yscore").onclick = function(){sellclick("y");}
-document.getElementById("uscore").onclick = function(){sellclick("u");}
-document.getElementById("iscore").onclick = function(){sellclick("i");}
-document.getElementById("oscore").onclick = function(){sellclick("o");}
-document.getElementById("pscore").onclick = function(){sellclick("p");}
-document.getElementById("ascore").onclick = function(){sellclick("a");}
-document.getElementById("sscore").onclick = function(){sellclick("s");}
-document.getElementById("dscore").onclick = function(){sellclick("d");}
-document.getElementById("fscore").onclick = function(){sellclick("f");}
-document.getElementById("gscore").onclick = function(){sellclick("g");}
-document.getElementById("hscore").onclick = function(){sellclick("h");}
-document.getElementById("jscore").onclick = function(){sellclick("j");}
-document.getElementById("kscore").onclick = function(){sellclick("k");}
-document.getElementById("lscore").onclick = function(){sellclick("l");}
-document.getElementById("zscore").onclick = function(){sellclick("z");}
-document.getElementById("xscore").onclick = function(){sellclick("x");}
-document.getElementById("cscore").onclick = function(){sellclick("c");}
-document.getElementById("vscore").onclick = function(){sellclick("v");}
-document.getElementById("bscore").onclick = function(){sellclick("b");}
-document.getElementById("nscore").onclick = function(){sellclick("n");}
-document.getElementById("mscore").onclick = function(){sellclick("m");}
-
-document.getElementById("ftcol").onclick = function(){
-	document.getElementById("collectionmain").style.display = "block";
-	document.getElementById("grandmamain").style.display = "none";
-	document.getElementById("ftcol").style.textDecoration = "underline";
-	document.getElementById("ftgrand").style.textDecoration = "none";
-	grandsmallinfo();
-}
-document.getElementById("ftgrand").onclick = function(){
-	document.getElementById("collectionmain").style.display = "none";
-	document.getElementById("grandmamain").style.display = "block";
-	document.getElementById("ftcol").style.textDecoration = "none";
-	document.getElementById("ftgrand").style.textDecoration = "underline";
-	document.getElementById("grandinfo").style.display = "none";
-	granddisplay();
-}
-
-document.getElementById("ShiftStore").onmouseover = function(){
-	document.getElementById("Secrets2").style = "text-decoration: auto";
-	if (document.getElementById("Secrets2").innerHTML.slice(-10) != "(Unlocked)"){
-		document.getElementById("Secrets2").innerHTML += " (Unlocked)";
+document.getElementById("lettersnormaldl").onmouseover = function(){
+	if (clickedletters != "d" && ifdl){
+		document.getElementById("lettersnormaldl").style.color = "white";
+		document.getElementById("lettersnormaldl").style.backgroundColor = "#7dff6d";
 	}
-	Player.Secrets[1] = true;
-	var Save =
+}
+document.getElementById("lettersnormaldl").onmouseout = function(){
+	if (clickedletters != "d" && ifdl){
+		document.getElementById("lettersnormaldl").style.color = "#34ff1b";
+		document.getElementById("lettersnormaldl").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersnormaldl").onclick = function(){
+	if (clickedletters != "d" && ifdl){
+		clickedletters = "d";
+		resetlettersbg();
+		document.getElementById("lettersnormaldl").style.color = "white";
+		document.getElementById("lettersnormaldl").style.backgroundColor = "#7dff6d";
+		document.getElementById("lettersmainnormaldl").style.display = "block";
+	}
+	else if (clickedletters == "d"){
+		clickedletters = "";
+		document.getElementById("lettersnormaldl").style.color = "#34ff1b";
+		document.getElementById("lettersnormaldl").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormaldl").style.display = "none";
+	}
+}
+document.getElementById("lettersnormalbcfgmpuwy").onmouseover = function(){
+	if (clickedletters != "b" && ifbc){
+		document.getElementById("lettersnormalbcfgmpuwy").style.color = "white";
+		document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "#63c6ff";
+	}
+}
+document.getElementById("lettersnormalbcfgmpuwy").onmouseout = function(){
+	if (clickedletters != "b" && ifbc){
+		document.getElementById("lettersnormalbcfgmpuwy").style.color = "#1bacff";
+		document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersnormalbcfgmpuwy").onclick = function(){
+	if (clickedletters != "b" && ifbc){
+		clickedletters = "b";
+		resetlettersbg();
+		document.getElementById("lettersnormalbcfgmpuwy").style.color = "white";
+		document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "#63c6ff";
+		document.getElementById("lettersmainnormalbcfgmpuwy").style.display = "block";
+	}
+	else if (clickedletters == "b"){
+		clickedletters = "";
+		document.getElementById("lettersnormalbcfgmpuwy").style.color = "#1bacff";
+		document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormalbcfgmpuwy").style.display = "none";
+	}
+}
+document.getElementById("lettersnormaljkqvxz").onmouseover = function(){
+	if (clickedletters != "j" && ifjk){
+		document.getElementById("lettersnormaljkqvxz").style.color = "white";
+		document.getElementById("lettersnormaljkqvxz").style.backgroundColor = "#ef82ff";
+	}
+}
+document.getElementById("lettersnormaljkqvxz").onmouseout = function(){
+	if (clickedletters != "j" && ifjk){
+		document.getElementById("lettersnormaljkqvxz").style.color = "#e21bff";
+		document.getElementById("lettersnormaljkqvxz").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersnormaljkqvxz").onclick = function(){
+	if (clickedletters != "j" && ifjk){
+		clickedletters = "j";
+		resetlettersbg();
+		document.getElementById("lettersnormaljkqvxz").style.color = "white";
+		document.getElementById("lettersnormaljkqvxz").style.backgroundColor = "#ef82ff";
+		document.getElementById("lettersmainnormaljkqvxz").style.display = "block";
+	}
+	else if (clickedletters == "j"){
+		clickedletters = "";
+		document.getElementById("lettersnormaljkqvxz").style.color = "#e21bff";
+		document.getElementById("lettersnormaljkqvxz").style.backgroundColor = "white";
+		document.getElementById("lettersmainnormaljkqvxz").style.display = "none";
+	}
+}
+
+document.getElementById("lettersuppercaseaehinorst").onmouseover = function(){
+	if (clickedletters != "E" && ifAH){
+		document.getElementById("lettersuppercaseaehinorst").style.color = "white";
+		document.getElementById("lettersuppercaseaehinorst").style.backgroundColor = "#ffc166";
+	}
+}
+document.getElementById("lettersuppercaseaehinorst").onmouseout = function(){
+	if (clickedletters != "E" && ifAH){
+		document.getElementById("lettersuppercaseaehinorst").style.color = "#ffa31b";
+		document.getElementById("lettersuppercaseaehinorst").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersuppercaseaehinorst").onclick = function(){
+	if (clickedletters != "E" && ifAH){
+		clickedletters = "E";
+		resetlettersbg();
+		document.getElementById("lettersuppercaseaehinorst").style.color = "white";
+		document.getElementById("lettersuppercaseaehinorst").style.backgroundColor = "#ffc166";
+		document.getElementById("lettersmainuppercaseaehinorst").style.display = "block";
+	}
+	else if (clickedletters == "E"){
+		clickedletters = "";
+		document.getElementById("lettersuppercaseaehinorst").style.color = "#ffa31b";
+		document.getElementById("lettersuppercaseaehinorst").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercaseaehinorst").style.display = "none";
+	}
+}
+document.getElementById("lettersuppercasedl").onmouseover = function(){
+	if (clickedletters != "D" && ifDL){
+		document.getElementById("lettersuppercasedl").style.color = "white";
+		document.getElementById("lettersuppercasedl").style.backgroundColor = "#7dff6d";
+	}
+}
+document.getElementById("lettersuppercasedl").onmouseout = function(){
+	if (clickedletters != "D" && ifDL){
+		document.getElementById("lettersuppercasedl").style.color = "#34ff1b";
+		document.getElementById("lettersuppercasedl").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersuppercasedl").onclick = function(){
+	if (clickedletters != "D" && ifDL){
+		clickedletters = "D";
+		resetlettersbg();
+		document.getElementById("lettersuppercasedl").style.color = "white";
+		document.getElementById("lettersuppercasedl").style.backgroundColor = "#7dff6d";
+		document.getElementById("lettersmainuppercasedl").style.display = "block";
+	}
+	else if (clickedletters == "D"){
+		clickedletters = "";
+		document.getElementById("lettersuppercasedl").style.color = "#34ff1b";
+		document.getElementById("lettersuppercasedl").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercasedl").style.display = "none";
+	}
+}
+document.getElementById("lettersuppercasebcfgmpuwy").onmouseover = function(){
+	if (clickedletters != "B" && ifBC){
+		document.getElementById("lettersuppercasebcfgmpuwy").style.color = "white";
+		document.getElementById("lettersuppercasebcfgmpuwy").style.backgroundColor = "#63c6ff";
+	}
+}
+document.getElementById("lettersuppercasebcfgmpuwy").onmouseout = function(){
+	if (clickedletters != "B" && ifBC){
+		document.getElementById("lettersuppercasebcfgmpuwy").style.color = "#1bacff";
+		document.getElementById("lettersuppercasebcfgmpuwy").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersuppercasebcfgmpuwy").onclick = function(){
+	if (clickedletters != "B" && ifBC){
+		clickedletters = "B";
+		resetlettersbg();
+		document.getElementById("lettersuppercasebcfgmpuwy").style.color = "white";
+		document.getElementById("lettersuppercasebcfgmpuwy").style.backgroundColor = "#63c6ff";
+		document.getElementById("lettersmainuppercasebcfgmpuwy").style.display = "block";
+	}
+	else if (clickedletters == "B"){
+		clickedletters = "";
+		document.getElementById("lettersuppercasebcfgmpuwy").style.color = "#1bacff";
+		document.getElementById("lettersuppercasebcfgmpuwy").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercasebcfgmpuwy").style.display = "none";
+	}
+}
+document.getElementById("lettersuppercasejkqvxz").onmouseover = function(){
+	if (clickedletters != "J" && ifJK){
+		document.getElementById("lettersuppercasejkqvxz").style.color = "white";
+		document.getElementById("lettersuppercasejkqvxz").style.backgroundColor = "#ef82ff";
+	}
+}
+document.getElementById("lettersuppercasejkqvxz").onmouseout = function(){
+	if (clickedletters != "J" && ifJK){
+		document.getElementById("lettersuppercasejkqvxz").style.color = "#e21bff";
+		document.getElementById("lettersuppercasejkqvxz").style.backgroundColor = "white";
+	}
+}
+document.getElementById("lettersuppercasejkqvxz").onclick = function(){
+	if (clickedletters != "J" && ifJK){
+		clickedletters = "J";
+		resetlettersbg();
+		document.getElementById("lettersuppercasejkqvxz").style.color = "white";
+		document.getElementById("lettersuppercasejkqvxz").style.backgroundColor = "#ef82ff";
+		document.getElementById("lettersmainuppercasejkqvxz").style.display = "block";
+	}
+	else if (clickedletters == "J"){
+		clickedletters = "";
+		document.getElementById("lettersuppercasejkqvxz").style.color = "#e21bff";
+		document.getElementById("lettersuppercasejkqvxz").style.backgroundColor = "white";
+		document.getElementById("lettersmainuppercasejkqvxz").style.display = "none";
+	}
+}
+
+
+function allowDropl(e) {
+	e.preventDefault();
+}
+function dragl(e){
+	e.target.style.opacity = 0.2;
+	if (e.target.id.slice(0,3) == "nor" && Player.Letters[e.target.id.slice(6)][2] < Player.Letters[e.target.id.slice(6)][4]){
+		for (let i=0; i < 4; i++){
+			if (Player.Collectors[i][0] && Player.Collectors[i][1] == false){
+				document.getElementById("collector"+(i+1)+"main").style.background = "#eaffe7";
+				document.getElementById("collector"+(i+1)).style.transform = "scale(1.1,1.1)";
+			}
+		}
+	}
+	else if (e.target.id.slice(0,3) == "upp" && Player.Letters[e.target.id.slice(9)][3] < Player.Letters[e.target.id.slice(9)][5]){
+		for (let i=0; i < 4; i++){
+			if (Player.Collectors[i][0] && Player.Collectors[i][1] == false){
+				document.getElementById("collector"+(i+1)+"main").style.background = "#eaffe7";
+				document.getElementById("collector"+(i+1)).style.transform = "scale(1.1,1.1)";
+			}
+		}
+	}
+	e.dataTransfer.setData("text/html", e.target.id);
+}
+function dragcol(e){
+	e.dataTransfer.setData("text/html", e.target.id);
+	document.getElementById("letters").style.background = "#eaffe7";
+}
+function dragendl(e){
+	e.target.style.opacity = 1;
+	for (let i=0; i < 4; i++){
+		if (Player.Collectors[i][0] && Player.Collectors[i][1] == false){
+			document.getElementById("collector"+(i+1)+"main").style.background = "white";
+			document.getElementById("collector"+(i+1)).style.transform = "scale(1,1)";
+		}
+	}
+}
+function dragendcol(e){
+	document.getElementById("letters").style.background = "";
+}
+function dropl(e) {
+	e.preventDefault();
+	var id = e.dataTransfer.getData("text/html");
+	coldrop(e.target.id, id)
+	return false;
+}
+function droponl(e) {
+	e.preventDefault();
+	var id = e.dataTransfer.getData("text/html");
+	if (id == "collector1main")
 	{
-		Player: Player
-	}
-	localStorage.setItem("Saved", JSON.stringify(Save));
-}
-document.getElementById("tutbutton").onclick = function(){
-	if (Player.tut == 3){
-		Player.tut = 10;
-		document.getElementById("tut4").style.display = "none";
-		var Save =
-		{
-			Player: Player
-		}
-		localStorage.setItem("Saved", JSON.stringify(Save));
-	}
-}
-
-function changecaps(value){
-	if (menuclicked == 1){
-		var tempchar = characters.substring(26,52);
-		var tempchar2 = characters.substring(0,26);
-		if (value == 1){
-			for (let i=0; i < tempchar.length; i++){
-				if (ActiveLetter.toLowerCase() != tempchar[i]){
-					document.getElementById(tempchar[i]+"Text").innerHTML = tempchar2[i];
-					if (Player.Letters[tempchar[i]][1] == true){
-						barcolors(tempchar[i], (Player.Letters[tempchar[i]][3]/Player.Letters[tempchar[i]][5]*100));
-					} else {
-						document.getElementById(tempchar[i]+"Bar").style = "display: block; opacity: 0;";
-					}
-				}
-			}
-		}
-		else if (value == 0){
-			for (let i=0; i < tempchar.length; i++){
-				if (ActiveLetter.toLowerCase() != tempchar[i]){
-					document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i];
-					if (Player.Letters[tempchar[i]][0] == true){
-						barcolors(tempchar[i], (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100));
-					} else {
-						document.getElementById(tempchar[i]+"Bar").style = "display: block; opacity: 0;";
-					}
-				}
-			}
-		}
-	}
-}
-
-function changeshift(value){
-	if (menuclicked == 2){
-		var tempchar = characters.substring(26,52);
-		var tempchar2 = characters.substring(0,26);
-		if (value == 1){
-			for (let i=0; i < tempchar.length; i++){
-				document.getElementById(tempchar[i]+"Textstore").innerHTML = tempchar2[i];
-			}
-		}
-		else if (value == 0){
-			for (let i=0; i < tempchar.length; i++){
-				document.getElementById(tempchar[i]+"Textstore").innerHTML = tempchar[i];
-			}
-		}
-		checkstore();
-	}
-}
-
-function keyup(event){
-	if ((event.code == "ShiftRight" || event.code == "ShiftLeft") && Caps == 0){
-		Shift = 0;
-		changecaps(0);
-		changeshift(0);
-		setTimeout(clearcolors, 200, "ShiftRight", 1);
-		setTimeout(clearcolors, 200, "ShiftLeft", 1);
-		setTimeout(clearcolors, 200, "ShiftStore", 1);
-	} 
-	else if ((event.code == "ShiftRight" || event.code == "ShiftLeft") && Caps == 1) {
-		Shift = 0;
-		changecaps(1);
-		changeshift(0);
-		setTimeout(clearcolors, 200, "ShiftRight", 1);
-		setTimeout(clearcolors, 200, "ShiftLeft", 1);
-		setTimeout(clearcolors, 200, "ShiftStore", 1);
-	} else {}
-	if (event.code == "CapsLock"){
-		Caps2 = 0;
-	} else {}
-}
-
-function keydown(event){
-	var name = event.key;
-	var code = event.code;
-	if (name || code){
-		if (event.getModifierState('CapsLock')) {
-			changecaps(1);
-			Caps = 1;
-			document.getElementById("CapsLock").style.transition = "all 0.5s ease";
-			document.getElementById("CapsLock").style.background = "#6eff61f7";
-			document.getElementById("CapsLock").style.transform = "scale(0.95,0.95)";
-			if (event.getModifierState('Shift')){
-				changecaps(0);
-			}
-		} 
-		else if (event.getModifierState('Shift')){
-			changecaps(1);
-			Caps = 0;
-		}
-		else {
-			changecaps(0);
-			Caps = 0;
-		}
-		if (characters.includes(name) == true && menuclicked == 1){
-			document.getElementById('audio').currentTime = 0;
-			document.getElementById('audio').play();
-			if (document.getElementById(name.toLowerCase())){
-				document.getElementById(name.toLowerCase()).style.transition = "all 0.5s ease";
-				document.getElementById(name.toLowerCase()).style.transform = "scale(0.95,0.95)";
-				if (ActiveLetter != name){
-					document.getElementById(name.toLowerCase()).style.background = "#6eff61f7";
-					c = setTimeout(clearcolors, 400, name.toLowerCase(), 1);
-				} 
-				else if (ActiveLetter == name){
-					c = setTimeout(clearcolors, 400, name.toLowerCase(), 0);
-				}
-			}
-			inputfield.push(name)
-			var a = document.getElementById("poletekst").innerHTML;
-			document.getElementById("poletekst").innerHTML = inputfield.join("");
-			if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
-				if (a.substr(a.length - 3) != "..."){
-					document.getElementById("poletekst").innerHTML = a + "...";
-				}
-				else {
-					document.getElementById("poletekst").innerHTML = a;
-				}
-			}
-		}
-		else if (characterscodes.includes(code) == true){
-			if ((code == "ShiftLeft" || code == "ShiftRight") && Shift == 0 && menuclicked != 3){
-				Shift = 1;
-				document.getElementById('audio').currentTime = 0;
-				document.getElementById('audio').play();
-			}
-			else if (code == "CapsLock" && Caps2 == 0 && menuclicked == 1){
-				Caps2 = 1;
-				document.getElementById('audio').currentTime = 0;
-				document.getElementById('audio').play();
-			}
-			else if (code == "Backslash"){
-				document.getElementById('audio').currentTime = 0;
-				document.getElementById('audio').play();
-				if (Shift == 0){
-					inputfield.push("\\");
-				}
-				else{
-					inputfield.push("|");
-				}
-				var a = document.getElementById("poletekst").innerHTML;
-				document.getElementById("poletekst").innerHTML = inputfield.join("");
-				if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
-					if (a.substr(a.length - 3) != "..."){
-						document.getElementById("poletekst").innerHTML = a + "...";
-					}
-					else {
-						document.getElementById("poletekst").innerHTML = a;
-					}
-				}
-			}
-			else if (code == "Backspace" && inputfield.length != 0 && menuclicked == 1){
-				document.getElementById('audio').currentTime = 0;
-				document.getElementById('audio').play();
-				inputfield.pop();
-				var a = document.getElementById("poletekst").innerHTML;
-				document.getElementById("poletekst").innerHTML = inputfield.join("");
-				if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
-					document.getElementById("poletekst").innerHTML = a;
-				}
-				if (inputfield.length == 0){
-					document.getElementById("poletekst").innerHTML = "...";
-				}
-				else {}
-			} 
-			else if (code == "Space" && inputfield.length != 0 && menuclicked == 1){
-				if (inputfield[inputfield.length-1] != " "){
-					document.getElementById('audio').currentTime = 0;
-					document.getElementById('audio').play();
-					inputfield.push(name)
-				}
-				var a = document.getElementById("poletekst").innerHTML;
-				document.getElementById("poletekst").innerHTML = inputfield.join("");
-				if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
-					if (a.substr(a.length - 3) != "..."){
-						document.getElementById("poletekst").innerHTML = a + "...";
-					}
-					else {
-						document.getElementById("poletekst").innerHTML = a;
-					}
-				}
-			}
-			if (document.getElementById(code)){
-				document.getElementById(code).style.transition = "all 0.5s ease";
-				document.getElementById(code).style.background = "#6eff61f7";
-				document.getElementById(code).style.transform = "scale(0.95,0.95)";
-			}
-			if (menuclicked == 2 && (code == "ShiftRight" || code == "ShiftLeft")){
-				document.getElementById("ShiftStore").style.transition = "all 0.5s ease";
-				document.getElementById("ShiftStore").style.background = "#6eff61f7";
-				document.getElementById("ShiftStore").style.transform = "scale(0.95,0.95)";
-				setTimeout(clearcolors, 400, "ShiftStore", 1);
-			}
-			if (code == "CapsLock"){
-				setTimeout(clearcolors, 1, code, 1);
-			}
-			else if (code != "Backslash"){
-				setTimeout(clearcolors, 400, code, 1);
-			}
-		}
-		else if (code == "Enter" && menuclicked == 1){
-			document.getElementById('audio').currentTime = 0;
-			document.getElementById('audio').play();
-			document.getElementById("enter").style.transition = "all 0.5s ease";
-			document.getElementById("enter").style.background = "#6eff61f7";
-			setTimeout(clearcolors, 400, "enter", 1);
-			if (AlertType != ""){
-				if (AlertType == "Info"){
-					document.getElementById("Alert").style = "display: none;";
-				}
-				else if (AlertType == "Reset"){
-					reset();
-					document.getElementById("Alert").style = "display: none;";
-				}
-				AlertType = "";
-			}
-			else if(inputfield.join("") != ""){
-				check();
-			}
-		}
-		else if (charactersspecial.includes(name) == true && menuclicked == 1){
-			document.getElementById('audio').currentTime = 0;
-			document.getElementById('audio').play();
-			if (name == "&"){
-				name = "&amp;";
-			}
-			else if (name == "<"){
-				name = "&lt;";
-			}
-			else if (name == ">"){
-				name = "&gt;";
-			}
-			inputfield.push(name)
-			var a = document.getElementById("poletekst").innerHTML;
-			document.getElementById("poletekst").innerHTML = inputfield.join("");
-			if (document.getElementById("poletekst").clientWidth > 0.35*document.body.clientWidth){
-				if (a.substr(a.length - 3) != "..."){
-					document.getElementById("poletekst").innerHTML = a + "...";
-				}
-				else {
-					document.getElementById("poletekst").innerHTML = a;
-				}
-			}
-		}
-		else if (code == "ArrowRight"){
-			if (menuclicked == 1){
-				menu2click();
-			}
-			else if (menuclicked == 2){
-				menu3click();
-			}
-			else if (menuclicked == 3){
-				menu4click();
-			}
-			else if (menuclicked == 4){
-				menu5click();
-			}
-			else if (menuclicked == 5){
-				menu1click(event);
-			}
-		}
-		else if (code == "ArrowLeft"){
-			if (menuclicked == 1){
-				menu5click();
-			}
-			else if (menuclicked == 2){
-				menu1click(event);
-			}
-			else if (menuclicked == 3){
-				menu2click();
-			}
-			else if (menuclicked == 4){
-				menu3click();
-			}
-			else if (menuclicked == 5){
-				menu4click();
-			}
-		}
-		else if (code == "ArrowDown"){
-			info();
-		}
-		else if (code == "ArrowUp" && menuclicked == 0){
-			menu1click(event);
-		}
-		result();
-	}
-}
-
-function clearcolors(idname, value){
-	if ((idname != "CapsLock" || Caps == 0) && (idname != "ShiftRight" && idname != "ShiftLeft" && idname != "ShiftStore")){
-		document.getElementById(idname).style.transition = "all 0.5s ease";
-		document.getElementById(idname).style.transform = "scale(1,1)";
-		if (value == 1){
-			document.getElementById(idname).style.background = "#ffe6c3f7";
-		} else {}
-	} else {} 
-	if ((idname == "ShiftRight" || idname == "ShiftLeft") && Shift == 0){
-		document.getElementById(idname).style.transition = "all 0.5s ease";
-		document.getElementById(idname).style.transform = "scale(1,1)";
-		document.getElementById(idname).style.background = "#ffe6c3f7";
-	} 
-	else if (idname == "ShiftStore" && Shift == 0){
-		document.getElementById(idname).style.transition = "all 0.5s ease";
-		document.getElementById(idname).style.transform = "scale(1,1)";
-		document.getElementById(idname).style.background = "#fffbf4f7";
-	}
-}
-
-function barcolors(id, BarP){
-	if (id){
-		document.getElementById(id+"Bar").style = "display: block; opacity: 1; box-shadow: 1px 1px 2px 0px hsl(" + BarP + ", 60%, 30%); border: 1px solid hsl(" + BarP + ", 100%, 40%); background: linear-gradient(to right, hsl(" + BarP + ", 100%, 60%) " + BarP + "%, #fff8ee 0%);";
-		if (Player.Letters[id][2] != 0 && document.getElementById(id+"Text").innerHTML == id){
-			document.getElementById(id+"Bar").innerHTML = Player.Letters[id][2];
-		}
-		else if (Player.Letters[id][2] == 0 && document.getElementById(id+"Text").innerHTML == id){
-			document.getElementById(id+"Bar").innerHTML = "&nbsp;";
-		}
-		else if (Player.Letters[id][3] != 0 && document.getElementById(id+"Text").innerHTML == id.toUpperCase()){
-			document.getElementById(id+"Bar").innerHTML = Player.Letters[id][3];
+		document.getElementById("collector1time").innerHTML = "&nbsp;";
+		document.getElementById("collector1letter").innerHTML = "#1";
+		document.getElementById("collector1letter").style.opacity = 0.07;
+		document.getElementById("collector1strg").innerHTML = "&nbsp;";
+		document.getElementById("collector1main").style.cursor = "default";
+		document.getElementById("collector1main").setAttribute("draggable", false);
+		document.getElementById("collector1main").style.background = "white";
+		document.getElementById("collector1").style.background = "white";
+		Player.Collectors[0][1] = false;
+		if (Player.Collectors[0][2] == Player.Collectors[0][2].toLowerCase()){
+			document.getElementById("normal" + Player.Collectors[0][2]).style.opacity = 1;
+			document.getElementById("normal" + Player.Collectors[0][2]).style.background = "";
 		}
 		else{
-			document.getElementById(id+"Bar").innerHTML = "&nbsp;";
+			document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.opacity = 1;
+			document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.background = "";
 		}
-	}
-}
-
-function resetlettersbackground(){
-	var tempchar = characters.substring(26,52);
-	for (let i=0; i < tempchar.length; i++){
-		try{clearTimeout(c);}catch{};
-		document.getElementById(tempchar[i]).style.transition = "all 0s ease";
-		document.getElementById(tempchar[i]).style.transform = "scale(1,1)";
-		document.getElementById(tempchar[i]).style.background = "#ffe6c3f7";
-		if ((Caps == 1 && Shift == 0) || (Caps == 0 && Shift == 1)){
-			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i].toUpperCase();
-			if (Player.Letters[tempchar[i]][1] == true){
-				barcolors(tempchar[i], (Player.Letters[tempchar[i]][3]/Player.Letters[tempchar[i]][5]*100));
-			} else {
-				document.getElementById(tempchar[i]+"Bar").style = "display: block; opacity: 0;";
-			}
-		}
-		else {
-			document.getElementById(tempchar[i]+"Text").innerHTML = tempchar[i];
-			if (Player.Letters[tempchar[i]][0] == true){
-				barcolors(tempchar[i], (Player.Letters[tempchar[i]][2]/Player.Letters[tempchar[i]][4]*100));
-			} else {
-				document.getElementById(tempchar[i]+"Bar").style = "display: block; opacity: 0;";
-			}
-		}
-	}
-}
-
-function check(){
-	if (inputfield.join("") == "sound mute"){
-		document.getElementById("audio").volume = 0; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound unmute" && Player.volume != 0){
-		document.getElementById("audio").volume = Player.volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound unmute" && Player.volume == 0){
-		document.getElementById("audio").volume = 1; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume >= 0.2){
-		document.getElementById("audio").volume -= 0.2; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound-" && document.getElementById("audio").volume < 0.2){
-		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume >= 0.4){
-		document.getElementById("audio").volume -= 0.4; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound--" && document.getElementById("audio").volume < 0.4){
-		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume >= 0.6){
-		document.getElementById("audio").volume -= 0.6; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound---" && document.getElementById("audio").volume < 0.6){
-		document.getElementById("audio").volume = 0; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume <= 0.8){
-		document.getElementById("audio").volume += 0.2; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound+" && document.getElementById("audio").volume > 0.8){
-		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume <= 0.6){
-		document.getElementById("audio").volume += 0.4; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound++" && document.getElementById("audio").volume > 0.6){
-		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume <= 0.4){
-		document.getElementById("audio").volume += 0.6; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	} 
-	else if (inputfield.join("") == "sound+++" && document.getElementById("audio").volume > 0.4){
-		document.getElementById("audio").volume = 1; Player.volume = document.getElementById("audio").volume; Player.volume2 = document.getElementById("audio").volume;
-	}
-	else if (inputfield.join("") == "save"){
-		document.getElementById("saveinfo").innerHTML = "Saved";
+		Player.Collectors[0][2] = "";
+		Player.Collectors[0][3] = 0;
 		save();
 	}
-	else if (inputfield.join("") == "help"){
-		document.getElementById("Alert").style = "display: block;";
-		document.getElementById("AlertText").innerHTML = "<b>Commands:</b><br>save (auto every 30 seconds)<br>sound mute<br>sound unmute<br>sound-/--/---<br>sound+/++/+++";
-		AlertType = "Info";
+	else if (id == "collector2main")
+	{
+		document.getElementById("collector2time").innerHTML = "&nbsp;";
+		document.getElementById("collector2letter").innerHTML = "#2";
+		document.getElementById("collector2letter").style.opacity = 0.07;
+		document.getElementById("collector2strg").innerHTML = "&nbsp;";
+		document.getElementById("collector2main").style.cursor = "default";
+		document.getElementById("collector2main").setAttribute("draggable", false);
+		document.getElementById("collector2main").style.background = "white";
+		document.getElementById("collector2").style.background = "white";
+		Player.Collectors[1][1] = false;
+		if (Player.Collectors[1][2] == Player.Collectors[1][2].toLowerCase()){
+			document.getElementById("normal" + Player.Collectors[1][2]).style.opacity = 1;
+			document.getElementById("normal" + Player.Collectors[1][2]).style.background = "";
+		}
+		else{
+			document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.opacity = 1;
+			document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.background = "";
+		}
+		Player.Collectors[1][2] = "";
+		Player.Collectors[1][3] = 0;
+		save();
 	}
-	if (commands.includes(inputfield.join("")) == false && characters.includes(inputfield.join("")) == true && Player.Letters[inputfield.join("").toLowerCase()] != undefined){
-		if (inputfield.join("") == inputfield.join("").toLowerCase() && Player.Letters[inputfield.join("")][0] == true && Player.Letters[inputfield.join("")][2] < Player.Letters[inputfield.join("")][4]){
-			if (ActiveLetter != inputfield.join("")){
-				resetlettersbackground();
-				try{clearTimeout(x);}catch{};
-				ActiveLetter = inputfield.join("");
-				ActiveLetterCount = Player.Letters[inputfield.join("")][2];
-				ActiveLetterMax = Player.Letters[inputfield.join("")][4];
-				ActiveLetterSpeed = Player.Letters[inputfield.join("")][6];
-				ActiveLetterCap = 0;
-			}	
-			else{
-				ActiveLetter = "";
-				ActiveLetterCount = 0;
-				ActiveLetterMax = 0;
-				ActiveLetterSpeed = 0;
-				ActiveLetterCap = 0;
-				resetlettersbackground();
-			}
+	else if (id == "collector3main")
+	{
+		document.getElementById("collector3time").innerHTML = "&nbsp;";
+		document.getElementById("collector3letter").innerHTML = "#3";
+		document.getElementById("collector3letter").style.opacity = 0.07;
+		document.getElementById("collector3strg").innerHTML = "&nbsp;";
+		document.getElementById("collector3main").style.cursor = "default";
+		document.getElementById("collector3main").setAttribute("draggable", false);
+		document.getElementById("collector3main").style.background = "white";
+		document.getElementById("collector3").style.background = "white";
+		Player.Collectors[2][1] = false;
+		if (Player.Collectors[2][2] == Player.Collectors[2][2].toLowerCase()){
+			document.getElementById("normal" + Player.Collectors[2][2]).style.opacity = 1;
+			document.getElementById("normal" + Player.Collectors[2][2]).style.background = "";
 		}
-		else if (inputfield.join("") != inputfield.join("").toLowerCase() && Player.Letters[inputfield.join("").toLowerCase()][1] == true && Player.Letters[inputfield.join("").toLowerCase()][3] < Player.Letters[inputfield.join("").toLowerCase()][5]){
-			if (ActiveLetter != inputfield.join("")){
-				resetlettersbackground();
-				try{clearTimeout(x);}catch{};
-				ActiveLetter = inputfield.join("");
-				ActiveLetterCount = Player.Letters[inputfield.join("").toLowerCase()][3];
-				ActiveLetterMax = Player.Letters[inputfield.join("").toLowerCase()][5];
-				ActiveLetterSpeed = Player.Letters[inputfield.join("").toLowerCase()][7];
-				ActiveLetterCap = 0;
-			}
-			else{
-				ActiveLetter = "";
-				ActiveLetterCount = 0;
-				ActiveLetterMax = 0;
-				ActiveLetterSpeed = 0;
-				ActiveLetterCap = 0;
-				resetlettersbackground();
-			}
+		else{
+			document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.opacity = 1;
+			document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.background = "";
 		}
+		Player.Collectors[2][2] = "";
+		Player.Collectors[2][3] = 0;
+		save();
 	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length >= 9 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true){
-		var text = inputfield.join("").substring(8);
-		if (text == Player.Grand.main[1] && Player.Grand.main[6] < 10){
-			grandtestword(1);
+	else if (id == "collector4main")
+	{
+		document.getElementById("collector4time").innerHTML = "&nbsp;";
+		document.getElementById("collector4letter").innerHTML = "#4";
+		document.getElementById("collector4letter").style.opacity = 0.07;
+		document.getElementById("collector4strg").innerHTML = "&nbsp;";
+		document.getElementById("collector4main").style.cursor = "default";
+		document.getElementById("collector4main").setAttribute("draggable", false);
+		document.getElementById("collector4main").style.background = "white";
+		document.getElementById("collector4").style.background = "white";
+		Player.Collectors[3][1] = false;
+		if (Player.Collectors[3][2] == Player.Collectors[3][2].toLowerCase()){
+			document.getElementById("normal" + Player.Collectors[3][2]).style.opacity = 1;
+			document.getElementById("normal" + Player.Collectors[3][2]).style.background = "";
 		}
-		else if (text == Player.Grand.main[2] && Player.Grand.main[7] < 7){
-			grandtestword(2);
+		else{
+			document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.opacity = 1;
+			document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.background = "";
 		}
-		else if (text == Player.Grand.main[3] && Player.Grand.main[8] < 3 && Player.Grand.main[5] == 1){
-			grandtestword(3);
-		}
-		else if (text.search("guess") == 0 && text.length >= 7 && text[5] == " " && Player.Grand.main[5] == 0){
-			var text = text.substring(6);
-			if (text == Player.Grand.main[3]){
-				Player.Grand.main[5] = 1;
-			}
-		}
-		granddisplay();
-		grandsmallinfo();
+		Player.Collectors[3][2] = "";
+		Player.Collectors[3][3] = 0;
+		save();
 	}
-	else {
-		for (key in Player.Letters){
-			if (Player.Letters[key][8] == inputfield.join("")){
-				var material = 0;
-				for (i=0; i < inputfield.length; i++){
-					if (inputfield[i] == inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i]][2] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-					else if (inputfield[i] != inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i].toLowerCase()][3] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-				}
-				if (material == 0){
-					Player.Letters[key][9] += 1;
-					for (i=0; i < inputfield.length; i++){
-						if (inputfield[i] == inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i]][2] -= 1;
-						}
-						else if (inputfield[i] != inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i].toLowerCase()][3] -= 1;
-						}
-						if (ActiveLetter == inputfield[i]){
-							ActiveLetterCount -= 1;
-						}
-						resetlettersbackground();
-					}
-					if (Player.Letters[key][9] == Player.Letters[key][10]){
-						Player.Letters[key][0] = true;
-						Player.Letters[key][8] = "";
-						Player.Letters[key][9] = 0;
-						Player.Letters[key][10] = 0;
-						if (key == "l"){
-							document.getElementById("menu3").style.cursor = "pointer";
-							document.getElementById("menu3").style.background = "linear-gradient(180deg, rgba(254,255,250,1) 0%, rgba(252,255,237,1) 80%)";
-							document.getElementById("menu3").innerHTML = '<img src="book.png" alt="features" width="110" height="80"><br/><span>Features</span>';
-							document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-							document.getElementById("menu3").style.transform = "translateY(15%)";
-						}
-						if (key == "g"){
-							document.getElementById("menu5").style.cursor = "pointer";
-							document.getElementById("menu5").style.background = "linear-gradient(180deg, rgba(254,255,250,1) 0%, rgba(252,255,237,1) 80%)";
-							document.getElementById("menu5").innerHTML = '<img src="online.png" alt="online" width="110" height="80"><br/><span>Online</span>';
-							document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(0px)";
-							document.getElementById("menu5").style.transform = "translateY(15%)";
-						}
-						draw(key, 14);
-						resetlettersbackground();
-					}
-					if (key == "a" && Player.tut == 2){
-						document.getElementById("tut3").style.display = "none";
-						document.getElementById("tut4").style.display = "block";
-						document.getElementById("menu3").style.filter = "blur(0)";
-						document.getElementById("menu4").style.filter = "blur(0)";
-						document.getElementById("menu5").style.filter = "blur(0)";
-						Player.tut = 3;
-					}
-				}
-			}
-			else if (Player.Letters[key][11] == inputfield.join("")){
-				var material = 0;
-				for (i=0; i < inputfield.length; i++){
-					if (inputfield[i] == inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i]][2] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-					else if (inputfield[i] != inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i].toLowerCase()][3] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-				}
-				if (material == 0){
-					Player.Letters[key][12] += 1;
-					for (i=0; i < inputfield.length; i++){
-						if (inputfield[i] == inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i]][2] -= 1;
-						}
-						else if (inputfield[i] != inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i].toLowerCase()][3] -= 1;
-						}
-						if (ActiveLetter == inputfield[i]){
-							ActiveLetterCount -= 1;
-						}
-						resetlettersbackground();
-					}
-					if (Player.Letters[key][12] == Player.Letters[key][13]){
-						Player.Letters[key][1] = true;
-						Player.Letters[key][11] = "";
-						Player.Letters[key][12] = 0;
-						Player.Letters[key][13] = 0;
-						draw(key.toUpperCase(), 16);
-						resetlettersbackground();
-					}
-				}
-			}
-			else if (Player.Letters[key][14] == inputfield.join("")){
-				var material = 0;
-				for (i=0; i < inputfield.length; i++){
-					if (inputfield[i] == inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i]][2] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-					else if (inputfield[i] != inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i].toLowerCase()][3] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-				}
-				if (material == 0){
-					Player.Letters[key][15] += 1;
-					for (i=0; i < inputfield.length; i++){
-						if (inputfield[i] == inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i]][2] -= 1;
-						}
-						else if (inputfield[i] != inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i].toLowerCase()][3] -= 1;
-						}
-						if (ActiveLetter == inputfield[i]){
-							ActiveLetterCount -= 1;
-						}
-						resetlettersbackground();
-					}
-					if (Player.Letters[key][15] == (Player.Letters[key][4]+1-Player.Letters[key][24])){
-						Player.Letters[key][4] += 1;
-						Player.Letters[key][15] = 0;
-						if (ActiveLetter == key){
-							ActiveLetterMax += 1;
-						}
-						if (Player.Letters[key][4] == 20){
-							Player.Letters[key][14] = "";
-						}
-						else {
-							draw(key, 14);
-						}
-						resetlettersbackground();
-					}
-				}
-			}
-			else if (Player.Letters[key][16] == inputfield.join("")){
-				var material = 0;
-				for (i=0; i < inputfield.length; i++){
-					if (inputfield[i] == inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i]][2] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-					else if (inputfield[i] != inputfield[i].toLowerCase()){
-						if (Player.Letters[inputfield[i].toLowerCase()][3] < inputfield.filter(x => x == inputfield[i]).length){
-							material = 1;
-						}
-					}
-				}
-				if (material == 0){
-					Player.Letters[key][17] += 1;
-					for (i=0; i < inputfield.length; i++){
-						if (inputfield[i] == inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i]][2] -= 1;
-						}
-						else if (inputfield[i] != inputfield[i].toLowerCase()){
-							Player.Letters[inputfield[i].toLowerCase()][3] -= 1;
-						}
-						if (ActiveLetter == inputfield[i]){
-							ActiveLetterCount -= 1;
-						}
-						resetlettersbackground();
-					}
-					if (Player.Letters[key][17] == (Player.Letters[key][5]*2+2-Player.Letters[key][25])){
-						Player.Letters[key][5] += 1;
-						Player.Letters[key][17] = 0;
-						if (ActiveLetter.toLowerCase() == key){
-							ActiveLetterMax += 1;
-						}
-						if (Player.Letters[key][5] == 15){
-							Player.Letters[key][16] = "";
-						}
-						else {
-							draw(key.toUpperCase(), 16);
-						}
-						resetlettersbackground();
-					}
-				}
-			}
-		}
-	}
-	document.getElementById("poletekst").innerHTML = "...";
-	document.getElementById("poleresult").innerHTML = "";
-	inputfield = [];
+	return false;
 }
 
-function result(){
-	if (inputfield.join("").length == 0){
-		document.getElementById("poleresult").innerHTML = "&nbsp;";
-	}
-	else if (inputfield.join("").length == 1){
-		if (Object.keys(Player.Letters).includes(inputfield.join("")) == true || Object.keys(Player.Letters).includes(inputfield.join("").toLowerCase()) == true){
-			if (ActiveLetter != inputfield.join("")){
-				if (inputfield.join("").toLowerCase() == inputfield.join("")){
-					if (Player.Letters[inputfield.join("")][0] == true){
-						if (Player.Letters[inputfield.join("")][2] < Player.Letters[inputfield.join("")][4]){
-							var letter = inputfield.join("")
-							document.getElementById("poleresult").innerHTML = "start collecting <b><i>" + letter + "</i></b> (" + (Player.Letters[letter][4]-Player.Letters[letter][2])+ " to full)";
-						}
-						else {
-							document.getElementById("poleresult").innerHTML = "cannot be collected (storage full)";
-						}
-					}
-					else {
-						document.getElementById("poleresult").innerHTML = "letter not unlocked";
-					}
+function coldrop(colid, letid){
+	if (letid.slice(0,3) == "nor"){
+		if (colid == "collector1main" || colid == "collector1letter" || colid == "collector1time" || colid == "collector1strg"){
+			if (Player.Letters[letid.slice(6)][2] < Player.Letters[letid.slice(6)][4]){
+				document.getElementById("collector1time").innerHTML = (1/Player.Letters[letid.slice(6)][6]).toFixed(1) + "s";
+				document.getElementById("collector1letter").innerHTML = letid.slice(6);
+				document.getElementById("collector1letter").style.opacity = 1;
+				document.getElementById("collector1strg").innerHTML = Player.Letters[letid.slice(6)][2] + "/" + Player.Letters[letid.slice(6)][4];
+				document.getElementById("collector1main").style.cursor = "move";
+				document.getElementById("collector1main").setAttribute("draggable", true);
+				document.getElementById("collector1").style.transform = "scale(1,1)";
+				document.getElementById("collector1").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%, white "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%)";
+				Player.Collectors[0][1] = true;
+				if (Player.Collectors[0][2] != "" && Player.Collectors[0][2] == Player.Collectors[0][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[0][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[0][2]).style.background = "";
 				}
-				else {
-					if (Player.Letters[inputfield.join("").toLowerCase()][1] == true){
-						if (Player.Letters[inputfield.join("").toLowerCase()][3] < Player.Letters[inputfield.join("").toLowerCase()][5]){
-							var letter = inputfield.join("");
-							document.getElementById("poleresult").innerHTML = "start collecting <b><i>" + letter + "</i></b> (" + (Player.Letters[letter.toLowerCase()][5]-Player.Letters[letter.toLowerCase()][3])+ " to full)";
-						}
-						else {
-							document.getElementById("poleresult").innerHTML = "cannot be collected (storage full)";
-						}
-					}
-					else {
-						document.getElementById("poleresult").innerHTML = "letter not unlocked";
-					}
+				else if (Player.Collectors[0][2] != "" && Player.Collectors[0][2] != Player.Collectors[0][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.background = "";
 				}
-			}
-			else {
-				var letter = inputfield.join("")
-				document.getElementById("poleresult").innerHTML = "stop collecting <b><i>" + letter;
+				Player.Collectors[0][2] = letid.slice(6);
+				Player.Collectors[0][3] = 0;
+				if (Player.Collectors[1][2] == letid.slice(6)){
+					Player.Collectors[1][1] = false;
+					Player.Collectors[1][2] = "";
+					Player.Collectors[1][3] = 0;
+					document.getElementById("collector2time").innerHTML = "&nbsp;";
+					document.getElementById("collector2letter").innerHTML = "#2";
+					document.getElementById("collector2letter").style.opacity = 0.07;
+					document.getElementById("collector2strg").innerHTML = "&nbsp;";
+					document.getElementById("collector2main").style.cursor = "default";
+					document.getElementById("collector2main").setAttribute("draggable", false);
+					document.getElementById("collector2main").style.background = "white";
+					document.getElementById("collector2").style.background = "white";
+				}
+				else if (Player.Collectors[2][2] == letid.slice(6)){
+					Player.Collectors[2][1] = false;
+					Player.Collectors[2][2] = "";
+					Player.Collectors[2][3] = 0;
+					document.getElementById("collector3time").innerHTML = "&nbsp;";
+					document.getElementById("collector3letter").innerHTML = "#3";
+					document.getElementById("collector3letter").style.opacity = 0.07;
+					document.getElementById("collector3strg").innerHTML = "&nbsp;";
+					document.getElementById("collector3main").style.cursor = "default";
+					document.getElementById("collector3main").setAttribute("draggable", false);
+					document.getElementById("collector3main").style.background = "white";
+					document.getElementById("collector3").style.background = "white";
+				}
+				else if (Player.Collectors[3][2] == letid.slice(6)){
+					Player.Collectors[3][1] = false;
+					Player.Collectors[3][2] = "";
+					Player.Collectors[3][3] = 0;
+					document.getElementById("collector4time").innerHTML = "&nbsp;";
+					document.getElementById("collector4letter").innerHTML = "#4";
+					document.getElementById("collector4letter").style.opacity = 0.07;
+					document.getElementById("collector4strg").innerHTML = "&nbsp;";
+					document.getElementById("collector4main").style.cursor = "default";
+					document.getElementById("collector4main").setAttribute("draggable", false);
+					document.getElementById("collector4main").style.background = "white";
+					document.getElementById("collector4").style.background = "white";
+				}
+				save();
 			}
 		}
-		else {
-			document.getElementById("poleresult").innerHTML = "unknown";
+		else if (colid == "collector2main" || colid == "collector2letter" || colid == "collector2time" || colid == "collector2strg"){
+			if (Player.Letters[letid.slice(6)][2] < Player.Letters[letid.slice(6)][4]){
+				document.getElementById("normal" + letid.slice(6)).style.opacity = 1;
+				document.getElementById("collector2time").innerHTML = (1/Player.Letters[letid.slice(6)][6]).toFixed(1) + "s";
+				document.getElementById("collector2letter").innerHTML = letid.slice(6);
+				document.getElementById("collector2letter").style.opacity = 1;
+				document.getElementById("collector2strg").innerHTML = Player.Letters[letid.slice(6)][2] + "/" + Player.Letters[letid.slice(6)][4];
+				document.getElementById("collector2main").style.cursor = "move";
+				document.getElementById("collector2main").setAttribute("draggable", true);
+				document.getElementById("collector2").style.transform = "scale(1,1)";
+				document.getElementById("collector2").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%, white "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%)";
+				Player.Collectors[1][1] = true;
+				if (Player.Collectors[1][2] != "" && Player.Collectors[1][2] == Player.Collectors[1][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[1][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[1][2]).style.background = "";
+				}
+				else if (Player.Collectors[1][2] != "" && Player.Collectors[1][2] != Player.Collectors[1][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.background = "";
+				}
+				Player.Collectors[1][2] = letid.slice(6);
+				Player.Collectors[1][3] = 0;
+				if (Player.Collectors[0][2] == letid.slice(6)){
+					Player.Collectors[0][1] = false;
+					Player.Collectors[0][2] = "";
+					Player.Collectors[0][3] = 0;
+					document.getElementById("collector1time").innerHTML = "&nbsp;";
+					document.getElementById("collector1letter").innerHTML = "#1";
+					document.getElementById("collector1letter").style.opacity = 0.07;
+					document.getElementById("collector1strg").innerHTML = "&nbsp;";
+					document.getElementById("collector1main").style.cursor = "default";
+					document.getElementById("collector1main").setAttribute("draggable", false);
+					document.getElementById("collector1main").style.background = "white";
+					document.getElementById("collector1").style.background = "white";
+				}
+				else if (Player.Collectors[2][2] == letid.slice(6)){
+					Player.Collectors[2][1] = false;
+					Player.Collectors[2][2] = "";
+					Player.Collectors[2][3] = 0;
+					document.getElementById("collector3time").innerHTML = "&nbsp;";
+					document.getElementById("collector3letter").innerHTML = "#3";
+					document.getElementById("collector3letter").style.opacity = 0.07;
+					document.getElementById("collector3strg").innerHTML = "&nbsp;";
+					document.getElementById("collector3main").style.cursor = "default";
+					document.getElementById("collector3main").setAttribute("draggable", false);
+					document.getElementById("collector3main").style.background = "white";
+					document.getElementById("collector3").style.background = "white";
+				}
+				else if (Player.Collectors[3][2] == letid.slice(6)){
+					Player.Collectors[3][1] = false;
+					Player.Collectors[3][2] = "";
+					Player.Collectors[3][3] = 0;
+					document.getElementById("collector4time").innerHTML = "&nbsp;";
+					document.getElementById("collector4letter").innerHTML = "#4";
+					document.getElementById("collector4letter").style.opacity = 0.07;
+					document.getElementById("collector4strg").innerHTML = "&nbsp;";
+					document.getElementById("collector4main").style.cursor = "default";
+					document.getElementById("collector4main").setAttribute("draggable", false);
+					document.getElementById("collector4main").style.background = "white";
+					document.getElementById("collector4").style.background = "white";
+				}
+				save();
+			}
+		}
+		else if (colid == "collector3main" || colid == "collector3letter" || colid == "collector3time" || colid == "collector3strg"){
+			if (Player.Letters[letid.slice(6)][2] < Player.Letters[letid.slice(6)][4]){
+				document.getElementById("normal" + letid.slice(6)).style.opacity = 1;
+				document.getElementById("collector3time").innerHTML = (1/Player.Letters[letid.slice(6)][6]).toFixed(1) + "s";
+				document.getElementById("collector3letter").innerHTML = letid.slice(6);
+				document.getElementById("collector3letter").style.opacity = 1;
+				document.getElementById("collector3strg").innerHTML = Player.Letters[letid.slice(6)][2] + "/" + Player.Letters[letid.slice(6)][4];
+				document.getElementById("collector3main").style.cursor = "move";
+				document.getElementById("collector3main").setAttribute("draggable", true);
+				document.getElementById("collector3").style.transform = "scale(1,1)";
+				document.getElementById("collector3").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%, white "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%)";
+				Player.Collectors[2][1] = true;
+				if (Player.Collectors[2][2] != "" && Player.Collectors[2][2] == Player.Collectors[2][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[2][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[2][2]).style.background = "";
+				}
+				else if (Player.Collectors[2][2] != "" && Player.Collectors[2][2] != Player.Collectors[2][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.background = "";
+				}
+				Player.Collectors[2][2] = letid.slice(6);
+				Player.Collectors[2][3] = 0;
+				if (Player.Collectors[0][2] == letid.slice(6)){
+					Player.Collectors[0][1] = false;
+					Player.Collectors[0][2] = "";
+					Player.Collectors[0][3] = 0;
+					document.getElementById("collector1time").innerHTML = "&nbsp;";
+					document.getElementById("collector1letter").innerHTML = "#1";
+					document.getElementById("collector1letter").style.opacity = 0.07;
+					document.getElementById("collector1strg").innerHTML = "&nbsp;";
+					document.getElementById("collector1main").style.cursor = "default";
+					document.getElementById("collector1main").setAttribute("draggable", false);
+					document.getElementById("collector1main").style.background = "white";
+					document.getElementById("collector1").style.background = "white";
+				}
+				else if (Player.Collectors[1][2] == letid.slice(6)){
+					Player.Collectors[1][1] = false;
+					Player.Collectors[1][2] = "";
+					Player.Collectors[1][3] = 0;
+					document.getElementById("collector2time").innerHTML = "&nbsp;";
+					document.getElementById("collector2letter").innerHTML = "#2";
+					document.getElementById("collector2letter").style.opacity = 0.07;
+					document.getElementById("collector2strg").innerHTML = "&nbsp;";
+					document.getElementById("collector2main").style.cursor = "default";
+					document.getElementById("collector2main").setAttribute("draggable", false);
+					document.getElementById("collector2main").style.background = "white";
+					document.getElementById("collector2").style.background = "white";
+				}
+				else if (Player.Collectors[3][2] == letid.slice(6)){
+					Player.Collectors[3][1] = false;
+					Player.Collectors[3][2] = "";
+					Player.Collectors[3][3] = 0;
+					document.getElementById("collector4time").innerHTML = "&nbsp;";
+					document.getElementById("collector4letter").innerHTML = "#4";
+					document.getElementById("collector4letter").style.opacity = 0.07;
+					document.getElementById("collector4strg").innerHTML = "&nbsp;";
+					document.getElementById("collector4main").style.cursor = "default";
+					document.getElementById("collector4main").setAttribute("draggable", false);
+					document.getElementById("collector4main").style.background = "white";
+					document.getElementById("collector4").style.background = "white";
+				}
+				save();
+			}
+		}
+		else if (colid == "collector4main" || colid == "collector4letter" || colid == "collector4time" || colid == "collector4strg"){
+			if (Player.Letters[letid.slice(6)][2] < Player.Letters[letid.slice(6)][4]){
+				document.getElementById("normal" + letid.slice(6)).style.opacity = 1;
+				document.getElementById("collector4time").innerHTML = (1/Player.Letters[letid.slice(6)][6]).toFixed(1) + "s";
+				document.getElementById("collector4letter").innerHTML = letid.slice(6);
+				document.getElementById("collector4letter").style.opacity = 1;
+				document.getElementById("collector4strg").innerHTML = Player.Letters[letid.slice(6)][2] + "/" + Player.Letters[letid.slice(6)][4];
+				document.getElementById("collector4main").style.cursor = "move";
+				document.getElementById("collector4main").setAttribute("draggable", true);
+				document.getElementById("collector4").style.transform = "scale(1,1)";
+				document.getElementById("collector4").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%, white "+(Player.Letters[letid.slice(6)][2]/Player.Letters[letid.slice(6)][4]*100)+"%)";
+				Player.Collectors[3][1] = true;
+				if (Player.Collectors[3][2] != "" && Player.Collectors[3][2] == Player.Collectors[3][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[3][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[3][2]).style.background = "";
+				}
+				else if (Player.Collectors[3][2] != "" && Player.Collectors[3][2] != Player.Collectors[3][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.background = "";
+				}
+				Player.Collectors[3][2] = letid.slice(6);
+				Player.Collectors[3][3] = 0;
+				if (Player.Collectors[0][2] == letid.slice(6)){
+					Player.Collectors[0][1] = false;
+					Player.Collectors[0][2] = "";
+					Player.Collectors[0][3] = 0;
+					document.getElementById("collector1time").innerHTML = "&nbsp;";
+					document.getElementById("collector1letter").innerHTML = "#1";
+					document.getElementById("collector1letter").style.opacity = 0.07;
+					document.getElementById("collector1strg").innerHTML = "&nbsp;";
+					document.getElementById("collector1main").style.cursor = "default";
+					document.getElementById("collector1main").setAttribute("draggable", false);
+					document.getElementById("collector1main").style.background = "white";
+					document.getElementById("collector1").style.background = "white";
+				}
+				else if (Player.Collectors[1][2] == letid.slice(6)){
+					Player.Collectors[1][1] = false;
+					Player.Collectors[1][2] = "";
+					Player.Collectors[1][3] = 0;
+					document.getElementById("collector2time").innerHTML = "&nbsp;";
+					document.getElementById("collector2letter").innerHTML = "#2";
+					document.getElementById("collector2letter").style.opacity = 0.07;
+					document.getElementById("collector2strg").innerHTML = "&nbsp;";
+					document.getElementById("collector2main").style.cursor = "default";
+					document.getElementById("collector2main").setAttribute("draggable", false);
+					document.getElementById("collector2main").style.background = "white";
+					document.getElementById("collector2").style.background = "white";
+				}
+				else if (Player.Collectors[2][2] == letid.slice(6)){
+					Player.Collectors[2][1] = false;
+					Player.Collectors[2][2] = "";
+					Player.Collectors[2][3] = 0;
+					document.getElementById("collector3time").innerHTML = "&nbsp;";
+					document.getElementById("collector3letter").innerHTML = "#3";
+					document.getElementById("collector3letter").style.opacity = 0.07;
+					document.getElementById("collector3strg").innerHTML = "&nbsp;";
+					document.getElementById("collector3main").style.cursor = "default";
+					document.getElementById("collector3main").setAttribute("draggable", false);
+					document.getElementById("collector3main").style.background = "white";
+					document.getElementById("collector3").style.background = "white";
+				}
+				save();
+			}
 		}
 	}
-	else if (commands.includes(inputfield.join(""))){
-		document.getElementById("poleresult").innerHTML = "command";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length == 7 && Player.Letters["l"][0] == true){
-		document.getElementById("poleresult").innerHTML = "help grandma!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[1]) == -1 && inputfield.join("").search(Player.Grand.main[2]) == -1 && inputfield.join("").search(Player.Grand.main[3]) == -1 && inputfield.join("").search("guess") == -1){
-		document.getElementById("poleresult").innerHTML = "help grandma!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[1]) != -1 && inputfield.join("").length == (8+Player.Grand.main[1].length)){
-		document.getElementById("poleresult").innerHTML = "help grandma with easy word!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[1]) != -1 && inputfield.join("").length > (8+Player.Grand.main[1].length)){
-		document.getElementById("poleresult").innerHTML = "help grandma!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[2]) != -1 && inputfield.join("").length == (8+Player.Grand.main[2].length)){
-		document.getElementById("poleresult").innerHTML = "help grandma with hard word!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[2]) != -1 && inputfield.join("").length > (8+Player.Grand.main[2].length)){
-		document.getElementById("poleresult").innerHTML = "help grandma!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[3]) != -1 && inputfield.join("").length == (8+Player.Grand.main[3].length) && Player.Grand.main[5] == 1){
-		document.getElementById("poleresult").innerHTML = "help grandma with mystery word!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 7 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search(Player.Grand.main[3]) != -1 && (inputfield.join("").length > (8+Player.Grand.main[3].length) || Player.Grand.main[5] != 1) && inputfield.join("").search("guess") == -1){
-		document.getElementById("poleresult").innerHTML = "help grandma!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length == 13 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search("guess") == 8){
-		document.getElementById("poleresult").innerHTML = "guess grandma's word!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 13 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search("guess") == 8 && inputfield.join("")[13] == " "){
-		document.getElementById("poleresult").innerHTML = "guess grandma's word!";
-	}
-	else if (inputfield.join("").search("grandma") == 0 && inputfield.join("").length > 13 && inputfield.join("")[7] == " " && Player.Letters["l"][0] == true && inputfield.join("").search("guess") == 8 && inputfield.join("")[13] != " "){
-		document.getElementById("poleresult").innerHTML = "help grandma!";
-	}
-	else {
-		var sukces = 0;
-		for (key in Player.Letters){
-			if (Player.Letters[key][8] == inputfield.join("")){
-				sukces = 1;
-				if ((Player.Letters[key][10]-Player.Letters[key][9]) > 1){
-					document.getElementById("poleresult").innerHTML = "unlock letter <b><i>" + key + "</i></b> (" + (Player.Letters[key][10]-Player.Letters[key][9]) + " times left)";
+	else if (letid.slice(0,3) == "upp"){
+		if (colid == "collector1main" || colid == "collector1letter" || colid == "collector1time" || colid == "collector1strg"){
+			if (Player.Letters[letid.slice(9)][3] < Player.Letters[letid.slice(9)][5]){
+				document.getElementById("collector1time").innerHTML = (1/Player.Letters[letid.slice(9)][7]).toFixed(1) + "s";
+				document.getElementById("collector1letter").innerHTML = letid.slice(9).toUpperCase();
+				document.getElementById("collector1letter").style.opacity = 1;
+				document.getElementById("collector1strg").innerHTML = Player.Letters[letid.slice(9)][3] + "/" + Player.Letters[letid.slice(9)][5];
+				document.getElementById("collector1main").style.cursor = "move";
+				document.getElementById("collector1main").setAttribute("draggable", true);
+				document.getElementById("collector1").style.transform = "scale(1,1)";
+				document.getElementById("collector1").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%, white "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%)";
+				Player.Collectors[0][1] = true;
+				if (Player.Collectors[0][2] != "" && Player.Collectors[0][2] == Player.Collectors[0][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[0][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[0][2]).style.background = "";
 				}
-				else {
-					document.getElementById("poleresult").innerHTML = "unlock letter <b><i>" + key + "</i></b> !!!";
+				else if (Player.Collectors[0][2] != "" && Player.Collectors[0][2] != Player.Collectors[0][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.background = "";
 				}
+				Player.Collectors[0][2] = letid.slice(9).toUpperCase();
+				Player.Collectors[0][3] = 0;
+				if (Player.Collectors[1][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[1][1] = false;
+					Player.Collectors[1][2] = "";
+					Player.Collectors[1][3] = 0;
+					document.getElementById("collector2time").innerHTML = "&nbsp;";
+					document.getElementById("collector2letter").innerHTML = "#2";
+					document.getElementById("collector2letter").style.opacity = 0.07;
+					document.getElementById("collector2strg").innerHTML = "&nbsp;";
+					document.getElementById("collector2main").style.cursor = "default";
+					document.getElementById("collector2main").setAttribute("draggable", false);
+					document.getElementById("collector2main").style.background = "white";
+					document.getElementById("collector2").style.background = "white";
+				}
+				else if (Player.Collectors[2][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[2][1] = false;
+					Player.Collectors[2][2] = "";
+					Player.Collectors[2][3] = 0;
+					document.getElementById("collector3time").innerHTML = "&nbsp;";
+					document.getElementById("collector3letter").innerHTML = "#3";
+					document.getElementById("collector3letter").style.opacity = 0.07;
+					document.getElementById("collector3strg").innerHTML = "&nbsp;";
+					document.getElementById("collector3main").style.cursor = "default";
+					document.getElementById("collector3main").setAttribute("draggable", false);
+					document.getElementById("collector3main").style.background = "white";
+					document.getElementById("collector3").style.background = "white";
+				}
+				else if (Player.Collectors[3][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[3][1] = false;
+					Player.Collectors[3][2] = "";
+					Player.Collectors[3][3] = 0;
+					document.getElementById("collector4time").innerHTML = "&nbsp;";
+					document.getElementById("collector4letter").innerHTML = "#4";
+					document.getElementById("collector4letter").style.opacity = 0.07;
+					document.getElementById("collector4strg").innerHTML = "&nbsp;";
+					document.getElementById("collector4main").style.cursor = "default";
+					document.getElementById("collector4main").setAttribute("draggable", false);
+					document.getElementById("collector4main").style.background = "white";
+					document.getElementById("collector4").style.background = "white";
+				}
+				save();
 			}
-			else if (Player.Letters[key][11] == inputfield.join("")){
-				sukces = 1;
-				if ((Player.Letters[key][13]-Player.Letters[key][12]) > 1){
-					document.getElementById("poleresult").innerHTML = "unlock letter <b><i>" + key.toUpperCase() + "</i></b> (" + (Player.Letters[key][13]-Player.Letters[key][12]) + " times left)";
-				}
-				else {
-					document.getElementById("poleresult").innerHTML = "unlock letter <b><i>" + key.toUpperCase() + "</i></b> !!!";
-				}
-			}
-			else if (Player.Letters[key][14] == inputfield.join("")){
-				sukces = 1;
-				if (((Player.Letters[key][4]+1)-Player.Letters[key][15]-Player.Letters[key][24]) > 1){
-					document.getElementById("poleresult").innerHTML = "storage upgrade of letter <b><i>" + key + "</i></b> (" + ((Player.Letters[key][4]+1-Player.Letters[key][24])-Player.Letters[key][15]) + " times left)";
-				}
-				else {
-					document.getElementById("poleresult").innerHTML = "+1 space for letter <b><i>" + key + "</i></b> !!!";
-				}
-			}
-			else if (Player.Letters[key][16] == inputfield.join("")){
-				sukces = 1;
-				if (((Player.Letters[key][5]*2+2)-Player.Letters[key][17]-Player.Letters[key][25]) > 1){
-					document.getElementById("poleresult").innerHTML = "storage upgrade of letter <b><i>" + key.toUpperCase() + "</i></b> (" + ((Player.Letters[key][5]*2+2-Player.Letters[key][25])-Player.Letters[key][17]) + " times left)";
-				}
-				else {
-					document.getElementById("poleresult").innerHTML = "+1 space for letter <b><i>" + key.toUpperCase() + "</i></b> !!!";
-				}
-			} else {}
 		}
-		if (sukces == 0){
-			document.getElementById("poleresult").innerHTML = "unknown";
+		else if (colid == "collector2main" || colid == "collector2letter" || colid == "collector2time" || colid == "collector2strg"){
+			if (Player.Letters[letid.slice(9)][3] < Player.Letters[letid.slice(9)][5]){
+				document.getElementById("uppercase" + letid.slice(9)).style.opacity = 1;
+				document.getElementById("collector2time").innerHTML = (1/Player.Letters[letid.slice(9)][7]).toFixed(1) + "s";
+				document.getElementById("collector2letter").innerHTML = letid.slice(9).toUpperCase();
+				document.getElementById("collector2letter").style.opacity = 1;
+				document.getElementById("collector2strg").innerHTML = Player.Letters[letid.slice(9)][3] + "/" + Player.Letters[letid.slice(9)][5];
+				document.getElementById("collector2main").style.cursor = "move";
+				document.getElementById("collector2main").setAttribute("draggable", true);
+				document.getElementById("collector2").style.transform = "scale(1,1)";
+				document.getElementById("collector2").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%, white "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%)";
+				Player.Collectors[1][1] = true;
+				if (Player.Collectors[1][2] != "" && Player.Collectors[1][2] == Player.Collectors[1][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[1][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[1][2]).style.background = "";
+				}
+				else if (Player.Collectors[1][2] != "" && Player.Collectors[1][2] != Player.Collectors[1][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.background = "";
+				}
+				Player.Collectors[1][2] = letid.slice(9).toUpperCase();
+				Player.Collectors[1][3] = 0;
+				if (Player.Collectors[0][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[0][1] = false;
+					Player.Collectors[0][2] = "";
+					Player.Collectors[0][3] = 0;
+					document.getElementById("collector1time").innerHTML = "&nbsp;";
+					document.getElementById("collector1letter").innerHTML = "#1";
+					document.getElementById("collector1letter").style.opacity = 0.07;
+					document.getElementById("collector1strg").innerHTML = "&nbsp;";
+					document.getElementById("collector1main").style.cursor = "default";
+					document.getElementById("collector1main").setAttribute("draggable", false);
+					document.getElementById("collector1main").style.background = "white";
+					document.getElementById("collector1").style.background = "white";
+				}
+				else if (Player.Collectors[2][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[2][1] = false;
+					Player.Collectors[2][2] = "";
+					Player.Collectors[2][3] = 0;
+					document.getElementById("collector3time").innerHTML = "&nbsp;";
+					document.getElementById("collector3letter").innerHTML = "#3";
+					document.getElementById("collector3letter").style.opacity = 0.07;
+					document.getElementById("collector3strg").innerHTML = "&nbsp;";
+					document.getElementById("collector3main").style.cursor = "default";
+					document.getElementById("collector3main").setAttribute("draggable", false);
+					document.getElementById("collector3main").style.background = "white";
+					document.getElementById("collector3").style.background = "white";
+				}
+				else if (Player.Collectors[3][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[3][1] = false;
+					Player.Collectors[3][2] = "";
+					Player.Collectors[3][3] = 0;
+					document.getElementById("collector4time").innerHTML = "&nbsp;";
+					document.getElementById("collector4letter").innerHTML = "#4";
+					document.getElementById("collector4letter").style.opacity = 0.07;
+					document.getElementById("collector4strg").innerHTML = "&nbsp;";
+					document.getElementById("collector4main").style.cursor = "default";
+					document.getElementById("collector4main").setAttribute("draggable", false);
+					document.getElementById("collector4main").style.background = "white";
+					document.getElementById("collector4").style.background = "white";
+				}
+				save();
+			}
+		}
+		else if (colid == "collector3main" || colid == "collector3letter" || colid == "collector3time" || colid == "collector3strg"){
+			if (Player.Letters[letid.slice(9)][3] < Player.Letters[letid.slice(9)][5]){
+				document.getElementById("uppercase" + letid.slice(9)).style.opacity = 1;
+				document.getElementById("collector3time").innerHTML = (1/Player.Letters[letid.slice(9)][7]).toFixed(1) + "s";
+				document.getElementById("collector3letter").innerHTML = letid.slice(9).toUpperCase();
+				document.getElementById("collector3letter").style.opacity = 1;
+				document.getElementById("collector3strg").innerHTML = Player.Letters[letid.slice(9)][3] + "/" + Player.Letters[letid.slice(9)][5];
+				document.getElementById("collector3main").style.cursor = "move";
+				document.getElementById("collector3main").setAttribute("draggable", true);
+				document.getElementById("collector3").style.transform = "scale(1,1)";
+				document.getElementById("collector3").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%, white "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%)";
+				Player.Collectors[2][1] = true;
+				if (Player.Collectors[2][2] != "" && Player.Collectors[2][2] == Player.Collectors[2][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[2][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[2][2]).style.background = "";
+				}
+				else if (Player.Collectors[2][2] != "" && Player.Collectors[2][2] != Player.Collectors[2][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.background = "";
+				}
+				Player.Collectors[2][2] = letid.slice(9).toUpperCase();
+				Player.Collectors[2][3] = 0;
+				if (Player.Collectors[0][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[0][1] = false;
+					Player.Collectors[0][2] = "";
+					Player.Collectors[0][3] = 0;
+					document.getElementById("collector1time").innerHTML = "&nbsp;";
+					document.getElementById("collector1letter").innerHTML = "#1";
+					document.getElementById("collector1letter").style.opacity = 0.07;
+					document.getElementById("collector1strg").innerHTML = "&nbsp;";
+					document.getElementById("collector1main").style.cursor = "default";
+					document.getElementById("collector1main").setAttribute("draggable", false);
+					document.getElementById("collector1main").style.background = "white";
+					document.getElementById("collector1").style.background = "white";
+				}
+				else if (Player.Collectors[1][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[1][1] = false;
+					Player.Collectors[1][2] = "";
+					Player.Collectors[1][3] = 0;
+					document.getElementById("collector2time").innerHTML = "&nbsp;";
+					document.getElementById("collector2letter").innerHTML = "#2";
+					document.getElementById("collector2letter").style.opacity = 0.07;
+					document.getElementById("collector2strg").innerHTML = "&nbsp;";
+					document.getElementById("collector2main").style.cursor = "default";
+					document.getElementById("collector2main").setAttribute("draggable", false);
+					document.getElementById("collector2main").style.background = "white";
+					document.getElementById("collector2").style.background = "white";
+				}
+				else if (Player.Collectors[3][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[3][1] = false;
+					Player.Collectors[3][2] = "";
+					Player.Collectors[3][3] = 0;
+					document.getElementById("collector4time").innerHTML = "&nbsp;";
+					document.getElementById("collector4letter").innerHTML = "#4";
+					document.getElementById("collector4letter").style.opacity = 0.07;
+					document.getElementById("collector4strg").innerHTML = "&nbsp;";
+					document.getElementById("collector4main").style.cursor = "default";
+					document.getElementById("collector4main").setAttribute("draggable", false);
+					document.getElementById("collector4main").style.background = "white";
+					document.getElementById("collector4").style.background = "white";
+				}
+				save();
+			}
+		}
+		else if (colid == "collector4main" || colid == "collector4letter" || colid == "collector4time" || colid == "collector4strg"){
+			if (Player.Letters[letid.slice(9)][3] < Player.Letters[letid.slice(9)][5]){
+				document.getElementById("uppercase" + letid.slice(9)).style.opacity = 1;
+				document.getElementById("collector4time").innerHTML = (1/Player.Letters[letid.slice(9)][7]).toFixed(1) + "s";
+				document.getElementById("collector4letter").innerHTML = letid.slice(9).toUpperCase();
+				document.getElementById("collector4letter").style.opacity = 1;
+				document.getElementById("collector4strg").innerHTML = Player.Letters[letid.slice(9)][3] + "/" + Player.Letters[letid.slice(9)][5];
+				document.getElementById("collector4main").style.cursor = "move";
+				document.getElementById("collector4main").setAttribute("draggable", true);
+				document.getElementById("collector4").style.transform = "scale(1,1)";
+				document.getElementById("collector4").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%, white "+(Player.Letters[letid.slice(9)][3]/Player.Letters[letid.slice(9)][5]*100)+"%)";
+				Player.Collectors[3][1] = true;
+				if (Player.Collectors[3][2] != "" && Player.Collectors[3][2] == Player.Collectors[3][2].toLowerCase()){
+					document.getElementById("normal" + Player.Collectors[3][2]).style.opacity = 1;
+					document.getElementById("normal" + Player.Collectors[3][2]).style.background = "";
+				}
+				else if (Player.Collectors[3][2] != "" && Player.Collectors[3][2] != Player.Collectors[3][2].toLowerCase()){
+					document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.opacity = 1;
+					document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.background = "";
+				}
+				Player.Collectors[3][2] = letid.slice(9).toUpperCase();
+				Player.Collectors[3][3] = 0;
+				if (Player.Collectors[0][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[0][1] = false;
+					Player.Collectors[0][2] = "";
+					Player.Collectors[0][3] = 0;
+					document.getElementById("collector1time").innerHTML = "&nbsp;";
+					document.getElementById("collector1letter").innerHTML = "#1";
+					document.getElementById("collector1letter").style.opacity = 0.07;
+					document.getElementById("collector1strg").innerHTML = "&nbsp;";
+					document.getElementById("collector1main").style.cursor = "default";
+					document.getElementById("collector1main").setAttribute("draggable", false);
+					document.getElementById("collector1main").style.background = "white";
+					document.getElementById("collector1").style.background = "white";
+				}
+				else if (Player.Collectors[1][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[1][1] = false;
+					Player.Collectors[1][2] = "";
+					Player.Collectors[1][3] = 0;
+					document.getElementById("collector2time").innerHTML = "&nbsp;";
+					document.getElementById("collector2letter").innerHTML = "#2";
+					document.getElementById("collector2letter").style.opacity = 0.07;
+					document.getElementById("collector2strg").innerHTML = "&nbsp;";
+					document.getElementById("collector2main").style.cursor = "default";
+					document.getElementById("collector2main").setAttribute("draggable", false);
+					document.getElementById("collector2main").style.background = "white";
+					document.getElementById("collector2").style.background = "white";
+				}
+				else if (Player.Collectors[2][2] == letid.slice(9).toUpperCase()){
+					Player.Collectors[2][1] = false;
+					Player.Collectors[2][2] = "";
+					Player.Collectors[2][3] = 0;
+					document.getElementById("collector3time").innerHTML = "&nbsp;";
+					document.getElementById("collector3letter").innerHTML = "#3";
+					document.getElementById("collector3letter").style.opacity = 0.07;
+					document.getElementById("collector3strg").innerHTML = "&nbsp;";
+					document.getElementById("collector3main").style.cursor = "default";
+					document.getElementById("collector3main").setAttribute("draggable", false);
+					document.getElementById("collector3main").style.background = "white";
+					document.getElementById("collector3").style.background = "white";
+				}
+				save();
+			}
 		}
 	}
 }
+
+function barcolors(P11, P12, key1, P21, P22, key2, P31, P32, key3, P41, P42, key4){
+	if (key1){
+		barP11 = P11;
+		barP12 = P12;
+		barkey1 = key1;
+	}
+	if (key2){
+		barP21 = P21;
+		barP22 = P22;
+		barkey2 = key2;
+	}
+	if (key3){
+		barP31 = P31;
+		barP32 = P32;
+		barkey3 = key3;
+	}
+	if (key4){
+		barP41 = P41;
+		barP42 = P42;
+		barkey4 = key4;
+	}
+	if (barkey1 && barkey1.toLowerCase() == barkey1){
+		barP11 += 0.6;
+		if (barP11 < barP12){
+			document.getElementById("normal"+barkey1+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP11+"%, #ffffff75 "+barP11+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("normal"+barkey1+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP12+"%, #ffffff75 "+barP12+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP11 = null;
+			barP12 = null;
+			barkey1 = null;
+		}
+	}
+	else if (barkey1 && barkey1.toLowerCase() != barkey1){
+		barP11 += 0.6;
+		if (barP11 < barP12){
+			document.getElementById("uppercase"+barkey1.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP11+"%, #ffffff75 "+barP11+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("uppercase"+barkey1.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP12+"%, #ffffff75 "+barP12+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP11 = null;
+			barP12 = null;
+			barkey1 = null;
+		}
+	}
+	if (barkey2 && barkey2.toLowerCase() == barkey2){
+		barP21 += 0.6;
+		if (barP21 < barP22){
+			document.getElementById("normal"+barkey2+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP21+"%, #ffffff75 "+barP21+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("normal"+barkey2+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP22+"%, #ffffff75 "+barP22+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP21 = null;
+			barP22 = null;
+			barkey2 = null;
+		}
+	}
+	else if (barkey2 && barkey2.toLowerCase() != barkey2){
+		barP21 += 0.6;
+		if (barP21 < barP22){
+			document.getElementById("uppercase"+barkey2.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP21+"%, #ffffff75 "+barP21+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("uppercase"+barkey2.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP22+"%, #ffffff75 "+barP22+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP21 = null;
+			barP22 = null;
+			barkey2 = null;
+		}
+	}
+	if (barkey3 && barkey3.toLowerCase() == barkey3){
+		barP31 += 0.6;
+		if (barP31 < barP32){
+			document.getElementById("normal"+barkey3+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP31+"%, #ffffff75 "+barP31+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("normal"+barkey3+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP32+"%, #ffffff75 "+barP32+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP31 = null;
+			barP32 = null;
+			barkey3 = null;
+		}
+	}
+	else if (barkey3 && barkey3.toLowerCase() != barkey3){
+		barP31 += 0.6;
+		if (barP31 < barP32){
+			document.getElementById("uppercase"+barkey3.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP31+"%, #ffffff75 "+barP31+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("uppercase"+barkey3.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP32+"%, #ffffff75 "+barP32+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP31 = null;
+			barP32 = null;
+			barkey3 = null;
+		}
+	}
+	if (barkey4 && barkey4.toLowerCase() == barkey4){
+		barP41 += 0.6;
+		if (barP41 < barP42){
+			document.getElementById("normal"+barkey4+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP41+"%, #ffffff75 "+barP41+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("normal"+barkey4+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP42+"%, #ffffff75 "+barP42+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP41 = null;
+			barP42 = null;
+			barkey4 = null;
+		}
+	}
+	else if (barkey4 && barkey4.toLowerCase() != barkey4){
+		barP41 += 0.6;
+		if (barP41 < barP42){
+			document.getElementById("uppercase"+barkey4.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP41+"%, #ffffff75 "+barP41+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		}
+		else{
+			document.getElementById("uppercase"+barkey4.toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+barP42+"%, #ffffff75 "+barP42+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			barP41 = null;
+			barP42 = null;
+			barkey4 = null;
+		}
+	}
+} setInterval(barcolors, 10);
 
 function getletters(){
-	if (ActiveLetter != ""){
-		if (ActiveLetter == "~") {}
-		else if (ActiveLetterCap < ((1/ActiveLetterSpeed)*100)){
-			if (ActiveLetter == ActiveLetter.toLowerCase()){
-				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100));
-				ActiveLetterCap += 1;
-				document.getElementById(ActiveLetter+"Text").innerHTML = ActiveLetter;
-				document.getElementById(ActiveLetter).style.background = "linear-gradient(to right, hsl(" + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + ", 100%, 60%) " + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + "%, #ffe6c3f7 0%)";
+	if (Player.Collectors[0][1] == true && Player.Collectors[0][2].toLowerCase() == Player.Collectors[0][2]){
+		document.getElementById("normal" + Player.Collectors[0][2]).style.opacity = 0.3;
+		document.getElementById("normal" + Player.Collectors[0][2]).style.background = "#79e6ee";
+		if (Player.Collectors[0][3] < (1/(Player.Letters[Player.Collectors[0][2]][6]*Player.Letters[Player.Collectors[0][2]][18]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[0][2]][6]*Player.Letters[Player.Collectors[0][2]][18]);
+			if (time <= 0.15){
+				document.getElementById("collector1time").innerHTML = (Player.Letters[Player.Collectors[0][2]][6]*Player.Letters[Player.Collectors[0][2]][18]).toFixed(1) + "/s";
+				document.getElementById("collector1main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
 			}
-			else {
-				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
-				ActiveLetterCap += 1;
-				document.getElementById(ActiveLetter.toLowerCase()+"Text").innerHTML = ActiveLetter;
-				document.getElementById(ActiveLetter.toLowerCase()).style.background = "linear-gradient(to right, hsl(" + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + ", 100%, 60%) " + (ActiveLetterCap/((1/ActiveLetterSpeed)*100))*100 + "%, #ffe6c3f7 0%)";
+			else{
+				document.getElementById("collector1time").innerHTML = (((1/(Player.Letters[Player.Collectors[0][2]][6]*Player.Letters[Player.Collectors[0][2]][18]))*100 - Player.Collectors[0][3])/100).toFixed(1) + "s";
+				document.getElementById("collector1main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[0][3]/((1/(Player.Letters[Player.Collectors[0][2]][6]*Player.Letters[Player.Collectors[0][2]][18]))*100))*100)+"%, white "+((Player.Collectors[0][3]/((1/(Player.Letters[Player.Collectors[0][2]][6]*Player.Letters[Player.Collectors[0][2]][18]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
 			}
+			Player.Collectors[0][3] += 1;
 		}
-		else if (ActiveLetterCap >= ((1/ActiveLetterSpeed)*100)){
-			if (ActiveLetter == ActiveLetter.toLowerCase()){
-				var ahinorst1 = 0;
-				var dl1 = 0;
-				var bcfgmpuwy1 = 0;
-				var jkqvxz1 = 0;
-				for (let i=0; i < 8; i++){
-					ahinorst1 = ahinorst1 + Player.Letters["ahinorst"[i]][18] + Player.Letters["ahinorst"[i]][19];
-				}
-				for (let i=0; i < 2; i++){
-					dl1 = dl1 + Player.Letters["dl"[i]][18] + Player.Letters["dl"[i]][19];
-				}
-				for (let i=0; i < 9; i++){
-					bcfgmpuwy1 = bcfgmpuwy1 + Player.Letters["bcfgmpuwy"[i]][18] + Player.Letters["bcfgmpuwy"[i]][19];
-				}
-				for (let i=0; i < 6; i++){
-					jkqvxz1 = jkqvxz1 + Player.Letters["jkqvxz"[i]][18] + Player.Letters["jkqvxz"[i]][19];
-				}
-				if ((ActiveLetterCount + 2) <= ActiveLetterMax){
-					ActiveLetterCount = ActiveLetterCount + 1 + Player.Letters[ActiveLetter][26];
-					Player.Letters[ActiveLetter][2] = Player.Letters[ActiveLetter][2] + 1 + Player.Letters[ActiveLetter][26];
-					Player.Letters[ActiveLetter][18] = Player.Letters[ActiveLetter][18] + 1 + Player.Letters[ActiveLetter][26];
-					document.getElementById("Count" + ActiveLetter).style.display = "block";
-					document.getElementById("Count" + ActiveLetter).innerHTML = "+"+(1+Player.Letters[ActiveLetter][26]);
-				}
-				else{
-					ActiveLetterCount += 1;
-					Player.Letters[ActiveLetter][2] += 1;
-					Player.Letters[ActiveLetter][18] += 1;
-					document.getElementById("Count" + ActiveLetter).style.display = "block";
-					document.getElementById("Count" + ActiveLetter).innerHTML = "+1";
-				}
-				if (Player.Letters[ActiveLetter][18] == Player.Letters[ActiveLetter][20]){
-					if (ActiveLetter != "e"){
-						applycolbonus(ActiveLetter, ColBonus[ColBonus.indexOf(Player.Letters[ActiveLetter][22])]);
-						Player.Letters[ActiveLetter][20] = Collections[Collections.indexOf(Player.Letters[ActiveLetter][18])+1];
-						Player.Letters[ActiveLetter][22] = ColBonus[ColBonus.indexOf(Player.Letters[ActiveLetter][22])+1];
-					}
-					else if (Player.Letters["e"][20] != 0){
-						applycolbonus("e", Player.Letters["e"][22]);
-						Player.Letters["e"][20] = Collections[Collections.indexOf(Player.Letters["e"][18])+1];
-					} else {Player.Letters["e"][22] = "";}
-				}
-				var ahinorst2 = 0;
-				var dl2 = 0;
-				var bcfgmpuwy2 = 0;
-				var jkqvxz2 = 0;
-				for (let i=0; i < 8; i++){
-					ahinorst2 = ahinorst2 + Player.Letters["ahinorst"[i]][18] + Player.Letters["ahinorst"[i]][19];
-				}
-				for (let i=0; i < 2; i++){
-					dl2 = dl2 + Player.Letters["dl"[i]][18] + Player.Letters["dl"[i]][19];
-				}
-				for (let i=0; i < 9; i++){
-					bcfgmpuwy2 = bcfgmpuwy2 + Player.Letters["bcfgmpuwy"[i]][18] + Player.Letters["bcfgmpuwy"[i]][19];
-				}
-				for (let i=0; i < 6; i++){
-					jkqvxz2 = jkqvxz2 + Player.Letters["jkqvxz"[i]][18] + Player.Letters["jkqvxz"[i]][19];
-				}
-				if (Player.Groups["ahinorst"][0] > ahinorst1 && Player.Groups["ahinorst"][0] <= ahinorst2 && Player.Groups["ahinorst"][0] != Player.Groups["ahinorst"][1]){
-					Player.Groups["ahinorst"][0] = Player.Groups["ahinorst"].slice().reverse().find(el => el > ahinorst2);
-					for (let i=0; i < 17; i++){
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				}
-				else if (Player.Groups["ahinorst"][0] > ahinorst1 && Player.Groups["ahinorst"][0] <= ahinorst2 && Player.Groups["ahinorst"][0] == Player.Groups["ahinorst"][1]){
-					Player.Groups["ahinorst"][0] = 0;
-					for (let i=0; i < 17; i++){
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				}
-				if (Player.Groups["dl"][0] > dl1 && Player.Groups["dl"][0] <= dl2 && Player.Groups["dl"][0] != Player.Groups["dl"][1]){
-					Player.Groups["dl"][0] = Player.Groups["dl"].slice().reverse().find(el => el > dl2);
-					for (let i=0; i < 15; i++){
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][6] = Player.Letters["bcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][7] = Player.Letters["bcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				} 
-				else if (Player.Groups["dl"][0] > dl1 && Player.Groups["dl"][0] <= dl2 && Player.Groups["dl"][0] == Player.Groups["dl"][1]){
-					Player.Groups["dl"][0] = 0;
-					for (let i=0; i < 15; i++){
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][6] = Player.Letters["bcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][7] = Player.Letters["bcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				}
-				if (Player.Groups["bcfgmpuwy"][0] > bcfgmpuwy1 && Player.Groups["bcfgmpuwy"][0] <= bcfgmpuwy2 && Player.Groups["bcfgmpuwy"][0] != Player.Groups["bcfgmpuwy"][1]){
-					Player.Groups["bcfgmpuwy"][0] = Player.Groups["bcfgmpuwy"].slice().reverse().find(el => el > bcfgmpuwy2);
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				else if (Player.Groups["bcfgmpuwy"][0] > bcfgmpuwy1 && Player.Groups["bcfgmpuwy"][0] <= bcfgmpuwy2 && Player.Groups["bcfgmpuwy"][0] == Player.Groups["bcfgmpuwy"][1]){
-					Player.Groups["bcfgmpuwy"][0] = 0;
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				if (Player.Groups["jkqvxz"][0] > jkqvxz1 && Player.Groups["jkqvxz"][0] <= jkqvxz2 && Player.Groups["jkqvxz"][0] != Player.Groups["jkqvxz"][1]){
-					Player.Groups["jkqvxz"][0] = Player.Groups["jkqvxz"].slice().reverse().find(el => el > jkqvxz2);
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				else if (Player.Groups["jkqvxz"][0] > jkqvxz1 && Player.Groups["jkqvxz"][0] <= jkqvxz2 && Player.Groups["jkqvxz"][0] == Player.Groups["jkqvxz"][1]){
-					Player.Groups["jkqvxz"][0] = 0;
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				checkcollection();
-				document.getElementById(ActiveLetter).style.background = "#ffe6c3f7";
-				var letter = ActiveLetter;
-				function countnone(){
-					document.getElementById("Count" + letter).style.display = "none";
-				} setTimeout(countnone, 950);
-				barcolors(ActiveLetter, (Player.Letters[ActiveLetter][2]/Player.Letters[ActiveLetter][4]*100));
-				if (ActiveLetterCount == ActiveLetterMax){
-					ActiveLetter = "~";
-					function xyz(){
-						ActiveLetter = "";
-					}
-					x = setTimeout(xyz, 950);
-					ActiveLetterCount = 0;
-					ActiveLetterMax = 0;
-					ActiveLetterSpeed = 0;
-					ActiveLetterCap = 0;
-				}
-				else{
-					ActiveLetterCap = 0;
-				}
-				if (ActiveLetter == "e" && Player.tut == 0 && ActiveLetterCount >= 3){
-					ActiveLetter = "~";
-					function xyz(){
-						ActiveLetter = "";
-					}
-					x = setTimeout(xyz, 950);
-					ActiveLetterCount = 0;
-					ActiveLetterMax = 0;
-					ActiveLetterSpeed = 0;
-					ActiveLetterCap = 0;
-					document.getElementById("tut1").style.display = "none";
-					document.getElementById("tut2").style.display = "block";
-					document.getElementById("menu2").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-					document.getElementById("menu2").style.cursor = "pointer";
-					document.getElementById("menu2").style.filter = "blur(0)";
-					Player.tut = 1;
-				}
+		else{
+			Player.Letters[Player.Collectors[0][2]][2] += 1;
+			Player.Letters[Player.Collectors[0][2]][10] += 1;
+			Player.Letters[Player.Collectors[0][2]][12] += 1;
+			Player.Score += Player.Letters[Player.Collectors[0][2]][16];
+			Player.Collectors[0][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[0][2]);
+			checkmastery(Player.Collectors[0][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("normal"+Player.Collectors[0][2]+"strg").innerHTML = Player.Letters[Player.Collectors[0][2]][2] + "/" + Player.Letters[Player.Collectors[0][2]][4];
+			barcolors((Player.Letters[Player.Collectors[0][2]][2]-1)/Player.Letters[Player.Collectors[0][2]][4]*100,Player.Letters[Player.Collectors[0][2]][2]/Player.Letters[Player.Collectors[0][2]][4]*100,Player.Collectors[0][2],null,null,null,null,null,null,null,null,null);
+			document.getElementById("collector1").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[0][2]][2]/Player.Letters[Player.Collectors[0][2]][4]*100)+"%, white "+(Player.Letters[Player.Collectors[0][2]][2]/Player.Letters[Player.Collectors[0][2]][4]*100)+"%)";
+			document.getElementById("collector1strg").innerHTML = Player.Letters[Player.Collectors[0][2]][2] + "/" + Player.Letters[Player.Collectors[0][2]][4];
+			if (Player.Letters[Player.Collectors[0][2]][2] == Player.Letters[Player.Collectors[0][2]][4]){
+				Player.Collectors[0][1] = false;
+				document.getElementById("normal" + Player.Collectors[0][2]).style.opacity = 1;
+				document.getElementById("normal" + Player.Collectors[0][2]).style.background = "";
+				Player.Collectors[0][2] = "";
+				Player.Collectors[0][3] = 0;
+				document.getElementById("collector1time").innerHTML = "&nbsp;";
+				document.getElementById("collector1letter").innerHTML = "#1";
+				document.getElementById("collector1letter").style.opacity = 0.07;
+				document.getElementById("collector1strg").innerHTML = "&nbsp;";
+				document.getElementById("collector1main").style.cursor = "default";
+				document.getElementById("collector1main").setAttribute("draggable", false);
+				document.getElementById("collector1main").style.background = "white";
+				document.getElementById("collector1").style.background = "white";
 			}
-			else if (ActiveLetter != ActiveLetter.toLowerCase()){
-				var ahinorst1 = 0;
-				var dl1 = 0;
-				var bcfgmpuwy1 = 0;
-				var jkqvxz1 = 0;
-				for (let i=0; i < 8; i++){
-					ahinorst1 = ahinorst1 + Player.Letters["ahinorst"[i]][18] + Player.Letters["ahinorst"[i]][19];
-				}
-				for (let i=0; i < 2; i++){
-					dl1 = dl1 + Player.Letters["dl"[i]][18] + Player.Letters["dl"[i]][19];
-				}
-				for (let i=0; i < 9; i++){
-					bcfgmpuwy1 = bcfgmpuwy1 + Player.Letters["bcfgmpuwy"[i]][18] + Player.Letters["bcfgmpuwy"[i]][19];
-				}
-				for (let i=0; i < 6; i++){
-					jkqvxz1 = jkqvxz1 + Player.Letters["jkqvxz"[i]][18] + Player.Letters["jkqvxz"[i]][19];
-				}
-				if ((ActiveLetterCount + 2) <= ActiveLetterMax){
-					ActiveLetterCount = ActiveLetterCount + 1 + Player.Letters[ActiveLetter.toLowerCase()][27];
-					Player.Letters[ActiveLetter.toLowerCase()][3] = Player.Letters[ActiveLetter.toLowerCase()][3] + 1 + Player.Letters[ActiveLetter.toLowerCase()][27];
-					Player.Letters[ActiveLetter.toLowerCase()][19] = Player.Letters[ActiveLetter.toLowerCase()][19] + 1 + Player.Letters[ActiveLetter.toLowerCase()][27];
-					document.getElementById("Count" + ActiveLetter.toLowerCase()).style.display = "block";
-					document.getElementById("Count" + ActiveLetter.toLowerCase()).innerHTML = "+"+(1+Player.Letters[ActiveLetter.toLowerCase()][27]);
-				}
-				else{
-					ActiveLetterCount += 1;
-					Player.Letters[ActiveLetter.toLowerCase()][3] += 1;
-					Player.Letters[ActiveLetter.toLowerCase()][19] += 1;
-					document.getElementById("Count" + ActiveLetter.toLowerCase()).style.display = "block";
-					document.getElementById("Count" + ActiveLetter.toLowerCase()).innerHTML = "+1";
-				}
-				if (Player.Letters[ActiveLetter.toLowerCase()][19] == Player.Letters[ActiveLetter.toLowerCase()][21]){
-					applycolbonus(ActiveLetter, ColBonus[ColBonus.indexOf(Player.Letters[ActiveLetter.toLowerCase()][23])]);
-					Player.Letters[ActiveLetter.toLowerCase()][21] = Collections[Collections.indexOf(Player.Letters[ActiveLetter.toLowerCase()][19])+1];
-					Player.Letters[ActiveLetter.toLowerCase()][23] = ColBonus[ColBonus.indexOf(Player.Letters[ActiveLetter.toLowerCase()][23])+1];
-				}
-				var ahinorst2 = 0;
-				var dl2 = 0;
-				var bcfgmpuwy2 = 0;
-				var jkqvxz2 = 0;
-				for (let i=0; i < 8; i++){
-					ahinorst2 = ahinorst2 + Player.Letters["ahinorst"[i]][18] + Player.Letters["ahinorst"[i]][19];
-				}
-				for (let i=0; i < 2; i++){
-					dl2 = dl2 + Player.Letters["dl"[i]][18] + Player.Letters["dl"[i]][19];
-				}
-				for (let i=0; i < 9; i++){
-					bcfgmpuwy2 = bcfgmpuwy2 + Player.Letters["bcfgmpuwy"[i]][18] + Player.Letters["bcfgmpuwy"[i]][19];
-				}
-				for (let i=0; i < 6; i++){
-					jkqvxz2 = jkqvxz2 + Player.Letters["jkqvxz"[i]][18] + Player.Letters["jkqvxz"[i]][19];
-				}
-				if (Player.Groups["ahinorst"][0] > ahinorst1 && Player.Groups["ahinorst"][0] <= ahinorst2 && Player.Groups["ahinorst"][0] != Player.Groups["ahinorst"][1]){
-					Player.Groups["ahinorst"][0] = Player.Groups["ahinorst"].slice().reverse().find(el => el > ahinorst2);
-					for (let i=0; i < 17; i++){
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				}
-				else if (Player.Groups["ahinorst"][0] > ahinorst1 && Player.Groups["ahinorst"][0] <= ahinorst2 && Player.Groups["ahinorst"][0] == Player.Groups["ahinorst"][1]){
-					Player.Groups["ahinorst"][0] = 0;
-					for (let i=0; i < 17; i++){
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7] = Player.Letters["dlbcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				}
-				if (Player.Groups["dl"][0] > dl1 && Player.Groups["dl"][0] <= dl2 && Player.Groups["dl"][0] != Player.Groups["dl"][1]){
-					Player.Groups["dl"][0] = Player.Groups["dl"].slice().reverse().find(el => el > dl2);
-					for (let i=0; i < 15; i++){
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][6] = Player.Letters["bcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][7] = Player.Letters["bcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				} 
-				else if (Player.Groups["dl"][0] > dl1 && Player.Groups["dl"][0] <= dl2 && Player.Groups["dl"][0] == Player.Groups["dl"][1]){
-					Player.Groups["dl"][0] = 0;
-					for (let i=0; i < 15; i++){
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][6] = Player.Letters["bcfgmpuwyjkqvxz"[i]][6]*1.1;
-						Player.Letters["bcfgmpuwyjkqvxz"[i]][7] = Player.Letters["bcfgmpuwyjkqvxz"[i]][7]*1.1;
-					}
-				}
-				if (Player.Groups["bcfgmpuwy"][0] > bcfgmpuwy1 && Player.Groups["bcfgmpuwy"][0] <= bcfgmpuwy2 && Player.Groups["bcfgmpuwy"][0] != Player.Groups["bcfgmpuwy"][1]){
-					Player.Groups["bcfgmpuwy"][0] = Player.Groups["bcfgmpuwy"].slice().reverse().find(el => el > bcfgmpuwy2);
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				else if (Player.Groups["bcfgmpuwy"][0] > bcfgmpuwy1 && Player.Groups["bcfgmpuwy"][0] <= bcfgmpuwy2 && Player.Groups["bcfgmpuwy"][0] == Player.Groups["bcfgmpuwy"][1]){
-					Player.Groups["bcfgmpuwy"][0] = 0;
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				if (Player.Groups["jkqvxz"][0] > jkqvxz1 && Player.Groups["jkqvxz"][0] <= jkqvxz2 && Player.Groups["jkqvxz"][0] != Player.Groups["jkqvxz"][1]){
-					Player.Groups["jkqvxz"][0] = Player.Groups["jkqvxz"].slice().reverse().find(el => el > jkqvxz2);
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				else if (Player.Groups["jkqvxz"][0] > jkqvxz1 && Player.Groups["jkqvxz"][0] <= jkqvxz2 && Player.Groups["jkqvxz"][0] == Player.Groups["jkqvxz"][1]){
-					Player.Groups["jkqvxz"][0] = 0;
-					for (let i=0; i < 6; i++){
-						Player.Letters["jkqvxz"[i]][6] = Player.Letters["jkqvxz"[i]][6]*1.1;
-						Player.Letters["jkqvxz"[i]][7] = Player.Letters["jkqvxz"[i]][7]*1.1;
-					}
-				}
-				checkcollection();
-				document.getElementById(ActiveLetter.toLowerCase()).style.background = "#ffe6c3f7";
-				var letter = ActiveLetter.toLowerCase();
-				function countnone(){
-					document.getElementById("Count" + letter).style.display = "none";
-				} setTimeout(countnone, 950);
-				barcolors(ActiveLetter.toLowerCase(), (Player.Letters[ActiveLetter.toLowerCase()][3]/Player.Letters[ActiveLetter.toLowerCase()][5]*100));
-				if (ActiveLetterCount == ActiveLetterMax){
-					ActiveLetter = "~";
-					function xyz(){
-						ActiveLetter = "";
-					}
-					x = setTimeout(xyz, 950);
-					ActiveLetterCount = 0;
-					ActiveLetterMax = 0;
-					ActiveLetterSpeed = 0;
-					ActiveLetterCap = 0;
-				}
-				else{
-					ActiveLetterCap = 0;
-				}
-			}
+			save();
 		}
-		var tempchar = characters.substring(26,52);
-		for (let i=0; i < tempchar.length; i++){
-			if (letter && letter.toLowerCase() != tempchar[i]){
-				document.getElementById("Count" + tempchar[i]).style.display = "none";
+	}
+	else if (Player.Collectors[0][1] == true && Player.Collectors[0][2].toLowerCase() != Player.Collectors[0][2]){
+		document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.opacity = 0.3;
+		document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.background = "#79e6ee";
+		if (Player.Collectors[0][3] < (1/(Player.Letters[Player.Collectors[0][2].toLowerCase()][7]*Player.Letters[Player.Collectors[0][2].toLowerCase()][19]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[0][2].toLowerCase()][7]*Player.Letters[Player.Collectors[0][2].toLowerCase()][19]);
+			if (time <= 0.15){
+				document.getElementById("collector1time").innerHTML = (Player.Letters[Player.Collectors[0][2].toLowerCase()][7]*Player.Letters[Player.Collectors[0][2].toLowerCase()][19]).toFixed(1) + "/s";
+				document.getElementById("collector1main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
 			}
+			else{
+				document.getElementById("collector1time").innerHTML = (((1/(Player.Letters[Player.Collectors[0][2].toLowerCase()][7]*Player.Letters[Player.Collectors[0][2].toLowerCase()][19]))*100 - Player.Collectors[0][3])/100).toFixed(1) + "s";
+				document.getElementById("collector1main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[0][3]/((1/(Player.Letters[Player.Collectors[0][2].toLowerCase()][7]*Player.Letters[Player.Collectors[0][2].toLowerCase()][19]))*100))*100)+"%, white "+((Player.Collectors[0][3]/((1/(Player.Letters[Player.Collectors[0][2].toLowerCase()][7]*Player.Letters[Player.Collectors[0][2].toLowerCase()][19]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[0][3] += 1;
 		}
-	} 
-	else {
-		var tempchar = characters.substring(26, 52);
-		for (let i=0; i < tempchar.length; i++){
-			document.getElementById("Count" + tempchar[i]).style.display = "none";
+		else{
+			Player.Letters[Player.Collectors[0][2].toLowerCase()][3] += 1;
+			Player.Letters[Player.Collectors[0][2].toLowerCase()][11] += 1;
+			Player.Letters[Player.Collectors[0][2].toLowerCase()][13] += 1;
+			Player.Score += Player.Letters[Player.Collectors[0][2].toLowerCase()][17];
+			Player.Collectors[0][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[0][2]);
+			checkmastery(Player.Collectors[0][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("uppercase"+Player.Collectors[0][2].toLowerCase()+"strg").innerHTML = Player.Letters[Player.Collectors[0][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[0][2].toLowerCase()][5];
+			barcolors((Player.Letters[Player.Collectors[0][2].toLowerCase()][3]-1)/Player.Letters[Player.Collectors[0][2].toLowerCase()][5]*100,Player.Letters[Player.Collectors[0][2].toLowerCase()][3]/Player.Letters[Player.Collectors[0][2].toLowerCase()][5]*100,Player.Collectors[0][2],null,null,null,null,null,null,null,null,null);
+			document.getElementById("collector1").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[0][2].toLowerCase()][3]/Player.Letters[Player.Collectors[0][2].toLowerCase()][5]*100)+"%, white "+(Player.Letters[Player.Collectors[0][2].toLowerCase()][3]/Player.Letters[Player.Collectors[0][2].toLowerCase()][5]*100)+"%)";
+			document.getElementById("collector1strg").innerHTML = Player.Letters[Player.Collectors[0][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[0][2].toLowerCase()][5];
+			if (Player.Letters[Player.Collectors[0][2].toLowerCase()][3] == Player.Letters[Player.Collectors[0][2].toLowerCase()][5]){
+				Player.Collectors[0][1] = false;
+				document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.opacity = 1;
+				document.getElementById("uppercase" + Player.Collectors[0][2].toLowerCase()).style.background = "";
+				Player.Collectors[0][2] = "";
+				Player.Collectors[0][3] = 0;
+				document.getElementById("collector1time").innerHTML = "&nbsp;";
+				document.getElementById("collector1letter").innerHTML = "#1";
+				document.getElementById("collector1letter").style.opacity = 0.07;
+				document.getElementById("collector1strg").innerHTML = "&nbsp;";
+				document.getElementById("collector1main").style.cursor = "default";
+				document.getElementById("collector1main").setAttribute("draggable", false);
+				document.getElementById("collector1main").style.background = "white";
+				document.getElementById("collector1").style.background = "white";
+			}
+			save();
+		}
+	}
+	if (Player.Collectors[1][1] == true && Player.Collectors[1][2].toLowerCase() == Player.Collectors[1][2]){
+		document.getElementById("normal" + Player.Collectors[1][2]).style.opacity = 0.3;
+		document.getElementById("normal" + Player.Collectors[1][2]).style.background = "#79e6ee";
+		if (Player.Collectors[1][3] < (1/(Player.Letters[Player.Collectors[1][2]][6]*Player.Letters[Player.Collectors[1][2]][18]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[1][2]][6]*Player.Letters[Player.Collectors[1][2]][18]);
+			if (time <= 0.15){
+				document.getElementById("collector2time").innerHTML = (Player.Letters[Player.Collectors[1][2]][6]*Player.Letters[Player.Collectors[1][2]][18]).toFixed(1) + "/s";
+				document.getElementById("collector2main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			else{
+				document.getElementById("collector2time").innerHTML = (((1/(Player.Letters[Player.Collectors[1][2]][6]*Player.Letters[Player.Collectors[1][2]][18]))*100 - Player.Collectors[1][3])/100).toFixed(1) + "s";
+				document.getElementById("collector2main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[1][3]/((1/(Player.Letters[Player.Collectors[1][2]][6]*Player.Letters[Player.Collectors[1][2]][18]))*100))*100)+"%, white "+((Player.Collectors[1][3]/((1/(Player.Letters[Player.Collectors[1][2]][6]*Player.Letters[Player.Collectors[1][2]][18]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[1][3] += 1;
+		}
+		else{
+			Player.Letters[Player.Collectors[1][2]][2] += 1;
+			Player.Letters[Player.Collectors[1][2]][10] += 1;
+			Player.Letters[Player.Collectors[1][2]][12] += 1;
+			Player.Score += Player.Letters[Player.Collectors[1][2]][16];
+			Player.Collectors[1][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[1][2]);
+			checkmastery(Player.Collectors[1][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("normal"+Player.Collectors[1][2]+"strg").innerHTML = Player.Letters[Player.Collectors[1][2]][2] + "/" + Player.Letters[Player.Collectors[1][2]][4];
+			barcolors(null,null,null,(Player.Letters[Player.Collectors[1][2]][2]-1)/Player.Letters[Player.Collectors[1][2]][4]*100,Player.Letters[Player.Collectors[1][2]][2]/Player.Letters[Player.Collectors[1][2]][4]*100,Player.Collectors[1][2],null,null,null,null,null,null);
+			document.getElementById("collector2").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[1][2]][2]/Player.Letters[Player.Collectors[1][2]][4]*100)+"%, white "+(Player.Letters[Player.Collectors[1][2]][2]/Player.Letters[Player.Collectors[1][2]][4]*100)+"%)";
+			document.getElementById("collector2strg").innerHTML = Player.Letters[Player.Collectors[1][2]][2] + "/" + Player.Letters[Player.Collectors[1][2]][4];
+			if (Player.Letters[Player.Collectors[1][2]][2] == Player.Letters[Player.Collectors[1][2]][4]){
+				Player.Collectors[1][1] = false;
+				document.getElementById("normal" + Player.Collectors[1][2]).style.opacity = 1;
+				document.getElementById("normal" + Player.Collectors[1][2]).style.background = "";
+				Player.Collectors[1][2] = "";
+				Player.Collectors[1][3] = 0;
+				document.getElementById("collector2time").innerHTML = "&nbsp;";
+				document.getElementById("collector2letter").innerHTML = "#2";
+				document.getElementById("collector2letter").style.opacity = 0.07;
+				document.getElementById("collector2strg").innerHTML = "&nbsp;";
+				document.getElementById("collector2main").style.cursor = "default";
+				document.getElementById("collector2main").setAttribute("draggable", false);
+				document.getElementById("collector2main").style.background = "white";
+				document.getElementById("collector2").style.background = "white";
+			}
+			save();
+		}
+	}
+	else if (Player.Collectors[1][1] == true && Player.Collectors[1][2].toLowerCase() != Player.Collectors[1][2]){
+		document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.opacity = 0.3;
+		document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.background = "#79e6ee";
+		if (Player.Collectors[1][3] < (1/(Player.Letters[Player.Collectors[1][2].toLowerCase()][7]*Player.Letters[Player.Collectors[1][2].toLowerCase()][19]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[1][2].toLowerCase()][7]*Player.Letters[Player.Collectors[1][2].toLowerCase()][19]);
+			if (time <= 0.15){
+				document.getElementById("collector2time").innerHTML = (Player.Letters[Player.Collectors[1][2].toLowerCase()][7]*Player.Letters[Player.Collectors[1][2].toLowerCase()][19]).toFixed(1) + "/s";
+				document.getElementById("collector2main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			else{
+				document.getElementById("collector2time").innerHTML = (((1/(Player.Letters[Player.Collectors[1][2].toLowerCase()][7]*Player.Letters[Player.Collectors[1][2].toLowerCase()][19]))*100 - Player.Collectors[1][3])/100).toFixed(1) + "s";
+				document.getElementById("collector2main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[1][3]/((1/(Player.Letters[Player.Collectors[1][2].toLowerCase()][7]*Player.Letters[Player.Collectors[1][2].toLowerCase()][19]))*100))*100)+"%, white "+((Player.Collectors[1][3]/((1/(Player.Letters[Player.Collectors[1][2].toLowerCase()][7]*Player.Letters[Player.Collectors[1][2].toLowerCase()][19]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[1][3] += 1;
+		}
+		else{
+			Player.Letters[Player.Collectors[1][2].toLowerCase()][3] += 1;
+			Player.Letters[Player.Collectors[1][2].toLowerCase()][11] += 1;
+			Player.Letters[Player.Collectors[1][2].toLowerCase()][13] += 1;
+			Player.Score += Player.Letters[Player.Collectors[1][2].toLowerCase()][17];
+			Player.Collectors[1][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[1][2]);
+			checkmastery(Player.Collectors[1][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("uppercase"+Player.Collectors[1][2].toLowerCase()+"strg").innerHTML = Player.Letters[Player.Collectors[1][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[1][2].toLowerCase()][5];
+			barcolors(null,null,null,(Player.Letters[Player.Collectors[1][2].toLowerCase()][3]-1)/Player.Letters[Player.Collectors[1][2].toLowerCase()][5]*100,Player.Letters[Player.Collectors[1][2].toLowerCase()][3]/Player.Letters[Player.Collectors[1][2].toLowerCase()][5]*100,Player.Collectors[1][2],null,null,null,null,null,null);
+			document.getElementById("collector2").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[1][2].toLowerCase()][3]/Player.Letters[Player.Collectors[1][2].toLowerCase()][5]*100)+"%, white "+(Player.Letters[Player.Collectors[1][2].toLowerCase()][3]/Player.Letters[Player.Collectors[1][2].toLowerCase()][5]*100)+"%)";
+			document.getElementById("collector2strg").innerHTML = Player.Letters[Player.Collectors[1][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[1][2].toLowerCase()][5];
+			if (Player.Letters[Player.Collectors[1][2].toLowerCase()][3] == Player.Letters[Player.Collectors[1][2].toLowerCase()][5]){
+				Player.Collectors[1][1] = false;
+				document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.opacity = 1;
+				document.getElementById("uppercase" + Player.Collectors[1][2].toLowerCase()).style.background = "";
+				Player.Collectors[1][2] = "";
+				Player.Collectors[1][3] = 0;
+				document.getElementById("collector2time").innerHTML = "&nbsp;";
+				document.getElementById("collector2letter").innerHTML = "#2";
+				document.getElementById("collector2letter").style.opacity = 0.07;
+				document.getElementById("collector2strg").innerHTML = "&nbsp;";
+				document.getElementById("collector2main").style.cursor = "default";
+				document.getElementById("collector2main").setAttribute("draggable", false);
+				document.getElementById("collector2main").style.background = "white";
+				document.getElementById("collector2").style.background = "white";
+			}
+			save();
+		}
+	}
+	if (Player.Collectors[2][1] == true && Player.Collectors[2][2].toLowerCase() == Player.Collectors[2][2]){
+		document.getElementById("normal" + Player.Collectors[2][2]).style.opacity = 0.3;
+		document.getElementById("normal" + Player.Collectors[2][2]).style.background = "#79e6ee";
+		if (Player.Collectors[2][3] < (1/(Player.Letters[Player.Collectors[2][2]][6]*Player.Letters[Player.Collectors[2][2]][18]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[2][2]][6]*Player.Letters[Player.Collectors[2][2]][18]);
+			if (time <= 0.15){
+				document.getElementById("collector3time").innerHTML = (Player.Letters[Player.Collectors[2][2]][6]*Player.Letters[Player.Collectors[2][2]][18]).toFixed(1) + "/s";
+				document.getElementById("collector3main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			else{
+				document.getElementById("collector3time").innerHTML = (((1/(Player.Letters[Player.Collectors[2][2]][6]*Player.Letters[Player.Collectors[2][2]][18]))*100 - Player.Collectors[2][3])/100).toFixed(1) + "s";
+				document.getElementById("collector3main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[2][3]/((1/(Player.Letters[Player.Collectors[2][2]][6]*Player.Letters[Player.Collectors[2][2]][18]))*100))*100)+"%, white "+((Player.Collectors[2][3]/((1/(Player.Letters[Player.Collectors[2][2]][6]*Player.Letters[Player.Collectors[2][2]][18]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[2][3] += 1;
+		}
+		else{
+			Player.Letters[Player.Collectors[2][2]][2] += 1;
+			Player.Letters[Player.Collectors[2][2]][10] += 1;
+			Player.Letters[Player.Collectors[2][2]][12] += 1;
+			Player.Score += Player.Letters[Player.Collectors[2][2]][16];
+			Player.Collectors[2][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[2][2]);
+			checkmastery(Player.Collectors[2][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("normal"+Player.Collectors[2][2]+"strg").innerHTML = Player.Letters[Player.Collectors[2][2]][2] + "/" + Player.Letters[Player.Collectors[2][2]][4];
+			barcolors(null,null,null,null,null,null,(Player.Letters[Player.Collectors[2][2]][2]-1)/Player.Letters[Player.Collectors[2][2]][4]*100,Player.Letters[Player.Collectors[2][2]][2]/Player.Letters[Player.Collectors[2][2]][4]*100,Player.Collectors[2][2],null,null,null);
+			document.getElementById("collector3").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[2][2]][2]/Player.Letters[Player.Collectors[2][2]][4]*100)+"%, white "+(Player.Letters[Player.Collectors[2][2]][2]/Player.Letters[Player.Collectors[2][2]][4]*100)+"%)";
+			document.getElementById("collector3strg").innerHTML = Player.Letters[Player.Collectors[2][2]][2] + "/" + Player.Letters[Player.Collectors[2][2]][4];
+			if (Player.Letters[Player.Collectors[2][2]][2] == Player.Letters[Player.Collectors[2][2]][4]){
+				Player.Collectors[2][1] = false;
+				document.getElementById("normal" + Player.Collectors[2][2]).style.opacity = 1;
+				document.getElementById("normal" + Player.Collectors[2][2]).style.background = "";
+				Player.Collectors[2][2] = "";
+				Player.Collectors[2][3] = 0;
+				document.getElementById("collector3time").innerHTML = "&nbsp;";
+				document.getElementById("collector3letter").innerHTML = "#3";
+				document.getElementById("collector3letter").style.opacity = 0.07;
+				document.getElementById("collector3strg").innerHTML = "&nbsp;";
+				document.getElementById("collector3main").style.cursor = "default";
+				document.getElementById("collector3main").setAttribute("draggable", false);
+				document.getElementById("collector3main").style.background = "white";
+				document.getElementById("collector3").style.background = "white";
+			}
+			save();
+		}
+	}
+	else if (Player.Collectors[2][1] == true && Player.Collectors[2][2].toLowerCase() != Player.Collectors[2][2]){
+		document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.opacity = 0.3;
+		document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.background = "#79e6ee";
+		if (Player.Collectors[2][3] < (1/(Player.Letters[Player.Collectors[2][2].toLowerCase()][7]*Player.Letters[Player.Collectors[2][2].toLowerCase()][19]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[2][2].toLowerCase()][7]*Player.Letters[Player.Collectors[2][2].toLowerCase()][19]);
+			if (time <= 0.15){
+				document.getElementById("collector3time").innerHTML = (Player.Letters[Player.Collectors[2][2].toLowerCase()][7]*Player.Letters[Player.Collectors[2][2].toLowerCase()][19]).toFixed(1) + "/s";
+				document.getElementById("collector3main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			else{
+				document.getElementById("collector3time").innerHTML = (((1/(Player.Letters[Player.Collectors[2][2].toLowerCase()][7]*Player.Letters[Player.Collectors[2][2].toLowerCase()][19]))*100 - Player.Collectors[2][3])/100).toFixed(1) + "s";
+				document.getElementById("collector3main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[2][3]/((1/(Player.Letters[Player.Collectors[2][2].toLowerCase()][7]*Player.Letters[Player.Collectors[2][2].toLowerCase()][19]))*100))*100)+"%, white "+((Player.Collectors[2][3]/((1/(Player.Letters[Player.Collectors[2][2].toLowerCase()][7]*Player.Letters[Player.Collectors[2][2].toLowerCase()][19]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[2][3] += 1;
+		}
+		else{
+			Player.Letters[Player.Collectors[2][2].toLowerCase()][3] += 1;
+			Player.Letters[Player.Collectors[2][2].toLowerCase()][11] += 1;
+			Player.Letters[Player.Collectors[2][2].toLowerCase()][13] += 1;
+			Player.Score += Player.Letters[Player.Collectors[2][2].toLowerCase()][17];
+			Player.Collectors[2][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[2][2]);
+			checkmastery(Player.Collectors[2][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("uppercase"+Player.Collectors[2][2].toLowerCase()+"strg").innerHTML = Player.Letters[Player.Collectors[2][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[2][2].toLowerCase()][5];
+			barcolors(null,null,null,null,null,null,(Player.Letters[Player.Collectors[2][2].toLowerCase()][3]-1)/Player.Letters[Player.Collectors[2][2].toLowerCase()][5]*100,Player.Letters[Player.Collectors[2][2].toLowerCase()][3]/Player.Letters[Player.Collectors[2][2].toLowerCase()][5]*100,Player.Collectors[2][2],null,null,null);
+			document.getElementById("collector3").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[2][2].toLowerCase()][3]/Player.Letters[Player.Collectors[2][2].toLowerCase()][5]*100)+"%, white "+(Player.Letters[Player.Collectors[2][2].toLowerCase()][3]/Player.Letters[Player.Collectors[2][2].toLowerCase()][5]*100)+"%)";
+			document.getElementById("collector3strg").innerHTML = Player.Letters[Player.Collectors[2][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[2][2].toLowerCase()][5];
+			if (Player.Letters[Player.Collectors[2][2].toLowerCase()][3] == Player.Letters[Player.Collectors[2][2].toLowerCase()][5]){
+				Player.Collectors[2][1] = false;
+				document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.opacity = 1;
+				document.getElementById("uppercase" + Player.Collectors[2][2].toLowerCase()).style.background = "";
+				Player.Collectors[2][2] = "";
+				Player.Collectors[2][3] = 0;
+				document.getElementById("collector3time").innerHTML = "&nbsp;";
+				document.getElementById("collector3letter").innerHTML = "#3";
+				document.getElementById("collector3letter").style.opacity = 0.07;
+				document.getElementById("collector3strg").innerHTML = "&nbsp;";
+				document.getElementById("collector3main").style.cursor = "default";
+				document.getElementById("collector3main").setAttribute("draggable", false);
+				document.getElementById("collector3main").style.background = "white";
+				document.getElementById("collector3").style.background = "white";
+			}
+			save();
+		}
+	}
+	if (Player.Collectors[3][1] == true && Player.Collectors[3][2].toLowerCase() == Player.Collectors[3][2]){
+		document.getElementById("normal" + Player.Collectors[3][2]).style.opacity = 0.3;
+		document.getElementById("normal" + Player.Collectors[3][2]).style.background = "#79e6ee";
+		if (Player.Collectors[3][3] < (1/(Player.Letters[Player.Collectors[3][2]][6]*Player.Letters[Player.Collectors[3][2]][18]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[3][2]][6]*Player.Letters[Player.Collectors[3][2]][18]);
+			if (time <= 0.15){
+				document.getElementById("collector4time").innerHTML = (Player.Letters[Player.Collectors[3][2]][6]*Player.Letters[Player.Collectors[3][2]][18]).toFixed(1) + "/s";
+				document.getElementById("collector4main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			else{
+				document.getElementById("collector4time").innerHTML = (((1/(Player.Letters[Player.Collectors[3][2]][6]*Player.Letters[Player.Collectors[3][2]][18]))*100 - Player.Collectors[3][3])/100).toFixed(1) + "s";
+				document.getElementById("collector4main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[3][3]/((1/(Player.Letters[Player.Collectors[3][2]][6]*Player.Letters[Player.Collectors[3][2]][18]))*100))*100)+"%, white "+((Player.Collectors[3][3]/((1/(Player.Letters[Player.Collectors[3][2]][6]*Player.Letters[Player.Collectors[3][2]][18]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[3][3] += 1;
+		}
+		else{
+			Player.Letters[Player.Collectors[3][2]][2] += 1;
+			Player.Letters[Player.Collectors[3][2]][10] += 1;
+			Player.Letters[Player.Collectors[3][2]][12] += 1;
+			Player.Score += Player.Letters[Player.Collectors[3][2]][16];
+			Player.Collectors[3][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[3][2]);
+			checkmastery(Player.Collectors[3][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("normal"+Player.Collectors[3][2]+"strg").innerHTML = Player.Letters[Player.Collectors[3][2]][2] + "/" + Player.Letters[Player.Collectors[3][2]][4];
+			barcolors(null,null,null,null,null,null,null,null,null,(Player.Letters[Player.Collectors[3][2]][2]-1)/Player.Letters[Player.Collectors[3][2]][4]*100,Player.Letters[Player.Collectors[3][2]][2]/Player.Letters[Player.Collectors[3][2]][4]*100,Player.Collectors[3][2]);
+			document.getElementById("collector4").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[3][2]][2]/Player.Letters[Player.Collectors[3][2]][4]*100)+"%, white "+(Player.Letters[Player.Collectors[3][2]][2]/Player.Letters[Player.Collectors[3][2]][4]*100)+"%)";
+			document.getElementById("collector4strg").innerHTML = Player.Letters[Player.Collectors[3][2]][2] + "/" + Player.Letters[Player.Collectors[3][2]][4];
+			if (Player.Letters[Player.Collectors[3][2]][2] == Player.Letters[Player.Collectors[3][2]][4]){
+				Player.Collectors[3][1] = false;
+				document.getElementById("normal" + Player.Collectors[3][2]).style.opacity = 1;
+				document.getElementById("normal" + Player.Collectors[3][2]).style.background = "";
+				Player.Collectors[3][2] = "";
+				Player.Collectors[3][3] = 0;
+				document.getElementById("collector4time").innerHTML = "&nbsp;";
+				document.getElementById("collector4letter").innerHTML = "#4";
+				document.getElementById("collector4letter").style.opacity = 0.07;
+				document.getElementById("collector4strg").innerHTML = "&nbsp;";
+				document.getElementById("collector4main").style.cursor = "default";
+				document.getElementById("collector4main").setAttribute("draggable", false);
+				document.getElementById("collector4main").style.background = "white";
+				document.getElementById("collector4").style.background = "white";
+			}
+			save();
+		}
+	}
+	else if (Player.Collectors[3][1] == true && Player.Collectors[3][2].toLowerCase() != Player.Collectors[3][2]){
+		document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.opacity = 0.3;
+		document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.background = "#79e6ee";
+		if (Player.Collectors[3][3] < (1/(Player.Letters[Player.Collectors[3][2].toLowerCase()][7]*Player.Letters[Player.Collectors[3][2].toLowerCase()][19]))*100){
+			var time = 1/(Player.Letters[Player.Collectors[3][2].toLowerCase()][7]*Player.Letters[Player.Collectors[3][2].toLowerCase()][19]);
+			if (time <= 0.15){
+				document.getElementById("collector4time").innerHTML = (Player.Letters[Player.Collectors[3][2].toLowerCase()][7]*Player.Letters[Player.Collectors[3][2].toLowerCase()][19]).toFixed(1) + "/s";
+				document.getElementById("collector4main").style.background = "linear-gradient(to top, #0cff0088 100%, white 0%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			else{
+				document.getElementById("collector4time").innerHTML = (((1/(Player.Letters[Player.Collectors[3][2].toLowerCase()][7]*Player.Letters[Player.Collectors[3][2].toLowerCase()][19]))*100 - Player.Collectors[3][3])/100).toFixed(1) + "s";
+				document.getElementById("collector4main").style.background = "linear-gradient(to top, #0cff0088 "+((Player.Collectors[3][3]/((1/(Player.Letters[Player.Collectors[3][2].toLowerCase()][7]*Player.Letters[Player.Collectors[3][2].toLowerCase()][19]))*100))*100)+"%, white "+((Player.Collectors[3][3]/((1/(Player.Letters[Player.Collectors[3][2].toLowerCase()][7]*Player.Letters[Player.Collectors[3][2].toLowerCase()][19]))*100))*100)+"%), linear-gradient(to right, #d0d0d0 0%, #d0d0d0 50%, #ffffff 80%)";
+			}
+			Player.Collectors[3][3] += 1;
+		}
+		else{
+			Player.Letters[Player.Collectors[3][2].toLowerCase()][3] += 1;
+			Player.Letters[Player.Collectors[3][2].toLowerCase()][11] += 1;
+			Player.Letters[Player.Collectors[3][2].toLowerCase()][13] += 1;
+			Player.Score += Player.Letters[Player.Collectors[3][2].toLowerCase()][17];
+			Player.Collectors[3][3] = 0;
+			scoredisp();
+			checkstore();
+			getmastery(Player.Collectors[3][2]);
+			checkmastery(Player.Collectors[3][2]);
+			if (strg != ""){storage(strg)};
+			document.getElementById("uppercase"+Player.Collectors[3][2].toLowerCase()+"strg").innerHTML = Player.Letters[Player.Collectors[3][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[3][2].toLowerCase()][5];
+			barcolors(null,null,null,null,null,null,null,null,null,(Player.Letters[Player.Collectors[3][2].toLowerCase()][3]-1)/Player.Letters[Player.Collectors[3][2].toLowerCase()][5]*100,Player.Letters[Player.Collectors[3][2].toLowerCase()][3]/Player.Letters[Player.Collectors[3][2].toLowerCase()][5]*100,Player.Collectors[3][2]);
+			document.getElementById("collector4").style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[3][2].toLowerCase()][3]/Player.Letters[Player.Collectors[3][2].toLowerCase()][5]*100)+"%, white "+(Player.Letters[Player.Collectors[3][2].toLowerCase()][3]/Player.Letters[Player.Collectors[3][2].toLowerCase()][5]*100)+"%)";
+			document.getElementById("collector4strg").innerHTML = Player.Letters[Player.Collectors[3][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[3][2].toLowerCase()][5];
+			if (Player.Letters[Player.Collectors[3][2].toLowerCase()][3] == Player.Letters[Player.Collectors[3][2].toLowerCase()][5]){
+				Player.Collectors[3][1] = false;
+				document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.opacity = 1;
+				document.getElementById("uppercase" + Player.Collectors[3][2].toLowerCase()).style.background = "";
+				Player.Collectors[3][2] = "";
+				Player.Collectors[3][3] = 0;
+				document.getElementById("collector4time").innerHTML = "&nbsp;";
+				document.getElementById("collector4letter").innerHTML = "#4";
+				document.getElementById("collector4letter").style.opacity = 0.07;
+				document.getElementById("collector4strg").innerHTML = "&nbsp;";
+				document.getElementById("collector4main").style.cursor = "default";
+				document.getElementById("collector4main").setAttribute("draggable", false);
+				document.getElementById("collector4main").style.background = "white";
+				document.getElementById("collector4").style.background = "white";
+			}
+			save();
 		}
 	}
 } setInterval(getletters, 10);
@@ -1996,46 +1573,17 @@ function checkstore(){
 		}
 	}
 	for (let key in Player.Letters){
-		var abc = document.getElementById("eTextstore").innerHTML;
-		if (abc == "e" && Player.Letters[key][0] == true){
-			document.getElementById(key + "store").style.transition = "all 0s ease";
-			document.getElementById(key + "store").style.background = "#6eff61f7";
-			document.getElementById(key + "storebar1").style.background = "#6eff61f7";
-			document.getElementById(key + "storebar1info1").innerHTML = "Max";
-			document.getElementById(key + "storebar1").innerHTML = "&nbsp;";
-			if (Player.Letters[key][14] != "" && Player.Letters[key][4] < 9){
-				document.getElementById(key + "storebar2info1").innerHTML = Player.Letters[key][4];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][14];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + ", 100%, 60%) " + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = Player.Letters[key][4] + 1;
+		if (Player.Letters[key][0] == false)
+		{
+			document.getElementById("normal"+key).style.opacity = 0.3;
+			document.getElementById("normal"+key).style.cursor = "default";
+			document.getElementById("normal"+key+"time").innerHTML = "Not unlocked";
+			var str = Player.Letters[key][8];
+			var str2 = "";
+			for (let i=0; i < (new Set(str).size); i++){
+				str2 += " " + str.split('').filter(x => x == [...new Set(str)].join('')[i]).length + [...new Set(str)].join('')[i];
 			}
-			else if (Player.Letters[key][14] != "" && Player.Letters[key][4] == 9){
-				document.getElementById(key + "storebar2info1").innerHTML = "&nbsp;&nbsp;" + Player.Letters[key][4];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][14];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + ", 100%, 60%) " + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = Player.Letters[key][4] + 1;
-			}
-			else if (Player.Letters[key][14] != "" && Player.Letters[key][4] < 19){
-				document.getElementById(key + "storebar2info1").innerHTML = Player.Letters[key][4];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][14];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + ", 100%, 60%) " + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = Player.Letters[key][4] + 1;
-			}
-			else if (Player.Letters[key][14] != "" && Player.Letters[key][4] == 19){
-				document.getElementById(key + "storebar2info1").innerHTML = "&nbsp;&nbsp;&nbsp;" + Player.Letters[key][4];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][14];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + ", 100%, 60%) " + (Player.Letters[key][15]/(Player.Letters[key][4] + 1-Player.Letters[key][24]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = "Max";
-			}
-			else if (Player.Letters[key][4] == 20){
-				document.getElementById(key + "storebar2info1").innerHTML = "Max";
-				document.getElementById(key + "storebar2").innerHTML = "&nbsp;";
-				document.getElementById(key + "storebar2").style.background = "#6eff61f7";
-				document.getElementById(key + "storebar2info2").innerHTML = "Max";
-			}
-		}
-		else if (abc == "e" && Player.Letters[key][0] == false){
-			document.getElementById(key + "store").style.transition = "all 0s ease";
+			document.getElementById("normal"+key+"strg").innerHTML = "Buy for:" + str2;
 			var is = 1;
 			for (let i=0; i < Player.Letters[key][8].length; i++){
 				if (Unlocked.includes(Player.Letters[key][8][i]) == false){
@@ -2043,1373 +1591,1207 @@ function checkstore(){
 				}
 			}
 			if (is == 1){
-				document.getElementById(key + "store").style.background = "#fbff3c";
+				document.getElementById("normal"+key+"strg").style.background = "linear-gradient(to right, #ffa400b0, #f2ff7980 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
 			}
-			else {
-				document.getElementById(key + "store").style.background = "#fffbf4f7";
+			else{
+				document.getElementById("normal"+key+"strg").style.background = "linear-gradient(to right, #ff000080, #ff4a4a80 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
 			}
-			document.getElementById(key + "storebar1info1").innerHTML = "&ensp;&ensp;&nbsp;0";
-			document.getElementById(key + "storebar1").innerHTML = Player.Letters[key][8];
-			document.getElementById(key + "storebar1").style.background = "linear-gradient(to right, hsl(" + Player.Letters[key][9]/(Player.Letters[key][10])*100 + ", 100%, 60%) " + Player.Letters[key][9]/(Player.Letters[key][10])*100 + "%, #f6f6f6 0%)";
-			document.getElementById(key + "storebar2info1").innerHTML = "&nbsp;";
-			document.getElementById(key + "storebar2").innerHTML = "???";
-			document.getElementById(key + "storebar2").style.background = "#f6f6f6";
-			document.getElementById(key + "storebar2info2").innerHTML = "&nbsp;";
-		}
-		else if (abc == "E" && Player.Letters[key][1] == true){
-			document.getElementById(key + "store").style.transition = "all 0s ease";
-			document.getElementById(key + "store").style.background = "#6eff61f7";
-			document.getElementById(key + "storebar1").style.background = "#6eff61f7";
-			document.getElementById(key + "storebar1info1").innerHTML = "Max";
-			document.getElementById(key + "storebar1").innerHTML = "&nbsp;";
-			if (Player.Letters[key][16] != "" && Player.Letters[key][5] < 9){
-				document.getElementById(key + "storebar2info1").innerHTML = Player.Letters[key][5];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][16];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + ", 100%, 60%) " + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = Player.Letters[key][5] + 1;
+			var material = 1;
+			for (i=0; i < str.length; i++){
+				if (str[i] == str[i].toLowerCase()){
+					if (Player.Letters[str[i]][2] < str.split('').filter(x => x == str[i]).length){
+						material = 0;
+					}
+				}
+				else if (str[i] != str[i].toLowerCase()){
+					if (Player.Letters[str[i].toLowerCase()][3] < str.split('').filter(x => x == str[i]).length){
+						material = 0;
+					}
+				}
 			}
-			else if (Player.Letters[key][16] != "" && Player.Letters[key][5] == 9){
-				document.getElementById(key + "storebar2info1").innerHTML = "&nbsp;&nbsp;" + Player.Letters[key][5];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][16];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + ", 100%, 60%) " + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = Player.Letters[key][5] + 1;
-			}
-			else if (Player.Letters[key][16] != "" && Player.Letters[key][5] < 14){
-				document.getElementById(key + "storebar2info1").innerHTML = Player.Letters[key][5];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][16];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + ", 100%, 60%) " + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = Player.Letters[key][5] + 1;
-			}
-			else if (Player.Letters[key][16] != "" && Player.Letters[key][5] == 14){
-				document.getElementById(key + "storebar2info1").innerHTML = "&nbsp;&nbsp;&nbsp;" + Player.Letters[key][5];
-				document.getElementById(key + "storebar2").innerHTML = Player.Letters[key][16];
-				document.getElementById(key + "storebar2").style.background = "linear-gradient(to right, hsl(" + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + ", 100%, 60%) " + (Player.Letters[key][17]/(Player.Letters[key][5]*2 + 2-Player.Letters[key][25]))*100 + "%, #f6f6f6 0%)";
-				document.getElementById(key + "storebar2info2").innerHTML = "Max";
-			}
-			else if (Player.Letters[key][5] == 15){
-				document.getElementById(key + "storebar2info1").innerHTML = "Max";
-				document.getElementById(key + "storebar2").innerHTML = "&nbsp;";
-				document.getElementById(key + "storebar2").style.background = "#6eff61f7";
-				document.getElementById(key + "storebar2info2").innerHTML = "Max";
+			if (material == 1){
+				document.getElementById("normal"+key).style.opacity = 0.6;
+				document.getElementById("normal"+key+"strg").style.cursor = "pointer";
+				document.getElementById("normal"+key+"strg").style.background = "linear-gradient(to right, #08ff0080, #79ff7a80 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
 			}
 		}
-		else if (abc == "E" && Player.Letters[key][1] == false){
-			document.getElementById(key + "store").style.transition = "all 0s ease";
+		if (Player.Letters[key][1] == false)
+		{
+			document.getElementById("uppercase"+key).style.opacity = 0.3;
+			document.getElementById("uppercase"+key).style.cursor = "default";
+			document.getElementById("uppercase"+key+"time").innerHTML = "Not unlocked";
+			var str = Player.Letters[key][9];
+			var str2 = "";
+			for (let i=0; i < (new Set(str).size); i++){
+				str2 += " " + str.split('').filter(x => x == [...new Set(str)].join('')[i]).length + [...new Set(str)].join('')[i];
+			}
+			document.getElementById("uppercase"+key+"strg").innerHTML = "Buy for:" + str2;
 			var is = 1;
-			for (let i=0; i < Player.Letters[key][11].length; i++){
-				if (Unlocked.includes(Player.Letters[key][11][i]) == false){
+			for (let i=0; i < Player.Letters[key][9].length; i++){
+				if (Unlocked.includes(Player.Letters[key][9][i]) == false){
 					is = 0;
 				}
 			}
 			if (is == 1){
-				document.getElementById(key + "store").style.background = "#fbff3c";
+				document.getElementById("uppercase"+key+"strg").style.background = "linear-gradient(to right, #ffa400b0, #f2ff7980 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
 			}
-			else {
-				document.getElementById(key + "store").style.background = "#fffbf4f7";
+			else{
+				document.getElementById("uppercase"+key+"strg").style.background = "linear-gradient(to right, #ff000080, #ff4a4a80 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
 			}
-			document.getElementById(key + "storebar1info1").innerHTML = "&ensp;&ensp;&nbsp;0";
-			document.getElementById(key + "storebar1").innerHTML = Player.Letters[key][11];
-			document.getElementById(key + "storebar1").style.background = "linear-gradient(to right, hsl(" + Player.Letters[key][12]/(Player.Letters[key][13])*100 + ", 100%, 60%) " + Player.Letters[key][12]/(Player.Letters[key][13])*100 + "%, #f6f6f6 0%)";
-			document.getElementById(key + "storebar2info1").innerHTML = "&nbsp;";
-			document.getElementById(key + "storebar2").innerHTML = "???";
-			document.getElementById(key + "storebar2").style.background = "#f6f6f6";
-			document.getElementById(key + "storebar2info2").innerHTML = "&nbsp;";
+			var material = 1;
+			for (i=0; i < str.length; i++){
+				if (str[i] == str[i].toLowerCase()){
+					if (Player.Letters[str[i]][2] < str.split('').filter(x => x == str[i]).length){
+						material = 0;
+					}
+				}
+				else if (str[i] != str[i].toLowerCase()){
+					if (Player.Letters[str[i].toLowerCase()][3] < str.split('').filter(x => x == str[i]).length){
+						material = 0;
+					}
+				}
+			}
+			if (material == 1){
+				document.getElementById("uppercase"+key).style.opacity = 0.6;
+				document.getElementById("uppercase"+key+"strg").style.cursor = "pointer";
+				document.getElementById("uppercase"+key+"strg").style.background = "linear-gradient(to right, #08ff0080, #79ff7a80 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			}
 		}
 	}
 }
 
-function checkcollection(){
-	document.getElementById("collectionletters").innerHTML = "";
-	var Collected = {};
-	for (key in Player.Letters){
-		if (Player.Letters[key][0] == true){
-			Collected[key] = Player.Letters[key][18];
-		}
-		if (Player.Letters[key][1] == true){
-			Collected[key.toUpperCase()] = Player.Letters[key][19];
-		}
+function checkmastery(letter){ // dorobić duże
+	if (letter && letter.toLowerCase() == letter){
+		document.getElementById("mastery"+letter+"count").innerHTML = "Total: <b>"+Player.Letters[letter][12]+"</b> ("+Player.Letters[letter][10]+")";
 	}
-	var items = Object.keys(Collected).map(
-		(key) => { return [key, Collected[key]] });
-	items.sort(
-		(first, second) => { return first[1] - second[1] }
-	);
-	var keys = items.map(
-		(e) => { return e[0] });
-	for (i in keys){
-		var div = document.createElement("div");
-		div.id = "col" + keys[keys.length - i-1];
-		if (keys[keys.length - i-1] == keys[keys.length - i-1].toLowerCase()){
-			if (Player.Letters[keys[keys.length - i-1]][20] != 0){
-				if (keys[keys.length - i-1] == "e"){
-					div.innerHTML = '<b style="font-size: 20px">'+keys[keys.length - i-1]+'</b><br/>Collected:<br/><b>'+Player.Letters[keys[keys.length - i-1]][18]+'</b>/'+Player.Letters[keys[keys.length - i-1]][20]+'<br/>Next bonus:<br/><b style="font-size: 9.5px">'+Player.Letters[keys[keys.length - i-1]][22]+'</b>';
-				}
-				else{
-					div.innerHTML = '<b style="font-size: 20px">'+keys[keys.length - i-1]+'</b><br/>Collected:<br/><b>'+Player.Letters[keys[keys.length - i-1]][18]+'</b>/'+Player.Letters[keys[keys.length - i-1]][20]+'<br/>Next bonus:<br/><b>'+Player.Letters[keys[keys.length - i-1]][22]+'</b>';
-				}
-				if (Player.Letters[keys[keys.length-i-1]][20] == Collections[0]){
-					var prev = 0;
-				}
-				else{
-					var prev = Collections[Collections.indexOf(Player.Letters[keys[keys.length-i-1]][20])-1];
-				}
-				div.style.background = "linear-gradient(to top, #bdffa5 "+((Player.Letters[keys[keys.length - i-1]][18]-prev)/(Player.Letters[keys[keys.length - i-1]][20]-prev))*100+"%, transparent 0%)";
+	else if (letter && letter.toLowerCase() != letter){
+		document.getElementById("mastery"+letter+"count").innerHTML = "Total: <b>"+Player.Letters[letter.toLowerCase()][13]+"</b> ("+Player.Letters[letter.toLowerCase()][11]+")";
+	}
+	else{
+		var total_time_eahinorst = 0;
+		var total_time_dl = 0;
+		var total_time_bcfgmpuwy = 0;
+		var total_time_jkqvxz = 0;
+		var total_time_EAHINORST = 0;
+		var total_time_DL = 0;
+		var total_time_BCFGMPUWY = 0;
+		var total_time_JKQVXZ = 0;
+		for (let i=0; i<"eahinorst".length; i++){
+			if (Player.Letters["eahinorst"[i]][0])
+			{
+				total_time_eahinorst += 1/(Player.Letters["eahinorst"[i]][6]*Player.Letters["eahinorst"[i]][18]);
+			}
+			if (Player.Letters["eahinorst"[i]][1])
+			{
+				total_time_EAHINORST += 1/(Player.Letters["eahinorst"[i]][7]*Player.Letters["eahinorst"[i]][19]);
+			}
+		}
+		for (let i=0; i<"dl".length; i++){
+			if (Player.Letters["dl"[i]][0])
+			{
+				total_time_eahinorst += 1/(Player.Letters["dl"[i]][6]*Player.Letters["dl"[i]][18]);
+			}
+			if (Player.Letters["dl"[i]][1])
+			{
+				total_time_EAHINORST += 1/(Player.Letters["dl"[i]][7]*Player.Letters["dl"[i]][19]);
+			}
+		}
+		for (let i=0; i<"bcfgmpuwy".length; i++){
+			if (Player.Letters["bcfgmpuwy"[i]][0])
+			{
+				total_time_eahinorst += 1/(Player.Letters["bcfgmpuwy"[i]][6]*Player.Letters["bcfgmpuwy"[i]][18]);
+			}
+			if (Player.Letters["bcfgmpuwy"[i]][1])
+			{
+				total_time_EAHINORST += 1/(Player.Letters["bcfgmpuwy"[i]][7]*Player.Letters["bcfgmpuwy"[i]][19]);
+			}
+		}
+		for (let i=0; i<"jkqvxz".length; i++){
+			if (Player.Letters["jkqvxz"[i]][0])
+			{
+				total_time_eahinorst += 1/(Player.Letters["jkqvxz"[i]][6]*Player.Letters["jkqvxz"[i]][18]);
+			}
+			if (Player.Letters["jkqvxz"[i]][1])
+			{
+				total_time_EAHINORST += 1/(Player.Letters["jkqvxz"[i]][7]*Player.Letters["jkqvxz"[i]][19]);
+			}
+		}
+		document.getElementById("masteryaehinorsttime").innerHTML = "Total time: " + total_time_eahinorst.toFixed(2) + "s";
+		document.getElementById("masterydltime").innerHTML = "Total time: " + total_time_dl.toFixed(2) + "s";
+		document.getElementById("masterybcfgmpuwytime").innerHTML = "Total time: " + total_time_bcfgmpuwy.toFixed(2) + "s";
+		document.getElementById("masteryjkqvxztime").innerHTML = "Total time: " + total_time_jkqvxz.toFixed(2) + "s";
+		for (let key in Player.Letters){
+			document.getElementById("mastery"+key+"count").innerHTML = "Total: <b>"+Player.Letters[key][12]+"</b> ("+Player.Letters[key][10]+")";
+			document.getElementById("mastery"+key.toUpperCase()+"count").innerHTML = "Total: <b>"+Player.Letters[key][13]+"</b> ("+Player.Letters[key][11]+")";
+			if (Player.Letters[key][0] == false){
+				document.getElementById("mastery"+key).style.opacity = 0.15;
+				document.getElementById("mastery"+key+"time").innerHTML = "&nbsp;";
 			}
 			else{
-				div.innerHTML = '<b style="font-size: 20px">'+keys[keys.length - i-1]+'</b><br/>Collected:<br/><b>'+Player.Letters[keys[keys.length - i-1]][18]+'</b><br/>Maxed out<br/>&nbsp;';
-				div.style.background = "#a5f5ff";
+				var time = 1/(Player.Letters[key][6]*Player.Letters[key][18]);
+				if (time <= 0.15){
+					document.getElementById("mastery"+key+"time").innerHTML = (Player.Letters[key][6]*Player.Letters[key][18]).toFixed(1) + "/s";
+				}
+				else{
+					document.getElementById("mastery"+key+"time").innerHTML = (1/(Player.Letters[key][6]*Player.Letters[key][18])).toFixed(2) + "s";
+				}
 			}
+			if (Player.Letters[key][1] == false){
+				document.getElementById("mastery"+key.toUpperCase()).style.opacity = 0.15;
+				document.getElementById("mastery"+key.toUpperCase()+"time").innerHTML = "&nbsp;";
+			}
+			else{
+				document.getElementById("mastery"+key.toUpperCase()+"time").innerHTML = (1/(Player.Letters[key][7]*Player.Letters[key][19])).toFixed(2) + "s";
+			}
+		}
+	}
+}
+
+function getmastery(letter){
+	if (letter == letter.toLowerCase())
+	{
+		Player.Letters[letter][18] = 1 + Player.Letters[letter][10] / 30;
+		var time = 1/(Player.Letters[letter][6]*Player.Letters[letter][18]);
+		if (time <= 0.15){
+			document.getElementById("normal"+letter+"time").innerHTML = (Player.Letters[letter][6]*Player.Letters[letter][18]).toFixed(1) + "/s";
 		}
 		else{
-			if (Player.Letters[keys[keys.length - i-1].toLowerCase()][21] != 0){
-				div.innerHTML = '<b style="font-size: 20px">'+keys[keys.length - i-1]+'</b><br/>Collected:<br/><b>'+Player.Letters[keys[keys.length - i-1].toLowerCase()][19]+'</b>/'+Player.Letters[keys[keys.length - i-1].toLowerCase()][21]+'<br/>Next bonus:<br/><b>'+Player.Letters[keys[keys.length - i-1].toLowerCase()][23]+'</b>';
-				if (Player.Letters[keys[keys.length-i-1].toLowerCase()][21] == Collections[0]){
-					var prev = 0;
-				}
-				else{
-					var prev = Collections[Collections.indexOf(Player.Letters[keys[keys.length-i-1].toLowerCase()][21])-1];
-				}
-				div.style.background = "linear-gradient(to top, #bdffa5 "+((Player.Letters[keys[keys.length - i-1].toLowerCase()][19]-prev)/(Player.Letters[keys[keys.length - i-1].toLowerCase()][21]-prev))*100+"%, transparent 0%)";
-			}
-			else{
-				div.innerHTML = '<b style="font-size: 20px">'+keys[keys.length - i-1]+'</b><br/>Collected:<br/><b>'+Player.Letters[keys[keys.length - i-1].toLowerCase()][19]+'</b><br/>Maxed out<br/>&nbsp;';
-				div.style.background = "#a5f5ff";
-			}
+			document.getElementById("normal"+letter+"time").innerHTML = (1/(Player.Letters[letter][6]*Player.Letters[letter][18])).toFixed(2) + "s";
 		}
-		div.className = "colletters";
-		document.getElementById("collectionletters").appendChild(div);
-	}
-	var ahinorst = 0;
-	var dl = 0;
-	var bcfgmpuwy = 0;
-	var jkqvxz = 0;
-	for (let i=0; i < 8; i++){
-		ahinorst = ahinorst + Player.Letters["ahinorst"[i]][18] + Player.Letters["ahinorst"[i]][19];
-	}
-	for (let i=0; i < 2; i++){
-		dl = dl + Player.Letters["dl"[i]][18] + Player.Letters["dl"[i]][19];
-	}
-	for (let i=0; i < 9; i++){
-		bcfgmpuwy = bcfgmpuwy + Player.Letters["bcfgmpuwy"[i]][18] + Player.Letters["bcfgmpuwy"[i]][19];
-	}
-	for (let i=0; i < 6; i++){
-		jkqvxz = jkqvxz + Player.Letters["jkqvxz"[i]][18] + Player.Letters["jkqvxz"[i]][19];
-	}
-	if (ahinorst != 0){var ahinorstprev = Player.Groups["ahinorst"].find(el => el <= ahinorst);}else{var ahinorstprev = 0;};
-	if (dl != 0){var dlprev = Player.Groups["dl"].find(el => el <= dl);}else{var dlprev = 0;};
-	if (bcfgmpuwy != 0){var bcfgmpuwyprev = Player.Groups["bcfgmpuwy"].find(el => el <= bcfgmpuwy);}else{var bcfgmpuwyprev = 0;};
-	if (jkqvxz != 0){var jkqvxzprev = Player.Groups["jkqvxz"].find(el => el <= jkqvxz);}else{var jkqvxzprev = 0;};
-	if (Player.Groups["ahinorst"][0] != 0){
-		document.getElementById("colgroupsbar1").innerHTML = "<b>"+ahinorst+"</b>/"+Player.Groups["ahinorst"][0]+"<br/><span>Next bonus: Speed x1.1 for letters from all groups below</span>";
-		document.getElementById("colgroupsbar1").style.background = "linear-gradient(90deg, #ffc979 "+((ahinorst-ahinorstprev)/(Player.Groups["ahinorst"][0]-ahinorstprev)*100)+"%, #ffe9c7 "+((ahinorst-ahinorstprev)/(Player.Groups["ahinorst"][0]-ahinorstprev)*100)+"%)";
-	}
-	else{
-		document.getElementById("colgroupsbar1").innerHTML = "<b style='font-size: 17px;'>"+ahinorst+"</b>";
-		document.getElementById("colgroupsbar1").style.background = "#ffc979";
-	}
-	if (Player.Groups["dl"][0] != 0){
-		document.getElementById("colgroupsbar2").innerHTML = "<b>"+dl+"</b>/"+Player.Groups["dl"][0]+"<br/><span>Next bonus: Speed x1.1 for letters from all groups below</span>";
-		document.getElementById("colgroupsbar2").style.background = "linear-gradient(90deg, #9dff78 "+((dl-dlprev)/(Player.Groups["dl"][0]-dlprev)*100)+"%, #d9ffca "+((dl-dlprev)/(Player.Groups["dl"][0]-dlprev)*100)+"%)";
-	}
-	else{
-		document.getElementById("colgroupsbar2").innerHTML = "<b style='font-size: 17px;'>"+dl+"</b>";
-		document.getElementById("colgroupsbar2").style.background = "#9dff78";
-	}
-	if (Player.Groups["bcfgmpuwy"][0] != 0){
-		document.getElementById("colgroupsbar3").innerHTML = "<b>"+bcfgmpuwy+"</b>/"+Player.Groups["bcfgmpuwy"][0]+"<br/><span>Next bonus: Speed x1.1 for letters from all groups below</span>";
-		document.getElementById("colgroupsbar3").style.background = "linear-gradient(90deg, #7ee1ff "+((bcfgmpuwy-bcfgmpuwyprev)/(Player.Groups["bcfgmpuwy"][0]-bcfgmpuwyprev)*100)+"%, #d9f6ff "+((bcfgmpuwy-bcfgmpuwyprev)/(Player.Groups["bcfgmpuwy"][0]-bcfgmpuwyprev)*100)+"%)";
-	}
-	else{
-		document.getElementById("colgroupsbar3").innerHTML = "<b style='font-size: 17px;'>"+bcfgmpuwy+"</b>";
-		document.getElementById("colgroupsbar3").style.background = "#7ee1ff";
-	}
-	if (Player.Groups["jkqvxz"][0] != 0){
-		document.getElementById("colgroupsbar4").innerHTML = "<b>"+jkqvxz+"</b>/"+Player.Groups["jkqvxz"][0]+"<br/><span>Next bonus: Speed x1.1 for letters from this group</span>";
-		document.getElementById("colgroupsbar4").style.background = "linear-gradient(90deg, #f1a8ff "+((jkqvxz-jkqvxzprev)/(Player.Groups["jkqvxz"][0]-jkqvxzprev)*100)+"%, #fce8ff "+((jkqvxz-jkqvxzprev)/(Player.Groups["jkqvxz"][0]-jkqvxzprev)*100)+"%)";
-	}
-	else{
-		document.getElementById("colgroupsbar4").innerHTML = "<b style='font-size: 17px;'>"+jkqvxz+"</b>";
-		document.getElementById("colgroupsbar4").style.background = "#f1a8ff";
-	}
-}
-
-function applycolbonus(letter, bonus){
-	if (letter == letter.toLowerCase()){
-		if (bonus == "Score x2"){
-			Player.Letters[letter][28] = Player.Letters[letter][28]*2;
-		}
-		else if (bonus == "Speed x1.2"){
-			Player.Letters[letter][6] = Player.Letters[letter][6]*1.2;
-			if (ActiveLetter == letter){
-				ActiveLetterSpeed = Player.Letters[letter][6];
+			/*if (Player.Letters[letter][14] == 2 && Player.Letters["d"][0] == false && Player.Letters["l"][0] == false){
+				ifdl = true;
+				document.getElementById("masterychoice2").style.background = "linear-gradient(90deg, rgba(185,255,78,0.88) 0%, rgba(35,255,61,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+				document.getElementById("masterychoice2").style.cursor = "pointer";
+				document.getElementById("masterychoice2").innerHTML = "dl";
+				document.getElementById("lettersnormaldl").innerHTML = "dl";
+				document.getElementById("lettersnormaldl").style.fontSize = "2vh";
+				document.getElementById("lettersnormaldl").style.cursor = "pointer";
+				document.getElementById("lettersnormaldl").style.background = "white";
+				document.getElementById("lettersnormaldl").style.backgroundColor = "white";
+				document.getElementById("lettersnormaldl").style.color = "#34ff1b";
+				document.getElementById("lettersnormaldl").style.borderColor = "#34ff1b";
 			}
-		}
-		else if (bonus == "-2 storage cost"){
-			Player.Letters[letter][24] += 2;
-			if ((Player.Letters[letter][4]+1-Player.Letters[letter][24]-Player.Letters[letter][15]) <= 0){
-				Player.Letters[letter][4] += 1;
-				Player.Letters[letter][15] = 0;
-				if (ActiveLetter == letter){
-					ActiveLetterMax += 1;
-				}
-				if (Player.Letters[letter][4] == 20){
-					Player.Letters[letter][14] = "";
-				}
-				else {
-					draw(letter, 14);
-				}
-				resetlettersbackground();
-			}
-		}
-		else if (bonus == "Speed x1.3"){
-			Player.Letters[letter][6] = Player.Letters[letter][6]*1.3;
-			if (ActiveLetter == letter){
-				ActiveLetterSpeed = Player.Letters[letter][6];
-			}
-		}
-		else if (bonus == "-3 storage cost"){
-			Player.Letters[letter][24] += 3;
-			if ((Player.Letters[letter][4]+1-Player.Letters[letter][24]-Player.Letters[letter][15]) <= 0){
-				Player.Letters[letter][4] += 1;
-				Player.Letters[letter][15] = 0;
-				if (ActiveLetter == letter){
-					ActiveLetterMax += 1;
-				}
-				if (Player.Letters[letter][4] == 20){
-					Player.Letters[letter][14] = "";
-				}
-				else {
-					draw(letter, 14);
-				}
-				resetlettersbackground();
-			}
-		}
-		else if (bonus == "+1 mined letter"){
-			Player.Letters[letter][26] += 1;
-		} 
-		else if (bonus == "Overall speed x1.02"){
-			for (key in Player.Letters){
-				Player.Letters[key][6] = Player.Letters[key][6]*1.02;
-				Player.Letters[key][7] = Player.Letters[key][7]*1.02;
-				if (ActiveLetter == key){
-					ActiveLetterSpeed = Player.Letters[letter][6];
-				}
-				else if (ActiveLetter.toLowerCase() == key){
-					ActiveLetterSpeed = Player.Letters[letter][7];
-				}
-			}
-		} else {}
+			if (Player.Letters["d"][14] == 3 && Player.Letters["b"][0] == false && Player.Letters["c"][0] == false && Player.Letters["f"][0] == false && Player.Letters["g"][0] == false && Player.Letters["m"][0] == false && Player.Letters["p"][0] == false && Player.Letters["u"][0] == false && Player.Letters["w"][0] == false && Player.Letters["y"][0]== false){
+				ifbc = true;
+				document.getElementById("masterychoice3").style.background = "linear-gradient(90deg, rgba(63,251,221,0.88) 0%, rgba(63,242,244,0.88) 24%, rgba(63,170,251,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+				document.getElementById("masterychoice3").style.cursor = "pointer";
+				document.getElementById("masterychoice3").innerHTML = "bcfgmpuwy";
+				document.getElementById("lettersnormalbcfgmpuwy").innerHTML = "bcfgmpuwy";
+				document.getElementById("lettersnormalbcfgmpuwy").style.fontSize = "2vh";
+				document.getElementById("lettersnormalbcfgmpuwy").style.cursor = "pointer";
+				document.getElementById("lettersnormalbcfgmpuwy").style.background = "white";
+				document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "white";
+				document.getElementById("lettersnormalbcfgmpuwy").style.color = "#1bacff";
+				document.getElementById("lettersnormalbcfgmpuwy").style.borderColor = "#1bacff";
+			}*/
+		checkmastery();
 	}
 	else if (letter != letter.toLowerCase()){
-		if (bonus == "Score x2"){
-			Player.Letters[letter][29] = Player.Letters[letter][29]*2;
-		}
-		else if (bonus == "Speed x1.2"){
-			Player.Letters[letter.toLowerCase()][7] = Player.Letters[letter.toLowerCase()][7]*1.2;
-			if (ActiveLetter == letter){
-				ActiveLetterSpeed = Player.Letters[letter.toLowerCase()][7];
-			}
-		}
-		else if (bonus == "-2 storage cost"){
-			Player.Letters[letter.toLowerCase()][25] += 2;
-			if ((Player.Letters[letter.toLowerCase()][5]+1-Player.Letters[letter.toLowerCase()][25]-Player.Letters[letter.toLowerCase()][17]) <= 0){
-				Player.Letters[letter.toLowerCase()][5] += 1;
-				Player.Letters[letter.toLowerCase()][17] = 0;
-				if (ActiveLetter == letter){
-					ActiveLetterMax += 1;
-				}
-				if (Player.Letters[letter.toLowerCase()][5] == 20){
-					Player.Letters[letter.toLowerCase()][16] = "";
-				}
-				else {
-					draw(letter, 16);
-				}
-				resetlettersbackground();
-			}
-		}
-		else if (bonus == "Speed x1.3"){
-			Player.Letters[letter.toLowerCase()][7] = Player.Letters[letter.toLowerCase()][7]*1.3;
-			if (ActiveLetter == letter){
-				ActiveLetterSpeed = Player.Letters[letter.toLowerCase()][7];
-			}
-		}
-		else if (bonus == "-3 storage cost"){
-			Player.Letters[letter.toLowerCase()][25] += 3;
-			if ((Player.Letters[letter.toLowerCase()][5]+1-Player.Letters[letter.toLowerCase()][25]-Player.Letters[letter.toLowerCase()][17]) <= 0){
-				Player.Letters[letter.toLowerCase()][5] += 1;
-				Player.Letters[letter.toLowerCase()][17] = 0;
-				if (ActiveLetter == letter){
-					ActiveLetterMax += 1;
-				}
-				if (Player.Letters[letter.toLowerCase()][5] == 20){
-					Player.Letters[letter.toLowerCase()][16] = "";
-				}
-				else {
-					draw(letter, 16);
-				}
-				resetlettersbackground();
-			}
-		}
-		else if (bonus == "+1 mined letter"){
-			Player.Letters[letter.toLowerCase()][27] += 1;
-		} else {}
-	}
-}
-
-function draw(letter, number){
-	var lista = [];
-	for (let key in Player.Letters){
-		if (Player.Letters[key][8] != ""){
-			lista.push(Player.Letters[key][8]);
-		}
-		if (Player.Letters[key][11] != ""){
-			lista.push(Player.Letters[key][11]);
-		}
-		if (Player.Letters[key][14] != ""){
-			lista.push(Player.Letters[key][14]);
-		}
-		if (Player.Letters[key][16] != ""){
-			lista.push(Player.Letters[key][16]);
-		}
-	}
-	if (letter == "e"){
-		if (number == 14){
-			var str = "aed";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter][14] = los;
-		}
-	}
-	else if (letter == "a" || letter == "h" || letter == "i" || letter == "n" || letter == "o" || letter == "r" || letter == "s" || letter == "t"){
-		if (number == 14){
-			var str = "eahinorst";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter][14] = los;
-		}
-	}
-	else if (letter == "d" || letter == "l"){
-		if (number == 14){
-			var str = "dlhinors";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter][14] = los;
-		}
-	}
-	else if (letter == "b" || letter == "c" || letter == "f" || letter == "g" || letter == "m" || letter == "p" || letter == "u" || letter == "w" || letter == "y"){
-		if (number == 14){
-			var str = "dlbcfgmpuwy";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter][14] = los;
-		}
-	}
-	else if (letter == "j" || letter == "k" || letter == "q" || letter == "v" || letter == "x" || letter == "z"){
-		if (number == 14){
-			var str = "cpbmjkqvxz";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter][14] = los;
-		}
-	}
-	else if (letter == "E"){
-		if (number == 16){
-			var str = "xqzE";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter.toLowerCase()][16] = los;
-		}
-	}
-	else if (letter == "A" || letter == "H" || letter == "I" || letter == "N" || letter == "O" || letter == "R" || letter == "S" || letter == "T"){
-		if (number == 16){
-			var str = "EAHINORST";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter.toLowerCase()][16] = los;
-		}
-	}
-	else if (letter == "D" || letter == "L"){
-		if (number == 16){
-			var str = "DLHINORS";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter.toLowerCase()][16] = los;
-		}
-	}
-	else if (letter == "B" || letter == "C" || letter == "F" || letter == "G" || letter == "M" || letter == "P" || letter == "U" || letter == "W" || letter == "Y"){
-		if (number == 16){
-			var str = "DLBCFGMPUWY";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter.toLowerCase()][16] = los;
-		}
-	}
-	else if (letter == "J" || letter == "K" || letter == "Q" || letter == "V" || letter == "X" || letter == "Z"){
-		if (number == 16){
-			var str = "CPBMJKQVXZ";
-			do {
-				var los = str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)] + str[Math.floor(Math.random() * str.length)];
-			} while (lista.includes(los) == true);
-			Player.Letters[letter.toLowerCase()][16] = los;
-		}
-	} else {}
-}
-
-function getupper(letter){ // 1 --> !
-	if (letter == "1"){
-		return "!";
-	}
-	else if (letter == "2"){
-		return "@";
-	}
-	else if (letter == "3"){
-		return "#";
-	}
-	else if (letter == "4"){
-		return "$";
-	}
-	else if (letter == "5"){
-		return "%";
-	}
-	else if (letter == "6"){
-		return "^";
-	}
-	else if (letter == "7"){
-		return "&";
-	}
-	else if (letter == "8"){
-		return "*";
-	}
-	else if (letter == "9"){
-		return "(";
-	}
-	else if (letter == "0"){
-		return ")";
-	}
-	else if (letter == "-"){
-		return "_";
-	}
-	else if (letter == "="){
-		return "+";
-	}
-	else if (letter == "["){
-		return "{";
-	}
-	else if (letter == "]"){
-		return "}";
-	}
-	else if (letter == ";"){
-		return ":";
-	}
-	else if (letter == "'"){
-		return '"';
-	}
-	else if (letter == ","){
-		return "<";
-	}
-	else if (letter == "."){
-		return ">";
-	}
-	else if (letter == "/"){
-		return "?";
-	} else {}
-}
-
-function grandtimer(){
-	if (Player.Letters["l"][0] == true){
-		Player.Grand.main[0] -= 1;
-		var min = Math.floor(Player.Grand.main[0]/60);
-		var sec = (Player.Grand.main[0] - min*60);
-		if (sec >= 10){
-			document.getElementById("grandtimer").innerHTML = "Refresh in <b>" + min + ":" + sec + "</b>";
+		Player.Letters[letter.toLowerCase()][19] = 1 + Player.Letters[letter.toLowerCase()][11] / 30;
+		var time = 1/(Player.Letters[letter.toLowerCase()][7]*Player.Letters[letter.toLowerCase()][19]);
+		if (time <= 0.15){
+			document.getElementById("uppercase"+letter.toLowerCase()+"time").innerHTML = (Player.Letters[letter.toLowerCase()][7]*Player.Letters[letter.toLowerCase()][19]).toFixed(1) + "/s";
 		}
 		else{
-			document.getElementById("grandtimer").innerHTML = "Refresh in <b>" + min + ":0" + sec + "</b>";
+			document.getElementById("uppercase"+letter.toLowerCase()+"time").innerHTML = (1/(Player.Letters[letter.toLowerCase()][7]*Player.Letters[letter.toLowerCase()][19])).toFixed(2) + "s";
 		}
-		if (Player.Grand.main[0] <= 0){
-			grandreset();
-		}
-		grandsmallinfo();
-		if (document.getElementById("grandmamain").style.display == "block"){
-			document.getElementById("grandinfo").style.display = "none";
-		}
-	}
-}setInterval(grandtimer, 1000)
-
-function granddisplay(){
-	var min = Math.floor(Player.Grand.main[0]/60);
-	var sec = (Player.Grand.main[0] - min*60);
-	if (sec >= 10){
-		document.getElementById("grandtimer").innerHTML = "Refresh in <b>" + min + ":" + sec + "</b>";
-	}
-	else{
-		document.getElementById("grandtimer").innerHTML = "Refresh in <b>" + min + ":0" + sec + "</b>";
-	}
-	document.getElementById("grandword1").innerHTML = '<b>'+Player.Grand.main[1]+'</b> (+5)<br>&nbsp;<div id="grandword1info1"><i>EASY WORD</i></div><div id="grandword1info2"><i>Typed: '+Player.Grand.main[6]+'/5</i></div>';
-	document.getElementById("grandword2").innerHTML = '<b>'+Player.Grand.main[2]+'</b> (+15)<br>&nbsp;<div id="grandword2info1"><i>HARD WORD</i></div><div id="grandword2info2"><i>Typed: '+Player.Grand.main[7]+'/3</i></div>';
-	if (Player.Grand.main[5] == 0){
-		document.getElementById("grandword3").innerHTML = '<b>'+("*".repeat(Player.Grand.main[3].length))+'</b> (+10)<br><span>'+Player.Grand.main[4]+'</span><div id="grandword2info1"><i>MYSTERY WORD</i></div><div id="grandword3info2"><i>Typed: '+Player.Grand.main[8]+'/3</i></div>';
-	}
-	else{
-		document.getElementById("grandword3").innerHTML = '<b>'+Player.Grand.main[3]+'</b> (+10)<br><span>'+Player.Grand.main[4]+'</span><div id="grandword2info1"><i>MYSTERY WORD</i></div><div id="grandword3info2"><i>Typed: '+Player.Grand.main[8]+'/3</i></div>';
-	}
-	if (Player.Grand.main[6] == 5){
-		document.getElementById("grandword1").style.background = "#69ff5c";
-	} else {document.getElementById("grandword1").style.background = "#fffcea";}
-	if (Player.Grand.main[7] == 3){
-		document.getElementById("grandword2").style.background = "#69ff5c";
-	} else {document.getElementById("grandword2").style.background = "#fffcea";}
-	if (Player.Grand.main[8] == 3){
-		document.getElementById("grandword3").style.background = "#69ff5c";
-	} else {document.getElementById("grandword3").style.background = "#fffcea";}
-	var points = Player.Grand.main[6]*5 + Player.Grand.main[7]*15 + Player.Grand.main[8]*10;
-	document.getElementById("grandbarpercent").innerHTML = points+"/100";
-	document.getElementById("grandbar").style.background = "linear-gradient(to right, hsl("+(points+15)+", 100%, 68%) "+points+"%, #f8f7f2 0%)";
-	if (points >= 40){
-		document.getElementById("grandbonus1").style.background = "#69ff5c";
-	} else {document.getElementById("grandbonus1").style.background = "#fffcea";}
-	if (points >= 80){
-		document.getElementById("grandbonus2").style.background = "#69ff5c";
-	} else {document.getElementById("grandbonus2").style.background = "#fffcea";}
-	if (points >= 100){
-		document.getElementById("grandbonus3").style.background = "#69ff5c";
-	} else {document.getElementById("grandbonus3").style.background = "#fffcea";}
-	document.getElementById("grandbonus1").innerHTML = "40% bonus: &nbsp;&nbsp;"+Player.Grand.nextbonus[0];
-	document.getElementById("grandbonus2").innerHTML = "80% bonus: &nbsp;&nbsp;"+Player.Grand.nextbonus[1];
-	document.getElementById("grandbonus3").innerHTML = "100% bonus: "+Player.Grand.nextbonus[2];
-	if (Player.Grand.activebonus.length == 1){
-		document.getElementById("bonusinfo").style.display = "block";
-		document.getElementById("bonusinfoperk1").innerHTML = Player.Grand.activebonus[0];
-		document.getElementById("bonusinfoperk2").innerHTML = null;
-		document.getElementById("bonusinfoperk3").innerHTML = null;
-	}
-	else if (Player.Grand.activebonus.length == 2){
-		document.getElementById("bonusinfo").style.display = "block";
-		document.getElementById("bonusinfoperk1").innerHTML = Player.Grand.activebonus[0];
-		document.getElementById("bonusinfoperk2").innerHTML = Player.Grand.activebonus[1];
-		document.getElementById("bonusinfoperk3").innerHTML = null;
-	}
-	else if (Player.Grand.activebonus.length == 3){
-		document.getElementById("bonusinfo").style.display = "block";
-		document.getElementById("bonusinfoperk1").innerHTML = Player.Grand.activebonus[0];
-		document.getElementById("bonusinfoperk2").innerHTML = Player.Grand.activebonus[1];
-		document.getElementById("bonusinfoperk3").innerHTML = Player.Grand.activebonus[2].slice(0, -30);
-	}
-	else{
-		document.getElementById("bonusinfo").style.display = "none";
+		checkmastery();
 	}
 }
 
-function grandtestword(n){
-	var Unlocked = [];
-	for (key in Player.Letters){
-		if (Player.Letters[key][0] == true){
-			Unlocked.push(key);
+function buy(type, letter){
+	if (type == "nor" && Player.Letters[letter][0] == false){
+		var str = Player.Letters[letter][8];
+		var material = 1;
+		for (i=0; i < str.length; i++){
+			if (Player.Letters[str[i]][2] < str.split('').filter(x => x == str[i]).length){
+				material = 0;
+			}
 		}
-		if (Player.Letters[key][1] == true){
-			Unlocked.push(key.toUpperCase());
-		}
-	}
-	var is = 1;
-	for (let i=0; i < Player.Grand.main[n].length; i++){
-		if (Unlocked.includes(Player.Grand.main[n][i]) == false && Player.Grand.main[n][i] != " "){
-			is = 0;
-		}
-	}
-	if (is == 1){
-		var material = 0;
-		inputfield = Player.Grand.main[n].split("");
-		for (i=0; i < inputfield.length; i++){
-			if (inputfield[i] == inputfield[i].toLowerCase() && inputfield[i] != " "){
-				if (Player.Letters[inputfield[i]][2] < inputfield.filter(x => x == inputfield[i]).length){
-					material = 1;
+		if (material == 1){
+			for (i=0; i < str.length; i++){
+				Player.Letters[str[i]][2] -= 1;
+				document.getElementById("normal"+str[i]+"strg").innerHTML = Player.Letters[str[i]][2] + "/" + Player.Letters[str[i]][4];
+				document.getElementById("normal"+str[i]+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%, #ffffff75 "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+				if (barkey1 == str[i]){
+					barkey1 = null;
+					barP11 = null;
+					barP12 = null;
+				}
+				else if (barkey2 == str[i]){
+					barkey2 = null;
+					barP21 = null;
+					barP22 = null;
+				}
+				else if (barkey3 == str[i]){
+					barkey3 = null;
+					barP31 = null;
+					barP32 = null;
+				}
+				else if (barkey4 == str[i]){
+					barkey4 = null;
+					barP41 = null;
+					barP42 = null;
+				}
+				for (let k=0; k<4; k++){
+					if (Player.Collectors[k][2] == str[i]){
+						document.getElementById("collector"+(k+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%, white "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%)";
+						document.getElementById("collector"+(k+1)+"strg").innerHTML = Player.Letters[str[i]][2] + "/" + Player.Letters[str[i]][4];
+					}
 				}
 			}
-			else if (inputfield[i] != inputfield[i].toLowerCase() && inputfield[i] != " "){
-				if (Player.Letters[inputfield[i].toLowerCase()][3] < inputfield.filter(x => x == inputfield[i]).length){
-					material = 1;
+			Player.Letters[letter][0] = true;
+			Player.Letters[letter][8] = "";
+			Player.Unlocked.push(letter);
+			document.getElementById("normal"+letter+"time").innerHTML = (1/Player.Letters[letter][6]).toFixed(2) + "s";
+			document.getElementById("normal"+letter+"strg").innerHTML = Player.Letters[letter][2] + "/" + Player.Letters[letter][4];
+			document.getElementById("normal"+letter+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[letter][2]/Player.Letters[letter][4]*100)+"%, #ffffff75 "+(Player.Letters[letter][2]/Player.Letters[letter][4]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			document.getElementById("normal"+letter).style.cursor = "move";
+			document.getElementById("normal"+letter+"strg").style.cursor = "move";
+			document.getElementById("normal"+letter).style.opacity = 1;
+			document.getElementById("normal"+letter).setAttribute('draggable', true);
+			document.getElementById("normal"+letter).setAttribute('ondragstart', 'dragl(event)');
+			document.getElementById("normal"+letter).setAttribute('ondragend', 'dragendl(event)');
+			var div = document.createElement("div");
+			div.id = "strg"+letter;
+			div.className = "strgletter";
+			div.innerHTML = letter;
+			document.getElementById("strgletters").appendChild(div);
+			document.getElementById("strg"+letter).setAttribute('onclick', 'storage(this.id);');
+			checkstore();
+			document.getElementById("mastery"+letter).style.opacity = 1;
+			checkmastery();
+			save();
+		}
+	}
+	else if (type == "upp" && Player.Letters[letter][1] == false){
+		var str = Player.Letters[letter][9];
+		var material = 1;
+		for (i=0; i < str.length; i++){
+				if (str[i] == str[i].toLowerCase()){
+					if (Player.Letters[str[i]][2] < str.split('').filter(x => x == str[i]).length){
+						material = 0;
+					}
+				}
+				else if (str[i] != str[i].toLowerCase()){
+					if (Player.Letters[str[i].toLowerCase()][3] < str.split('').filter(x => x == str[i]).length){
+						material = 0;
+					}
 				}
 			}
-		}
-		if (material == 0){
-			Player.Grand.main[n+5] += 1;
-			for (i=0; i < inputfield.length; i++){
-				if (inputfield[i] == inputfield[i].toLowerCase() && inputfield[i] != " "){
-					Player.Letters[inputfield[i]][2] -= 1;
+		if (material == 1){
+			for (i=0; i < str.length; i++){
+				if (str[i] == str[i].toLowerCase()){
+					Player.Letters[str[i]][2] -= 1;
+					document.getElementById("normal"+str[i]+"strg").innerHTML = Player.Letters[str[i]][2] + "/" + Player.Letters[str[i]][4];
+					document.getElementById("normal"+str[i]+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%, #ffffff75 "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+					if (barkey1 == str[i]){
+						barkey1 = null;
+						barP11 = null;
+						barP12 = null;
+					}
+					else if (barkey2 == str[i]){
+						barkey2 = null;
+						barP21 = null;
+						barP22 = null;
+					}
+					else if (barkey3 == str[i]){
+						barkey3 = null;
+						barP31 = null;
+						barP32 = null;
+					}
+					else if (barkey4 == str[i]){
+						barkey4 = null;
+						barP41 = null;
+						barP42 = null;
+					}
+					for (let k=0; k<4; k++){
+						if (Player.Collectors[k][2] == str[i]){
+							document.getElementById("collector"+(k+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%, white "+(Player.Letters[str[i]][2]/Player.Letters[str[i]][4]*100)+"%)";
+							document.getElementById("collector"+(k+1)+"strg").innerHTML = Player.Letters[str[i]][2] + "/" + Player.Letters[str[i]][4];
+						}
+					}
 				}
-				else if (inputfield[i] != inputfield[i].toLowerCase() && inputfield[i] != " "){
-					Player.Letters[inputfield[i].toLowerCase()][3] -= 1;
+				else{
+					Player.Letters[str[i].toLowerCase()][3] -= 1;
+					document.getElementById("uppercase"+str[i].toLowerCase()+"strg").innerHTML = Player.Letters[str[i].toLowerCase()][3] + "/" + Player.Letters[str[i].toLowerCase()][5];
+					document.getElementById("uppercase"+str[i].toLowerCase()+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[str[i].toLowerCase()][3]/Player.Letters[str[i].toLowerCase()][5]*100)+"%, #ffffff75 "+(Player.Letters[str[i].toLowerCase()][3]/Player.Letters[str[i].toLowerCase()][5]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+					if (barkey1 == str[i]){
+						barkey1 = null;
+						barP11 = null;
+						barP12 = null;
+					}
+					else if (barkey2 == str[i]){
+						barkey2 = null;
+						barP21 = null;
+						barP22 = null;
+					}
+					else if (barkey3 == str[i]){
+						barkey3 = null;
+						barP31 = null;
+						barP32 = null;
+					}
+					else if (barkey4 == str[i]){
+						barkey4 = null;
+						barP41 = null;
+						barP42 = null;
+					}
+					for (let k=0; k<4; k++){
+						if (Player.Collectors[k][2] == str[i]){
+							document.getElementById("collector"+(k+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[str[i].toLowerCase()][3]/Player.Letters[str[i].toLowerCase()][5]*100)+"%, white "+(Player.Letters[str[i].toLowerCase()][3]/Player.Letters[str[i].toLowerCase()][5]*100)+"%)";
+							document.getElementById("collector"+(k+1)+"strg").innerHTML = Player.Letters[str[i].toLowerCase()][3] + "/" + Player.Letters[str[i].toLowerCase()][5];
+						}
+					}
 				}
-				if (ActiveLetter == inputfield[i] && inputfield[i] != " "){
-					ActiveLetterCount -= 1;
-				}
-				resetlettersbackground();
 			}
-		}
-	}
-}
-
-function grandreset(){
-	Player.Grand.main[0] = 420;
-	Player.Grand.easyused.push(Player.Grand.main[1]);
-	Player.Grand.hardused.push(Player.Grand.main[2]);
-	if (Player.Grand.main[5] == 1 && Player.Grand.mysteryused.includes(Player.Grand.main[3]) == false){
-		Player.Grand.mysteryused.push(Player.Grand.main[3]);
-	}
-	if (Player.Grand.easyused.length < 4 && Player.Grand.easy.length > 0){
-		var newword = Player.Grand.easy[Math.floor(Math.random() * Player.Grand.easy.length)]
-		Player.Grand.main[1] = newword;
-		Player.Grand.easy = Player.Grand.easy.filter(item => item !== newword);
-	}
-	else if (Player.Grand.easyused.length >= 4 || Player.Grand.easy.length == 0){
-		var words = Player.Grand.easy.concat(Player.Grand.easyused).slice(0,-3);
-		var newword = words[Math.floor(Math.random() * words.length)];
-		Player.Grand.main[1] = newword;
-		Player.Grand.easy = Player.Grand.easy.filter(item => item !== newword);
-		Player.Grand.easyused = Player.Grand.easyused.filter(item => item !== newword);
-	}
-	if (Player.Grand.hardused.length < 4 && Player.Grand.hard.length > 0){
-		var newword = Player.Grand.hard[Math.floor(Math.random() * Player.Grand.hard.length)]
-		Player.Grand.main[2] = newword;
-		Player.Grand.hard = Player.Grand.hard.filter(item => item !== newword);
-	}
-	else if (Player.Grand.hardused.length >= 4 || Player.Grand.hard.length == 0){
-		var words = Player.Grand.hard.concat(Player.Grand.hardused).slice(0,-3);
-		var newword = words[Math.floor(Math.random() * words.length)];
-		Player.Grand.main[2] = newword;
-		Player.Grand.hard = Player.Grand.hard.filter(item => item !== newword);
-		Player.Grand.hardused = Player.Grand.hardused.filter(item => item !== newword);
-	}
-	if (Player.Grand.main[5] == 1 && Player.Grand.mystery.length != Player.Grand.mysteryused.length){
-		var words = Player.Grand.mystery.filter(item => Player.Grand.mysteryused.includes(item) == false)
-		var newword = words[Math.floor(Math.random() * words.length)];
-		Player.Grand.main[3] = newword;
-		Player.Grand.main[4] = Player.Grand.mysterydsc[Player.Grand.mystery.indexOf(newword)];
-	}
-	else{
-		var words = Player.Grand.mystery.filter(item => item !== Player.Grand.main[3])
-		var newword = words[Math.floor(Math.random() * words.length)];
-		Player.Grand.main[3] = newword;
-		Player.Grand.main[4] = Player.Grand.mysterydsc[Player.Grand.mystery.indexOf(newword)];
-	}
-	if (Player.Grand.mysteryused.includes(Player.Grand.main[3])){
-		Player.Grand.main[5] = 1;
-	}
-	else{
-		Player.Grand.main[5] = 0;
-	}
-	var points = Player.Grand.main[6]*5 + Player.Grand.main[7]*15 + Player.Grand.main[8]*10;
-	granddeletebonus();
-	if (points >= 40 && points < 80){
-		grandgivebonus(Player.Grand.nextbonus[0]);
-	}
-	else if (points >= 80 && points < 100){
-		grandgivebonus(Player.Grand.nextbonus[0], Player.Grand.nextbonus[1]);
-	}
-	else if (points >= 100){
-		grandgivebonus(Player.Grand.nextbonus[0], Player.Grand.nextbonus[1], Player.Grand.nextbonus[2]);
-	}
-	var bonuse = Player.Grand.bonusese.filter(item => item !== Player.Grand.nextbonus[0]);
-	Player.Grand.nextbonus[0] = bonuse[Math.floor(Math.random() * bonuse.length)];
-	var bonush = Player.Grand.bonusesh.filter(item => item !== Player.Grand.nextbonus[1]);
-	Player.Grand.nextbonus[1] = bonush[Math.floor(Math.random() * bonush.length)];
-	var bonusm = Player.Grand.bonusesm.filter(item => item !== Player.Grand.nextbonus[2]);
-	Player.Grand.nextbonus[2] = bonusm[Math.floor(Math.random() * bonusm.length)];
-	Player.Grand.main[6] = 0;
-	Player.Grand.main[7] = 0;
-	Player.Grand.main[8] = 0;
-	grandsmallinfo();
-	if (document.getElementById("grandmamain").style.display == "block"){
-		document.getElementById("grandinfo").style.display = "none";
-	}
-	granddisplay();
-}
-
-function granddeletebonus(){
-	for (let i=0; i < Player.Grand.activebonus.length; i++){
-		if (Player.Grand.activebonus[i] == "<b>Score x1.3</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]/1.3;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]/1.3;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.4</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]/1.4;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]/1.4;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.5</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]/1.5;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]/1.5;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.6</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]/1.6;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]/1.6;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.3</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][28] = Player.Letters["dljkqvxz"[k]][28]/1.3;
-				Player.Letters["dljkqvxz"[k]][29] = Player.Letters["dljkqvxz"[k]][29]/1.3;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.4</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][28] = Player.Letters["dljkqvxz"[k]][28]/1.4;
-				Player.Letters["dljkqvxz"[k]][29] = Player.Letters["dljkqvxz"[k]][29]/1.4;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.5</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][28] = Player.Letters["dljkqvxz"[k]][28]/1.5;
-				Player.Letters["dljkqvxz"[k]][29] = Player.Letters["dljkqvxz"[k]][29]/1.5;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.3</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][28] = Player.Letters["bcfgmpuwy"[k]][28]/1.3;
-				Player.Letters["bcfgmpuwy"[k]][29] = Player.Letters["bcfgmpuwy"[k]][29]/1.3;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.4</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][28] = Player.Letters["bcfgmpuwy"[k]][28]/1.4;
-				Player.Letters["bcfgmpuwy"[k]][29] = Player.Letters["bcfgmpuwy"[k]][29]/1.4;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Score x1.5</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][28] = Player.Letters["bcfgmpuwy"[k]][28]/1.5;
-				Player.Letters["bcfgmpuwy"[k]][29] = Player.Letters["bcfgmpuwy"[k]][29]/1.5;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.2</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][6] = Player.Letters["ahinorst"[k]][6]/1.2;
-				Player.Letters["ahinorst"[k]][7] = Player.Letters["ahinorst"[k]][7]/1.2;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.3</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][6] = Player.Letters["ahinorst"[k]][6]/1.3;
-				Player.Letters["ahinorst"[k]][7] = Player.Letters["ahinorst"[k]][7]/1.3;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.4</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][6] = Player.Letters["ahinorst"[k]][6]/1.4;
-				Player.Letters["ahinorst"[k]][7] = Player.Letters["ahinorst"[k]][7]/1.4;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.2</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][6] = Player.Letters["dljkqvxz"[k]][6]/1.2;
-				Player.Letters["dljkqvxz"[k]][7] = Player.Letters["dljkqvxz"[k]][7]/1.2;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.3</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][6] = Player.Letters["dljkqvxz"[k]][6]/1.3;
-				Player.Letters["dljkqvxz"[k]][7] = Player.Letters["dljkqvxz"[k]][7]/1.3;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.2</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][6] = Player.Letters["bcfgmpuwy"[k]][6]/1.2;
-				Player.Letters["bcfgmpuwy"[k]][7] = Player.Letters["bcfgmpuwy"[k]][7]/1.2;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Speed x1.3</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][6] = Player.Letters["bcfgmpuwy"[k]][6]/1.3;
-				Player.Letters["bcfgmpuwy"[k]][7] = Player.Letters["bcfgmpuwy"[k]][7]/1.3;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Overall speed x1.05</b> and instant <b>+500 score</b>"){
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]/1.05;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]/1.05;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Overall speed x1.1</b> and instant <b>+400 score</b>"){
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]/1.1;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]/1.1;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Overall speed x1.15</b> and instant <b>+400 score</b>"){
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]/1.15;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]/1.15;
-			}
-		}
-		else if (Player.Grand.activebonus[i] == "<b>Overall speed x1.2</b> and instant <b>+300 score</b>"){
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]/1.2;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]/1.2;
-			}
-		}
-	}
-	Player.Grand.activebonus = [];
-}
-
-function grandgivebonus(a, b, c){
-	if (a && b && c){
-		var l = [a, b, c];
-		Player.Grand.activebonus.push(a);
-		Player.Grand.activebonus.push(b);
-		Player.Grand.activebonus.push(c);
-	}
-	else if (a && b){
-		var l = [a, b];
-		Player.Grand.activebonus.push(a);
-		Player.Grand.activebonus.push(b);
-	}
-	else if (a){
-		var l = [a];
-		Player.Grand.activebonus.push(a);
-	}
-	for (let i=0; i < l.length; i++){
-		if (l[i] == "<b>Score x1.3</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]*1.3;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]*1.3;
-			}
-		}
-		else if (l[i] == "<b>Score x1.4</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]*1.4;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]*1.4;
-			}
-		}
-		else if (l[i] == "<b>Score x1.5</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]*1.5;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]*1.5;
-			}
-		}
-		else if (l[i] == "<b>Score x1.6</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][28] = Player.Letters["ahinorst"[k]][28]*1.6;
-				Player.Letters["ahinorst"[k]][29] = Player.Letters["ahinorst"[k]][29]*1.6;
-			}
-		}
-		else if (l[i] == "<b>Score x1.3</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][28] = Player.Letters["dljkqvxz"[k]][28]*1.3;
-				Player.Letters["dljkqvxz"[k]][29] = Player.Letters["dljkqvxz"[k]][29]*1.3;
-			}
-		}
-		else if (l[i] == "<b>Score x1.4</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][28] = Player.Letters["dljkqvxz"[k]][28]*1.4;
-				Player.Letters["dljkqvxz"[k]][29] = Player.Letters["dljkqvxz"[k]][29]*1.4;
-			}
-		}
-		else if (l[i] == "<b>Score x1.5</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][28] = Player.Letters["dljkqvxz"[k]][28]*1.5;
-				Player.Letters["dljkqvxz"[k]][29] = Player.Letters["dljkqvxz"[k]][29]*1.5;
-			}
-		}
-		else if (l[i] == "<b>Score x1.3</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][28] = Player.Letters["bcfgmpuwy"[k]][28]*1.3;
-				Player.Letters["bcfgmpuwy"[k]][29] = Player.Letters["bcfgmpuwy"[k]][29]*1.3;
-			}
-		}
-		else if (l[i] == "<b>Score x1.4</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][28] = Player.Letters["bcfgmpuwy"[k]][28]*1.4;
-				Player.Letters["bcfgmpuwy"[k]][29] = Player.Letters["bcfgmpuwy"[k]][29]*1.4;
-			}
-		}
-		else if (l[i] == "<b>Score x1.5</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][28] = Player.Letters["bcfgmpuwy"[k]][28]*1.5;
-				Player.Letters["bcfgmpuwy"[k]][29] = Player.Letters["bcfgmpuwy"[k]][29]*1.5;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.2</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][6] = Player.Letters["ahinorst"[k]][6]*1.2;
-				Player.Letters["ahinorst"[k]][7] = Player.Letters["ahinorst"[k]][7]*1.2;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.3</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][6] = Player.Letters["ahinorst"[k]][6]*1.3;
-				Player.Letters["ahinorst"[k]][7] = Player.Letters["ahinorst"[k]][7]*1.3;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.4</b> for all letters from group <b><i>ahinorst</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["ahinorst"[k]][6] = Player.Letters["ahinorst"[k]][6]*1.4;
-				Player.Letters["ahinorst"[k]][7] = Player.Letters["ahinorst"[k]][7]*1.4;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.2</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][6] = Player.Letters["dljkqvxz"[k]][6]*1.2;
-				Player.Letters["dljkqvxz"[k]][7] = Player.Letters["dljkqvxz"[k]][7]*1.2;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.3</b> for all letters from group <b><i>dl</i></b> and group <b><i>jkqvxz</i></b>"){
-			for (let k=0; k < 8; k++){
-				Player.Letters["dljkqvxz"[k]][6] = Player.Letters["dljkqvxz"[k]][6]*1.3;
-				Player.Letters["dljkqvxz"[k]][7] = Player.Letters["dljkqvxz"[k]][7]*1.3;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.2</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][6] = Player.Letters["bcfgmpuwy"[k]][6]*1.2;
-				Player.Letters["bcfgmpuwy"[k]][7] = Player.Letters["bcfgmpuwy"[k]][7]*1.2;
-			}
-		}
-		else if (l[i] == "<b>Speed x1.3</b> for all letters from group <b><i>bcfgmpuwy</i></b>"){
-			for (let k=0; k < 9; k++){
-				Player.Letters["bcfgmpuwy"[k]][6] = Player.Letters["bcfgmpuwy"[k]][6]*1.3;
-				Player.Letters["bcfgmpuwy"[k]][7] = Player.Letters["bcfgmpuwy"[k]][7]*1.3;
-			}
-		}
-		else if (l[i] == "<b>Overall speed x1.05</b> and instant <b>+500 score</b>"){
-			Player.Score += 500;
-			if (Player.Score.toFixed(1).slice(-1) == 0){
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(0) + "</b>";
-			}
-			else{
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(1) + "</b>";
-			}
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]*1.05;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]*1.05;
-			}
-		}
-		else if (l[i] == "<b>Overall speed x1.1</b> and instant <b>+400 score</b>"){
-			Player.Score += 400;
-			if (Player.Score.toFixed(1).slice(-1) == 0){
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(0) + "</b>";
-			}
-			else{
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(1) + "</b>";
-			}
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]*1.1;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]*1.1;
-			}
-		}
-		else if (l[i] == "<b>Overall speed x1.15</b> and instant <b>+400 score</b>"){
-			Player.Score += 400;
-			if (Player.Score.toFixed(1).slice(-1) == 0){
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(0) + "</b>";
-			}
-			else{
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(1) + "</b>";
-			}
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]*1.15;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]*1.15;
-			}
-		}
-		else if (l[i] == "<b>Overall speed x1.2</b> and instant <b>+300 score</b>"){
-			Player.Score += 300;
-			if (Player.Score.toFixed(1).slice(-1) == 0){
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(0) + "</b>";
-			}
-			else{
-				document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(1) + "</b>";
-			}
-			for (let k=0; k < 26; k++){
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][6]*1.2;
-				Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7] = Player.Letters["abcdefghijklmnopqrstuvwxyz"[k]][7]*1.2;
-			}
+			Player.Letters[letter][1] = true;
+			Player.Letters[letter][9] = "";
+			Player.Unlocked.push(letter.toUpperCase());
+			document.getElementById("uppercase"+letter+"time").innerHTML = (1/Player.Letters[letter][7]).toFixed(2) + "s";
+			document.getElementById("uppercase"+letter+"strg").innerHTML = Player.Letters[letter][3] + "/" + Player.Letters[letter][5];
+			document.getElementById("uppercase"+letter+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[letter][3]/Player.Letters[letter][5]*100)+"%, #ffffff75 "+(Player.Letters[letter][3]/Player.Letters[letter][5]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			document.getElementById("uppercase"+letter).style.cursor = "move";
+			document.getElementById("uppercase"+letter+"strg").style.cursor = "move";
+			document.getElementById("uppercase"+letter).style.opacity = 1;
+			document.getElementById("uppercase"+letter).setAttribute('draggable', true);
+			document.getElementById("uppercase"+letter).setAttribute('ondragstart', 'dragl(event)');
+			document.getElementById("uppercase"+letter).setAttribute('ondragend', 'dragendl(event)');
+			var div = document.createElement("div");
+			div.id = "strg"+letter.toUpperCase();
+			div.className = "strgletter";
+			div.innerHTML = letter.toUpperCase();
+			document.getElementById("strgletters").appendChild(div);
+			document.getElementById("strg"+letter.toUpperCase()).setAttribute('onclick', 'storage(this.id);');
+			checkstore();
+			document.getElementById("mastery"+letter.toUpperCase()).style.opacity = 1;
+			checkmastery();
+			save();
 		}
 	}
 }
 
-function grandsmallinfo(){
-	if (Player.Letters["l"][0] == true && menuclicked != 0){
-		document.getElementById("grandinfo").style.display = "block";
-		if ((Player.Grand.main[0] - Math.floor(Player.Grand.main[0]/60)*60) >= 10){
-			document.getElementById("grandinfohead").innerHTML = "Current grandma words (" + Math.floor(Player.Grand.main[0]/60) + ":" + (Player.Grand.main[0] - Math.floor(Player.Grand.main[0]/60)*60) + ")";
+function storage(id){ //wszystko co ze storage - dorobić duże
+	if (id.length > 1){
+		var letter = id.slice(4);
+	}
+	else{
+		var letter = id;
+	}
+	strg = letter;
+	document.getElementById("storagemain").style.display = "block";
+	if ((Player.Letters[letter][25]).toFixed(1).slice(-1) == 0 && (Player.Letters[letter][22]).toFixed(1).slice(-1) == 0){
+		document.getElementById("storagereq1info").innerHTML = (Player.Letters[letter][25]).toFixed(0) + "/" + (Player.Letters[letter][22]).toFixed(0);
+	}
+	else if ((Player.Letters[letter][25]).toFixed(1).slice(-1) == 0 && (Player.Letters[letter][22]).toFixed(1).slice(-1) != 0){
+		document.getElementById("storagereq1info").innerHTML = (Player.Letters[letter][25]).toFixed(0) + "/" + (Player.Letters[letter][22]).toFixed(1);
+	}
+	else if ((Player.Letters[letter][25]).toFixed(1).slice(-1) != 0 && (Player.Letters[letter][22]).toFixed(1).slice(-1) == 0){
+		document.getElementById("storagereq1info").innerHTML = (Player.Letters[letter][25]).toFixed(1) + "/" + (Player.Letters[letter][22]).toFixed(0);
+	}
+	else if ((Player.Letters[letter][25]).toFixed(1).slice(-1) != 0 && (Player.Letters[letter][22]).toFixed(1).slice(-1) != 0){
+		document.getElementById("storagereq1info").innerHTML = (Player.Letters[letter][25]).toFixed(1) + "/" + (Player.Letters[letter][22]).toFixed(1);
+	}
+	document.getElementById("storagereq2info").innerHTML = (Player.Letters[letter][26]).toFixed(0) + "/" + (Player.Letters[letter][23]).toFixed(0);
+	document.getElementById("storagereq2letter").innerHTML = Player.Letters[letter][24];
+	document.getElementById("storagerew").innerHTML = "<span>+5 storage</span><br>"+letter;
+	var p = (Player.Letters[letter][25]/Player.Letters[letter][22]*0.4 + Player.Letters[letter][26]/Player.Letters[letter][23]*0.6)*100;
+	document.getElementById("storageprog").innerHTML = p.toFixed(0) + "%";
+	document.getElementById("storageprog").style.background = "linear-gradient(to right, #15ff0075 "+p+"%, #ffffff75 "+p+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+	if (Player.Score <= Player.Letters[letter][22]-Player.Letters[letter][25]){
+		if (Player.Score.toFixed(1).slice(-1) == 0){
+			document.getElementById("storagereq1fill").innerHTML = "Fill (" + Player.Score.toFixed(0) +")";
 		}
 		else{
-			document.getElementById("grandinfohead").innerHTML = "Current grandma words (" + Math.floor(Player.Grand.main[0]/60) + ":0" + (Player.Grand.main[0] - Math.floor(Player.Grand.main[0]/60)*60) + ")";
+			document.getElementById("storagereq1fill").innerHTML = "Fill (" + Player.Score.toFixed(1) +")";
 		}
-		document.getElementById("grandinfoword1").innerHTML = Player.Grand.main[1];
-		document.getElementById("grandinfoword2").innerHTML = Player.Grand.main[2];
-		if (Player.Grand.main[5] == 1){
-			document.getElementById("grandinfoword3").innerHTML = Player.Grand.main[3];
+	}
+	else{
+		if ((Player.Letters[letter][22]-Player.Letters[letter][25]).toFixed(1).slice(-1) == 0){
+			document.getElementById("storagereq1fill").innerHTML = "Fill (" + (Player.Letters[letter][22]-Player.Letters[letter][25]).toFixed(0) +")";
 		}
 		else{
-			document.getElementById("grandinfoword3").innerHTML = "*".repeat(Player.Grand.main[3].length);
+			document.getElementById("storagereq1fill").innerHTML = "Fill (" + (Player.Letters[letter][22]-Player.Letters[letter][25]).toFixed(1) +")";
 		}
-		document.getElementById("grandinfoword1").style.background = "linear-gradient(to right, hsl("+(Player.Grand.main[6]/5*100)+", 100%, 60%) "+(Player.Grand.main[6]/5*100)+"%, #f8f7f2 0%)";
-		document.getElementById("grandinfoword2").style.background = "linear-gradient(to right, hsl("+(Player.Grand.main[7]/3*100)+", 100%, 60%) "+(Player.Grand.main[7]/3*100)+"%, #f8f7f2 0%)";
-		document.getElementById("grandinfoword3").style.background = "linear-gradient(to right, hsl("+(Player.Grand.main[8]/3*100)+", 100%, 60%) "+(Player.Grand.main[8]/3*100)+"%, #f8f7f2 0%)";
+	}
+	if (Player.Score.toFixed(1) > 0 && Player.Letters[letter][22] != Player.Letters[letter][25]){
+		document.getElementById("storagereq1fill").style.background = "linear-gradient(to right, #00ff1d87, #31ff00a3 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+	}
+	else if (Player.Letters[letter][22] != Player.Letters[letter][25]){
+		document.getElementById("storagereq1fill").style.background = "linear-gradient(to right, #ff3a0087, #ff3a00a3 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+	}
+	if (Player.Letters[Player.Letters[letter][24]][2] <= Player.Letters[letter][23]-Player.Letters[letter][26]){
+		document.getElementById("storagereq2fill").innerHTML = "Fill (" + Player.Letters[Player.Letters[letter][24]][2] +")";
+	}
+	else{
+		document.getElementById("storagereq2fill").innerHTML = "Fill (" + (Player.Letters[letter][23]-Player.Letters[letter][26]) +")";
+	}
+	if (Player.Letters[Player.Letters[letter][24]][2].toFixed(0) > 0 && Player.Letters[letter][23] != Player.Letters[letter][26]){
+		document.getElementById("storagereq2fill").style.background = "linear-gradient(to right, #00ff1d87, #31ff00a3 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+	}
+	else if (Player.Letters[letter][23] != Player.Letters[letter][26]){
+		document.getElementById("storagereq2fill").style.background = "linear-gradient(to right, #ff3a0087, #ff3a00a3 80%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+	}
+	if (Player.Letters[letter][22] == Player.Letters[letter][25]){
+		document.getElementById("storagereq1fill").innerHTML = "";
+		document.getElementById("storagereq1fill").style.cursor = "default";
+		document.getElementById("storagereq1fill").style.background = "rgb(145 255 154)";
+		document.getElementById("storagereq1letter").style.backgroundImage = 'url("score.png"), linear-gradient(to top, rgb(156 255 164) 0%, rgb(163 255 171) 20%, rgb(190 255 190) 80%)';
+	}
+	else{
+		document.getElementById("storagereq1fill").style.cursor = "pointer";
+		document.getElementById("storagereq1letter").style.backgroundImage = 'url("score.png"), linear-gradient(to top, #ececec 0%, #ececec 20%, #ffffff 80%)';
+	}
+	if (Player.Letters[letter][23] == Player.Letters[letter][26]){
+		document.getElementById("storagereq2fill").innerHTML = "";
+		document.getElementById("storagereq2fill").style.cursor = "default";
+		document.getElementById("storagereq2letter").style.background = "linear-gradient(to top, rgb(156 255 164) 0%, rgb(163 255 171) 20%, rgb(190 255 190) 80%)";
+		document.getElementById("storagereq2fill").style.background = "rgb(145 255 154)";
+	}
+	else{
+		document.getElementById("storagereq2fill").style.cursor = "pointer";
+		document.getElementById("storagereq2letter").style.background = "linear-gradient(to top, #ececec 0%, #ececec 20%, #ffffff 80%)";
+	}
+}
+
+function storagefill(value){
+	if (value == 1){
+		if (Player.Letters[strg][22]-Player.Letters[strg][25] > 0){
+			if (Player.Score <= Player.Letters[strg][22]-Player.Letters[strg][25]){
+				Player.Letters[strg][25] += Player.Score;
+				Player.Score = 0;
+			}
+			else{
+				Player.Score -= (Player.Letters[strg][22]-Player.Letters[strg][25]);
+				Player.Letters[strg][25] = Player.Letters[strg][22];
+			}
+			scoredisp();
+			save();
+		}
+	}
+	else if (value == 2){
+		if (Player.Letters[strg][23]-Player.Letters[strg][26] > 0){
+			if (Player.Letters[Player.Letters[strg][24]][2] <= Player.Letters[strg][23]-Player.Letters[strg][26]){
+				Player.Letters[strg][26] += Player.Letters[Player.Letters[strg][24]][2];
+				Player.Letters[Player.Letters[strg][24]][2] = 0;
+			}
+			else{
+				Player.Letters[Player.Letters[strg][24]][2] -= (Player.Letters[strg][23]-Player.Letters[strg][26]).toFixed(0);
+				Player.Letters[strg][26] = Player.Letters[strg][23];
+			}
+			document.getElementById("normal"+Player.Letters[strg][24]+"strg").innerHTML = Player.Letters[Player.Letters[strg][24]][2] + "/" + Player.Letters[Player.Letters[strg][24]][4];
+			document.getElementById("normal"+Player.Letters[strg][24]+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[Player.Letters[strg][24]][2]/Player.Letters[Player.Letters[strg][24]][4]*100)+"%, #ffffff75 "+(Player.Letters[Player.Letters[strg][24]][2]/Player.Letters[Player.Letters[strg][24]][4]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+			for (let k=0; k<4; k++){
+				if (Player.Collectors[k][2] == Player.Letters[strg][24]){
+					document.getElementById("collector"+(k+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Letters[strg][24]][2]/Player.Letters[Player.Letters[strg][24]][4]*100)+"%, white "+(Player.Letters[Player.Letters[strg][24]][2]/Player.Letters[Player.Letters[strg][24]][4]*100)+"%)";
+					document.getElementById("collector"+(k+1)+"strg").innerHTML = Player.Letters[Player.Letters[strg][24]][2] + "/" + Player.Letters[Player.Letters[strg][24]][4];
+				}
+			}
+			checkstore();
+			save();
+		}
+	}
+	if (Player.Letters[strg][23] == Player.Letters[strg][26] && Player.Letters[strg][22] == Player.Letters[strg][25]){
+		Player.Letters[strg][4] += 5;
+		document.getElementById("normal"+strg+"strg").innerHTML = Player.Letters[strg][2] + "/" + Player.Letters[strg][4];
+		document.getElementById("normal"+strg+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[strg][2]/Player.Letters[strg][4]*100)+"%, #ffffff75 "+(Player.Letters[strg][2]/Player.Letters[strg][4]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+		for (let k=0; k<4; k++){
+			if (Player.Collectors[k][2] == strg){
+				document.getElementById("collector"+(k+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[strg][2]/Player.Letters[strg][4]*100)+"%, white "+(Player.Letters[strg][2]/Player.Letters[strg][4]*100)+"%)";
+				document.getElementById("collector"+(k+1)+"strg").innerHTML = Player.Letters[strg][2] + "/" + Player.Letters[strg][4];
+			}
+		}
+		storagedraw(strg);
+	}
+	storage(strg);
+}
+
+function storagedraw(letter){
+	var random1 = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+	var random2 = (min, max) => Math.random()*(max - min) + min;
+	if ("eahinorst".includes(letter)){
+		var str = "eahinorst" + letter;
+		var lett = str[random1(0, str.length-1)];
+		while (lett == Player.Letters[letter][24]){
+			lett = str[random1(0, str.length-1)];
+		}
+	}
+	else if ("dl".includes(letter)){
+		var str = "nshrdl" + letter;
+		var lett = str[random1(0, str.length-1)];
+		while (lett == Player.Letters[letter][24]){
+			lett = str[random1(0, str.length-1)];
+		}
+	}
+	else if ("bcfgmpuwy".includes(letter)){
+		var str = "bcfgmpuwy" + letter;
+		var lett = str[random1(0, str.length-1)];
+		while (lett == Player.Letters[letter][24]){
+			lett = str[random1(0, str.length-1)];
+		}
+	}
+	else if ("jkqvxz".includes(letter)){
+		var str = "jkqvxz" + letter;
+		var lett = str[random1(0, str.length-1)];
+		while (lett == Player.Letters[letter][24]){
+			lett = str[random1(0, str.length-1)];
+		}
+	}
+	var number = random1(Player.Letters[letter][4], Math.round(Player.Letters[letter][4]*1.3));
+	Player.Letters[letter][24] = lett;
+	Player.Letters[letter][23] = Number(number);
+	var numberscore = random2(Player.Letters[lett][16]*Player.Letters[letter][23],Player.Letters[lett][16]*Player.Letters[letter][23]*1.5);
+	if (numberscore.toFixed(1).slice(-1) == 0){
+		numberscore = numberscore.toFixed(0);
+	}
+	else if (numberscore.toFixed(1).slice(-1) != 0){
+		numberscore = numberscore.toFixed(1);
+	}
+	Player.Letters[letter][22] = Number(numberscore);
+	Player.Letters[letter][25] = 0;
+	Player.Letters[letter][26] = 0;
+}
+
+function scoredisp(){
+	if (Player.Score.toFixed(1).slice(-1) == 0){
+		document.getElementById("scoredisplay").innerHTML = "<b>" + Player.Score.toFixed(0) + "</b><img draggable='false' src='client/score.png' alt='Score' width='43' height='43'>";
+	}
+	else{
+		document.getElementById("scoredisplay").innerHTML = "<b>" + Player.Score.toFixed(1) + "</b><img draggable='false' src='client/score.png' alt='Score' width='43' height='43'>";
 	}
 }
 
 function entername(){
-	var string = document.getElementById("nick").value;
-	var is = 1;
-	if (string.length >= 4){
-		for (let i=0; i < string.length; i++){
-			if ("qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM".includes(string[i])){
-				is = 1;
+	if (AlertType != "Change"){
+		var string = document.getElementById("nick").value;
+		var is = 1;
+		if (string.length >= 4 && string.length <= 15){
+			for (let i=0; i < string.length; i++){
+				if ("qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM".includes(string[i])){
+					is = 1;
+				}
+				else{
+					is = 0;
+					break;
+				}
+			}
+		}
+		else if (string.length > 10){
+			is = 2;
+			document.getElementById("nameerror").innerHTML = "Your nickname cannot be longer than 10 characters!"
+			document.getElementById("logbutton").style = "margin-top: -39px; line-height: 20px;";
+			document.getElementById("nameerror").style.display = "block";
+			document.getElementById("nick").value = "";
+		}
+		else{
+			is = 0;
+		}
+		if (is == 1){
+			var b = 1;
+			for (let i=0; i<localStorage.length; i++){
+				if (string == JSON.parse(localStorage.getItem(localStorage.key(i))).Player.nick){
+					b = 0;
+				}
+			}
+			if (b == 1){
+				Player.nick = string;
+				logged = 1;
+				socket.emit('newplayer', Player);
 			}
 			else{
-				is = 0;
+				document.getElementById("nameerror").innerHTML = "You already have save with the same nickname!"
+				document.getElementById("logbutton").style = "margin-top: -29px; line-height: 20px;";
+				document.getElementById("nameerror").style.display = "block";
+				document.getElementById("nick").value = "";
 			}
+		}
+		else if (is == 0){
+			document.getElementById("nameerror").innerHTML = "min. 4 characters (letters or numbers)"
+			document.getElementById("logbutton").style = "margin-top: -29px; line-height: 20px;";
+			document.getElementById("nameerror").style.display = "block";
+			document.getElementById("nick").value = "";
 		}
 	}
 	else{
-		is = 0;
+		var string = document.getElementById("nick2").value;
+		var is = 1;
+		if (string.length >= 4){
+			for (let i=0; i < string.length; i++){
+				if ("qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM".includes(string[i])){
+					is = 1;
+				}
+				else{
+					is = 0;
+					break;
+				}
+			}
+		}
+		else{
+			is = 0;
+		}
+		if (is == 1){
+			var b = 1;
+			for (let i=0; i<localStorage.length; i++){
+				if (string == JSON.parse(localStorage.getItem(localStorage.key(i))).Player.nick){
+					b = 0;
+				}
+			}
+			if (b == 1){
+				localStorage.removeItem(Player.nick);
+				Player.nick = string;
+				var Save =
+				{
+					Player: Player
+				}
+				localStorage.setItem(Player.nick, JSON.stringify(Save));
+				socket.emit('LogPlayer', Player);
+				document.getElementById("namedisplay").innerHTML = "Playing as: <i><b>" + Player.nick + "</b></i>";
+				document.getElementById("Alert").style = "display: none;";
+				AlertType = "";
+			}
+			else{
+				document.getElementById("nameerror2").innerHTML = "You already have save with the same nickname!"
+				document.getElementById("nameerror2").style.display = "block";
+				document.getElementById("nick2").value = "";
+			}
+		}
+		else{
+			document.getElementById("nameerror2").innerHTML = "min. 4 characters (letters or numbers)"
+			document.getElementById("nameerror2").style.display = "block";
+			document.getElementById("nick2").value = "";
+		}
 	}
-	if (is == 1){
-		Player.nick = string;
-		socket.emit('newplayer', Player);
+}
+
+function changemastery(n){
+	function lol(){
+		document.getElementById("masteryaehinorst").style.display = "none";
+		document.getElementById("masterydl").style.display = "none";
+		document.getElementById("masterybcfgmpuwy").style.display = "none";
+		document.getElementById("masteryjkqvxz").style.display = "none";
+		document.getElementById("masteryAEHINORST").style.display = "none";
+		document.getElementById("masteryDL").style.display = "none";
+		document.getElementById("masteryBCFGMPUWY").style.display = "none";
+		document.getElementById("masteryJKQVXZ").style.display = "none";
+	}
+	if (n == 1){
+		lol();
+		document.getElementById("masteryaehinorst").style.display = "block";
+	}
+	else if (n == 2 && ifdl){
+		lol();
+		document.getElementById("masterydl").style.display = "block";
+	}
+	else if (n == 3 && ifbc){
+		lol();
+		document.getElementById("masterybcfgmpuwy").style.display = "block";
+	}
+	else if (n == 4 && ifjk){
+		lol();
+		document.getElementById("masteryjkqvxz").style.display = "block";
+	}
+	else if (n == 5 && ifAH){
+		lol();
+		document.getElementById("masteryAEHINORST").style.display = "block";
+	}
+	else if (n == 6 && ifDL){
+		lol();
+		document.getElementById("masteryDL").style.display = "block";
+	}
+	else if (n == 7 && ifBC){
+		lol();
+		document.getElementById("masteryBCFGMPUWY").style.display = "block";
+	}
+	else if (n == 8 && ifJK){
+		lol();
+		document.getElementById("masteryJKQVXZ").style.display = "block";
+	}
+}
+
+function transformmastery(n, value){
+	if (value == 1){
+		if (n == 1){
+			document.getElementById("masterychoice1").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 2 && ifdl){
+			document.getElementById("masterychoice2").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 3 && ifbc){
+			document.getElementById("masterychoice3").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 4 && ifjk){
+			document.getElementById("masterychoice4").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 5 && ifAH){
+			document.getElementById("masterychoice5").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 6 && ifDL){
+			document.getElementById("masterychoice6").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 7 && ifBC){
+			document.getElementById("masterychoice7").style.transform = "scale(1.05,1.05)";
+		}
+		else if (n == 8 && ifJK){
+			document.getElementById("masterychoice8").style.transform = "scale(1.05,1.05)";
+		}
 	}
 	else{
-		document.getElementById("nameerror").innerHTML = "min. 4 characters (letters or numbers)"
-		document.getElementById("logbutton").style = "margin-top: -29px; line-height: 20px;";
-		document.getElementById("nameerror").style.display = "block";
-		document.getElementById("nick").value = "";
+		if (n == 1){
+			document.getElementById("masterychoice1").style.transform = "scale(1,1)";
+		}
+		else if (n == 2 && ifdl){
+			document.getElementById("masterychoice2").style.transform = "scale(1,1)";
+		}
+		else if (n == 3 && ifbc){
+			document.getElementById("masterychoice3").style.transform = "scale(1,1)";
+		}
+		else if (n == 4 && ifjk){
+			document.getElementById("masterychoice4").style.transform = "scale(1,1)";
+		}
+		else if (n == 5 && ifAH){
+			document.getElementById("masterychoice5").style.transform = "scale(1,1)";
+		}
+		else if (n == 6 && ifDL){
+			document.getElementById("masterychoice6").style.transform = "scale(1,1)";
+		}
+		else if (n == 7 && ifBC){
+			document.getElementById("masterychoice7").style.transform = "scale(1,1)";
+		}
+		else if (n == 8 && ifJK){
+			document.getElementById("masterychoice8").style.transform = "scale(1,1)";
+		}
+	}
+}
+
+document.getElementById("masterychoice1").onclick = function(){changemastery(1)};
+document.getElementById("masterychoice2").onclick = function(){changemastery(2)};
+document.getElementById("masterychoice3").onclick = function(){changemastery(3)};
+document.getElementById("masterychoice4").onclick = function(){changemastery(4)};
+document.getElementById("masterychoice5").onclick = function(){changemastery(5)};
+document.getElementById("masterychoice6").onclick = function(){changemastery(6)};
+document.getElementById("masterychoice7").onclick = function(){changemastery(7)};
+document.getElementById("masterychoice8").onclick = function(){changemastery(8)};
+
+document.getElementById("masterychoice1").onmouseover = function(){transformmastery(1, 1)};
+document.getElementById("masterychoice2").onmouseover = function(){transformmastery(2, 1)};
+document.getElementById("masterychoice3").onmouseover = function(){transformmastery(3, 1)};
+document.getElementById("masterychoice4").onmouseover = function(){transformmastery(4, 1)};
+document.getElementById("masterychoice5").onmouseover = function(){transformmastery(5, 1)};
+document.getElementById("masterychoice6").onmouseover = function(){transformmastery(6, 1)};
+document.getElementById("masterychoice7").onmouseover = function(){transformmastery(7, 1)};
+document.getElementById("masterychoice8").onmouseover = function(){transformmastery(8, 1)};
+document.getElementById("masterychoice1").onmouseout = function(){transformmastery(1, 0)};
+document.getElementById("masterychoice2").onmouseout = function(){transformmastery(2, 0)};
+document.getElementById("masterychoice3").onmouseout = function(){transformmastery(3, 0)};
+document.getElementById("masterychoice4").onmouseout = function(){transformmastery(4, 0)};
+document.getElementById("masterychoice5").onmouseout = function(){transformmastery(5, 0)};
+document.getElementById("masterychoice6").onmouseout = function(){transformmastery(6, 0)};
+document.getElementById("masterychoice7").onmouseout = function(){transformmastery(7, 0)};
+document.getElementById("masterychoice8").onmouseout = function(){transformmastery(8, 0)};
+
+document.getElementById("savegame1").onclick = function(){
+	if (localStorage.length >= 1){
+		logged = 1;
+		Player.nick = JSON.parse(localStorage.getItem(localStorage.key(0))).Player.nick
+		socket.emit('explayer', Player);
+	}
+	else{
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "block";
+	}
+}
+document.getElementById("savegame2").onclick = function(){
+	if (localStorage.length >= 2){
+		logged = 1;
+		Player.nick = JSON.parse(localStorage.getItem(localStorage.key(1))).Player.nick
+		socket.emit('explayer', Player);
+	}
+	else{
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "block";
+	}
+}
+document.getElementById("savegame3").onclick = function(){
+	if (localStorage.length >= 3){
+		logged = 1;
+		Player.nick = JSON.parse(localStorage.getItem(localStorage.key(2))).Player.nick
+		socket.emit('explayer', Player);
+	}
+	else{
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "block";
+	}
+}
+
+document.getElementById("save1bin").onclick = function(){
+	if (localStorage.length >= 1){
+		localStorage.removeItem(localStorage.key(0));
+		location.reload();
+	}
+	else{
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "block";
+	}
+}
+document.getElementById("save2bin").onclick = function(){
+	if (localStorage.length >= 2){
+		localStorage.removeItem(localStorage.key(1));
+		location.reload();
+	}
+	else{
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "block";
+	}
+}
+document.getElementById("save3bin").onclick = function(){
+	if (localStorage.length >= 3){
+		localStorage.removeItem(localStorage.key(2));
+		location.reload();
+	}
+	else{
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "block";
+	}
+}
+
+document.getElementById("savegame1").onmouseover = function(){
+	document.getElementById("save1bin").style.opacity = 1;
+}
+document.getElementById("savegame1").onmouseout = function(){
+	document.getElementById("save1bin").style.opacity = 0;
+}
+document.getElementById("savegame2").onmouseover = function(){
+	if (localStorage.length >= 2){
+		document.getElementById("save2bin").style.opacity = 1;
+	}
+}
+document.getElementById("savegame2").onmouseout = function(){
+	document.getElementById("save2bin").style.opacity = 0;
+}
+document.getElementById("savegame3").onmouseover = function(){
+	if (localStorage.length >= 3){
+		document.getElementById("save3bin").style.opacity = 1;
+	}
+}
+document.getElementById("savegame3").onmouseout = function(){
+	document.getElementById("save3bin").style.opacity = 0;
+}
+document.getElementById("save1bin").onmouseover = function(){
+	if (localStorage.length >= 1){
+		document.getElementById("save1bin").style.opacity = 1;
+	}
+	else{
+		document.getElementById("savegame1").style.textDecoration = "underline";
+	}
+}
+document.getElementById("save1bin").onmouseout = function(){
+	if (localStorage.length < 1){
+		document.getElementById("savegame1").style.textDecoration = "";
+	}
+}
+document.getElementById("save2bin").onmouseover = function(){
+	if (localStorage.length >= 2){
+		document.getElementById("save2bin").style.opacity = 1;
+	}
+	else{
+		document.getElementById("savegame2").style.textDecoration = "underline";
+	}
+}
+document.getElementById("save2bin").onmouseout = function(){
+	if (localStorage.length < 2){
+		document.getElementById("savegame2").style.textDecoration = "";
+	}
+}
+document.getElementById("save3bin").onmouseover = function(){
+	if (localStorage.length >= 3){
+		document.getElementById("save3bin").style.opacity = 1;
+	}
+	else{
+		document.getElementById("savegame3").style.textDecoration = "underline";
+	}
+}
+document.getElementById("save3bin").onmouseout = function(){
+	if (localStorage.length < 3){
+		document.getElementById("savegame3").style.textDecoration = "";
+	}
+}
+
+document.getElementById("namedisplay").onclick = function(){
+	if ((document.getElementById("changename").style.display || document.getElementById("changename").style.display == "block") && document.getElementById("changename").style.display != "none"){
+		document.getElementById("changename").style.display = "none";
+	}
+	else{
+		document.getElementById("changename").style.display = "block";
+	}
+}
+
+document.getElementById("changeacc").onclick = function(){
+	var Save =
+	{
+		Player: Player
+	}
+	localStorage.setItem(Player.nick, JSON.stringify(Save));
+	location.reload();
+}
+
+document.getElementById("changenick").onclick = function(){
+	document.getElementById("Alert").style = "display: block;";
+	document.getElementById("AlertCancel").style.display = "inline-block";
+	document.getElementById("AlertText").innerHTML = "<b>Change nickname:</b><br><input id='nick2' type='text' style='height:23px;' placeholder='nickname'><div id='nameerror2'>min. 4 characters (letters or numbers)</div>";
+	AlertType = "Change";
+}
+
+document.onclick = function(el){
+	if (el.path && el.path[0].id != "namedisplay" && el.path[2].id != "namedisplay" && el.path[0].id != "changename" && el.path[0].id != "changeacc" && el.path[0].id != "changenick" && AlertType != "Change"){
+		document.getElementById("changename").style.display = "none";
 	}
 }
 
 document.getElementById("AlertConfirm").onclick = function(){
 	if (AlertType == "Info"){
 		document.getElementById("Alert").style = "display: none;";
+		AlertType = "";
 	}
-	else if (AlertType == "Reset"){
-		reset();
-		document.getElementById("Alert").style = "display: none;";
+	else if (AlertType == "Change"){
+		entername();
 	}
+}
+document.getElementById("AlertCancel").onclick = function(){
+	document.getElementById("Alert").style = "display: none;";
 	AlertType = "";
 }
-
-window.addEventListener('resize', loadsize);
-document.addEventListener("keyup", keyup);
-document.addEventListener("keydown", keydown);
-
+function ver0to2(){
+	var Save =
+	{
+		Player: Player
+	}
+	localStorage.setItem(Player.nick, JSON.stringify(Save));
+}
 function save(){
 	if (Player.nick != ""){
 		var Save =
 		{
 			Player: Player
 		}
-		localStorage.setItem("Saved", JSON.stringify(Save));
-		document.getElementById("saveinfo").style.display = "block";
-		document.getElementById("saveinfo").style.animation = "slide .2s linear 1";
-		ssave = setTimeout(slidesave, 1500);
-		socket.emit('LogPlayer', Player);
+		localStorage.setItem(Player.nick, JSON.stringify(Save));
 	}
 }
-setInterval(save, 30000);
-
-document.getElementById("saveinfo").onclick = function(){
-	document.getElementById("Secrets1").style = "text-decoration: auto";
-	if (document.getElementById("Secrets1").innerHTML.slice(-10) != "(Unlocked)"){
-		document.getElementById("Secrets1").innerHTML += " (Unlocked)";
-	}
-	Player.Secrets[0] = true;
-	var Save =
-	{
-		Player: Player
-	}
-	localStorage.setItem("Saved", JSON.stringify(Save));
-	try{clearTimeout(ssave);}catch{};
-	try{clearTimeout(hsave);}catch{};
-	slidesave();
-	setTimeout(boop, 200)
-	function boop(){
-		document.getElementById("saveinfo").style.display = "block";
-		document.getElementById("saveinfo").innerHTML = "BOOP!";
-		document.getElementById("saveinfo").style.animation = "slide .2s linear 1";
-		var ssave = setTimeout(slidesave, 500);
-	}
-}
-function slidesave(){
-	document.getElementById("saveinfo").style.animation = "slideout .2s linear 1";
-	hsave = setTimeout(hidesave, 190);
-}
-function hidesave(){
-	document.getElementById("saveinfo").innerHTML = "Auto saved"
-	document.getElementById("saveinfo").style.display = "none";
-}
-
 function load(){
-	var SavedGame = JSON.parse(localStorage.getItem("Saved"));
-	if (SavedGame){
-		if (typeof SavedGame.Player !== "undefined") PlayerLoaded = SavedGame.Player;
-		if (Object.keys(PlayerLoaded) === Object.keys(Player) && Object.keys(PlayerLoaded.Letters) === Object.keys(Player.Letters) && PlayerLoaded.Letters["a"].length == Player.Letters["a"].length){
-			Player = PlayerLoaded;
-		}
-		else {
-			Object.entries(Player).forEach(([key, value]) => {
-				if (Object.keys(PlayerLoaded).includes(key) == false){
-					PlayerLoaded[key] = value;
-				} else{}
-			});
-			Object.entries(Player.Letters).forEach(([key, value]) => {
-				if (Object.keys(PlayerLoaded.Letters).includes(key) == false){
-					PlayerLoaded.Letters[key] = value;
-				} else{}
-			});
-			for (key in Player.Letters){
-				var a = Player.Letters[key].length;
-				var b = PlayerLoaded.Letters[key].length;
-				if (a != b){
-					var c = a-b;
-					for (let i=c; i > 0; i--){
-						PlayerLoaded.Letters[key].push(Player.Letters[key][a-i]);
-					}
-				}
-			}
-			Player = PlayerLoaded;
-		}
-	}
-	if (Player.nick == "cynka02"){
-		Player.Secrets[2] = true;
-		var Save =
-		{
-			Player: Player
-		}
-		localStorage.setItem("Saved", JSON.stringify(Save));
-	}
-	if (Player.nick == ""){
-		document.getElementById("Login").style.display = "block";
-	}
-	else{
-		document.getElementById("namedisplay").innerHTML = "Playing as: <i><b>" + Player.nick + "</b></i>";
-	}
-	document.getElementById("audio").volume = Player.volume2;
-	var letterkeys = Object.keys(Player.Letters);
-	for (let i=0; i < letterkeys.length; i++){
-		if (Player.Letters[letterkeys[i]][0] == true){
-			barcolors(letterkeys[i], ((Player.Letters[letterkeys[i]][2]/Player.Letters[letterkeys[i]][4])*100));
+	for (let i=0; i < 3; i++){
+		if (localStorage.getItem(localStorage.key(i))){
+			document.getElementById("savegame" + (i+1)).innerHTML = "<b>" + JSON.parse(localStorage.getItem(localStorage.key(i))).Player.nick + "</b>";
 		}
 		else{
-			document.getElementById(letterkeys[i]+"Bar").style = "display: block; opacity: 0;";
+			document.getElementById("savegame" + (i+1)).innerHTML = "New game";
 		}
 	}
-	if (Player.Score.toFixed(1).slice(-1) == 0){
-		document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(0) + "</b>";
-	}
-	else{
-		document.getElementById("scoredisplay").innerHTML = "Score: <b>" + Player.Score.toFixed(1) + "</b>";
-	}
-	if (Player.Secrets[0]){
-		document.getElementById("Secrets1").style = "text-decoration: auto";
-		document.getElementById("Secrets1").innerHTML += " (Unlocked)";
-	}
-	if (Player.Secrets[1]){
-		document.getElementById("Secrets2").style = "text-decoration: auto";
-		document.getElementById("Secrets2").innerHTML += " (Unlocked)";
-	}
-	if (Player.Secrets[2]){
-		document.getElementById("Secrets3").style = "text-decoration: auto";
-		document.getElementById("Secrets3").innerHTML += " (Unlocked)";
-	}
-	if (Player.tut == 0 && Player.nick != ""){
-		document.getElementById("tut1").style.display = "block";
-		document.getElementById("menu1").style.transform = "translateY(1%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "block";
-		document.getElementById("pole").style.display = "block";
-		menuclicked = 1;
-		loadsize();
-		document.getElementById("menu2").style.filter = "blur(3px)";
-		document.getElementById("menu3").style.filter = "blur(3px)";
-		document.getElementById("menu4").style.filter = "blur(3px)";
-		document.getElementById("menu5").style.filter = "blur(3px)";
-	}
-	else if (Player.tut == 1 && Player.nick != ""){
-		document.getElementById("tut2").style.display = "block";
-		document.getElementById("menu1").style.transform = "translateY(1%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "block";
-		document.getElementById("pole").style.display = "block";
-		menuclicked = 1;
-		loadsize();
-		document.getElementById("menu2").style.filter = "blur(0)";
-		document.getElementById("menu3").style.filter = "blur(3px)";
-		document.getElementById("menu4").style.filter = "blur(3px)";
-		document.getElementById("menu5").style.filter = "blur(3px)";
-		document.getElementById("menu2").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu2").style.cursor = "pointer";
-	}
-	else if (Player.tut == 2 && Player.nick != ""){
-		document.getElementById("tut3").style.display = "block";
-		document.getElementById("menu2").style.transform = "translateY(1%)";
-		document.getElementById("menu2").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu2").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "none";
-		document.getElementById("pole").style.display = "none";
-		document.getElementById("store").style.display = "block";
-		menuclicked = 2;
-		loadsize();
-		document.getElementById("menu2").style.filter = "blur(0)";
-		document.getElementById("menu3").style.filter = "blur(3px)";
-		document.getElementById("menu4").style.filter = "blur(3px)";
-		document.getElementById("menu5").style.filter = "blur(3px)";
-		document.getElementById("menu2").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu2").style.cursor = "pointer";
-	}
-	else if (Player.tut == 3 && Player.nick != ""){
-		document.getElementById("tut4").style.display = "block";
-		document.getElementById("menu1").style.transform = "translateY(1%)";
-		document.getElementById("menu1").getElementsByTagName("img")[0].style.transform = "scale(1.15,1.15)";
-		document.getElementById("menu1").getElementsByTagName("span")[0].style.transform = "translateY(-10px)";
-		document.getElementById("info").style.display = "none";
-		document.getElementById("keyboard").style.display = "block";
-		document.getElementById("pole").style.display = "block";
-		document.getElementById("store").style.display = "none";
-		menuclicked = 1;
-		loadsize();
-		document.getElementById("menu2").style.filter = "blur(0)";
-		document.getElementById("menu3").style.filter = "blur(0)";
-		document.getElementById("menu4").style.filter = "blur(0)";
-		document.getElementById("menu5").style.filter = "blur(0)";
-		document.getElementById("menu2").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu2").style.cursor = "pointer";
-	}
-	else{
-		document.getElementById("menu2").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu2").style.cursor = "pointer";
-		menu1click();
-	}
-	if (Player.Letters["l"][0] == true){
-		document.getElementById("menu3").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu3").style.cursor = "pointer";
-		document.getElementById("menu3").innerHTML = '<img src="book.png" alt="features" width="110" height="80"><br/><span>Features</span>';
-		granddisplay();
-	}
-	else
-	{
-		document.getElementById("menu3").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-	}
-	if (Player.Letters["g"][0] == true){
-		document.getElementById("menu5").style.background = "linear-gradient(180deg, #fefffa 0%, #fffdf1 80%)";
-		document.getElementById("menu5").style.cursor = "pointer";
-		document.getElementById("menu5").innerHTML = '<img src="online.png" alt="online" width="110" height="80"><br/><span>Online</span>';
-	}
-	else{
-		document.getElementById("menu5").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-	}
-	document.getElementById("menu4").getElementsByTagName("span")[0].style.transform = "translateY(-16px)";
-	loadsize();
-	if (Player.nick != ""){
-		var Save =
-		{
-			Player: Player
+}
+socket.on('enternick', function(value){
+	if (value == 1 && logged == 1){
+		if (JSON.parse(localStorage.getItem("Saved"))){
+			var SavedGame = JSON.parse(localStorage.getItem("Saved"));
+			var Save =
+			{
+				Player: Player
+			}
+			localStorage.setItem(Player.nick, JSON.stringify(Save));
 		}
-		localStorage.setItem("Saved", JSON.stringify(Save));
+		else if (JSON.parse(localStorage.getItem(Player.nick))){
+			var SavedGame = JSON.parse(localStorage.getItem(Player.nick));
+			if (SavedGame.Player.version){
+				if (SavedGame.Player.version == version){
+					Player = SavedGame.Player;
+				}
+				else{
+					ver0to2();
+				}
+			}
+			else{
+				ver0to2();
+			}
+		}
+		else{
+			var Save =
+			{
+				Player: Player
+			}
+			localStorage.setItem(Player.nick, JSON.stringify(Save));
+		}
 		socket.emit('LogPlayer', Player);
-	}
-}
-
-function loadsize(){
-	var classkeys = document.getElementsByClassName("keys");
-	var classkeysstore = document.getElementsByClassName("keysstore");
-	for (let i=0; i < classkeys.length; i++){
-		classkeys[i].style = "border-radius: " + classkeys[0].clientHeight/8 + "px;";
-	}
-	for (let i=0; i < classkeysstore.length; i++){
-		classkeysstore[i].style = "border-radius: " + classkeysstore[0].clientHeight/8 + "px;";
-	}
-	for (let i=0; i < (characterscodes.length-1); i++){
-		document.getElementById(characterscodes[i]).style = "border-radius: " + classkeys[0].clientHeight/9 + "px;";
-	}
-	document.getElementById("Space").style = "border-radius: " + classkeys[0].clientHeight/9 + "px;";
-	document.getElementById("ShiftStore").style = "border-radius: " + classkeysstore[0].clientHeight/9 + "px;";
-	document.getElementById("title").style = "font-size: " + (document.getElementById("title").clientHeight/2.5 + 8) + "px; line-height: " + document.getElementById("title").clientHeight + "px;";
-	document.getElementById("Help").style = "margin-top: " + (-(classkeys[0].clientHeight)/2) +"px; font-size: " + (classkeys[0].clientWidth/8) + "px;";
-	if (menuclicked == 2){
+		document.getElementById("Login").style.display = "none";
+		document.getElementById("Login2").style.display = "none";
+		scoredisp();
+		document.getElementById("namedisplay").innerHTML = "Playing as: <i><b>" + Player.nick + "</b></i>";
+		document.getElementById("all").style.display = "block";
+		for (let key in Player.Letters){
+			if (Player.Letters[key][0])
+			{
+				var time = 1/(Player.Letters[key][6]*Player.Letters[key][18]);
+				if (time <= 0.15){
+					document.getElementById("normal"+key+"time").innerHTML = (Player.Letters[key][6]*Player.Letters[key][18]).toFixed(1) + "/s";
+				}
+				else{
+					document.getElementById("normal"+key+"time").innerHTML = (1/(Player.Letters[key][6]*Player.Letters[key][18])).toFixed(2) + "s";
+				}
+				document.getElementById("normal"+key+"strg").innerHTML = Player.Letters[key][2] + "/" + Player.Letters[key][4];
+				document.getElementById("normal"+key+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[key][2]/Player.Letters[key][4]*100)+"%, #ffffff75 "+(Player.Letters[key][2]/Player.Letters[key][4]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+				document.getElementById("normal"+key).setAttribute('draggable', true);
+				document.getElementById("normal"+key).setAttribute('ondragstart', 'dragl(event)');
+				document.getElementById("normal"+key).setAttribute('ondragend', 'dragendl(event)');
+			}
+			if (Player.Letters[key][1])
+			{
+				var time = 1/(Player.Letters[key][7]*Player.Letters[key][19]);
+				if (time <= 0.15){
+					document.getElementById("normal"+key+"time").innerHTML = (Player.Letters[key][7]*Player.Letters[key][19]).toFixed(1) + "/s";
+				}
+				else{
+					document.getElementById("normal"+key+"time").innerHTML = (1/(Player.Letters[key][7]*Player.Letters[key][19])).toFixed(2) + "s";
+				}
+				document.getElementById("uppercase"+key+"strg").innerHTML = Player.Letters[key][3] + "/" + Player.Letters[key][5];
+				document.getElementById("uppercase"+key+"strg").style.background = "linear-gradient(to right, #15ff0075 "+(Player.Letters[key][3]/Player.Letters[key][5]*100)+"%, #ffffff75 "+(Player.Letters[key][3]/Player.Letters[key][5]*100)+"%), linear-gradient(to top, #d2d2d2 0%, #d2d2d2 50%, #ffffff 90%)";
+				document.getElementById("uppercase"+key).setAttribute('draggable', true);
+				document.getElementById("uppercase"+key).setAttribute('ondragstart', 'dragl(event)');
+				document.getElementById("uppercase"+key).setAttribute('ondragend', 'dragendl(event)');
+			}
+		}
+		for (let i=0; i<Player.Unlocked.length; i++){
+			var div = document.createElement("div");
+			div.id = "strg"+Player.Unlocked[i];
+			div.className = "strgletter";
+			div.innerHTML = Player.Unlocked[i];
+			document.getElementById("strgletters").appendChild(div);
+			document.getElementById("strg"+Player.Unlocked[i]).setAttribute('onclick', 'storage(this.id);');
+		}
 		checkstore();
+		checkmastery();
+		for (let i=0; i < 4; i++){
+			if (Player.Collectors[i][0]){
+				document.getElementById("collector"+(i+1)+"letter").innerHTML = "#" + (i+1);
+				document.getElementById("collector"+(i+1)+"main").setAttribute('ondrop', 'dropl(event)');
+				document.getElementById("collector"+(i+1)+"main").setAttribute('ondragover', 'allowDropl(event)');
+				document.getElementById("collector"+(i+1)+"main").setAttribute('ondragstart', 'dragcol(event)');
+				document.getElementById("collector"+(i+1)+"main").setAttribute('ondragend', 'dragendcol(event)');
+			}
+			if (Player.Collectors[i][0] && Player.Collectors[i][1]){
+				if (Player.Collectors[i][2] == Player.Collectors[i][2].toLowerCase()){
+					document.getElementById("collector"+(i+1)+"letter").innerHTML = Player.Collectors[i][2];
+					document.getElementById("collector"+(i+1)+"letter").style.opacity = 1;
+					document.getElementById("collector"+(i+1)+"strg").innerHTML = Player.Letters[Player.Collectors[i][2]][2] + "/" + Player.Letters[Player.Collectors[i][2]][4];
+					document.getElementById("collector"+(i+1)+"main").style.cursor = "move";
+					document.getElementById("collector"+(i+1)+"main").setAttribute("draggable", true);
+					document.getElementById("collector"+(i+1)).style.transform = "scale(1,1)";
+					document.getElementById("collector"+(i+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[i][2]][2]/Player.Letters[Player.Collectors[i][2]][4]*100)+"%, white "+(Player.Letters[Player.Collectors[i][2]][2]/Player.Letters[Player.Collectors[i][2]][4]*100)+"%)";
+				}
+				else{
+					document.getElementById("collector"+(i+1)+"letter").innerHTML = Player.Collectors[i][2];
+					document.getElementById("collector"+(i+1)+"letter").style.opacity = 1;
+					document.getElementById("collector"+(i+1)+"strg").innerHTML = Player.Letters[Player.Collectors[i][2].toLowerCase()][3] + "/" + Player.Letters[Player.Collectors[i][2].toLowerCase()][5];
+					document.getElementById("collector"+(i+1)+"main").style.cursor = "move";
+					document.getElementById("collector"+(i+1)+"main").setAttribute("draggable", true);
+					document.getElementById("collector"+(i+1)).style.transform = "scale(1,1)";
+					document.getElementById("collector"+(i+1)).style.background = "linear-gradient(to top, #9eff96 "+(Player.Letters[Player.Collectors[i][2].toLowerCase()][3]/Player.Letters[Player.Collectors[i][2].toLowerCase()][5]*100)+"%, white "+(Player.Letters[Player.Collectors[i][2].toLowerCase()][3]/Player.Letters[Player.Collectors[i][2].toLowerCase()][5]*100)+"%)";
+				}
+			}
+		}
+		document.getElementById("masteryaehinorst").style.display = "block";
+		if (Player.Letters["e"][14] >= 2 || Player.Letters["d"][0] || Player.Letters["l"][0]){
+			ifdl = true;
+			document.getElementById("masterychoice2").style.background = "linear-gradient(90deg, rgba(185,255,78,0.88) 0%, rgba(35,255,61,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice2").style.cursor = "pointer";
+			document.getElementById("masterychoice2").innerHTML = "dl";
+			document.getElementById("lettersnormaldl").innerHTML = "dl";
+			document.getElementById("lettersnormaldl").style.fontSize = "2vh";
+			document.getElementById("lettersnormaldl").style.cursor = "pointer";
+			document.getElementById("lettersnormaldl").style.background = "white";
+			document.getElementById("lettersnormaldl").style.backgroundColor = "white";
+			document.getElementById("lettersnormaldl").style.color = "#34ff1b";
+			document.getElementById("lettersnormaldl").style.borderColor = "#34ff1b";
+		}
+		if (Player.Letters["d"][14] >= 3 || Player.Letters["b"][0] || Player.Letters["c"][0] || Player.Letters["f"][0] || Player.Letters["g"][0] || Player.Letters["m"][0] || Player.Letters["p"][0] || Player.Letters["u"][0] || Player.Letters["w"][0] || Player.Letters["y"][0]){
+			ifbc = true;
+			document.getElementById("masterychoice3").style.background = "linear-gradient(90deg, rgba(63,251,221,0.88) 0%, rgba(63,242,244,0.88) 24%, rgba(63,170,251,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice3").style.cursor = "pointer";
+			document.getElementById("masterychoice3").innerHTML = "bcfgmpuwy";
+			document.getElementById("lettersnormalbcfgmpuwy").innerHTML = "bcfgmpuwy";
+			document.getElementById("lettersnormalbcfgmpuwy").style.fontSize = "2vh";
+			document.getElementById("lettersnormalbcfgmpuwy").style.cursor = "pointer";
+			document.getElementById("lettersnormalbcfgmpuwy").style.background = "white";
+			document.getElementById("lettersnormalbcfgmpuwy").style.backgroundColor = "white";
+			document.getElementById("lettersnormalbcfgmpuwy").style.color = "#1bacff";
+			document.getElementById("lettersnormalbcfgmpuwy").style.borderColor = "#1bacff";
+		}
+		if (Player.Letters["g"][20] >= 1 || Player.Letters["j"][0] || Player.Letters["k"][0] || Player.Letters["q"][0] || Player.Letters["v"][0] || Player.Letters["x"][0] || Player.Letters["z"][0]){
+			ifjk = true;
+			document.getElementById("masterychoice4").style.background = "linear-gradient(90deg, rgba(197,63,251,0.88) 0%, rgba(223,63,244,0.88) 24%, rgba(251,63,235,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice4").style.cursor = "pointer";
+			document.getElementById("masterychoice4").innerHTML = "jkqvxz";
+			document.getElementById("lettersnormaljkqvxz").innerHTML = "jkqvxz";
+			document.getElementById("lettersnormaljkqvxz").style.fontSize = "2vh";
+			document.getElementById("lettersnormaljkqvxz").style.cursor = "pointer";
+			document.getElementById("lettersnormaljkqvxz").style.background = "white";
+			document.getElementById("lettersnormaljkqvxz").style.backgroundColor = "white";
+			document.getElementById("lettersnormaljkqvxz").style.color = "#e21bff";
+			document.getElementById("lettersnormaljkqvxz").style.borderColor = "#e21bff";
+		}
+		if (Player.Letters["s"][20] >= 1 || Player.Letters["e"][1] || Player.Letters["a"][1] || Player.Letters["h"][1] || Player.Letters["i"][1] || Player.Letters["n"][1] || Player.Letters["o"][1] || Player.Letters["r"][1] || Player.Letters["s"][1] || Player.Letters["t"][1]){
+			ifAH = true;
+			document.getElementById("masterychoice5").style.background = "linear-gradient(90deg, rgba(251,192,63,0.88) 29%, rgba(252,241,70,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice5").style.cursor = "pointer";
+			document.getElementById("masterychoice5").innerHTML = "E AHINORST";
+			document.getElementById("lettersuppercaseaehinorst").innerHTML = "E AHINORST";
+			document.getElementById("lettersuppercaseaehinorst").style.fontSize = "2vh";
+			document.getElementById("lettersuppercaseaehinorst").style.cursor = "pointer";
+			document.getElementById("lettersuppercaseaehinorst").style.background = "white";
+			document.getElementById("lettersuppercaseaehinorst").style.backgroundColor = "white";
+			document.getElementById("lettersuppercaseaehinorst").style.color = "#ffa31b";
+			document.getElementById("lettersuppercaseaehinorst").style.borderColor = "#ffa31b";
+		}
+		if (Player.Letters["a"][20] >= 2 || Player.Letters["d"][1] || Player.Letters["l"][1]){
+			ifDL = true;
+			document.getElementById("masterychoice6").style.background = "linear-gradient(90deg, rgba(185,255,78,0.88) 0%, rgba(35,255,61,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice6").style.cursor = "pointer";
+			document.getElementById("masterychoice6").innerHTML = "DL";
+			document.getElementById("lettersuppercasedl").innerHTML = "DL";
+			document.getElementById("lettersuppercasedl").style.fontSize = "2vh";
+			document.getElementById("lettersuppercasedl").style.cursor = "pointer";
+			document.getElementById("lettersuppercasedl").style.background = "white";
+			document.getElementById("lettersuppercasedl").style.backgroundColor = "white";
+			document.getElementById("lettersuppercasedl").style.color = "#34ff1b";
+			document.getElementById("lettersuppercasedl").style.borderColor = "#34ff1b";
+		}
+		if (Player.Letters["p"][20] >= 1 || Player.Letters["b"][1] || Player.Letters["c"][1] || Player.Letters["f"][1] || Player.Letters["g"][1] || Player.Letters["m"][1] || Player.Letters["p"][1] || Player.Letters["u"][1] || Player.Letters["w"][1] || Player.Letters["y"][1]){
+			ifBC = true;
+			document.getElementById("masterychoice7").style.background = "linear-gradient(90deg, rgba(63,251,221,0.88) 0%, rgba(63,242,244,0.88) 24%, rgba(63,170,251,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice7").style.cursor = "pointer";
+			document.getElementById("masterychoice7").innerHTML = "BCFGMPUWY";
+			document.getElementById("lettersuppercasebcfgmpuwy").innerHTML = "BCFGMPUWY";
+			document.getElementById("lettersuppercasebcfgmpuwy").style.fontSize = "2vh";
+			document.getElementById("lettersuppercasebcfgmpuwy").style.cursor = "pointer";
+			document.getElementById("lettersuppercasebcfgmpuwy").style.background = "white";
+			document.getElementById("lettersuppercasebcfgmpuwy").style.backgroundColor = "white";
+			document.getElementById("lettersuppercasebcfgmpuwy").style.color = "#1bacff";
+			document.getElementById("lettersuppercasebcfgmpuwy").style.borderColor = "#1bacff";
+		}
+		if (Player.Letters["k"][20] >= 2 || Player.Letters["j"][1] || Player.Letters["k"][1] || Player.Letters["q"][1] || Player.Letters["v"][1] || Player.Letters["x"][1] || Player.Letters["z"][1]){
+			ifJK = true;
+			document.getElementById("masterychoice8").style.background = "linear-gradient(90deg, rgba(197,63,251,0.88) 0%, rgba(223,63,244,0.88) 24%, rgba(251,63,235,0.88) 100%), linear-gradient(to top, #282828 20%, white 80%)";
+			document.getElementById("masterychoice8").style.cursor = "pointer";
+			document.getElementById("masterychoice8").innerHTML = "JKQVXZ";
+			document.getElementById("lettersuppercasejkqvxz").innerHTML = "JKQVXZ";
+			document.getElementById("lettersuppercasejkqvxz").style.fontSize = "2vh";
+			document.getElementById("lettersuppercasejkqvxz").style.cursor = "pointer";
+			document.getElementById("lettersuppercasejkqvxz").style.background = "white";
+			document.getElementById("lettersuppercasejkqvxz").style.backgroundColor = "white";
+			document.getElementById("lettersuppercasejkqvxz").style.color = "#e21bff";
+			document.getElementById("lettersuppercasejkqvxz").style.borderColor = "#e21bff";
+		}
+		logged = 2;
 	}
-}
-
-function reset(){
-	localStorage.clear();
-	location.reload();
-}
-
-socket.on('poletekst', function(text) {
-   document.getElementById("poletekst").innerHTML = text;
-});
-socket.on('enternick', function(value) {
-	if (value == 1){
-		save();
-		location.reload();
-	}
-	else if (value == 0){
+	else if (value == 0 && logged == 1){
+		logged = 0;
 		document.getElementById("nameerror").innerHTML = "this player is currently in the game!"
 		document.getElementById("logbutton").style = "margin-top: -29px; line-height: 20px;";
 		document.getElementById("nameerror").style.display = "block";
 		document.getElementById("nick").value = "";
-	}
-});
-socket.on('playerscore', function(lista) {
-	var keys = Object.keys(lista);
-	var l = {};
-	for (let i=0; i< keys.length; i++){
-		l[[lista[keys[i]][0],lista[keys[i]][2]]] = lista[keys[i]][1];
-	}
-	var items = Object.keys(l).map(function(key) {
-		return [key, l[key]];
-	});
-	items.sort(function(first, second) {
-		return second[1] - first[1];
-	});
-	items = items.slice(0, 10);
-	var keys = Object.keys(items);
-	for (let i=0; i < 10; i++){
-		if (i < keys.length){
-			if (items[keys[i]][1]){
-				if (items[keys[i]][0].slice(0,items[keys[i]][0].indexOf(",")) == "cynka02"){
-					document.getElementById("top" + (i+1) + "1").innerHTML = "cynka02 (Dev)";
-				}
-				else{
-					document.getElementById("top" + (i+1) + "1").innerHTML = items[keys[i]][0].slice(0,items[keys[i]][0].indexOf(","));
-				}
-				document.getElementById("top" + (i+1) + "2").innerHTML = items[keys[i]][1].toFixed(0);
-				document.getElementById("top" + (i+1) + "3").innerHTML = items[keys[i]][0].slice(items[keys[i]][0].indexOf(",")+1,items[keys[i]][0].indexOf(",")+2);
-			}
-			else{
-				if (items[keys[i]][0].slice(0,items[keys[i]][0].indexOf(",")) == "cynka02"){
-					document.getElementById("top" + (i+1) + "1").innerHTML = "cynka02 (Dev)";
-				}
-				else{
-					document.getElementById("top" + (i+1) + "1").innerHTML = items[keys[i]][0].slice(0,items[keys[i]][0].indexOf(","));
-				}
-				document.getElementById("top" + (i+1) + "2").innerHTML = "0";
-				document.getElementById("top" + (i+1) + "3").innerHTML = items[keys[i]][0].slice(items[keys[i]][0].indexOf(",")+1,items[keys[i]][0].indexOf(",")+2);
-			}
-		}
-		else{
-			document.getElementById("top" + (i+1) + "1").innerHTML = "";
-			document.getElementById("top" + (i+1) + "2").innerHTML = "";
-			document.getElementById("top" + (i+1) + "3").innerHTML = "";
-		}
 	}
 });
