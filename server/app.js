@@ -3,19 +3,24 @@ const app = express();
 const http = require('http');
 const path = require('path');
 const socketIO = require('socket.io');
-const publicPath = path.join(__dirname, '../client');
+const publicPath = path.join(__dirname, '../');
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const io = socketIO(server);
 app.use(express.static(publicPath));
 server.listen(port);
+
 var lista = {};
+
 
 io.on('connection', (socket) => {
 	io.emit('poletekst', "...");
 	socket.on('disconnect', () => {
 		delete lista[socket.id];
-		io.emit('playerscore', lista);
+	});
+	
+	socket.on('explayer', (Player) => {
+		io.emit('enternick', 1);
 	});
 	
 	socket.on('newplayer', (Player) => {
@@ -33,13 +38,13 @@ io.on('connection', (socket) => {
 		}
 	});
 	socket.on('LogPlayer', (Player) => {
-		var letters = "eatorhnsidlcyufgwbmpvkjzqxEADTORHNSILCYUFGWBMPVKJZQX"
+		var letters = "eatndosirhlcyufgwbmpvkjzqxEATNDOSIRHLCYUFGWBMPVKJZQX"
 		var unlocked = []
 		for (key in Player.Letters){
 			if (Player.Letters[key][0] == true){
 				unlocked.push(key);
 			}
-			else if (Player.Letters[key][1] == true){
+			if (Player.Letters[key][1] == true){
 				unlocked.push(key.toUpperCase());
 			}
 		}
@@ -53,6 +58,5 @@ io.on('connection', (socket) => {
 		});
 		var letter = Object.keys(d).find(key => d[key] === max);
 		lista[socket.id] = [Player.nick, Player.Score, letter];
-		io.emit('playerscore', lista);
 	});
 });
