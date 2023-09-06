@@ -1,306 +1,38 @@
 <html>
 <head>
-	<title>Alphabet idle</title>
-	<script src="/socket.io/socket.io.js"></script>
-	<link rel="stylesheet" href="client/styles.css">
-	<meta charset="utf-8">
+	<title>Data Convert</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
+
 <body onload="load()">
-<div id="Login"><h1>Hi!</h1><h3>Create new game or load existing one</h3>
-	<div id="savegame1"></div><div id="save1bin"></div>
-	<div id="savegame2"></div><div id="save2bin"></div>
-	<div id="savegame3"></div><div id="save3bin"></div>
-</div>
-<div id="Login2"><h1>Hi!</h1><h3>You need to create your nickname</h3><h4>it will be used in online rankings and features:</h4><form onsubmit="entername();return false"><input id="nick" type="text" style="height:27px;" placeholder="nickname"><div id="nameerror">min. 4 characters (letters or numbers)</div><br><input type="submit" value="Start!" id="logbutton"></form></div>
-<div id="Alert"><span id="AlertText"></span><div id="AlertOks"><div id="AlertConfirm">Ok</div><div id="AlertCancel">Cancel</div></div></div>
-<div id="title"><b>Alphabet idle</b><span style="float:right;padding-right:15px;font-size:1.8vh;cursor:pointer;" id="namedisplay"></span></div>
-<div id="changename"><span id="changenick">Change nickname</span><br><span id="changeacc">Change account</span></div>
-<div id="scoredisplay">Score: <b>0</b></div>
-<div id="all">
-	<div id="menu">
-		<div id="menu1">Main</div>
-		<div id="menu2">Times / Stars</div>
-		<div id="menu3">Storage</div>
-		<div id="menu4">Prestige</div>
-		<div id="menu5">Online</div>
-	</div>
-	<div id="main">
-		<div id="collectors"><span class="coltext1">Collectors</span><br><span class="coltext2"><i>Drag and drop letter on these to start collecting!</i></span>
-			<div id="collector1"><div id="collector1main"><span id="collector1time">&nbsp;</span><br><span id="collector1letter">#1</span><br><span id="collector1strg">&nbsp;</span></div></div>
-			<div id="collector2"><div id="collector2main"><span id="collector2time">&nbsp;</span><br><span id="collector2letter">Locked</span><br><span id="collector2strg">&nbsp;</span></div></div>
-			<div id="collector3"><div id="collector3main"><span id="collector3time">&nbsp;</span><br><span id="collector3letter">Locked</span><br><span id="collector3strg">&nbsp;</span></div></div>
-			<div id="collector4"><div id="collector4main"><span id="collector4time">&nbsp;</span><br><span id="collector4letter">Locked</span><br><span id="collector4strg">&nbsp;</span></div></div>
-		</div>
-		<div id="letters" ondrop="droponl(event)" ondragover="allowDropl(event)">
-			<div id="lettersinfo"><div id="lettersinfo1">normal</div><div id="lettersinfo2">UPPERCASE</div><div id="lettersinfo3"><i>Special</i></div></div>
-			<div id="lettersnormalmenu">
-				<div id="lettersnormalaehinorst">e ahinorst</div>
-				<div id="lettersnormaldl">Get <b><i>2 stars</i></b> in <b><i>e ahinorst</i></b></div>
-				<div id="lettersnormalbcfgmpuwy">Get <b><i>2 stars</i></b> in <b><i>dl</b></i></div>
-				<div id="lettersnormaljkqvxz">Get <b><i>3 stars</i></b> in <b><i>bcfgmpuwy</b></i> & <b><i>dl</b></i></div>
-			</div>
-			<div id="lettersuppercasemenu">
-				<div id="lettersuppercaseaehinorst">Reach <b><i>prestige 1</i></b> on <b><i>s</b></i></div>
-				<div id="lettersuppercasedl">Reach <b><i>prestige 2</i></b> on <b><i>a</b></i></div>
-				<div id="lettersuppercasebcfgmpuwy">Reach <b><i>prestige 1</i></b> on <b><i>p</b></i></div>
-				<div id="lettersuppercasejkqvxz">Reach <b><i>prestige 2</i></b> on <b><i>k</b></i></div>
-			</div>
-			<div id="lettersspecialmenu">
-				<div id="lettersspecial1">Capture all normal public mines</div>
-				<div id="lettersspecial2">Find all secrets &amp; max out prestiges</div>
-			</div>
-			<div id="lettersmainnormalaehinorst">
-				<div id="normale" class="normal"><span id="normaletime" class="normaltime">&nbsp;</span><br><span id="normaledisp" class="normaldisp">e</span><br><div id="normalestrg" class="normalstrg">&nbsp;</div></div>
-				<div id="normala" class="normal"><span id="normalatime" class="normaltime">&nbsp;</span><br><span id="normaladisp" class="normaldisp">a</span><br><div id="normalastrg" class="normalstrg" onclick="buy('nor','a')">&nbsp;</div></div>
-				<div id="normalh" class="normal"><span id="normalhtime" class="normaltime">&nbsp;</span><br><span id="normalhdisp" class="normaldisp">h</span><br><div id="normalhstrg" class="normalstrg" onclick="buy('nor','h')">&nbsp;</div></div>
-				<div id="normali" class="normal"><span id="normalitime" class="normaltime">&nbsp;</span><br><span id="normalidisp" class="normaldisp">i</span><br><div id="normalistrg" class="normalstrg" onclick="buy('nor','i')">&nbsp;</div></div>
-				<div id="normaln" class="normal"><span id="normalntime" class="normaltime">&nbsp;</span><br><span id="normalndisp" class="normaldisp">n</span><br><div id="normalnstrg" class="normalstrg" onclick="buy('nor','n')">&nbsp;</div></div>
-				<div id="normalo" class="normal"><span id="normalotime" class="normaltime">&nbsp;</span><br><span id="normalodisp" class="normaldisp">o</span><br><div id="normalostrg" class="normalstrg" onclick="buy('nor','o')">&nbsp;</div></div>
-				<div id="normalr" class="normal"><span id="normalrtime" class="normaltime">&nbsp;</span><br><span id="normalrdisp" class="normaldisp">r</span><br><div id="normalrstrg" class="normalstrg" onclick="buy('nor','r')">&nbsp;</div></div>
-				<div id="normals" class="normal"><span id="normalstime" class="normaltime">&nbsp;</span><br><span id="normalsdisp" class="normaldisp">s</span><br><div id="normalsstrg" class="normalstrg" onclick="buy('nor','s')">&nbsp;</div></div>
-				<div id="normalt" class="normal"><span id="normalttime" class="normaltime">&nbsp;</span><br><span id="normaltdisp" class="normaldisp">t</span><br><div id="normaltstrg" class="normalstrg" onclick="buy('nor','t')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainnormaldl">
-				<div id="normald" class="normal"><span id="normaldtime" class="normaltime">&nbsp;</span><br><span id="normalddisp" class="normaldisp">d</span><br><div id="normaldstrg" class="normalstrg" onclick="buy('nor','d')">&nbsp;</div></div>
-				<div id="normall" class="normal"><span id="normalltime" class="normaltime">&nbsp;</span><br><span id="normalldisp" class="normaldisp">l</span><br><div id="normallstrg" class="normalstrg" onclick="buy('nor','l')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainnormalbcfgmpuwy">
-				<div id="normalb" class="normal"><span id="normalbtime" class="normaltime">&nbsp;</span><br><span id="normalbdisp" class="normaldisp">b</span><br><div id="normalbstrg" class="normalstrg" onclick="buy('nor','b')">&nbsp;</div></div>
-				<div id="normalc" class="normal"><span id="normalctime" class="normaltime">&nbsp;</span><br><span id="normalcdisp" class="normaldisp">c</span><br><div id="normalcstrg" class="normalstrg" onclick="buy('nor','c')">&nbsp;</div></div>
-				<div id="normalf" class="normal"><span id="normalftime" class="normaltime">&nbsp;</span><br><span id="normalfdisp" class="normaldisp">f</span><br><div id="normalfstrg" class="normalstrg" onclick="buy('nor','f')">&nbsp;</div></div>
-				<div id="normalg" class="normal"><span id="normalgtime" class="normaltime">&nbsp;</span><br><span id="normalgdisp" class="normaldisp">g</span><br><div id="normalgstrg" class="normalstrg" onclick="buy('nor','g')">&nbsp;</div></div>
-				<div id="normalm" class="normal"><span id="normalmtime" class="normaltime">&nbsp;</span><br><span id="normalmdisp" class="normaldisp">m</span><br><div id="normalmstrg" class="normalstrg" onclick="buy('nor','m')">&nbsp;</div></div>
-				<div id="normalp" class="normal"><span id="normalptime" class="normaltime">&nbsp;</span><br><span id="normalpdisp" class="normaldisp">p</span><br><div id="normalpstrg" class="normalstrg" onclick="buy('nor','p')">&nbsp;</div></div>
-				<div id="normalu" class="normal"><span id="normalutime" class="normaltime">&nbsp;</span><br><span id="normaludisp" class="normaldisp">u</span><br><div id="normalustrg" class="normalstrg" onclick="buy('nor','u')">&nbsp;</div></div>
-				<div id="normalw" class="normal"><span id="normalwtime" class="normaltime">&nbsp;</span><br><span id="normalwdisp" class="normaldisp">w</span><br><div id="normalwstrg" class="normalstrg" onclick="buy('nor','w')">&nbsp;</div></div>
-				<div id="normaly" class="normal"><span id="normalytime" class="normaltime">&nbsp;</span><br><span id="normalydisp" class="normaldisp">y</span><br><div id="normalystrg" class="normalstrg" onclick="buy('nor','y')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainnormaljkqvxz">
-				<div id="normalj" class="normal"><span id="normaljtime" class="normaltime">&nbsp;</span><br><span id="normaljdisp" class="normaldisp">j</span><br><div id="normaljstrg" class="normalstrg" onclick="buy('nor','j')">&nbsp;</div></div>
-				<div id="normalk" class="normal"><span id="normalktime" class="normaltime">&nbsp;</span><br><span id="normalkdisp" class="normaldisp">k</span><br><div id="normalkstrg" class="normalstrg" onclick="buy('nor','k')">&nbsp;</div></div>
-				<div id="normalq" class="normal"><span id="normalqtime" class="normaltime">&nbsp;</span><br><span id="normalqdisp" class="normaldisp">q</span><br><div id="normalqstrg" class="normalstrg" onclick="buy('nor','q')">&nbsp;</div></div>
-				<div id="normalv" class="normal"><span id="normalvtime" class="normaltime">&nbsp;</span><br><span id="normalvdisp" class="normaldisp">v</span><br><div id="normalvstrg" class="normalstrg" onclick="buy('nor','v')">&nbsp;</div></div>
-				<div id="normalx" class="normal"><span id="normalxtime" class="normaltime">&nbsp;</span><br><span id="normalxdisp" class="normaldisp">x</span><br><div id="normalxstrg" class="normalstrg" onclick="buy('nor','x')">&nbsp;</div></div>
-				<div id="normalz" class="normal"><span id="normalztime" class="normaltime">&nbsp;</span><br><span id="normalzdisp" class="normaldisp">z</span><br><div id="normalzstrg" class="normalstrg" onclick="buy('nor','z')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainuppercaseaehinorst">
-				<div id="uppercasee" class="uppercase"><span id="uppercaseetime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseedisp" class="uppercasedisp">E</span><br><div id="uppercaseestrg" class="uppercasestrg">&nbsp;</div></div>
-				<div id="uppercasea" class="uppercase"><span id="uppercaseatime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseadisp" class="uppercasedisp">A</span><br><div id="uppercaseastrg" class="uppercasestrg" onclick="buy('upp','a')">&nbsp;</div></div>
-				<div id="uppercaseh" class="uppercase"><span id="uppercasehtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasehdisp" class="uppercasedisp">H</span><br><div id="uppercasehstrg" class="uppercasestrg" onclick="buy('upp','h')">&nbsp;</div></div>
-				<div id="uppercasei" class="uppercase"><span id="uppercaseitime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseidisp" class="uppercasedisp">I</span><br><div id="uppercaseistrg" class="uppercasestrg" onclick="buy('upp','i')">&nbsp;</div></div>
-				<div id="uppercasen" class="uppercase"><span id="uppercasentime" class="uppercasetime">&nbsp;</span><br><span id="uppercasendisp" class="uppercasedisp">N</span><br><div id="uppercasenstrg" class="uppercasestrg" onclick="buy('upp','n')">&nbsp;</div></div>
-				<div id="uppercaseo" class="uppercase"><span id="uppercaseotime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseodisp" class="uppercasedisp">O</span><br><div id="uppercaseostrg" class="uppercasestrg" onclick="buy('upp','o')">&nbsp;</div></div>
-				<div id="uppercaser" class="uppercase"><span id="uppercasertime" class="uppercasetime">&nbsp;</span><br><span id="uppercaserdisp" class="uppercasedisp">R</span><br><div id="uppercaserstrg" class="uppercasestrg" onclick="buy('upp','r')">&nbsp;</div></div>
-				<div id="uppercases" class="uppercase"><span id="uppercasestime" class="uppercasetime">&nbsp;</span><br><span id="uppercasesdisp" class="uppercasedisp">S</span><br><div id="uppercasesstrg" class="uppercasestrg" onclick="buy('upp','s')">&nbsp;</div></div>
-				<div id="uppercaset" class="uppercase"><span id="uppercasettime" class="uppercasetime">&nbsp;</span><br><span id="uppercasetdisp" class="uppercasedisp">T</span><br><div id="uppercasetstrg" class="uppercasestrg" onclick="buy('upp','t')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainuppercasedl">
-				<div id="uppercased" class="uppercase"><span id="uppercasedtime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseddisp" class="uppercasedisp">D</span><br><div id="uppercasedstrg" class="uppercasestrg" onclick="buy('upp','d')">&nbsp;</div></div>
-				<div id="uppercasel" class="uppercase"><span id="uppercaseltime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseldisp" class="uppercasedisp">L</span><br><div id="uppercaselstrg" class="uppercasestrg" onclick="buy('upp','l')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainuppercasebcfgmpuwy">
-				<div id="uppercaseb" class="uppercase"><span id="uppercasebtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasebdisp" class="uppercasedisp">B</span><br><div id="uppercasebstrg" class="uppercasestrg" onclick="buy('upp','b')">&nbsp;</div></div>
-				<div id="uppercasec" class="uppercase"><span id="uppercasectime" class="uppercasetime">&nbsp;</span><br><span id="uppercasecdisp" class="uppercasedisp">C</span><br><div id="uppercasecstrg" class="uppercasestrg" onclick="buy('upp','c')">&nbsp;</div></div>
-				<div id="uppercasef" class="uppercase"><span id="uppercaseftime" class="uppercasetime">&nbsp;</span><br><span id="uppercasefdisp" class="uppercasedisp">F</span><br><div id="uppercasefstrg" class="uppercasestrg" onclick="buy('upp','f')">&nbsp;</div></div>
-				<div id="uppercaseg" class="uppercase"><span id="uppercasegtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasegdisp" class="uppercasedisp">G</span><br><div id="uppercasegstrg" class="uppercasestrg" onclick="buy('upp','g')">&nbsp;</div></div>
-				<div id="uppercasem" class="uppercase"><span id="uppercasemtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasemdisp" class="uppercasedisp">M</span><br><div id="uppercasemstrg" class="uppercasestrg" onclick="buy('upp','m')">&nbsp;</div></div>
-				<div id="uppercasep" class="uppercase"><span id="uppercaseptime" class="uppercasetime">&nbsp;</span><br><span id="uppercasepdisp" class="uppercasedisp">P</span><br><div id="uppercasepstrg" class="uppercasestrg" onclick="buy('upp','p')">&nbsp;</div></div>
-				<div id="uppercaseu" class="uppercase"><span id="uppercaseutime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseudisp" class="uppercasedisp">U</span><br><div id="uppercaseustrg" class="uppercasestrg" onclick="buy('upp','u')">&nbsp;</div></div>
-				<div id="uppercasew" class="uppercase"><span id="uppercasewtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasewdisp" class="uppercasedisp">W</span><br><div id="uppercasewstrg" class="uppercasestrg" onclick="buy('upp','w')">&nbsp;</div></div>
-				<div id="uppercasey" class="uppercase"><span id="uppercaseytime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseydisp" class="uppercasedisp">Y</span><br><div id="uppercaseystrg" class="uppercasestrg" onclick="buy('upp','y')">&nbsp;</div></div>
-			</div>
-			<div id="lettersmainuppercasejkqvxz">
-				<div id="uppercasej" class="uppercase"><span id="uppercasejtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasejdisp" class="uppercasedisp">J</span><br><div id="uppercasejstrg" class="uppercasestrg" onclick="buy('upp','j')">&nbsp;</div></div>
-				<div id="uppercasek" class="uppercase"><span id="uppercasektime" class="uppercasetime">&nbsp;</span><br><span id="uppercasekdisp" class="uppercasedisp">K</span><br><div id="uppercasekstrg" class="uppercasestrg" onclick="buy('upp','k')">&nbsp;</div></div>
-				<div id="uppercaseq" class="uppercase"><span id="uppercaseqtime" class="uppercasetime">&nbsp;</span><br><span id="uppercaseqdisp" class="uppercasedisp">Q</span><br><div id="uppercaseqstrg" class="uppercasestrg" onclick="buy('upp','q')">&nbsp;</div></div>
-				<div id="uppercasev" class="uppercase"><span id="uppercasevtime" class="uppercasetime">&nbsp;</span><br><span id="uppercasevdisp" class="uppercasedisp">V</span><br><div id="uppercasevstrg" class="uppercasestrg" onclick="buy('upp','v')">&nbsp;</div></div>
-				<div id="uppercasex" class="uppercase"><span id="uppercasextime" class="uppercasetime">&nbsp;</span><br><span id="uppercasexdisp" class="uppercasedisp">X</span><br><div id="uppercasexstrg" class="uppercasestrg" onclick="buy('upp','x')">&nbsp;</div></div>
-				<div id="uppercasez" class="uppercase"><span id="uppercaseztime" class="uppercasetime">&nbsp;</span><br><span id="uppercasezdisp" class="uppercasedisp">Z</span><br><div id="uppercasezstrg" class="uppercasestrg" onclick="buy('upp','z')">&nbsp;</div></div>
-			</div>
-		</div>
-	</div>
-	
-	<div id="mastery">
-		<div id="masterymain">
-			<div id="masteryaehinorst">
-				<div id="masteryaehinorsttime"></div>
-				<div id="masterye" class="masterykeys"><span id="masteryecount" class="masterycount"></span><br />e<br /><span id="masteryetime" class="masterytime"></span></div>
-				<div id="masterya" class="masterykeys"><span id="masteryacount" class="masterycount"></span><br />a<br /><span id="masteryatime" class="masterytime"></span></div>
-				<div id="masteryh" class="masterykeys"><span id="masteryhcount" class="masterycount"></span><br />h<br /><span id="masteryhtime" class="masterytime"></span></div>
-				<div id="masteryi" class="masterykeys"><span id="masteryicount" class="masterycount"></span><br />i<br /><span id="masteryitime" class="masterytime"></span></div>
-				<div id="masteryn" class="masterykeys"><span id="masteryncount" class="masterycount"></span><br />n<br /><span id="masteryntime" class="masterytime"></span></div>
-				<div id="masteryo" class="masterykeys"><span id="masteryocount" class="masterycount"></span><br />o<br /><span id="masteryotime" class="masterytime"></span></div>
-				<div id="masteryr" class="masterykeys"><span id="masteryrcount" class="masterycount"></span><br />r<br /><span id="masteryrtime" class="masterytime"></span></div>
-				<div id="masterys" class="masterykeys"><span id="masteryscount" class="masterycount"></span><br />s<br /><span id="masterystime" class="masterytime"></span></div>
-				<div id="masteryt" class="masterykeys"><span id="masterytcount" class="masterycount"></span><br />t<br /><span id="masteryttime" class="masterytime"></span></div>
-			</div>
-			<div id="masterydl">
-				<div id="masterydltime"></div>
-				<div id="masteryd" class="masterykeys"><span id="masterydcount"></span><br />d<br /><span id="masterydtime"></span></div>
-				<div id="masteryl" class="masterykeys"><span id="masterylcount"></span><br />l<br /><span id="masteryltime"></span></div>
-			</div>
-			<div id="masterybcfgmpuwy">
-				<div id="masterybcfgmpuwytime"></div>
-				<div id="masteryb" class="masterykeys"><span id="masterybcount"></span><br />b<br /><span id="masterybtime"></span></div>
-				<div id="masteryc" class="masterykeys"><span id="masteryccount"></span><br />c<br /><span id="masteryctime"></span></div>
-				<div id="masteryf" class="masterykeys"><span id="masteryfcount"></span><br />f<br /><span id="masteryftime"></span></div>
-				<div id="masteryg" class="masterykeys"><span id="masterygcount"></span><br />g<br /><span id="masterygtime"></span></div>
-				<div id="masterym" class="masterykeys"><span id="masterymcount"></span><br />m<br /><span id="masterymtime"></span></div>
-				<div id="masteryp" class="masterykeys"><span id="masterypcount"></span><br />p<br /><span id="masteryptime"></span></div>
-				<div id="masteryu" class="masterykeys"><span id="masteryucount"></span><br />u<br /><span id="masteryutime"></span></div>
-				<div id="masteryw" class="masterykeys"><span id="masterywcount"></span><br />w<br /><span id="masterywtime"></span></div>
-				<div id="masteryy" class="masterykeys"><span id="masteryycount"></span><br />y<br /><span id="masteryytime"></span></div>
-			</div>
-			<div id="masteryjkqvxz">
-				<div id="masteryjkqvxztime"></div>
-				<div id="masteryj" class="masterykeys"><span id="masteryjcount"></span><br />j<br /><span id="masteryjtime"></span></div>
-				<div id="masteryk" class="masterykeys"><span id="masterykcount"></span><br />k<br /><span id="masteryktime"></span></div>
-				<div id="masteryq" class="masterykeys"><span id="masteryqcount"></span><br />q<br /><span id="masteryqtime"></span></div>
-				<div id="masteryv" class="masterykeys"><span id="masteryvcount"></span><br />v<br /><span id="masteryvtime"></span></div>
-				<div id="masteryx" class="masterykeys"><span id="masteryxcount"></span><br />x<br /><span id="masteryxtime"></span></div>
-				<div id="masteryz" class="masterykeys"><span id="masteryzcount"></span><br />z<br /><span id="masteryztime"></span></div>
-			</div>
-			<div id="masteryAEHINORST">
-				<div id="masteryE" class="masterykeys"><span id="masteryEcount"></span><br />E<br /><span id="masteryEtime"></span></div>
-				<div id="masteryA" class="masterykeys"><span id="masteryAcount"></span><br />A<br /><span id="masteryAtime"></span></div>
-				<div id="masteryH" class="masterykeys"><span id="masteryHcount"></span><br />H<br /><span id="masteryHtime"></span></div>
-				<div id="masteryI" class="masterykeys"><span id="masteryIcount"></span><br />I<br /><span id="masteryItime"></span></div>
-				<div id="masteryN" class="masterykeys"><span id="masteryNcount"></span><br />N<br /><span id="masteryNtime"></span></div>
-				<div id="masteryO" class="masterykeys"><span id="masteryOcount"></span><br />O<br /><span id="masteryOtime"></span></div>
-				<div id="masteryR" class="masterykeys"><span id="masteryRcount"></span><br />R<br /><span id="masteryRtime"></span></div>
-				<div id="masteryS" class="masterykeys"><span id="masteryScount"></span><br />S<br /><span id="masteryStime"></span></div>
-				<div id="masteryT" class="masterykeys"><span id="masteryTcount"></span><br />T<br /><span id="masteryTtime"></span></div>
-			</div>
-			<div id="masteryDL">
-				<div id="masteryD" class="masterykeys"><span id="masteryDcount"></span><br />D<br /><span id="masteryDtime"></span></div>
-				<div id="masteryL" class="masterykeys"><span id="masteryLcount"></span><br />L<br /><span id="masteryLtime"></span></div>
-			</div>
-			<div id="masteryBCFGMPUWY">
-				<div id="masteryB" class="masterykeys"><span id="masteryBcount"></span><br />B<br /><span id="masteryBtime"></span></div>
-				<div id="masteryC" class="masterykeys"><span id="masteryCcount"></span><br />C<br /><span id="masteryCtime"></span></div>
-				<div id="masteryF" class="masterykeys"><span id="masteryFcount"></span><br />F<br /><span id="masteryFtime"></span></div>
-				<div id="masteryG" class="masterykeys"><span id="masteryGcount"></span><br />G<br /><span id="masteryGtime"></span></div>
-				<div id="masteryM" class="masterykeys"><span id="masteryMcount"></span><br />M<br /><span id="masteryMtime"></span></div>
-				<div id="masteryP" class="masterykeys"><span id="masteryPcount"></span><br />P<br /><span id="masteryPtime"></span></div>
-				<div id="masteryU" class="masterykeys"><span id="masteryUcount"></span><br />U<br /><span id="masteryUtime"></span></div>
-				<div id="masteryW" class="masterykeys"><span id="masteryWcount"></span><br />W<br /><span id="masteryWtime"></span></div>
-				<div id="masteryY" class="masterykeys"><span id="masteryYcount"></span><br />Y<br /><span id="masteryYtime"></span></div>
-			</div>
-			<div id="masteryJKQVXZ">
-				<div id="masteryJ" class="masterykeys"><span id="masteryJcount"></span><br />J<br /><span id="masteryJtime"></span></div>
-				<div id="masteryK" class="masterykeys"><span id="masteryKcount"></span><br />K<br /><span id="masteryKtime"></span></div>
-				<div id="masteryQ" class="masterykeys"><span id="masteryQcount"></span><br />Q<br /><span id="masteryQtime"></span></div>
-				<div id="masteryV" class="masterykeys"><span id="masteryVcount"></span><br />V<br /><span id="masteryVtime"></span></div>
-				<div id="masteryX" class="masterykeys"><span id="masteryXcount"></span><br />X<br /><span id="masteryXtime"></span></div>
-				<div id="masteryZ" class="masterykeys"><span id="masteryZcount"></span><br />Z<br /><span id="masteryZtime"></span></div>
-			</div>
-		</div>
-		<div id="masterychoice">
-			<div id="masterychoicetext">Groups</div>
-			<div id="masterychoice1">eahinorst</div>
-			<div id="masterychoice2">?</div>
-			<div id="masterychoice3">???</div>
-			<div id="masterychoice4">??</div>
-			<div id="masterychoice5">???</div>
-			<div id="masterychoice6">?</div>
-			<div id="masterychoice7">???</div>
-			<div id="masterychoice8">??</div>
-		</div>
-	</div>
-	
-	<div id="storage">
-		<div id="chooseinfo">Choose letter to upgrade its storage:</div>
-		<div id="strgletters"></div>
-		<div id="storagemain">
-			<div id="storagemaininfo">
-				<div id="storagemaininfo1">REQUIREMENTS</div>
-				<div id="storagemaininfo2">PROGRESS</div>
-				<div id="storagemaininfo3">REWARD</div>
-			</div>
-			<div id="storagemainmain">
-				<div id="storagereqs">
-					<div id="storagereq1"><div id="storagereq1letter"></div><div id="storagereq1info"></div><div id="storagereq1fill" onclick="storagefill(1)"></div></div>
-					<div id="storagereq2"><div id="storagereq2letter"></div><div id="storagereq2info"></div><div id="storagereq2fill" onclick="storagefill(2)"></div></div>
-				</div>
-				<div id="storageprog">50%</div>
-				<div id="storagerew"><span>+5 storage</span><br>e</div>
-			</div>
-		</div>
-	</div>
-	<div id="prestige">PRESTIGE</div>
-	<div id="online">ONLINE</div>
-</div>
-	<!--<div id="online"><b>Top 10</b><span style="font-size:10px;margin-left: 10px;margin-right: -110px;">(currently playing)</span>
-		<table id="toptable">
-			<tr>
-				<th id="toptableh1"></th>
-				<th id="toptableh2">Player</th>
-				<th id="toptableh3">Score</th>
-				<th id="toptableh4">Best letter</th>
-			</tr>
-			<tr style="color: #53d34d">
-				<td>1.</td>
-				<td id="top11"></td>
-				<td id="top12"></td>
-				<td id="top13"></td>
-			</tr>
-			<tr style="color: #53d34d">
-				<td>2.</td>
-				<td id="top21"></td>
-				<td id="top22"></td>
-				<td id="top23"></td>
-			</tr>
-			<tr style="color: #53d34d">
-				<td>3.</td>
-				<td id="top31"></td>
-				<td id="top32"></td>
-				<td id="top33"></td>
-			</tr>
-			<tr>
-				<td>4.</td>
-				<td id="top41"></td>
-				<td id="top42"></td>
-				<td id="top43"></td>
-			</tr>
-			<tr>
-				<td>5.</td>
-				<td id="top51"></td>
-				<td id="top52"></td>
-				<td id="top53"></td>
-			</tr>
-			<tr>
-				<td>6.</td>
-				<td id="top61"></td>
-				<td id="top62"></td>
-				<td id="top63"></td>
-			</tr>
-			<tr>
-				<td>7.</td>
-				<td id="top71"></td>
-				<td id="top72"></td>
-				<td id="top73"></td>
-			</tr>
-			<tr>
-				<td>8.</td>
-				<td id="top81"></td>
-				<td id="top82"></td>
-				<td id="top83"></td>
-			</tr>
-			<tr>
-				<td>9.</td>
-				<td id="top91"></td>
-				<td id="top92"></td>
-				<td id="top93"></td>
-			</tr>
-			<tr>
-				<td>10.</td>
-				<td id="top101"></td>
-				<td id="top102"></td>
-				<td id="top103"></td>
-			</tr>
-		</table>
-	</div>-->
-<div id="saveinfo">Auto saved</div>
+    <div id="menu">
+        <div id="logo"><a href="#">Data <mark style="color:rgb(13, 123, 213);background:none;">Convert</mark><span>Krzysztof Różycki</span></a></div>
+        <div id="menus">
+            <div id="language">
+                <div id="lang_pl" onclick="entopl()"></div>
+                <div id="lang_en" onclick="pltoen()"></div>
+            </div>
+            <div id="menu5"><a href="#contact"></a></div>
+            <div id="menu4"><a href="#us"></a></div>
+            <div id="menu3"><a href="#career"></a></div>
+            <div id="menu2"><a href="#services"></a></div>
+            <div id="menu1"><a href="#"></a></div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="main_image"><div id="image_round"><img src="gpnt.jpg" draggable="false"></div></div>
+        <div id="home"></div>
+        <div id="services"></div>
+        <div id="career"></div>
+        <div id="us"></div>
+        <div id="contact"></div>
+    </div>
+    <div id="footer"></div>
+
+    <a href="javascript:" id="return_to_top"><img src="arrow_top.png" id="icon_arrow"></a>
+
 </body>
-<script src="client/scripts.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="scripts.js"></script>
 </html>
