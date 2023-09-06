@@ -1,0 +1,221 @@
+html {
+    scroll-behavior: smooth;
+}
+body
+{
+	margin: 0;
+	padding: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    scroll-behavior: smooth;
+    font-family: "Gill Sans", sans-serif;
+}
+
+#menu
+{
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    box-shadow: 0px 1px 3px 0px #afafaf;
+    height: 9vh;
+    background: #fcfcfc;
+}
+
+#logo
+{
+    float: left;
+    height: 9vh;
+    max-width: 40vw;
+    font-size: 2.4vw;
+    color: black;
+    line-height: 8.5vh;
+    margin-left: 15vw;
+    cursor: default;
+    font-weight: 1000;
+    letter-spacing: -2px;
+    cursor: pointer;
+
+}
+#logo>a
+{
+    text-decoration: none;
+    color: rgb(17, 33, 52);
+}
+#logo>a>span
+{
+    font-size: 0.8vw;
+    padding-left: 1vw;
+    letter-spacing: normal;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#menus
+{
+    float: right;
+    height: 9vh;
+}
+#menu1, #menu2, #menu3, #menu4, #menu5, #language
+{
+    width: 4.5vw;
+    height: 9vh;
+    float: right;
+    margin-right: 0.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1vw;
+    font-family: 'Josefin Sans',Helvetica,Arial,Lucida,sans-serif;
+}
+#language
+{
+    margin-left: 7.7vw;
+    margin-right: 2vw;
+}
+#lang_pl
+{
+    float: left;
+    width: 1.2vw;
+    height: 0.7vw;
+    background-image: url("pl.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+}
+#lang_en
+{
+    float: left;
+    width: 1.2vw;
+    height: 0.7vw;
+    margin-left: 0.5vw;
+    background-image: url("en.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px solid #cccccc;
+}
+#menu1>a, #menu2>a, #menu3>a, #menu4>a, #menu5>a
+{
+    text-decoration: none;
+    color: rgb(38, 49, 62);
+}
+#menu1>a:hover, #menu2>a:hover, #menu3>a:hover, #menu4>a:hover, #menu5>a:hover
+{
+    color: rgb(106, 141, 181);
+}
+
+
+#main
+{
+    top: 9vh;
+    z-index: 0;
+    width: 100%;
+    background-color: #f4f4f4;
+    overflow: hidden;
+}
+#main_image
+{
+    display: block;
+    width: 100%;
+    height: 65vh;
+    margin-top: 9vh;
+    overflow: hidden;
+    animation-name: arise;
+    animation-duration: 0.7s;
+}
+#image_round
+{
+    position: relative;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    overflow: hidden;
+    width: 160%;
+    left:-30%; 
+    height: 65vh;
+}
+#image_round>img
+{
+    position: relative;
+    width: 100vw;
+    height: 75vh;
+    margin-left: 18%;
+    margin-top: -2.5%;
+}
+#home
+{
+    margin-top: 3vh;
+    height: 30vh;
+    width: 100%;
+    max-width: 100%;
+    font-size: 3.1vw;
+    color: rgb(13, 123, 213);
+    text-align: center;
+    font-weight: 600;
+    animation-name: arise2;
+    animation-duration: 1s;
+}
+
+#services, #career, #us, #contact
+{
+    width: 70vw;
+    height: 50vh;
+    margin-bottom: 3vh;
+    background-color: rgb(208, 208, 208);
+    float: left;
+    margin-left: 15vw;
+    text-align: center;
+    line-height: 50vh;
+    font-size: 4vw;
+}
+
+#return_to_top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(29, 50, 93);
+    background: rgba(29, 50, 93, 0.7);
+    width: 3vw;
+    height: 3vw;
+    text-decoration: none;
+    display: none;
+    -webkit-border-radius: 0.8vw;
+    -moz-border-radius: 0.8vw;
+    border-radius: 0.8vw;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return_to_top img {
+    position: relative;
+    top: 0.9vw;
+    left: 0.9vw;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+#return_to_top:hover {
+    background: rgba(29, 50, 93, 0.9);
+}
+#return_to_top:hover img {
+    top: 0.5vw;
+}
+#icon_arrow{
+    width: 1.2vw;
+    height: 1.1vw;
+}
+
+@keyframes arise {
+    0%   {transform: scale(1.1); opacity: 0;}
+    100% {transform: scale(1);}
+  }
+@keyframes arise2 {
+    0%   {opacity: 0; transform: translate(0,30px);}
+    20%   {opacity: 0; transform: translate(0,30px);}
+    100% {opacity: 1; transform: translate(0,0px);}
+  }
+
