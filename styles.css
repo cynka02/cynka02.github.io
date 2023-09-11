@@ -22,6 +22,7 @@ body
     box-shadow: 0px 1px 3px 0px #afafaf;
     height: 9vh;
     background: #fcfcfc;
+    opacity: 0.97;
 }
 
 #logo
@@ -51,7 +52,7 @@ body
     letter-spacing: normal;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-#menus
+#meninfo3
 {
     float: right;
     height: 9vh;
@@ -111,14 +112,13 @@ body
     top: 9vh;
     z-index: 0;
     width: 100%;
-    background-color: #f4f4f4;
     overflow: hidden;
 }
 #main_image
 {
     display: block;
     width: 100%;
-    height: 65vh;
+    height: 60vh;
     margin-top: 9vh;
     overflow: hidden;
     animation-name: arise;
@@ -132,42 +132,185 @@ body
     overflow: hidden;
     width: 160%;
     left:-30%; 
-    height: 65vh;
+    height: 60vh;
 }
 #image_round>img
 {
     position: relative;
     width: 100vw;
-    height: 75vh;
+    height: 90vh;
     margin-left: 18%;
-    margin-top: -2.5%;
+    margin-top: -2%;
 }
 #home
 {
-    margin-top: 3vh;
-    height: 30vh;
+    margin-top: 5vh;
     width: 100%;
     max-width: 100%;
-    font-size: 3.1vw;
+    font-size: 4.5vw;
     color: rgb(13, 123, 213);
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
     animation-name: arise2;
     animation-duration: 1s;
 }
 
-#services, #career, #us, #contact
+#info1, #info2, #info3
 {
-    width: 70vw;
-    height: 50vh;
-    margin-bottom: 3vh;
-    background-color: rgb(208, 208, 208);
-    float: left;
-    margin-left: 15vw;
-    text-align: center;
-    line-height: 50vh;
-    font-size: 4vw;
+    display: block;
+    width: 75vw;
+    margin-left: 12.5vw;
+    height: 10vh;
+    min-height: 35vh;
+    margin-top: 17vh;
+    animation-name: arise2;
+    animation-duration: 0.5s;
+    border-left: 0.8vh solid #e1e1e1;
+
+}#info2, #info3{margin-top: 20vh;}
+#info2
+{
+    border-left: none;
+    border-right: 0.8vh solid #e1e1e1;
 }
+#info3
+{
+    margin-bottom: 15vh;
+}
+#info1_split, #info3_split
+{
+    width: 40vw;
+    display: block;
+    float: left;
+}
+#info2_split
+{
+    width: 40vw;
+    display: block;
+    float: right;
+}
+#info1_header, #info3_header
+{
+    margin-top: 2%;
+    margin-left: 3%;
+    font-size: 8vh;
+    text-align: left;
+    font-weight: 700;
+}
+#info1_header
+{
+    color: #e0a835;
+}
+#info3_header
+{
+    color: #49ad53;
+}
+#info1_text, #info3_text
+{
+    margin-left: 3%;
+    font-size: 2.5vh;
+    color: #656769;
+    text-align: left;
+    font-weight: 600;
+}
+#info2_header
+{
+    margin-top: 2%;
+    margin-right: 3%;
+    font-size: 8vh;
+    text-align: right;
+    font-weight: 700;
+}
+#info2_header
+{
+    color: #bf4040;
+}
+#info2_text
+{
+    margin-right: 3%;
+    font-size: 2.5vh;
+    color: #656769;
+    text-align: right;
+    font-weight: 600;
+}
+
+#info1_image
+{
+    width: 45vh;
+    height: 30vh;
+    display: block;
+    float: right;
+    margin-top: 2%;
+    margin-right: 10%;
+    background-color: gray;
+    border-radius: 3vh;
+    background-image: url("services.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#info2_image
+{
+    width: 50vh;
+    height: 30vh;
+    display: block;
+    float: left;
+    margin-top: 2%;
+    margin-left: 10%;
+    background-color: gray;
+    border-radius: 3vh;
+    background-image: url("career.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#info3_image
+{
+    width: 50vh;
+    height: 30vh;
+    display: block;
+    float: right;
+    margin-top: 2%;
+    margin-right: 10%;
+    background-color: gray;
+    border-radius: 3vh;
+    background-image: url("us.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#contact
+{
+    width: 80vw;
+    margin-left: 10vw;
+    height: 32vh;
+    border-top: 2px solid #bababa;
+    text-align: center;
+}
+
+#contact1, #contact2, #contact3
+{
+    display: inline-block;
+    width: 20vw;
+    margin-top: 10vh;
+}
+
+#contact1header, #contact2header, #contact3header
+{
+    font-size: 4vh;
+    text-align: center;
+    line-height: 5vh;
+    color: #47494c;
+    margin-bottom: 1.2vh;
+}
+#contact1text, #contact2text, #contact3text
+{
+    font-size: 2vh;
+    text-align: center;
+    color: #5f6263;
+    line-height: 3vh;
+}
+
+
+
 
 #return_to_top {
     position: fixed;
@@ -207,6 +350,26 @@ body
 #icon_arrow{
     width: 1.2vw;
     height: 1.1vw;
+}
+
+
+.reveal{
+    position: relative;
+    transform: translateY(4vh);
+    opacity: 0;
+    transition: 1s all ease;
+}
+.reveal.active{
+    transform: translateY(0);
+    opacity: 1;
+}
+.reveal2{
+    position: relative;
+    opacity: 0;
+    transition: 0.7s all ease;
+}
+.reveal2.active{
+    opacity: 1;
 }
 
 @keyframes arise {
