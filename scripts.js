@@ -18,7 +18,7 @@ function load(){
         if (lang){ // polski
             document.getElementById("menu5").innerHTML ='<a href="#contact">Kontakt</a>';
             document.getElementById("menu4").innerHTML ='<a href="#info3">O nas</a>';
-            document.getElementById("menu3").innerHTML ='<a href="#info2">Kariera</a>';
+            document.getElementById("menu3").innerHTML ='<a href="#info2">Partnerzy</a>';
             document.getElementById("menu2").innerHTML ='<a href="#info1">Oferta</a>';
             document.getElementById("home").innerHTML ='Innowacyjne metody<br>obróbki danych';
             document.getElementById("info1_header").innerHTML ='Oferta';
