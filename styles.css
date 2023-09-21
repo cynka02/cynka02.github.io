@@ -33,7 +33,7 @@ body
     font-size: 2.4vw;
     color: black;
     line-height: 8.5vh;
-    margin-left: 15vw;
+    margin-left: 8vw;
     cursor: default;
     font-weight: 1000;
     letter-spacing: -2px;
@@ -43,13 +43,21 @@ body
 #logo>a
 {
     text-decoration: none;
-    color: rgb(17, 33, 52);
+    color: #081a4c;
+}
+#logo>a>img
+{
+    width: 16vw;
+    height: 7vh;
+    float: left;
 }
 #logo>a>span
 {
+    float: left;
     font-size: 0.8vw;
+    margin-top: 1.8vh;
     padding-left: 1vw;
-    letter-spacing: 1px;
+    letter-spacing: 0.06vw;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #meninfo3
@@ -67,7 +75,7 @@ body
     align-items: center;
     justify-content: center;
     font-size: 1.1vw;
-    color: rgb(38, 49, 62);
+    color: #081a4c;
     font-family: 'Josefin Sans',Helvetica,Arial,Lucida,sans-serif;
 }
 #language
@@ -100,11 +108,11 @@ body
 #menu1>a, #menu2>a, #menu3>a, #menu4>a, #menu5>a
 {
     text-decoration: none;
-    color: rgb(38, 49, 62);
+    color: #081a4c;
 }
 #menu1>a:hover, #menu2>a:hover, #menu3>a:hover, #menu4>a:hover, #menu5>a:hover
 {
-    color: rgb(106, 141, 181);
+    color: #4060b5;
 }
 
 
@@ -145,11 +153,11 @@ body
 }
 #home
 {
-    margin-top: 5vh;
+    margin-top: 6vh;
     width: 100%;
     max-width: 100%;
     font-size: 4.1vw;
-    color: rgb(13, 123, 213);
+    color: #2853c4;
     text-align: center;
     font-weight: 600;
     animation-name: arise2;
@@ -191,7 +199,7 @@ body
     font-size: 7vh;
     text-align: left;
     font-weight: 650;
-    color: #18283a;
+    color: #0d276e;
 }
 #info2_header
 {
@@ -200,13 +208,13 @@ body
     font-size: 7vh;
     text-align: left;
     font-weight: 650;
-    color: #18283a;
+    color: #0d276e;
 }
 #info1_text, #info3_text
 {
     margin-left: 4%;
     font-size: 2.3vh;
-    color: #5f5f5f;
+    color: #5b606e;
     text-align: left;
     font-weight: 530;
 }
@@ -214,7 +222,7 @@ body
 {
     margin-left: 11%;
     font-size: 2.3vh;
-    color: #5f5f5f;
+    color: #5b606e;
     text-align: left;
     font-weight: 530;
 }
@@ -230,9 +238,9 @@ body
     text-align: center;
     font-weight: 600;
     float: left;
-    background-color: #3f95da;
+    background-color: #2ba855;
     border-radius: 5vw;
-    border: 1px solid #2f7cbc;
+    border: 1px solid #1d8841;
     cursor: pointer;
     transition: 0.3s all;
 }
@@ -261,7 +269,6 @@ body
     display: block;
     float: right;
     margin-right: 2vw;
-    background-color: gray;
     border-radius: 3vh;
     background-image: url("services.jpg");
     background-size: cover;
@@ -274,7 +281,6 @@ body
     display: block;
     float: left;
     margin-left: 2vw;
-    background-color: gray;
     border-radius: 3vh;
     background-image: url("career.jpg");
     background-size: cover;
@@ -287,7 +293,6 @@ body
     display: block;
     float: right;
     margin-right: 2vw;
-    background-color: gray;
     border-radius: 3vh;
     background-image: url("us.jpg");
     background-size: cover;
@@ -322,13 +327,13 @@ body
 {
     font-size: 2vh;
     text-align: center;
-    color: #5f6263;
+    color: #5b606e;
     line-height: 3vh;
 }
 #contact3text>a, #contact2text>a
 {
     text-decoration: none;
-    color:  #47494c;
+    color:  #5b606e;
 }
 
 
@@ -414,5 +419,5 @@ body
     height: 80vh;
     margin-top: 19vh;
     font-size: 5.5vw;
-    color: #18283a;
+    color: #0d276e;
 }
