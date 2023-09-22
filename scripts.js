@@ -33,7 +33,7 @@ function load(){
             document.getElementById("contact1header").innerHTML ='Adres';
             document.getElementById("contact1text").innerHTML ='Gdański Park Naukowo-Technologiczny<br>Trzy Lipy 3, 80-172 Gdańsk';
             document.getElementById("contact2header").innerHTML ='Telefon';
-            document.getElementById("contact2text").innerHTML ='<a href="tel:987123654">+48 987 123 654</a><br><b>Krzysztof</b>';
+            document.getElementById("contact2text").innerHTML ='<a href="tel:605040000">+48 605 040 000</a><br><b>Krzysztof</b>';
             document.getElementById("contact3header").innerHTML ='Mail';
             document.getElementById("contact3text").innerHTML ='<a href="mailto:abc@lego.com">abc@lego.com</a><br>&nbsp;';
             document.getElementById("lang_pl").style = "cursor: auto;";
