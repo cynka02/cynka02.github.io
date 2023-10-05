@@ -490,8 +490,7 @@ body
         font-size: 1.7vh;
         line-height: 4vh;
     }
-    #info1_image, #info2_image, #info3_image
-    {
+    #info1_image, #info2_image, #info3_image{
         width: 70vw;
         height: 70vw;
         margin-left: 10vw;
@@ -499,6 +498,9 @@ body
         margin-right: 0;
         border-radius: 400vh;
         margin-top: -64vh;
+    }
+    #info1_image{
+        margin-top: -66vh;
     }
     #info3_image{
         margin-top: -60vh;

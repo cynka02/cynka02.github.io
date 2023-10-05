@@ -48,7 +48,7 @@ function load(){
 }
 
 $(window).scroll(function() {
-    if ($(this).scrollTop() >= 700) {
+    if ($(this).scrollTop() >= 700 && navigator.userAgentData.mobile) {
         $('#return_to_top').fadeIn(200);
     } else {
         $('#return_to_top').fadeOut(200);
