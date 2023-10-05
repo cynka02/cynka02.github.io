@@ -51,21 +51,13 @@ body
     height: 7vh;
     float: left;
 }
-#logo>a>span
-{
-    float: left;
-    font-size: 0.8vw;
-    margin-top: 1.8vh;
-    padding-left: 1vw;
-    letter-spacing: 0.06vw;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+
 #meninfo3
 {
     float: right;
     height: 9vh;
 }
-#menu1, #menu2, #menu3, #menu4, #menu5, #language
+#menu1, #menu2, #menu3, #menu4, #language
 {
     width: 4.5vw;
     height: 9vh;
@@ -74,7 +66,7 @@ body
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1vw;
+    font-size: 1vw;
     color: #081a4c;
     font-family: 'Josefin Sans',Helvetica,Arial,Lucida,sans-serif;
 }
@@ -105,12 +97,12 @@ body
     background-repeat: no-repeat;
     border: 1px solid #cccccc;
 }
-#menu1>a, #menu2>a, #menu3>a, #menu4>a, #menu5>a
+#menu1>a, #menu2>a, #menu3>a, #menu4>a
 {
     text-decoration: none;
     color: #081a4c;
 }
-#menu1>a:hover, #menu2>a:hover, #menu3>a:hover, #menu4>a:hover, #menu5>a:hover
+#menu1>a:hover, #menu2>a:hover, #menu3>a:hover, #menu4>a:hover
 {
     color: #4060b5;
 }
@@ -146,7 +138,7 @@ body
 #image_round>img
 {
     position: relative;
-    width: 100vw;
+    width: 102vw;
     height: 80vh;
     margin-left: 18%;
     margin-top: -2%;
@@ -334,6 +326,7 @@ body
 {
     text-decoration: none;
     color:  #5b606e;
+    user-select: text;
 }
 
 
@@ -420,4 +413,111 @@ body
     margin-top: 19vh;
     font-size: 5.5vw;
     color: #0d276e;
+}
+
+@media only screen and (max-width: 850px) {
+    #logo{
+        margin-left: -10vw;
+    }
+    #logo>a>img{
+        width: 37vw;
+        height: 7.5vh;
+    }
+    #menu1, #menu2, #menu3, #menu4{
+        width: 12vw;
+        margin-right: 2vw;
+        font-size: 3vw;
+    }
+    #menu4{
+        margin-right: 0;
+    }
+    #language {
+        margin-left: 0;
+        width: 6.5vw;
+        height: 3vh;
+    }
+    #lang_pl{
+        width: 2.5vw;
+        height: 1.6vw;
+    }
+    #lang_en{
+        width: 2.5vw;
+        height: 1.6vw;
+    }
+    #main_image{
+        width: 101vw;
+        height: 45vh;
+    }
+    #image_round{
+        height: 45vh;
+    }
+    #image_round>img{
+        width: 200vw;
+        height: 60vh;
+        margin-left: -10%;
+        margin-top: -17%;
+    }
+    #home{
+        margin-top: 7vh;
+        margin-bottom: 40vh;
+        width: 90vw;
+        margin-left: 5vw;
+        max-width: 100vw;
+        font-size: 9vw;
+    }
+    #info1, #info2, #info3{
+        width: 90vw;
+        margin-left: 5vw;
+        padding-top: 15vh;
+    
+    }#info2, #info3{margin-top: 30vh;}
+    #info1_split, #info2_split, #info3_split{
+        width: 100%;
+    }
+    #info1_header, #info2_header, #info3_header{
+        margin-top: 0;
+        margin-left: 0;
+        font-size: 5vh;
+    }
+    #info1_text, #info2_text, #info3_text{
+        margin-left: 0;
+        font-size: 1.9vh;
+    }
+    #info1_click, #info2_click, #info3_click{
+        margin-left: 0;
+        width: 35vw;
+        height: 3vh;
+        font-size: 1.7vh;
+        line-height: 3vh;
+    }
+    #info1_image, #info2_image, #info3_image
+    {
+        width: 70vw;
+        height: 70vw;
+        margin-left: 10vw;
+        float: left;
+        margin-right: 0;
+        border-radius: 400vh;
+        margin-top: -63vh;
+    }
+    #info2_image{
+        margin-top: -60vh;
+    }
+    #info3_image{
+        margin-top: -58vh;
+    }
+    #contact{
+        margin-top: -20vh;
+        width: 90vw;
+        margin-left: 5vw;
+    }
+    #contact1, #contact2, #contact3{
+        display: block;
+        float: left;
+        width: 100%;
+        margin-top: 5vh;
+    }
+    #contact3{
+        margin-bottom: 5vh;
+    }
 }
