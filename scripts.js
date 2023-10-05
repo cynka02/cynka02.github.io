@@ -47,17 +47,6 @@ function load(){
     }
 }
 
-$(window).scroll(function() {
-    if ($(this).scrollTop() >= 700 && !navigator.userAgentData.mobile) {
-        $('#return_to_top').fadeIn(200);
-    } else {
-        $('#return_to_top').fadeOut(200);
-    }
-});
-$('#return_to_top').click(function() {
-    window.scrollTo(0, 0);
-});
-
 function reveal() {
     var reveals = document.querySelectorAll(".reveal");
     for (var i = 0; i < reveals.length; i++) {

@@ -332,47 +332,6 @@ body
 
 
 
-#return_to_top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgb(29, 50, 93);
-    background: rgba(29, 50, 93, 0.7);
-    width: 3vw;
-    height: 3vw;
-    text-decoration: none;
-    display: none;
-    -webkit-border-radius: 0.8vw;
-    -moz-border-radius: 0.8vw;
-    border-radius: 0.8vw;
-    -webkit-transition: all 0.3s linear;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-#return_to_top img {
-    position: relative;
-    top: 0.9vw;
-    left: 0.9vw;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-#return_to_top:hover {
-    background: rgba(29, 50, 93, 0.9);
-}
-#return_to_top:hover img {
-    top: 0.5vw;
-}
-#icon_arrow{
-    width: 1.2vw;
-    height: 1.1vw;
-}
-
-
 .reveal{
     position: relative;
     transform: translateY(4vh);
@@ -525,5 +484,4 @@ body
     #contact1text, #contact2text, #contact3text{
         font-size: 1.9vh;
     }
-    #return_to_top {display: none;}
 }
